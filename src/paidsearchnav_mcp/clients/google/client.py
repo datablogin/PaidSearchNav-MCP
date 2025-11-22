@@ -9,23 +9,28 @@ from google.ads.googleads.client import GoogleAdsClient  # type: ignore[import-u
 from google.ads.googleads.errors import (
     GoogleAdsException,  # type: ignore[import-untyped]
 )
-from paidsearchnav.core.circuit_breaker import GoogleAdsCircuitBreaker
-from paidsearchnav.core.config import CircuitBreakerConfig, Settings
-from paidsearchnav.core.exceptions import APIError, AuthenticationError, RateLimitError
-from paidsearchnav.core.models.campaign import Campaign
-from paidsearchnav.core.models.keyword import Keyword, MatchType
-from paidsearchnav.core.models.search_term import SearchTerm, SearchTermMetrics
-from paidsearchnav.platforms.google.metrics import (
+
+from paidsearchnav_mcp.clients.google.metrics import (
     APIEfficiencyMetrics,
 )
-from paidsearchnav.platforms.google.rate_limiting import (
+from paidsearchnav_mcp.clients.google.rate_limiting import (
     GoogleAdsRateLimiter,
     OperationType,
     account_info_rate_limited,
     report_rate_limited,
     search_rate_limited,
 )
-from paidsearchnav.platforms.google.validation import GoogleAdsInputValidator
+from paidsearchnav_mcp.clients.google.validation import GoogleAdsInputValidator
+from paidsearchnav_mcp.core.circuit_breaker import GoogleAdsCircuitBreaker
+from paidsearchnav_mcp.core.config import CircuitBreakerConfig, Settings
+from paidsearchnav_mcp.core.exceptions import (
+    APIError,
+    AuthenticationError,
+    RateLimitError,
+)
+from paidsearchnav_mcp.models.campaign import Campaign
+from paidsearchnav_mcp.models.keyword import Keyword, MatchType
+from paidsearchnav_mcp.models.search_term import SearchTerm, SearchTermMetrics
 
 logger = logging.getLogger(__name__)
 
@@ -1341,7 +1346,11 @@ class GoogleAdsAPIClient:
 
         try:
             # Calculate max_results per method if specified
-            method_max_results = max_results // 3 if max_results else None
+            # Ensure each method gets at least 1 result if max_results is specified
+            if max_results and max_results < 3:
+                method_max_results = 1
+            else:
+                method_max_results = max_results // 3 if max_results else None
 
             # Fetch ad group level negative keywords
             ad_group_negatives = await self._fetch_ad_group_negative_keywords(
@@ -1366,12 +1375,13 @@ class GoogleAdsAPIClient:
             if max_results and len(negative_keywords) > max_results:
                 negative_keywords = negative_keywords[:max_results]
 
-        except StopIteration:
-            logger.warning(
-                "StopIteration encountered: Fewer API responses than expected. "
-                "This may indicate a mocking issue in tests or an API change."
+        except StopIteration as e:
+            logger.error(
+                "Unexpected StopIteration during negative keyword fetch. "
+                "This may indicate an API change or issue.",
+                exc_info=True,
             )
-            # Continue with partial results rather than failing completely
+            raise APIError("Failed to fetch complete negative keyword list") from e
 
         logger.info(
             f"Fetched {len(negative_keywords)} negative keywords for customer {customer_id}"

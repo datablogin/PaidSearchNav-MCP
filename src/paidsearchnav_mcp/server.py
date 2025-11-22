@@ -3,6 +3,7 @@
 import logging
 import os
 from datetime import datetime
+from enum import Enum
 from typing import Any
 
 from fastmcp import FastMCP
@@ -13,6 +14,25 @@ from paidsearchnav_mcp.clients.google.client import GoogleAdsAPIClient
 logger = logging.getLogger(__name__)
 
 
+# ============================================================================
+# Error Codes
+# ============================================================================
+
+
+class ErrorCode(str, Enum):
+    """Error codes for programmatic error handling."""
+
+    INVALID_CREDENTIALS = "INVALID_CREDENTIALS"
+    INVALID_CUSTOMER_ID = "INVALID_CUSTOMER_ID"
+    INVALID_INPUT = "INVALID_INPUT"
+    SEARCH_TERMS_FETCH_ERROR = "SEARCH_TERMS_FETCH_ERROR"
+    KEYWORDS_FETCH_ERROR = "KEYWORDS_FETCH_ERROR"
+    CAMPAIGNS_FETCH_ERROR = "CAMPAIGNS_FETCH_ERROR"
+    NEGATIVE_KEYWORDS_FETCH_ERROR = "NEGATIVE_KEYWORDS_FETCH_ERROR"
+    GEO_PERFORMANCE_FETCH_ERROR = "GEO_PERFORMANCE_FETCH_ERROR"
+    BIGQUERY_FETCH_ERROR = "BIGQUERY_FETCH_ERROR"
+
+
 # Initialize MCP server
 mcp = FastMCP("PaidSearchNav MCP Server")
 
@@ -21,10 +41,19 @@ mcp = FastMCP("PaidSearchNav MCP Server")
 # Helper Functions
 # ============================================================================
 
+# Global client instance for reuse across requests
+_client_instance: GoogleAdsAPIClient | None = None
+
 
 def _get_google_ads_client() -> GoogleAdsAPIClient:
     """
-    Create and return a configured Google Ads API client.
+    Get or create a configured Google Ads API client (singleton pattern).
+
+    The client instance is reused across requests to:
+    - Share circuit breaker state
+    - Reuse rate limiter state
+    - Optimize connection pooling
+    - Maintain metrics across requests
 
     Reads credentials from environment variables:
     - GOOGLE_ADS_DEVELOPER_TOKEN
@@ -39,6 +68,13 @@ def _get_google_ads_client() -> GoogleAdsAPIClient:
     Raises:
         ValueError: If required environment variables are not set
     """
+    global _client_instance
+
+    # Return existing instance if available
+    if _client_instance is not None:
+        return _client_instance
+
+    # Create new instance
     developer_token = os.getenv("GOOGLE_ADS_DEVELOPER_TOKEN")
     client_id = os.getenv("GOOGLE_ADS_CLIENT_ID")
     client_secret = os.getenv("GOOGLE_ADS_CLIENT_SECRET")
@@ -59,7 +95,8 @@ def _get_google_ads_client() -> GoogleAdsAPIClient:
             f"Missing required environment variables: {', '.join(missing)}"
         )
 
-    return GoogleAdsAPIClient(
+    # Create and cache the client instance
+    _client_instance = GoogleAdsAPIClient(
         developer_token=developer_token,
         client_id=client_id,
         client_secret=client_secret,
@@ -67,6 +104,8 @@ def _get_google_ads_client() -> GoogleAdsAPIClient:
         login_customer_id=login_customer_id,
         settings=None,  # Optional settings for rate limiting
     )
+
+    return _client_instance
 
 
 # ============================================================================
@@ -192,13 +231,19 @@ async def get_search_terms(request: SearchTermsRequest) -> dict[str, Any]:
         }
 
     except ValueError as e:
-        logger.error(f"Invalid date format or configuration: {e}")
-        return {"status": "error", "message": f"Invalid input: {str(e)}", "data": []}
+        logger.error(f"Invalid date format or configuration: {e}", exc_info=True)
+        return {
+            "status": "error",
+            "error_code": ErrorCode.INVALID_INPUT,
+            "message": "Invalid input: Please check date format (YYYY-MM-DD) and configuration.",
+            "data": [],
+        }
     except Exception as e:
         logger.error(f"Error fetching search terms: {e}", exc_info=True)
         return {
             "status": "error",
-            "message": f"Failed to fetch search terms: {str(e)}",
+            "error_code": ErrorCode.SEARCH_TERMS_FETCH_ERROR,
+            "message": "Failed to fetch search terms. Please check your credentials and customer ID.",
             "data": [],
         }
 
@@ -259,13 +304,19 @@ async def get_keywords(request: KeywordsRequest) -> dict[str, Any]:
         }
 
     except ValueError as e:
-        logger.error(f"Invalid configuration: {e}")
-        return {"status": "error", "message": f"Invalid input: {str(e)}", "data": []}
+        logger.error(f"Invalid configuration: {e}", exc_info=True)
+        return {
+            "status": "error",
+            "error_code": ErrorCode.INVALID_INPUT,
+            "message": "Invalid input: Please check your configuration.",
+            "data": [],
+        }
     except Exception as e:
         logger.error(f"Error fetching keywords: {e}", exc_info=True)
         return {
             "status": "error",
-            "message": f"Failed to fetch keywords: {str(e)}",
+            "error_code": ErrorCode.KEYWORDS_FETCH_ERROR,
+            "message": "Failed to fetch keywords. Please check your credentials and customer ID.",
             "data": [],
         }
 
@@ -329,13 +380,19 @@ async def get_campaigns(request: CampaignsRequest) -> dict[str, Any]:
         }
 
     except ValueError as e:
-        logger.error(f"Invalid date format or configuration: {e}")
-        return {"status": "error", "message": f"Invalid input: {str(e)}", "data": []}
+        logger.error(f"Invalid date format or configuration: {e}", exc_info=True)
+        return {
+            "status": "error",
+            "error_code": ErrorCode.INVALID_INPUT,
+            "message": "Invalid input: Please check date format (YYYY-MM-DD) and configuration.",
+            "data": [],
+        }
     except Exception as e:
         logger.error(f"Error fetching campaigns: {e}", exc_info=True)
         return {
             "status": "error",
-            "message": f"Failed to fetch campaigns: {str(e)}",
+            "error_code": ErrorCode.CAMPAIGNS_FETCH_ERROR,
+            "message": "Failed to fetch campaigns. Please check your credentials and customer ID.",
             "data": [],
         }
 
@@ -382,13 +439,19 @@ async def get_negative_keywords(request: NegativeKeywordsRequest) -> dict[str, A
         }
 
     except ValueError as e:
-        logger.error(f"Invalid configuration: {e}")
-        return {"status": "error", "message": f"Invalid input: {str(e)}", "data": []}
+        logger.error(f"Invalid configuration: {e}", exc_info=True)
+        return {
+            "status": "error",
+            "error_code": ErrorCode.INVALID_INPUT,
+            "message": "Invalid input: Please check your configuration.",
+            "data": [],
+        }
     except Exception as e:
         logger.error(f"Error fetching negative keywords: {e}", exc_info=True)
         return {
             "status": "error",
-            "message": f"Failed to fetch negative keywords: {str(e)}",
+            "error_code": ErrorCode.NEGATIVE_KEYWORDS_FETCH_ERROR,
+            "message": "Failed to fetch negative keywords. Please check your credentials and customer ID.",
             "data": [],
         }
 
@@ -433,13 +496,19 @@ async def get_geo_performance(request: CampaignsRequest) -> dict[str, Any]:
         }
 
     except ValueError as e:
-        logger.error(f"Invalid date format or configuration: {e}")
-        return {"status": "error", "message": f"Invalid input: {str(e)}", "data": []}
+        logger.error(f"Invalid date format or configuration: {e}", exc_info=True)
+        return {
+            "status": "error",
+            "error_code": ErrorCode.INVALID_INPUT,
+            "message": "Invalid input: Please check date format (YYYY-MM-DD) and configuration.",
+            "data": [],
+        }
     except Exception as e:
         logger.error(f"Error fetching geographic performance: {e}", exc_info=True)
         return {
             "status": "error",
-            "message": f"Failed to fetch geographic performance: {str(e)}",
+            "error_code": ErrorCode.GEO_PERFORMANCE_FETCH_ERROR,
+            "message": "Failed to fetch geographic performance. Please check your credentials and customer ID.",
             "data": [],
         }
 
@@ -514,7 +583,7 @@ def get_config() -> dict[str, Any]:
             },
             "bigquery": {
                 "enabled": bool(os.getenv("GOOGLE_APPLICATION_CREDENTIALS")),
-                "default_project": os.getenv("GCP_PROJECT_ID", "not-configured"),
+                "default_project_configured": bool(os.getenv("GCP_PROJECT_ID")),
             },
             "caching": {
                 "enabled": bool(os.getenv("REDIS_URL")),

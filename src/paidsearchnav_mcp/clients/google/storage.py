@@ -10,7 +10,6 @@ from datetime import datetime, timedelta
 from typing import TYPE_CHECKING, Any, Dict, List, Optional
 
 import redis.asyncio as redis
-from paidsearchnav.core.config import RedisConfig
 from tenacity import (
     retry,
     retry_if_exception_type,
@@ -18,9 +17,11 @@ from tenacity import (
     wait_exponential,
 )
 
+from paidsearchnav_mcp.core.config import RedisConfig
+
 # Avoid circular import by importing OperationType at type checking time only
 if TYPE_CHECKING:
-    from paidsearchnav.platforms.google.rate_limiting import OperationType
+    from paidsearchnav_mcp.clients.google.rate_limiting import OperationType
 else:
     # Define a simple enum for runtime use
     from enum import Enum
