@@ -101,6 +101,12 @@ _client_instance: GoogleAdsAPIClient | None = None
 _cache_instance: CacheClient | None = None
 
 
+def reset_client_for_testing():
+    """Reset the singleton client instance (for testing only)."""
+    global _client_instance
+    _client_instance = None
+
+
 def _get_google_ads_client() -> GoogleAdsAPIClient:
     """
     Get or create a configured Google Ads API client (singleton pattern).
