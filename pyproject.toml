@@ -11,7 +11,9 @@ dependencies = [
     "pydantic-settings>=2.0.0",
     "python-dotenv>=1.0.0",
     "httpx>=0.25.0",
-    "redis>=5.0.0"
+    "redis>=5.0.0",
+    "tenacity>=8.0.0",
+    "pandas>=2.0.0"
 ]
 
 [project.optional-dependencies]
