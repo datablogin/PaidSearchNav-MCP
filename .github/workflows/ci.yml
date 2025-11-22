@@ -35,12 +35,12 @@ jobs:
 
     - name: Run linting
       run: |
-        ruff check .
-        ruff format --check .
+        ruff check src/
+        ruff format --check src/
 
     - name: Run type checking
       run: |
-        mypy .
+        mypy src/
 
     - name: Run tests
       run: |
