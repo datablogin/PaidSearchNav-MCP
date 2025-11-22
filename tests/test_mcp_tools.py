@@ -25,6 +25,7 @@ from paidsearchnav_mcp.server import (
     get_keywords,
     get_negative_keywords,
     get_search_terms,
+    reset_client_for_testing,
 )
 
 
@@ -115,6 +116,14 @@ class MockCampaign:
 # ============================================================================
 # Fixtures
 # ============================================================================
+
+
+@pytest.fixture(autouse=True)
+def reset_singleton_client():
+    """Reset the singleton client instance before each test."""
+    reset_client_for_testing()
+    yield
+    reset_client_for_testing()
 
 
 @pytest.fixture
