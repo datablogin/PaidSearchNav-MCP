@@ -8,9 +8,9 @@ from fastapi import WebSocketDisconnect
 from jose import jwt
 from pydantic import SecretStr
 
-from paidsearchnav.api.models.responses import WebSocketMessage
-from paidsearchnav.api.v1.websocket import ConnectionManager, broadcast_audit_update
-from paidsearchnav.core.config import Settings
+from paidsearchnav_mcp.api.models.responses import WebSocketMessage
+from paidsearchnav_mcp.api.v1.websocket import ConnectionManager, broadcast_audit_update
+from paidsearchnav_mcp.core.config import Settings
 
 
 class TestConnectionManager:

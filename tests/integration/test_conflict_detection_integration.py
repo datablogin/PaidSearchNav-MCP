@@ -15,7 +15,7 @@ from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 
-from paidsearchnav.scripts.conflict_detection import (
+from paidsearchnav_mcp.scripts.conflict_detection import (
     ConflictDetectionConfig,
     ConflictDetectionManager,
     ConflictDetectionResults,

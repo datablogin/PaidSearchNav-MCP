@@ -6,9 +6,9 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.logging.audit import AuditLogger, get_audit_logger
-from paidsearchnav.logging.config import (
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.logging.audit import AuditLogger, get_audit_logger
+from paidsearchnav_mcp.logging.config import (
     LogConfig,
     SecureRotatingFileHandler,
     check_log_permissions,

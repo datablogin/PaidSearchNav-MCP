@@ -4,8 +4,8 @@ from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 
-from paidsearchnav.core.config import GA4Config
-from paidsearchnav.platforms.ga4.client import (
+from paidsearchnav_mcp.core.config import GA4Config
+from paidsearchnav_mcp.platforms.ga4.client import (
     GA4DataClient,
     GA4RateLimitError,
 )

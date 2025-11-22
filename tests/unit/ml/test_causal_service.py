@@ -7,8 +7,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from paidsearchnav.ml.causal_service import CausalMLConfig, CausalMLService, ModelCache
-from paidsearchnav.ml.models import (
+from paidsearchnav_mcp.ml.causal_service import CausalMLConfig, CausalMLService, ModelCache
+from paidsearchnav_mcp.ml.models import (
     CausalMethod,
     ModelStatus,
     ModelType,

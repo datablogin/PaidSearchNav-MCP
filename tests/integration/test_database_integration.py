@@ -11,7 +11,7 @@ import pytest_asyncio
 import sqlalchemy as sa
 from sqlalchemy.exc import OperationalError
 
-from paidsearchnav.integrations.database import (
+from paidsearchnav_mcp.integrations.database import (
     AnalysisStorageService,
     DatabaseConnection,
 )

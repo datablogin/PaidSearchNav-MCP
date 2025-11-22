@@ -7,7 +7,7 @@ import pytest
 from sqlalchemy.exc import OperationalError
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from paidsearchnav.integrations.database import (
+from paidsearchnav_mcp.integrations.database import (
     AnalysisStorageService,
     DatabaseConnection,
 )

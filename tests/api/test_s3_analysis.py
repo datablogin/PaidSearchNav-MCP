@@ -7,9 +7,9 @@ import pytest
 from botocore.exceptions import ClientError, NoCredentialsError
 from httpx import AsyncClient
 
-from paidsearchnav.api.dependencies import get_current_user
-from paidsearchnav.api.main import app
-from paidsearchnav.core.models.analysis import (
+from paidsearchnav_mcp.api.dependencies import get_current_user
+from paidsearchnav_mcp.api.main import app
+from paidsearchnav_mcp.models.analysis import (
     AnalysisMetrics,
     AnalysisResult,
     Recommendation,

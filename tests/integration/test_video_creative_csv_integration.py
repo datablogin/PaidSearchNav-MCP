@@ -6,8 +6,8 @@ from pathlib import Path
 
 import pytest
 
-from paidsearchnav.analyzers.video_creative import VideoCreativeAnalyzer
-from paidsearchnav.core.models.video_creative import (
+from paidsearchnav_mcp.analyzers.video_creative import VideoCreativeAnalyzer
+from paidsearchnav_mcp.models.video_creative import (
     AssetSource,
     AssetStatus,
     AssetType,

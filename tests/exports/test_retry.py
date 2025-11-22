@@ -2,7 +2,7 @@
 
 import pytest
 
-from paidsearchnav.exports.retry import RetryPolicy, exponential_backoff_with_jitter
+from paidsearchnav_mcp.exports.retry import RetryPolicy, exponential_backoff_with_jitter
 
 
 class TestExponentialBackoff:

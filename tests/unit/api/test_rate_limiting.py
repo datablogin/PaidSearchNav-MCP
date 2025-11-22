@@ -7,8 +7,8 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from fastapi import HTTPException, Request
 
-from paidsearchnav.api.middleware_rate_limit import CustomerAccessRateLimitMiddleware
-from paidsearchnav.core.config import Settings
+from paidsearchnav_mcp.api.middleware_rate_limit import CustomerAccessRateLimitMiddleware
+from paidsearchnav_mcp.core.config import Settings
 
 
 class TestCustomerAccessRateLimitMiddleware:

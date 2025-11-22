@@ -2,8 +2,8 @@
 
 import pytest
 
-from paidsearchnav.analyzers.negative_conflicts import NegativeConflictAnalyzer
-from paidsearchnav.analyzers.shared_negatives import SharedNegativeValidatorAnalyzer
+from paidsearchnav_mcp.analyzers.negative_conflicts import NegativeConflictAnalyzer
+from paidsearchnav_mcp.analyzers.shared_negatives import SharedNegativeValidatorAnalyzer
 
 
 class TestNegativeConflictAnalyzerCSV:

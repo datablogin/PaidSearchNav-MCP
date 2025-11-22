@@ -3,7 +3,7 @@
 import pytest
 
 # Import the validation functions directly
-from paidsearchnav.core.request_validation import (
+from paidsearchnav_mcp.core.request_validation import (
     validate_email_address,
     validate_google_ads_customer_id,
     validate_user_type,

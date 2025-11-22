@@ -5,8 +5,8 @@ from unittest.mock import Mock
 
 import pytest
 
-from paidsearchnav.platforms.google.client import GoogleAdsClient
-from paidsearchnav.platforms.google.scripts.base import (
+from paidsearchnav_mcp.platforms.google.client import GoogleAdsClient
+from paidsearchnav_mcp.platforms.google.scripts.base import (
     ScriptBase,
     ScriptConfig,
     ScriptExecutor,
@@ -14,7 +14,7 @@ from paidsearchnav.platforms.google.scripts.base import (
     ScriptStatus,
     ScriptType,
 )
-from paidsearchnav.platforms.google.scripts.scheduler import (
+from paidsearchnav_mcp.platforms.google.scripts.scheduler import (
     ScriptExecution,
     ScriptMonitor,
     ScriptSchedule,

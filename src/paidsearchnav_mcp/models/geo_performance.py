@@ -5,8 +5,8 @@ from enum import Enum
 
 from pydantic import Field
 
-from paidsearchnav_mcp.core.models.analysis import AnalysisResult
-from paidsearchnav_mcp.core.models.base import BasePSNModel
+from paidsearchnav_mcp.models.analysis import AnalysisResult
+from paidsearchnav_mcp.models.base import BasePSNModel
 
 
 class GeographicLevel(str, Enum):

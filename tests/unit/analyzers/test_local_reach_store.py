@@ -6,10 +6,10 @@ from pathlib import Path
 
 import pytest
 
-from paidsearchnav.analyzers.local_reach_store_performance import (
+from paidsearchnav_mcp.analyzers.local_reach_store_performance import (
     LocalReachStoreAnalyzer,
 )
-from paidsearchnav.core.models import (
+from paidsearchnav_mcp.models import (
     LocalReachEfficiencyLevel,
     LocalReachIssueType,
     LocalReachMetrics,

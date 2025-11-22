@@ -8,7 +8,7 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse
 from starlette.status import HTTP_408_REQUEST_TIMEOUT, HTTP_413_REQUEST_ENTITY_TOO_LARGE
 
-from paidsearchnav.api.middleware_security import (
+from paidsearchnav_mcp.api.middleware_security import (
     ContentTypeValidationMiddleware,
     RequestLimitMiddleware,
     RequestSizeReaderMiddleware,

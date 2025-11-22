@@ -5,15 +5,15 @@ from unittest.mock import AsyncMock
 
 import pytest
 
-from paidsearchnav.analyzers.bulk_negative_manager import BulkNegativeManagerAnalyzer
-from paidsearchnav.core.models.analysis import RecommendationType
-from paidsearchnav.core.models.campaign import (
+from paidsearchnav_mcp.analyzers.bulk_negative_manager import BulkNegativeManagerAnalyzer
+from paidsearchnav_mcp.models.analysis import RecommendationType
+from paidsearchnav_mcp.models.campaign import (
     BiddingStrategy,
     Campaign,
     CampaignStatus,
     CampaignType,
 )
-from paidsearchnav.core.models.search_term import SearchTerm, SearchTermMetrics
+from paidsearchnav_mcp.models.search_term import SearchTerm, SearchTermMetrics
 
 
 @pytest.fixture

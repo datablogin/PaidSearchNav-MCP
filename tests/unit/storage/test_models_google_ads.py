@@ -5,7 +5,7 @@ from datetime import datetime
 import pytest
 from sqlalchemy.exc import IntegrityError
 
-from paidsearchnav.storage.models import (
+from paidsearchnav_mcp.storage.models import (
     AnalysisRecord,
     Customer,
     CustomerGoogleAdsAccount,

@@ -4,8 +4,8 @@ from unittest.mock import Mock
 
 import pytest
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.storage.repository import AnalysisRepository
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.storage.repository import AnalysisRepository
 
 
 class TestSQLInjectionPrevention:

@@ -8,9 +8,9 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from paidsearchnav.core.models.keyword import Keyword, KeywordMatchType, KeywordStatus
-from paidsearchnav.core.models.search_term import SearchTerm, SearchTermMetrics
-from paidsearchnav.parsers.csv_parser import GoogleAdsCSVParser
+from paidsearchnav_mcp.models.keyword import Keyword, KeywordMatchType, KeywordStatus
+from paidsearchnav_mcp.models.search_term import SearchTerm, SearchTermMetrics
+from paidsearchnav_mcp.parsers.csv_parser import GoogleAdsCSVParser
 
 
 class TestGoogleAdsCSVParser:

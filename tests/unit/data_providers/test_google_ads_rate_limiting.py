@@ -5,8 +5,8 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from paidsearchnav.data_providers.google_ads import GoogleAdsDataProvider
-from paidsearchnav.security.rate_limiting import RateLimitError
+from paidsearchnav_mcp.data_providers.google_ads import GoogleAdsDataProvider
+from paidsearchnav_mcp.security.rate_limiting import RateLimitError
 
 
 @pytest.fixture

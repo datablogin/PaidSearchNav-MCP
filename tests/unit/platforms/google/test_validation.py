@@ -2,8 +2,8 @@
 
 import pytest
 
-from paidsearchnav.core.models.campaign import CampaignType
-from paidsearchnav.platforms.google.validation import GoogleAdsInputValidator
+from paidsearchnav_mcp.models.campaign import CampaignType
+from paidsearchnav_mcp.platforms.google.validation import GoogleAdsInputValidator
 
 
 class TestCampaignTypeValidation:

@@ -13,8 +13,8 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from paidsearchnav.api.models.responses import WebSocketMessage
-from paidsearchnav.api.v1.websocket import ConnectionManager, broadcast_audit_update
+from paidsearchnav_mcp.api.models.responses import WebSocketMessage
+from paidsearchnav_mcp.api.v1.websocket import ConnectionManager, broadcast_audit_update
 
 
 class TestWebSocketPerformance:

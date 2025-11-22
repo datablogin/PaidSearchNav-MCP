@@ -146,7 +146,92 @@ The Login Customer ID is your Google Ads Manager account ID (without dashes).
    grep GOOGLE_ADS .env
    ```
 
-## Step 8: Test Your API Connection
+## Step 8: Verify the Setup
+
+Your Google Ads API credentials are now configured. Proceed to Step 9 to test your connection.
+
+## API Rate Limits and Tier Information
+
+Google Ads API enforces rate limits based on your access tier. Understanding these limits is crucial for production deployments.
+
+### Rate Limit Tiers
+
+#### BASIC Tier (Default - Free Developer Tokens)
+
+This is the default tier for all developer tokens. Limits per customer account:
+
+- **Search Operations**: 300 requests/minute, 18,000 requests/hour
+- **Mutate Operations**: 100 requests/minute, 6,000 requests/hour
+- **Report Operations**: 133 requests/minute, 7,980 requests/hour
+
+**Configuration:**
+
+```bash
+# .env file - BASIC tier (default)
+GOOGLE_ADS_RATE_LIMIT_TIER=BASIC
+```
+
+#### STANDARD Tier (Requires Application)
+
+Apply through Google Ads API support. Provides 10x multiplier on all limits:
+
+- **Search Operations**: 3,000 requests/minute, 180,000 requests/hour
+- **Mutate Operations**: 1,000 requests/minute, 60,000 requests/hour
+- **Report Operations**: 1,330 requests/minute, 79,800 requests/hour
+
+**How to Apply:** Visit [Google Ads API Rate Limits](https://developers.google.com/google-ads/api/docs/rate-limits) and submit a request.
+
+**Configuration:**
+
+```bash
+# .env file - STANDARD tier (requires approval)
+GOOGLE_ADS_RATE_LIMIT_TIER=STANDARD
+```
+
+#### PREMIUM Tier (Enterprise)
+
+Contact Google Ads API team directly for enterprise-level limits.
+
+### Rate Limiting in PaidSearchNav MCP
+
+This MCP server includes **proactive rate limiting** to prevent hitting Google's limits:
+
+- **Automatic**: Rate limiting is enabled by default
+- **Redis-backed**: Uses Redis to track request counts across distributed deployments
+- **Per-operation tracking**: Separate limits for search, mutate, and report operations
+- **Circuit breaker**: Automatically stops requests if repeated failures occur
+
+**Monitoring:** Check logs for rate limit warnings:
+
+```text
+WARNING: Approaching rate limit for search operations (280/300 per minute)
+```
+
+### Best Practices
+
+1. **Cache aggressively**: Enable Redis caching to reduce API calls (see README)
+2. **Batch requests**: Combine multiple queries where possible
+3. **Monitor usage**: Track your daily quota usage in Google Ads UI
+4. **Apply for higher tier**: If regularly hitting limits, apply for STANDARD access
+5. **Implement retry logic**: Use exponential backoff for transient failures
+
+### Troubleshooting Rate Limits
+
+**Error:** `RATE_LIMIT_EXCEEDED`
+
+**Solutions:**
+
+1. Enable Redis caching to reduce API calls
+2. Increase cache TTL in `.env` (e.g., `REDIS_TTL=7200` for 2 hours)
+3. Reduce query frequency in your application
+4. Apply for higher tier access if consistently hitting limits
+5. Optimize queries to request only necessary fields
+
+**Check current usage:**
+
+- Google Ads UI → Tools & Settings → API Center → View your API usage
+
+## Step 9: Test Your API Connection
 
 ### Quick Test with Python
 
@@ -251,6 +336,184 @@ docker-compose logs -f mcp-server
 3. **Verify account access**: Use the Google Ads UI to confirm you can access the accounts programmatically
 
 4. **Test with official examples**: Run examples from the [google-ads-python repository](https://github.com/googleads/google-ads-python/tree/main/examples) to isolate MCP-specific issues
+
+## Troubleshooting Flowchart
+
+### Authentication Errors
+
+```text
+┌─────────────────────────────────────┐
+│ Error: "UNAUTHENTICATED" or         │
+│ "INVALID_CREDENTIALS"                │
+└─────────────┬───────────────────────┘
+              │
+              ▼
+┌─────────────────────────────────────┐
+│ Are all 4 credentials set in .env?  │
+│ - GOOGLE_ADS_DEVELOPER_TOKEN         │
+│ - GOOGLE_ADS_CLIENT_ID              │
+│ - GOOGLE_ADS_CLIENT_SECRET          │
+│ - GOOGLE_ADS_REFRESH_TOKEN          │
+└─────────────┬───────────────────────┘
+              │
+        ┌─────┴─────┐
+        │    NO     │
+        └─────┬─────┘
+              │
+              ▼
+┌─────────────────────────────────────┐
+│ ✓ Set missing credentials in .env   │
+│ ✓ Restart MCP server                │
+└─────────────────────────────────────┘
+
+        ┌─────┴─────┐
+        │    YES    │
+        └─────┬─────┘
+              │
+              ▼
+┌─────────────────────────────────────┐
+│ Is the refresh token expired?       │
+│ (Tokens can expire after 6 months   │
+│ of inactivity)                       │
+└─────────────┬───────────────────────┘
+              │
+        ┌─────┴─────┐
+        │    YES    │
+        └─────┬─────┘
+              │
+              ▼
+┌─────────────────────────────────────┐
+│ ✓ Regenerate refresh token           │
+│   (see Step 5 in setup guide)       │
+│ ✓ Update GOOGLE_ADS_REFRESH_TOKEN   │
+│ ✓ Restart MCP server                │
+└─────────────────────────────────────┘
+
+        ┌─────┴─────┐
+        │    NO     │
+        └─────┬─────┘
+              │
+              ▼
+┌─────────────────────────────────────┐
+│ Does OAuth client have correct      │
+│ scopes?                              │
+│ Required:                            │
+│ https://www.googleapis.com/auth/    │
+│ adwords                              │
+└─────────────┬───────────────────────┘
+              │
+        ┌─────┴─────┐
+        │    NO     │
+        └─────┬─────┘
+              │
+              ▼
+┌─────────────────────────────────────┐
+│ ✓ Re-create OAuth client with       │
+│   correct scopes                     │
+│ ✓ Generate new refresh token        │
+└─────────────────────────────────────┘
+
+        ┌─────┴─────┐
+        │    YES    │
+        └─────┬─────┘
+              │
+              ▼
+┌─────────────────────────────────────┐
+│ Is the developer token valid and    │
+│ approved?                            │
+└─────────────┬───────────────────────┘
+              │
+        ┌─────┴─────┐
+        │    NO     │
+        └─────┬─────┘
+              │
+              ▼
+┌─────────────────────────────────────┐
+│ ✓ Apply for new developer token in  │
+│   Google Ads UI → API Center        │
+│ ✓ Wait for approval (can take days) │
+└─────────────────────────────────────┘
+
+        ┌─────┴─────┐
+        │    YES    │
+        └─────┬─────┘
+              │
+              ▼
+┌─────────────────────────────────────┐
+│ ⚠️  Contact support - unusual       │
+│ authentication issue                 │
+│                                      │
+│ Provide:                             │
+│ - Error message from logs            │
+│ - Google Ads customer ID             │
+│ - Timestamp of error                 │
+└─────────────────────────────────────┘
+```
+
+### Data Access Errors
+
+```text
+┌─────────────────────────────────────┐
+│ Error: "PERMISSION_DENIED" or       │
+│ "Customer not found"                 │
+└─────────────┬───────────────────────┘
+              │
+              ▼
+┌─────────────────────────────────────┐
+│ Is the customer ID format correct?  │
+│ (10 digits, no dashes)               │
+└─────────────┬───────────────────────┘
+              │
+        ┌─────┴─────┐
+        │    NO     │
+        └─────┬─────┘
+              │
+              ▼
+┌─────────────────────────────────────┐
+│ ✓ Fix format: 1234567890            │
+│ ✗ Wrong: 123-456-7890                │
+└─────────────────────────────────────┘
+
+        ┌─────┴─────┐
+        │    YES    │
+        └─────┬─────┘
+              │
+              ▼
+┌─────────────────────────────────────┐
+│ Do you have access to this account? │
+│ Check in Google Ads UI               │
+└─────────────┬───────────────────────┘
+              │
+        ┌─────┴─────┐
+        │    NO     │
+        └─────┬─────┘
+              │
+              ▼
+┌─────────────────────────────────────┐
+│ ✓ Request access from account owner │
+│ ✓ Use LOGIN_CUSTOMER_ID if managing │
+│   multiple accounts                  │
+└─────────────────────────────────────┘
+```
+
+### Quick Diagnostic Commands
+
+```bash
+# 1. Test Google Ads API credentials
+python -c "from google.ads.googleads.client import GoogleAdsClient; \
+           client = GoogleAdsClient.load_from_env(); \
+           print('✓ Credentials valid')"
+
+# 2. Test MCP server health
+# (After starting MCP server in Claude Desktop)
+# Check Claude Desktop → Settings → Developer → MCP Servers → paidsearchnav-mcp
+
+# 3. Check Redis connection (if using caching)
+redis-cli ping  # Should return "PONG"
+
+# 4. Verify environment variables
+env | grep GOOGLE_ADS  # Should show (redacted) credential values
+```
 
 ## Additional Resources
 

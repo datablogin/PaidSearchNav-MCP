@@ -4,12 +4,12 @@ import pytest
 from fastapi import FastAPI, Request
 from fastapi.testclient import TestClient
 
-from paidsearchnav.api.middleware_i18n import (
+from paidsearchnav_mcp.api.middleware_i18n import (
     I18nMiddleware,
     get_language,
     get_request_translator,
 )
-from paidsearchnav.i18n import get_translator
+from paidsearchnav_mcp.i18n import get_translator
 
 
 @pytest.fixture

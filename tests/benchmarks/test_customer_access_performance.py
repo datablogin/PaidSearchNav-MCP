@@ -6,8 +6,8 @@ from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 
-from paidsearchnav.storage.api_repository import APIRepository
-from paidsearchnav.storage.models import UserType
+from paidsearchnav_mcp.storage.api_repository import APIRepository
+from paidsearchnav_mcp.storage.models import UserType
 
 
 class TestCustomerAccessPerformance:

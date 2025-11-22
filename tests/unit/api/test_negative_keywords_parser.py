@@ -5,7 +5,7 @@ from io import BytesIO
 import pytest
 from fastapi.testclient import TestClient
 
-from paidsearchnav.api.main import create_app
+from paidsearchnav_mcp.api.main import create_app
 
 # Test constants
 LARGE_FILE_TEST_MULTIPLIER = 100000  # Sufficient to exceed 100MB limit

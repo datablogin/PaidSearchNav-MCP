@@ -7,7 +7,7 @@ from unittest.mock import AsyncMock, Mock, patch
 import pytest
 from click.testing import CliRunner
 
-from paidsearchnav.scheduler.cli import (
+from paidsearchnav_mcp.scheduler.cli import (
     parse_date_flexible,
     sanitize_error_message,
     scheduler,

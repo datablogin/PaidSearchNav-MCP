@@ -5,16 +5,16 @@ from unittest.mock import AsyncMock
 
 import pytest
 
-from paidsearchnav.analyzers.campaign_overlap import CampaignOverlapAnalyzer
-from paidsearchnav.core.models.analysis import CampaignOverlapAnalysisResult
-from paidsearchnav.core.models.campaign import (
+from paidsearchnav_mcp.analyzers.campaign_overlap import CampaignOverlapAnalyzer
+from paidsearchnav_mcp.models.analysis import CampaignOverlapAnalysisResult
+from paidsearchnav_mcp.models.campaign import (
     BiddingStrategy,
     Campaign,
     CampaignStatus,
     CampaignType,
 )
-from paidsearchnav.core.models.keyword import Keyword, KeywordMatchType, KeywordStatus
-from paidsearchnav.core.models.search_term import SearchTerm, SearchTermMetrics
+from paidsearchnav_mcp.models.keyword import Keyword, KeywordMatchType, KeywordStatus
+from paidsearchnav_mcp.models.search_term import SearchTerm, SearchTermMetrics
 
 
 @pytest.fixture

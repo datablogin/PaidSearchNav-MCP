@@ -6,7 +6,7 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from paidsearchnav.api.run import main
+from paidsearchnav_mcp.api.run import main
 
 
 class TestAPIRunner:

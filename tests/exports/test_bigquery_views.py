@@ -4,9 +4,9 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from paidsearchnav.exports.base import ExportConfig, ExportFormat
-from paidsearchnav.exports.bigquery import BigQueryExporter
-from paidsearchnav.exports.bigquery_views import (
+from paidsearchnav_mcp.exports.base import ExportConfig, ExportFormat
+from paidsearchnav_mcp.exports.bigquery import BigQueryExporter
+from paidsearchnav_mcp.exports.bigquery_views import (
     AnalyzerViewConfig,
     BigQueryAnalyzerViews,
 )

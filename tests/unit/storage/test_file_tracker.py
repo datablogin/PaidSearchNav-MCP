@@ -7,8 +7,8 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from paidsearchnav.core.models.audit_files import FileCategory, S3FileReference
-from paidsearchnav.storage.file_tracker import FileTracker
+from paidsearchnav_mcp.models.audit_files import FileCategory, S3FileReference
+from paidsearchnav_mcp.storage.file_tracker import FileTracker
 
 
 class TestFileTracker:

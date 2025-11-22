@@ -5,7 +5,7 @@ from typing import Any
 
 from pydantic import Field, field_validator
 
-from paidsearchnav_mcp.core.models.base import BasePSNModel
+from paidsearchnav_mcp.models.base import BasePSNModel
 
 
 class KeywordMatchType(str, Enum):

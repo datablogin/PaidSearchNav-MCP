@@ -9,18 +9,18 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from paidsearchnav.core.exceptions import APIError, RateLimitError
-from paidsearchnav.core.execution.analyzer_executor import (
+from paidsearchnav_mcp.core.exceptions import APIError, RateLimitError
+from paidsearchnav_mcp.core.execution.analyzer_executor import (
     AnalyzerExecutor,
     QuotaManager,
 )
-from paidsearchnav.core.interfaces import Analyzer
-from paidsearchnav.core.models import (
+from paidsearchnav_mcp.core.interfaces import Analyzer
+from paidsearchnav_mcp.models import (
     Recommendation,
     RecommendationPriority,
     RecommendationType,
 )
-from paidsearchnav.core.models.analysis import AnalysisMetrics, AnalysisResult
+from paidsearchnav_mcp.models.analysis import AnalysisMetrics, AnalysisResult
 
 
 class MockAnalyzer(Analyzer):

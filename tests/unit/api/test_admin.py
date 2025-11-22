@@ -3,7 +3,7 @@
 import pytest
 from fastapi import HTTPException
 
-from paidsearchnav.api.admin import (
+from paidsearchnav_mcp.api.admin import (
     check_admin_access,
     get_user_permissions,
     require_admin_role,

@@ -5,12 +5,12 @@ from unittest.mock import AsyncMock
 
 import pytest
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.orchestration.monitoring import WorkflowMonitor
-from paidsearchnav.orchestration.step_executors import StepExecutorRegistry
-from paidsearchnav.orchestration.workflow_definitions import WorkflowDefinitionParser
-from paidsearchnav.orchestration.workflow_engine import WorkflowOrchestrator
-from paidsearchnav.storage.models import (
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.orchestration.monitoring import WorkflowMonitor
+from paidsearchnav_mcp.orchestration.step_executors import StepExecutorRegistry
+from paidsearchnav_mcp.orchestration.workflow_definitions import WorkflowDefinitionParser
+from paidsearchnav_mcp.orchestration.workflow_engine import WorkflowOrchestrator
+from paidsearchnav_mcp.storage.models import (
     WorkflowDefinition,
     WorkflowExecution,
     WorkflowStep,

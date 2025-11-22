@@ -42,18 +42,25 @@ jobs:
     #   run: |
     #     mypy src/
 
-    # Temporarily skip tests - most tests are for archived codebase
-    # Will add MCP-specific tests in future PR
-    # - name: Run tests
-    #   run: |
-    #     pytest tests/ -v --cov=src/paidsearchnav_mcp --cov-report=xml --cov-report=term
-    #
-    # - name: Upload coverage to Codecov
-    #   uses: codecov/codecov-action@v4
-    #   if: matrix.python-version == '3.12'
-    #   with:
-    #     file: ./coverage.xml
-    #     fail_ci_if_error: false
+    # Run MCP tool tests (Phase 1 tests)
+    - name: Run MCP tool tests
+      run: |
+        pytest tests/test_mcp_tools.py -v --cov=src/paidsearchnav_mcp/server.py --cov-report=term --cov-report=xml
+
+    # Upload coverage to Codecov (optional - only if codecov token is configured)
+    - name: Upload coverage reports
+      if: matrix.python-version == '3.12'
+      uses: codecov/codecov-action@v4
+      with:
+        files: ./coverage.xml
+        fail_ci_if_error: false  # Don't fail if codecov upload fails
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+    # Verify minimum test coverage
+    - name: Verify test coverage
+      run: |
+        coverage report --fail-under=70
 
   docker-build:
     name: Docker Build

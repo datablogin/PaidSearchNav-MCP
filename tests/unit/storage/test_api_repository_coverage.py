@@ -7,8 +7,8 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from sqlalchemy.exc import SQLAlchemyError
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.storage.api_repository import APIRepository
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.storage.api_repository import APIRepository
 
 
 @pytest.fixture

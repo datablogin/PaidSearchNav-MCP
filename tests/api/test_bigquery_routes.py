@@ -6,10 +6,10 @@ from unittest.mock import MagicMock, patch
 import pytest
 from fastapi.testclient import TestClient
 
-from paidsearchnav.api.dependencies import get_current_user, get_settings
-from paidsearchnav.api.main import app
-from paidsearchnav.core.config import BigQueryConfig, BigQueryTier, Settings
-from paidsearchnav.platforms.bigquery.service import BigQueryService
+from paidsearchnav_mcp.api.dependencies import get_current_user, get_settings
+from paidsearchnav_mcp.api.main import app
+from paidsearchnav_mcp.core.config import BigQueryConfig, BigQueryTier, Settings
+from paidsearchnav_mcp.platforms.bigquery.service import BigQueryService
 from tests.utils import create_auth_headers
 
 

@@ -5,9 +5,9 @@ from unittest.mock import Mock, mock_open, patch
 
 import pytest
 
-from paidsearchnav.core.circuit_breaker import CircuitBreakerConfig
-from paidsearchnav.core.config import S3Config
-from paidsearchnav.integrations.s3 import (
+from paidsearchnav_mcp.core.circuit_breaker import CircuitBreakerConfig
+from paidsearchnav_mcp.core.config import S3Config
+from paidsearchnav_mcp.integrations.s3 import (
     S3Client,
     S3ClientError,
     S3Object,

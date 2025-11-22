@@ -5,19 +5,19 @@ from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 
-from paidsearchnav.analyzers.shared_negatives import SharedNegativeValidatorAnalyzer
-from paidsearchnav.core.models.analysis import (
+from paidsearchnav_mcp.analyzers.shared_negatives import SharedNegativeValidatorAnalyzer
+from paidsearchnav_mcp.models.analysis import (
     AnalysisResult,
     RecommendationPriority,
     RecommendationType,
 )
-from paidsearchnav.core.models.campaign import (
+from paidsearchnav_mcp.models.campaign import (
     BiddingStrategy,
     Campaign,
     CampaignStatus,
     CampaignType,
 )
-from paidsearchnav.core.models.keyword import Keyword, KeywordMatchType, KeywordStatus
+from paidsearchnav_mcp.models.keyword import Keyword, KeywordMatchType, KeywordStatus
 
 
 @pytest.fixture

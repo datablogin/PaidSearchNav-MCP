@@ -5,12 +5,12 @@ from unittest.mock import patch
 
 import pytest
 
-from paidsearchnav.core.circuit_breaker import (
+from paidsearchnav_mcp.core.circuit_breaker import (
     GoogleAdsCircuitBreaker,
     create_google_ads_circuit_breaker,
 )
-from paidsearchnav.core.config import CircuitBreakerConfig
-from paidsearchnav.core.exceptions import APIError, RateLimitError
+from paidsearchnav_mcp.core.config import CircuitBreakerConfig
+from paidsearchnav_mcp.core.exceptions import APIError, RateLimitError
 
 
 class TestGoogleAdsCircuitBreaker:

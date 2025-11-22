@@ -4,9 +4,9 @@ from unittest.mock import Mock
 
 import pytest
 
-from paidsearchnav.platforms.google.client import GoogleAdsClient
-from paidsearchnav.platforms.google.scripts.base import ScriptConfig, ScriptType
-from paidsearchnav.platforms.google.scripts.quarterly_data_extraction import (
+from paidsearchnav_mcp.platforms.google.client import GoogleAdsClient
+from paidsearchnav_mcp.platforms.google.scripts.base import ScriptConfig, ScriptType
+from paidsearchnav_mcp.platforms.google.scripts.quarterly_data_extraction import (
     CampaignPerformanceScript,
     GeographicPerformanceScript,
     KeywordPerformanceScript,

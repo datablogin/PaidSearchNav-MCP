@@ -7,8 +7,8 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from click.testing import CliRunner
 
-from paidsearchnav.cli.main import cli
-from paidsearchnav.storage.models import (
+from paidsearchnav_mcp.cli.main import cli
+from paidsearchnav_mcp.storage.models import (
     AnalysisRecord,
     Audit,
     Customer,

@@ -8,7 +8,7 @@ from typing import Dict, List, Optional
 from pydantic import BaseModel, Field, field_validator
 from pydantic_core import PydanticCustomError
 
-from paidsearchnav_mcp.core.models.base import BasePSNModel
+from paidsearchnav_mcp.models.base import BasePSNModel
 
 
 class BusinessType(str, Enum):

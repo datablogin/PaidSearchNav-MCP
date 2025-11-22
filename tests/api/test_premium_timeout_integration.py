@@ -5,11 +5,11 @@ from unittest.mock import Mock, patch
 import pytest
 from google.cloud import bigquery
 
-from paidsearchnav.api.v1.premium_utils import (
+from paidsearchnav_mcp.api.v1.premium_utils import (
     get_customer_tier_from_service_tier,
     safe_execute_query,
 )
-from paidsearchnav.platforms.bigquery.timeout_config import CustomerTier
+from paidsearchnav_mcp.platforms.bigquery.timeout_config import CustomerTier
 
 
 class TestPremiumTimeoutIntegration:

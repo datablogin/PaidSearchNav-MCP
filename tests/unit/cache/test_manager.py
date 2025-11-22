@@ -4,14 +4,14 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from paidsearchnav.cache.base import CacheBackend
-from paidsearchnav.cache.config import CacheConfig, CacheTTLConfig, RedisCacheConfig
-from paidsearchnav.cache.manager import (
+from paidsearchnav_mcp.cache.base import CacheBackend
+from paidsearchnav_mcp.cache.config import CacheConfig, CacheTTLConfig, RedisCacheConfig
+from paidsearchnav_mcp.cache.manager import (
     CacheManager,
     get_cache_manager,
     set_cache_manager,
 )
-from paidsearchnav.core.config import Settings
+from paidsearchnav_mcp.core.config import Settings
 
 
 class MockCacheBackend(CacheBackend):

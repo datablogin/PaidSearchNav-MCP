@@ -5,8 +5,8 @@ from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 
-from paidsearchnav.alerts.models import AlertPriority
-from paidsearchnav.platforms.bigquery.cost_monitor_enhanced import (
+from paidsearchnav_mcp.alerts.models import AlertPriority
+from paidsearchnav_mcp.platforms.bigquery.cost_monitor_enhanced import (
     CostThreshold,
     CostUsagePattern,
     CustomerBudgetConfig,

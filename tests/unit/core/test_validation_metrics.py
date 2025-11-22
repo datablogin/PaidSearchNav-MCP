@@ -2,8 +2,8 @@
 
 import pytest
 
-from paidsearchnav.core.constants import MAX_COST_MICROS, MAX_REVENUE_MICROS
-from paidsearchnav.core.validation.metrics import (
+from paidsearchnav_mcp.core.constants import MAX_COST_MICROS, MAX_REVENUE_MICROS
+from paidsearchnav_mcp.core.validation.metrics import (
     MetricsValidationError,
     validate_cost_micros,
     validate_integer,

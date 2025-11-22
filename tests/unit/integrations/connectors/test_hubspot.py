@@ -6,8 +6,8 @@ from unittest.mock import Mock, patch
 import pytest
 import requests
 
-from paidsearchnav.integrations.base import Lead, LeadStage
-from paidsearchnav.integrations.connectors.hubspot import HubSpotConnector
+from paidsearchnav_mcp.integrations.base import Lead, LeadStage
+from paidsearchnav_mcp.integrations.connectors.hubspot import HubSpotConnector
 
 
 class TestHubSpotConnector:

@@ -7,8 +7,8 @@ import pytest
 from click.testing import CliRunner
 from openpyxl import load_workbook
 
-from paidsearchnav.cli.main import cli
-from paidsearchnav.storage.models import AnalysisRecord, Audit, Customer
+from paidsearchnav_mcp.cli.main import cli
+from paidsearchnav_mcp.storage.models import AnalysisRecord, Audit, Customer
 
 
 @pytest.fixture

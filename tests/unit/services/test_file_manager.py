@@ -5,8 +5,8 @@ from unittest.mock import MagicMock, Mock, patch
 
 import pytest
 
-from paidsearchnav.core.config import S3Config
-from paidsearchnav.core.models.file_management import (
+from paidsearchnav_mcp.core.config import S3Config
+from paidsearchnav_mcp.models.file_management import (
     AuditFileSet,
     CleanupReport,
     FileCategory,

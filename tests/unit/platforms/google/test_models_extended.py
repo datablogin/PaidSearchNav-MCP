@@ -3,7 +3,7 @@
 import pytest
 from pydantic import ValidationError
 
-from paidsearchnav.platforms.google.models_extended import (
+from paidsearchnav_mcp.platforms.google.models_extended import (
     AdSchedulePerformance,
     AuctionInsights,
     DevicePerformance,

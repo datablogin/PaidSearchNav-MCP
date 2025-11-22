@@ -5,9 +5,9 @@ from datetime import datetime, timezone
 import pytest
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.storage.api_repository import APIRepository
-from paidsearchnav.storage.models import (
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.storage.api_repository import APIRepository
+from paidsearchnav_mcp.storage.models import (
     AnalysisRecord,
     Audit,
     Base,

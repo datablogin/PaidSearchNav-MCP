@@ -2,7 +2,7 @@
 
 import pytest
 
-from paidsearchnav.logging.secrets import SecretsRegistry, mask_secrets
+from paidsearchnav_mcp.logging.secrets import SecretsRegistry, mask_secrets
 
 
 class TestRecursionDepthLimiting:

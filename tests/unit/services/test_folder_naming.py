@@ -2,8 +2,8 @@
 
 import pytest
 
-from paidsearchnav.core.models.customer_init import BusinessType
-from paidsearchnav.services.folder_naming import (
+from paidsearchnav_mcp.models.customer_init import BusinessType
+from paidsearchnav_mcp.services.folder_naming import (
     FolderNamingError,
     PathValidationError,
     create_folder_structure,

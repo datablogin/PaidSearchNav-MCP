@@ -7,8 +7,8 @@ from pathlib import Path
 
 import pytest
 
-from paidsearchnav.core.models.search_term import SearchTerm
-from paidsearchnav.parsers.csv_parser import GoogleAdsCSVParser
+from paidsearchnav_mcp.models.search_term import SearchTerm
+from paidsearchnav_mcp.parsers.csv_parser import GoogleAdsCSVParser
 
 
 class TestCSVSearchTermsInference:

@@ -6,13 +6,13 @@ from typing import Any
 
 from pydantic import Field
 
-from paidsearchnav_mcp.core.models.base import (
+from paidsearchnav_mcp.models.base import (
     BasePSNModel,
     EnhancedKeyMetrics,
     MetricPeriod,
     MetricWithContext,
 )
-from paidsearchnav_mcp.core.models.search_term import (
+from paidsearchnav_mcp.models.search_term import (
     SearchTerm,
     SearchTermClassification,
 )

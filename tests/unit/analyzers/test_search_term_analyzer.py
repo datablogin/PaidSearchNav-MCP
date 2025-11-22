@@ -5,11 +5,11 @@ from unittest.mock import AsyncMock
 
 import pytest
 
-from paidsearchnav.analyzers.search_term_analyzer import (
+from paidsearchnav_mcp.analyzers.search_term_analyzer import (
     SearchTermAnalyzer,
     SearchTermIntent,
 )
-from paidsearchnav.core.models import (
+from paidsearchnav_mcp.models import (
     AnalysisResult,
     Keyword,
     MatchType,

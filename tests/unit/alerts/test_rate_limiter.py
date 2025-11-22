@@ -4,8 +4,8 @@ import time
 
 import pytest
 
-from paidsearchnav.alerts.models import Alert, AlertPriority, AlertType
-from paidsearchnav.alerts.rate_limiter import (
+from paidsearchnav_mcp.alerts.models import Alert, AlertPriority, AlertType
+from paidsearchnav_mcp.alerts.rate_limiter import (
     AdaptiveRateLimiter,
     AlertRateLimiter,
     RateLimitBucket,

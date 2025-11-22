@@ -4,9 +4,9 @@ from datetime import datetime, timedelta
 
 import pytest
 
-from paidsearchnav.core.models.campaign import CampaignStatus, CampaignType
-from paidsearchnav.core.models.keyword import KeywordMatchType, KeywordStatus
-from paidsearchnav.data_providers.mock_provider import MockDataProvider
+from paidsearchnav_mcp.models.campaign import CampaignStatus, CampaignType
+from paidsearchnav_mcp.models.keyword import KeywordMatchType, KeywordStatus
+from paidsearchnav_mcp.data_providers.mock_provider import MockDataProvider
 
 
 class TestMockDataProvider:

@@ -4,7 +4,7 @@ from typing import Any
 
 import pytest
 
-from paidsearchnav.core import constants
+from paidsearchnav_mcp.core import constants
 
 
 @pytest.fixture

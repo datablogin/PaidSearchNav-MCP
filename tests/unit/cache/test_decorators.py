@@ -4,14 +4,14 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from paidsearchnav.cache.decorators import (
+from paidsearchnav_mcp.cache.decorators import (
     _build_cache_key,
     _get_default_ttl,
     _hash_arguments,
     cache,
     cache_key,
 )
-from paidsearchnav.cache.manager import CacheManager
+from paidsearchnav_mcp.cache.manager import CacheManager
 
 
 class TestCacheDecorators:

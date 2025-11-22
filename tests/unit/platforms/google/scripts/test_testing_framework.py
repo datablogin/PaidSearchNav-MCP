@@ -6,7 +6,7 @@ from datetime import datetime
 from pathlib import Path
 from unittest.mock import Mock, patch
 
-from paidsearchnav.platforms.google.scripts.test_scenarios import (
+from paidsearchnav_mcp.platforms.google.scripts.test_scenarios import (
     ConflictDetectionTestCase,
     EndToEndAccuracyScenario,
     GeographicPerformanceTestCase,
@@ -14,7 +14,7 @@ from paidsearchnav.platforms.google.scripts.test_scenarios import (
     MultiLocationPerformanceScenario,
     ScaleAndPerformanceScenario,
 )
-from paidsearchnav.platforms.google.scripts.testing_framework import (
+from paidsearchnav_mcp.platforms.google.scripts.testing_framework import (
     BaseTestCase,
     DataAccuracyTestCase,
     IntegrationTestCase,

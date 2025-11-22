@@ -2,7 +2,7 @@
 
 import pytest
 
-from paidsearchnav.storage.models import User, UserType
+from paidsearchnav_mcp.storage.models import User, UserType
 
 
 class TestUserModelValidation:

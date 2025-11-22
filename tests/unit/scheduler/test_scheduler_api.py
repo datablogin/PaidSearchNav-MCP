@@ -5,15 +5,15 @@ from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 
-from paidsearchnav.core.config import SchedulerConfig, Settings
-from paidsearchnav.scheduler.api import (
+from paidsearchnav_mcp.core.config import SchedulerConfig, Settings
+from paidsearchnav_mcp.scheduler.api import (
     JobHistoryResponse,
     JobStatusResponse,
     ScheduleAuditRequest,
     SchedulerAPI,
     TriggerAuditRequest,
 )
-from paidsearchnav.scheduler.interfaces import JobStatus, JobType
+from paidsearchnav_mcp.scheduler.interfaces import JobStatus, JobType
 
 
 def create_trigger_audit_request(**overrides):

@@ -5,10 +5,10 @@ from pathlib import Path
 
 import pytest
 
-from paidsearchnav.analyzers.local_reach_store_performance import (
+from paidsearchnav_mcp.analyzers.local_reach_store_performance import (
     LocalReachStoreAnalyzer,
 )
-from paidsearchnav.analyzers.store_performance import StorePerformanceAnalyzer
+from paidsearchnav_mcp.analyzers.store_performance import StorePerformanceAnalyzer
 
 
 class TestStorePerformanceCSVIntegration:

@@ -21,9 +21,9 @@ except ImportError:
     SimpleSpanProcessor = None
     InMemorySpanExporter = None
 
-from paidsearchnav.api.monitoring import TracingConfig, setup_tracing
-from paidsearchnav.api.monitoring.health import HealthChecker
-from paidsearchnav.api.monitoring.metrics import get_metrics_collector
+from paidsearchnav_mcp.api.monitoring import TracingConfig, setup_tracing
+from paidsearchnav_mcp.api.monitoring.health import HealthChecker
+from paidsearchnav_mcp.api.monitoring.metrics import get_metrics_collector
 
 
 @pytest.fixture

@@ -6,7 +6,7 @@ from unittest.mock import patch
 
 import pytest
 
-from paidsearchnav.logging.monitoring import (
+from paidsearchnav_mcp.logging.monitoring import (
     MetricsCollector,
     gauge,
     increment,

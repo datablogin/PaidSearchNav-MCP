@@ -3,14 +3,14 @@
 import pytest
 from pydantic import ValidationError
 
-from paidsearchnav.core.models.campaign import (
+from paidsearchnav_mcp.models.campaign import (
     BiddingStrategy,
     Campaign,
     CampaignStatus,
     CampaignType,
 )
-from paidsearchnav.core.models.keyword import Keyword, KeywordMatchType, KeywordStatus
-from paidsearchnav.core.models.search_term import SearchTerm, SearchTermMetrics
+from paidsearchnav_mcp.models.keyword import Keyword, KeywordMatchType, KeywordStatus
+from paidsearchnav_mcp.models.search_term import SearchTerm, SearchTermMetrics
 
 
 class TestKeywordNumericValidation:

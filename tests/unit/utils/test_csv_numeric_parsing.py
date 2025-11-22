@@ -2,7 +2,7 @@
 
 import pandas as pd
 
-from paidsearchnav.utils.csv_parsing import (
+from paidsearchnav_mcp.utils.csv_parsing import (
     clean_numeric_value,
     get_common_numeric_columns,
     normalize_dataframe_numerics,

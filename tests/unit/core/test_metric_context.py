@@ -2,13 +2,13 @@
 
 from datetime import datetime, timezone
 
-from paidsearchnav.core.models.analysis import AnalysisMetrics, AnalysisResult
-from paidsearchnav.core.models.base import (
+from paidsearchnav_mcp.models.analysis import AnalysisMetrics, AnalysisResult
+from paidsearchnav_mcp.models.base import (
     EnhancedKeyMetrics,
     MetricPeriod,
     MetricWithContext,
 )
-from paidsearchnav.core.models.bid_adjustment import (
+from paidsearchnav_mcp.models.bid_adjustment import (
     BidAdjustmentAnalysisResult,
     BidAdjustmentAnalysisSummary,
     BidOptimization,

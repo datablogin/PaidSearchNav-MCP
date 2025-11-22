@@ -3,7 +3,7 @@
 from datetime import datetime, timezone
 from unittest.mock import patch
 
-from paidsearchnav.orchestration.monitoring import (
+from paidsearchnav_mcp.orchestration.monitoring import (
     ExecutionInfo,
     WorkflowMetrics,
     WorkflowMonitor,

@@ -7,8 +7,8 @@ import pytest
 from fastapi import status
 from fastapi.testclient import TestClient
 
-from paidsearchnav.api.main import app
-from paidsearchnav.auth.jwt_manager import jwt_manager
+from paidsearchnav_mcp.api.main import app
+from paidsearchnav_mcp.auth.jwt_manager import jwt_manager
 
 
 @pytest.fixture

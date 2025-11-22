@@ -1,6 +1,6 @@
 """Tests for logging context management."""
 
-from paidsearchnav.logging.context import (
+from paidsearchnav_mcp.logging.context import (
     LogContext,
     add_context,
     clear_context,

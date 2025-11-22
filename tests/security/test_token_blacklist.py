@@ -3,7 +3,7 @@
 import time
 from datetime import datetime, timedelta, timezone
 
-from paidsearchnav.api.token_blacklist import (
+from paidsearchnav_mcp.api.token_blacklist import (
     TokenBlacklist,
     blacklist_token,
     get_token_blacklist,

@@ -4,8 +4,8 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.orchestration.step_executors import (
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.orchestration.step_executors import (
     AnalysisEngineExecutor,
     BaseStepExecutor,
     CustomerInitServiceExecutor,

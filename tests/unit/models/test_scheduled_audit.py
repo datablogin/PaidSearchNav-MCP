@@ -5,7 +5,7 @@ from datetime import datetime, timedelta, timezone
 import pytest
 from pydantic import ValidationError
 
-from paidsearchnav.core.models import AuditFrequency, ScheduledAudit
+from paidsearchnav_mcp.models import AuditFrequency, ScheduledAudit
 
 
 class TestScheduledAudit:

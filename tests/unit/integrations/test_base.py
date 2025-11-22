@@ -2,7 +2,7 @@
 
 from datetime import datetime, timezone
 
-from paidsearchnav.integrations.base import (
+from paidsearchnav_mcp.integrations.base import (
     CRMConnector,
     CustomerJourney,
     Lead,

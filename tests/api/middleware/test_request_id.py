@@ -8,13 +8,13 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import Response
 from starlette.testclient import TestClient
 
-from paidsearchnav.api.exceptions import (
+from paidsearchnav_mcp.api.exceptions import (
     APIException,
     api_exception_handler,
     general_exception_handler,
     http_exception_handler,
 )
-from paidsearchnav.api.middleware_request_id import (
+from paidsearchnav_mcp.api.middleware_request_id import (
     RequestIDMiddleware,
     get_request_id,
 )

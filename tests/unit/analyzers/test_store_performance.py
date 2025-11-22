@@ -6,8 +6,8 @@ from pathlib import Path
 
 import pytest
 
-from paidsearchnav.analyzers.store_performance import StorePerformanceAnalyzer
-from paidsearchnav.core.models import (
+from paidsearchnav_mcp.analyzers.store_performance import StorePerformanceAnalyzer
+from paidsearchnav_mcp.models import (
     StoreIssueType,
     StoreLocationData,
     StoreMetrics,

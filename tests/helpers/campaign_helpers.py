@@ -1,6 +1,6 @@
 """Test helper functions for creating Campaign instances."""
 
-from paidsearchnav.core.models.campaign import (
+from paidsearchnav_mcp.models.campaign import (
     BiddingStrategy,
     Campaign,
     CampaignStatus,

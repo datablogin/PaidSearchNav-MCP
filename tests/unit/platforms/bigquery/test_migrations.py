@@ -4,7 +4,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from paidsearchnav.platforms.bigquery.migrations import BigQueryMigrations
+from paidsearchnav_mcp.platforms.bigquery.migrations import BigQueryMigrations
 
 
 class TestBigQueryMigrations:

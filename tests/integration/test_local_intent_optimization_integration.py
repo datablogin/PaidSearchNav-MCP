@@ -4,21 +4,21 @@ from unittest.mock import Mock
 
 import pytest
 
-from paidsearchnav.platforms.google.client import GoogleAdsClient
-from paidsearchnav.platforms.google.scripts.base import (
+from paidsearchnav_mcp.platforms.google.client import GoogleAdsClient
+from paidsearchnav_mcp.platforms.google.scripts.base import (
     RateLimiter,
     ScriptExecutor,
     ScriptStatus,
 )
-from paidsearchnav.platforms.google.scripts.geographic_optimization import (
+from paidsearchnav_mcp.platforms.google.scripts.geographic_optimization import (
     GeographicOptimizationEngine,
     create_geographic_optimization_config,
 )
-from paidsearchnav.platforms.google.scripts.local_intent_optimization import (
+from paidsearchnav_mcp.platforms.google.scripts.local_intent_optimization import (
     LocalIntentDetectionEngine,
     create_local_intent_config,
 )
-from paidsearchnav.platforms.google.scripts.local_keyword_expansion import (
+from paidsearchnav_mcp.platforms.google.scripts.local_keyword_expansion import (
     LocalKeywordExpansionEngine,
     create_local_keyword_expansion_config,
 )

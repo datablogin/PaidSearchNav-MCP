@@ -6,10 +6,10 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from paidsearchnav.core.exceptions import DataError
-from paidsearchnav.core.models.keyword import Keyword
-from paidsearchnav.core.models.search_term import SearchTerm
-from paidsearchnav.data_providers.csv_provider import CSVDataProvider
+from paidsearchnav_mcp.core.exceptions import DataError
+from paidsearchnav_mcp.models.keyword import Keyword
+from paidsearchnav_mcp.models.search_term import SearchTerm
+from paidsearchnav_mcp.data_providers.csv_provider import CSVDataProvider
 
 
 class TestCSVDataProvider:

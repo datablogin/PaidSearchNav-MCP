@@ -6,8 +6,8 @@ from unittest.mock import Mock, patch
 import numpy as np
 import pytest
 
-from paidsearchnav.integrations.base import Lead, LeadQuality, LeadStage
-from paidsearchnav.integrations.lead_scoring import (
+from paidsearchnav_mcp.integrations.base import Lead, LeadQuality, LeadStage
+from paidsearchnav_mcp.integrations.lead_scoring import (
     SKLEARN_AVAILABLE,
     LeadQualityScorer,
     ScoringFeatures,

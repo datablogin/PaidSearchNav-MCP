@@ -7,14 +7,14 @@ from unittest.mock import patch
 
 import pytest
 
-from paidsearchnav.core.models import (
+from paidsearchnav_mcp.models import (
     AnalysisMetrics,
     AnalysisResult,
     Recommendation,
     RecommendationPriority,
     RecommendationType,
 )
-from paidsearchnav.reports.async_generator import AsyncReportGenerator
+from paidsearchnav_mcp.reports.async_generator import AsyncReportGenerator
 
 
 @pytest.fixture

@@ -5,19 +5,19 @@ from datetime import datetime
 
 import pytest
 
-from paidsearchnav.core.models.analysis import (
+from paidsearchnav_mcp.models.analysis import (
     PerformanceMaxAnalysisResult,
     Recommendation,
     RecommendationPriority,
     RecommendationType,
 )
-from paidsearchnav.core.models.campaign import (
+from paidsearchnav_mcp.models.campaign import (
     BiddingStrategy,
     Campaign,
     CampaignStatus,
     CampaignType,
 )
-from paidsearchnav.exporters.pmax_exporter import PerformanceMaxExporter
+from paidsearchnav_mcp.exporters.pmax_exporter import PerformanceMaxExporter
 
 
 @pytest.fixture

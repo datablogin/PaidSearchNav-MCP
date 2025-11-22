@@ -7,8 +7,8 @@ from unittest.mock import AsyncMock, Mock, patch
 import pytest
 from click.testing import CliRunner
 
-from paidsearchnav.cli.geo import geo
-from paidsearchnav.core.models import (
+from paidsearchnav_mcp.cli.geo import geo
+from paidsearchnav_mcp.models import (
     GeographicLevel,
     GeoPerformanceAnalysisResult,
     GeoPerformanceData,

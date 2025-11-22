@@ -2,9 +2,9 @@
 
 from unittest.mock import AsyncMock
 
-from paidsearchnav.analyzers.search_terms import SearchTermsAnalyzer
-from paidsearchnav.core.config import AnalyzerThresholds
-from paidsearchnav.core.models import SearchTerm, SearchTermMetrics
+from paidsearchnav_mcp.analyzers.search_terms import SearchTermsAnalyzer
+from paidsearchnav_mcp.core.config import AnalyzerThresholds
+from paidsearchnav_mcp.models import SearchTerm, SearchTermMetrics
 
 
 class TestSearchTermsAnalyzerConfigurableCPA:

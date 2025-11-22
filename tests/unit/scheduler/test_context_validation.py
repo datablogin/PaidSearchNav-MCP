@@ -5,8 +5,8 @@ from datetime import datetime
 import pytest
 from pydantic import ValidationError
 
-from paidsearchnav.scheduler.jobs import validate_job_context
-from paidsearchnav.scheduler.models import JobContextValidator
+from paidsearchnav_mcp.scheduler.jobs import validate_job_context
+from paidsearchnav_mcp.scheduler.models import JobContextValidator
 
 
 class TestJobContextValidator:

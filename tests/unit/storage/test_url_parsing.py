@@ -1,6 +1,6 @@
 """Tests for database URL parsing logic in repository.py"""
 
-from paidsearchnav.storage.repository import _convert_postgres_url_scheme
+from paidsearchnav_mcp.storage.repository import _convert_postgres_url_scheme
 
 
 class TestDatabaseUrlParsing:

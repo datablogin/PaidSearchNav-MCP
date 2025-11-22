@@ -5,7 +5,7 @@ import tempfile
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
-from paidsearchnav.parsers.csv_parser import GoogleAdsCSVParser
+from paidsearchnav_mcp.parsers.csv_parser import GoogleAdsCSVParser
 
 
 class TestChunkedCSVParsing:

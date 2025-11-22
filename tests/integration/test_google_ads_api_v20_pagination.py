@@ -7,8 +7,8 @@ from typing import Any, Dict
 
 import pytest
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.platforms.google.client import GoogleAdsAPIClient
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.platforms.google.client import GoogleAdsAPIClient
 
 
 class APIEfficiencyMetrics:

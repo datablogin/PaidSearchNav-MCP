@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 import pytest
 from pydantic import ValidationError
 
-from paidsearchnav.core.models.geo_performance import (
+from paidsearchnav_mcp.models.geo_performance import (
     DistancePerformanceData,
     GeographicLevel,
     GeoPerformanceAnalysisResult,

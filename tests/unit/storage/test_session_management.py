@@ -10,12 +10,12 @@ import pytest
 import pytest_asyncio
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.core.models.analysis import (
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.models.analysis import (
     AnalysisMetrics,
     AnalysisResult,
 )
-from paidsearchnav.storage.repository import AnalysisRepository
+from paidsearchnav_mcp.storage.repository import AnalysisRepository
 
 
 @pytest.fixture

@@ -5,15 +5,15 @@ from unittest.mock import AsyncMock, Mock
 
 import pytest
 
-from paidsearchnav.analyzers.keyword_analyzer import (
+from paidsearchnav_mcp.analyzers.keyword_analyzer import (
     KeywordAnalysisResult,
     KeywordAnalyzer,
 )
-from paidsearchnav.core.models.analysis import (
+from paidsearchnav_mcp.models.analysis import (
     RecommendationPriority,
     RecommendationType,
 )
-from paidsearchnav.core.models.keyword import Keyword, KeywordMatchType, KeywordStatus
+from paidsearchnav_mcp.models.keyword import Keyword, KeywordMatchType, KeywordStatus
 
 
 @pytest.fixture

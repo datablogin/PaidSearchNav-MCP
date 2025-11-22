@@ -6,14 +6,14 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from unittest.mock import patch
 
-from paidsearchnav.core.models.analysis import (
+from paidsearchnav_mcp.models.analysis import (
     AnalysisMetrics,
     AnalysisResult,
     Recommendation,
     RecommendationPriority,
     RecommendationType,
 )
-from paidsearchnav.logging.audit import AuditLogger, get_audit_logger
+from paidsearchnav_mcp.logging.audit import AuditLogger, get_audit_logger
 
 
 class TestAuditLogger:

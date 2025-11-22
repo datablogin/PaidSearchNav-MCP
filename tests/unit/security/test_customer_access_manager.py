@@ -5,7 +5,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from paidsearchnav.security.access_control import (
+from paidsearchnav_mcp.security.access_control import (
     AccessLevel,
     AccessToken,
     CustomerAccessManager,

@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from paidsearchnav.parsers.csv_parser import CSVParser
+from paidsearchnav_mcp.parsers.csv_parser import CSVParser
 
 
 class TestCSVParserNewReports:

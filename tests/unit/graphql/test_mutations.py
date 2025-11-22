@@ -5,9 +5,9 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from paidsearchnav.core.exceptions import ValidationError
-from paidsearchnav.graphql.resolvers.mutation import Mutation
-from paidsearchnav.graphql.types import (
+from paidsearchnav_mcp.core.exceptions import ValidationError
+from paidsearchnav_mcp.graphql.resolvers.mutation import Mutation
+from paidsearchnav_mcp.graphql.types import (
     AuditStatus,
     ScheduleAuditInput,
     TriggerAuditInput,

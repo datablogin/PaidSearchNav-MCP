@@ -5,7 +5,7 @@ import time
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
-from paidsearchnav.exports.base import ExportStatus
+from paidsearchnav_mcp.exports.base import ExportStatus
 
 
 class MockBigQueryClient:

@@ -4,7 +4,7 @@ from datetime import datetime
 
 import pytest
 
-from paidsearchnav.exports.base import (
+from paidsearchnav_mcp.exports.base import (
     ExportConfig,
     ExportConnectionError,
     ExportDestination,

@@ -5,8 +5,8 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from paidsearchnav.core.config import S3Config
-from paidsearchnav.integrations.aws_config import AWSConfigHelper, AWSCredentialError
+from paidsearchnav_mcp.core.config import S3Config
+from paidsearchnav_mcp.integrations.aws_config import AWSConfigHelper, AWSCredentialError
 
 
 class TestAWSConfigHelper:

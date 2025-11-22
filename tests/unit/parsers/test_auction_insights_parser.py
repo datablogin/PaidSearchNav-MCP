@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from paidsearchnav.parsers.auction_insights import (
+from paidsearchnav_mcp.parsers.auction_insights import (
     AuctionInsightsConfig,
     AuctionInsightsParser,
 )

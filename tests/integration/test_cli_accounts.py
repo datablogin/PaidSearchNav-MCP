@@ -7,8 +7,8 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from click.testing import CliRunner
 
-from paidsearchnav.cli.accounts import accounts
-from paidsearchnav.core.models.account import (
+from paidsearchnav_mcp.cli.accounts import accounts
+from paidsearchnav_mcp.models.account import (
     Account,
     AccountHierarchy,
     AccountStatus,

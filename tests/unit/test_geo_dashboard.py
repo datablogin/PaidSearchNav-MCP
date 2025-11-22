@@ -5,14 +5,14 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from paidsearchnav.core.models import (
+from paidsearchnav_mcp.models import (
     GeographicLevel,
     GeoPerformanceAnalysisResult,
     GeoPerformanceData,
     GeoPerformanceSummary,
     LocationInsight,
 )
-from paidsearchnav.dashboards.geo_dashboard import GeoDashboard
+from paidsearchnav_mcp.dashboards.geo_dashboard import GeoDashboard
 
 
 @pytest.fixture

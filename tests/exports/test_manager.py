@@ -4,7 +4,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from paidsearchnav.exports.base import (
+from paidsearchnav_mcp.exports.base import (
     ExportConfig,
     ExportError,
     ExportFormat,
@@ -12,8 +12,8 @@ from paidsearchnav.exports.base import (
     ExportResult,
     ExportStatus,
 )
-from paidsearchnav.exports.config import ExportConfigManager
-from paidsearchnav.exports.manager import ExportManager
+from paidsearchnav_mcp.exports.config import ExportConfigManager
+from paidsearchnav_mcp.exports.manager import ExportManager
 
 
 class TestExportManager:

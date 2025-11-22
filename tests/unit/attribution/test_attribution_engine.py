@@ -5,8 +5,8 @@ from unittest.mock import AsyncMock, Mock
 
 import pytest
 
-from paidsearchnav.attribution.engine import AttributionEngine
-from paidsearchnav.attribution.models import (
+from paidsearchnav_mcp.attribution.engine import AttributionEngine
+from paidsearchnav_mcp.attribution.models import (
     AttributionModel,
     AttributionModelType,
     AttributionTouch,

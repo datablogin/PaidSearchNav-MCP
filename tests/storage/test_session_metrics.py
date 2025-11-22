@@ -5,7 +5,7 @@ from unittest.mock import patch
 
 import pytest
 
-from paidsearchnav.storage.session_metrics import (
+from paidsearchnav_mcp.storage.session_metrics import (
     SessionMetrics,
     configure_session_metrics,
     get_session_metrics,

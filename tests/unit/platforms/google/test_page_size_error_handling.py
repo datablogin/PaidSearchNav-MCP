@@ -6,9 +6,9 @@ import pytest
 from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.v20.errors.types import GoogleAdsFailure
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.core.exceptions import APIError
-from paidsearchnav.platforms.google.client import GoogleAdsAPIClient
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.core.exceptions import APIError
+from paidsearchnav_mcp.platforms.google.client import GoogleAdsAPIClient
 
 
 class TestPageSizeErrorHandling:

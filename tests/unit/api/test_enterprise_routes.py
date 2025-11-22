@@ -7,8 +7,8 @@ import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from paidsearchnav.api.routes.enterprise import router
-from paidsearchnav.ml.models import (
+from paidsearchnav_mcp.api.routes.enterprise import router
+from paidsearchnav_mcp.ml.models import (
     AnomalyDetection,
     BidRecommendation,
     CausalInsight,

@@ -9,8 +9,8 @@ import pytest
 # Skip entire module if imports are not available
 pytest.importorskip("paidsearchnav.platforms.google.client")
 
-from paidsearchnav.core.models.keyword import MatchType
-from paidsearchnav.platforms.google.client import GoogleAdsAPIClient
+from paidsearchnav_mcp.models.keyword import MatchType
+from paidsearchnav_mcp.platforms.google.client import GoogleAdsAPIClient
 
 
 class TestGoogleAdsAPIV20Compatibility:

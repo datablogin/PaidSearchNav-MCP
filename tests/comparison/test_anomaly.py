@@ -5,8 +5,8 @@ from datetime import datetime
 import numpy as np
 import pytest
 
-from paidsearchnav.comparison.anomaly import AnomalyDetector
-from paidsearchnav.comparison.models import MetricType, TrendDataPoint
+from paidsearchnav_mcp.comparison.anomaly import AnomalyDetector
+from paidsearchnav_mcp.comparison.models import MetricType, TrendDataPoint
 
 
 class TestAnomalyDetector:

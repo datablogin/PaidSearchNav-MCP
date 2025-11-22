@@ -2,7 +2,7 @@
 
 import pandas as pd
 
-from paidsearchnav.utils.csv_parsing import (
+from paidsearchnav_mcp.utils.csv_parsing import (
     detect_summary_rows,
     infer_missing_fields,
     preprocess_search_terms_data,

@@ -1,9 +1,9 @@
 """Unit tests for field mappings."""
 
-from paidsearchnav.core.models.geo_performance import GeoPerformanceData
-from paidsearchnav.core.models.keyword import Keyword
-from paidsearchnav.core.models.search_term import SearchTerm
-from paidsearchnav.parsers.field_mappings import (
+from paidsearchnav_mcp.models.geo_performance import GeoPerformanceData
+from paidsearchnav_mcp.models.keyword import Keyword
+from paidsearchnav_mcp.models.search_term import SearchTerm
+from paidsearchnav_mcp.parsers.field_mappings import (
     FIELD_MAPPINGS,
     get_available_file_types,
     get_field_mapping,

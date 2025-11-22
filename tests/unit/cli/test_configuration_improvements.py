@@ -5,7 +5,7 @@ from unittest.mock import Mock, patch
 import pytest
 from click.testing import CliRunner
 
-from paidsearchnav.cli.utils import (
+from paidsearchnav_mcp.cli.utils import (
     CLIConfigurationError,
     get_settings_safely,
     validate_customer_id,

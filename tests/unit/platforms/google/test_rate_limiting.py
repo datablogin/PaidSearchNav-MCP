@@ -5,8 +5,8 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from paidsearchnav.core.config import GoogleAdsConfig
-from paidsearchnav.platforms.google.rate_limiting import (
+from paidsearchnav_mcp.core.config import GoogleAdsConfig
+from paidsearchnav_mcp.platforms.google.rate_limiting import (
     GoogleAdsRateLimiter,
     OperationType,
     RateLimitError,

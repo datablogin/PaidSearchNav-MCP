@@ -190,7 +190,38 @@ Use the get_keywords tool to retrieve all keywords for customer 1234567890,
 showing match types and quality scores
 \`\`\`
 
-### Test 4: Verify Data is Returned
+### Test 4: Verify Redis Caching (Optional)
+
+If you've configured Redis caching, verify it's working:
+
+**1. Check Redis connection:**
+
+\`\`\`bash
+redis-cli ping  # Should return PONG
+\`\`\`
+
+**2. Make the same query twice:**
+
+\`\`\`
+Use the get_campaigns tool twice with the same parameters:
+Customer ID: 1234567890, dates: 2024-01-01 to 2024-01-31
+\`\`\`
+
+**3. Check the logs for cache hits:**
+
+\`\`\`
+First request: "Cache miss for campaigns query: customer=1234567890"
+Second request: "Cache hit for campaigns query: customer=1234567890"
+\`\`\`
+
+**4. Verify performance improvement:**
+
+- First request: ~500-1000ms (API call)
+- Second request: ~10-50ms (cache hit)
+
+**Cache TTL:** Results are cached for 1-4 hours depending on data type (configurable via \`REDIS_TTL\` in \`.env\`)
+
+### Test 5: Verify Data is Returned
 
 Successful responses should include:
 

@@ -5,15 +5,15 @@ from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 
-from paidsearchnav.analyzers.geo_performance import GeoPerformanceAnalyzer
-from paidsearchnav.core.models import (
+from paidsearchnav_mcp.analyzers.geo_performance import GeoPerformanceAnalyzer
+from paidsearchnav_mcp.models import (
     GeographicLevel,
     GeoPerformanceAnalysisResult,
     GeoPerformanceData,
     GeoPerformanceSummary,
     LocationInsight,
 )
-from paidsearchnav.platforms.google.client import GoogleAdsAPIClient
+from paidsearchnav_mcp.platforms.google.client import GoogleAdsAPIClient
 
 
 @pytest.fixture

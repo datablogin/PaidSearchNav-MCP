@@ -7,7 +7,7 @@ from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 
-from paidsearchnav.analyzers.dayparting import (
+from paidsearchnav_mcp.analyzers.dayparting import (
     DaypartingAnalysisResult,
     DaypartingAnalyzer,
 )

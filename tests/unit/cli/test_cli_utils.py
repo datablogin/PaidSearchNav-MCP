@@ -5,7 +5,7 @@ from unittest.mock import Mock, patch
 import pytest
 from click.testing import CliRunner
 
-from paidsearchnav.cli.utils import (
+from paidsearchnav_mcp.cli.utils import (
     MAX_CUSTOMER_ID_LENGTH,
     MIN_CUSTOMER_ID_LENGTH,
     MIN_TOKEN_LENGTH,
@@ -22,7 +22,7 @@ from paidsearchnav.cli.utils import (
     sanitize_error_message,
     validate_customer_id,
 )
-from paidsearchnav.core.exceptions import (
+from paidsearchnav_mcp.core.exceptions import (
     APIError,
     AuthenticationError,
     AuthorizationError,

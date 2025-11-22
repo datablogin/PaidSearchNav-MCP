@@ -13,17 +13,17 @@ from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 
-from paidsearchnav.core.config import SchedulerConfig, Settings
-from paidsearchnav.scheduler.interfaces import JobStatus, JobType
-from paidsearchnav.scheduler.jobs import AuditJob, validate_job_context
-from paidsearchnav.scheduler.models import (
+from paidsearchnav_mcp.core.config import SchedulerConfig, Settings
+from paidsearchnav_mcp.scheduler.interfaces import JobStatus, JobType
+from paidsearchnav_mcp.scheduler.jobs import AuditJob, validate_job_context
+from paidsearchnav_mcp.scheduler.models import (
     AuditJobConfig,
     JobContextValidator,
     JobExecution,
 )
-from paidsearchnav.scheduler.retry import RetryableJob, create_default_retry_policy
-from paidsearchnav.scheduler.scheduler import AuditScheduler
-from paidsearchnav.scheduler.storage import JobHistoryStore
+from paidsearchnav_mcp.scheduler.retry import RetryableJob, create_default_retry_policy
+from paidsearchnav_mcp.scheduler.scheduler import AuditScheduler
+from paidsearchnav_mcp.scheduler.storage import JobHistoryStore
 
 
 def clear_prometheus_registry():

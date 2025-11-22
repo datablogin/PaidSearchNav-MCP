@@ -8,15 +8,15 @@ from unittest.mock import MagicMock, patch
 import pytest
 import pytest_asyncio
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.core.models.analysis import (
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.models.analysis import (
     AnalysisMetrics,
     AnalysisResult,
     Recommendation,
     RecommendationPriority,
     RecommendationType,
 )
-from paidsearchnav.storage.repository import AnalysisRepository
+from paidsearchnav_mcp.storage.repository import AnalysisRepository
 
 
 @pytest.fixture

@@ -1,8 +1,8 @@
 """Tests for the translator module."""
 
-from paidsearchnav.i18n import get_translator, gettext, init_i18n, ngettext
-from paidsearchnav.i18n.config import I18nConfig
-from paidsearchnav.i18n.translator import LazyString, Translator
+from paidsearchnav_mcp.i18n import get_translator, gettext, init_i18n, ngettext
+from paidsearchnav_mcp.i18n.config import I18nConfig
+from paidsearchnav_mcp.i18n.translator import LazyString, Translator
 
 
 class TestTranslator:

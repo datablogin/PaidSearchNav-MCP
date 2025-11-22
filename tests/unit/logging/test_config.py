@@ -7,8 +7,8 @@ import tempfile
 from pathlib import Path
 from unittest.mock import patch
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.logging.config import (
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.logging.config import (
     ConfigHelper,
     LogConfig,
     LogLevel,

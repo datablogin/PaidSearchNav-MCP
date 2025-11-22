@@ -4,7 +4,7 @@ from datetime import datetime
 
 import pytest
 
-from paidsearchnav.storage.s3_utils import (
+from paidsearchnav_mcp.storage.s3_utils import (
     S3_BUCKET_BASE,
     get_analysis_input_path,
     get_analysis_output_path,

@@ -4,8 +4,8 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from paidsearchnav.core.config import CircuitBreakerConfig
-from paidsearchnav.platforms.google.client import GoogleAdsAPIClient
+from paidsearchnav_mcp.core.config import CircuitBreakerConfig
+from paidsearchnav_mcp.platforms.google.client import GoogleAdsAPIClient
 
 
 @pytest.fixture

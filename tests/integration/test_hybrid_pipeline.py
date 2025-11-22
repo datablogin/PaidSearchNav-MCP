@@ -6,9 +6,9 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from paidsearchnav.core.config import BigQueryConfig, BigQueryTier
-from paidsearchnav.exports.base import ExportFormat, ExportRequest, ExportStatus
-from paidsearchnav.exports.hybrid import CustomerTier, HybridExportManager
+from paidsearchnav_mcp.core.config import BigQueryConfig, BigQueryTier
+from paidsearchnav_mcp.exports.base import ExportFormat, ExportRequest, ExportStatus
+from paidsearchnav_mcp.exports.hybrid import CustomerTier, HybridExportManager
 
 
 class TestHybridPipelineIntegration:

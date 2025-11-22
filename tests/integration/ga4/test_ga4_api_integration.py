@@ -10,12 +10,12 @@ from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 
-from paidsearchnav.analyzers.ga4_analytics import GA4AnalyticsAnalyzer
-from paidsearchnav.core.config import BigQueryConfig, GA4Config
-from paidsearchnav.platforms.ga4.auth import GA4Authenticator
-from paidsearchnav.platforms.ga4.client import GA4DataClient
-from paidsearchnav.platforms.ga4.data_validator import GA4DataValidator
-from paidsearchnav.platforms.ga4.rate_limiter import GA4ResilientClient
+from paidsearchnav_mcp.analyzers.ga4_analytics import GA4AnalyticsAnalyzer
+from paidsearchnav_mcp.core.config import BigQueryConfig, GA4Config
+from paidsearchnav_mcp.platforms.ga4.auth import GA4Authenticator
+from paidsearchnav_mcp.platforms.ga4.client import GA4DataClient
+from paidsearchnav_mcp.platforms.ga4.data_validator import GA4DataValidator
+from paidsearchnav_mcp.platforms.ga4.rate_limiter import GA4ResilientClient
 
 
 @pytest.mark.integration

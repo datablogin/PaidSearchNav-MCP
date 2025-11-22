@@ -5,9 +5,9 @@ from unittest.mock import AsyncMock, Mock
 
 import pytest
 
-from paidsearchnav.scheduler.interfaces import JobStatus, JobType
-from paidsearchnav.scheduler.models import JobExecution
-from paidsearchnav.scheduler.retry import (
+from paidsearchnav_mcp.scheduler.interfaces import JobStatus, JobType
+from paidsearchnav_mcp.scheduler.models import JobExecution
+from paidsearchnav_mcp.scheduler.retry import (
     RetryableJob,
     RetryPolicy,
     create_default_retry_policy,

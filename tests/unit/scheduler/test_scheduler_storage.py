@@ -7,9 +7,9 @@ from uuid import uuid4
 import pytest
 from sqlalchemy.exc import SQLAlchemyError
 
-from paidsearchnav.scheduler.interfaces import JobStatus, JobType
-from paidsearchnav.scheduler.storage import JobHistoryStore
-from paidsearchnav.storage.models import JobExecutionRecord
+from paidsearchnav_mcp.scheduler.interfaces import JobStatus, JobType
+from paidsearchnav_mcp.scheduler.storage import JobHistoryStore
+from paidsearchnav_mcp.storage.models import JobExecutionRecord
 
 
 @pytest.fixture

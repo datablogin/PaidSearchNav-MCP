@@ -5,8 +5,8 @@ from datetime import datetime
 
 import pytest
 
-from paidsearchnav.analyzers.demographics import DemographicsAnalyzer
-from paidsearchnav.core.models.demographics import (
+from paidsearchnav_mcp.analyzers.demographics import DemographicsAnalyzer
+from paidsearchnav_mcp.models.demographics import (
     AgeGroup,
     DemographicsAnalysisResult,
     DemographicType,

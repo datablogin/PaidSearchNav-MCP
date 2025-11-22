@@ -2,7 +2,7 @@
 
 import pytest
 
-from paidsearchnav.cache.base import CacheBackend
+from paidsearchnav_mcp.cache.base import CacheBackend
 
 
 class TestCacheBackend:

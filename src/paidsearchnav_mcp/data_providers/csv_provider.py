@@ -13,9 +13,9 @@ from paidsearchnav_mcp.parsers.csv_parser import CSVParser
 from paidsearchnav_mcp.security.rate_limiting import validate_multiple_id_lists
 
 if TYPE_CHECKING:
-    from paidsearchnav_mcp.core.models.campaign import Campaign
-    from paidsearchnav_mcp.core.models.keyword import Keyword
-    from paidsearchnav_mcp.core.models.search_term import SearchTerm
+    from paidsearchnav_mcp.models.campaign import Campaign
+    from paidsearchnav_mcp.models.keyword import Keyword
+    from paidsearchnav_mcp.models.search_term import SearchTerm
 
 logger = logging.getLogger(__name__)
 

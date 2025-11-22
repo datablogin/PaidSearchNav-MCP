@@ -20,8 +20,8 @@ except ImportError:
             super().__init__(str(error_response))
 
 
-from paidsearchnav.core.config import S3Config
-from paidsearchnav.security.s3_security_manager import (
+from paidsearchnav_mcp.core.config import S3Config
+from paidsearchnav_mcp.security.s3_security_manager import (
     PreSignedURLConfig,
     S3BucketPolicy,
     S3SecurityManager,

@@ -6,8 +6,8 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from paidsearchnav.scheduler.jobs import AuditJob
-from paidsearchnav.scheduler.models import AuditJobConfig
+from paidsearchnav_mcp.scheduler.jobs import AuditJob
+from paidsearchnav_mcp.scheduler.models import AuditJobConfig
 
 
 class MockAnalyzer:

@@ -7,9 +7,9 @@ from unittest.mock import patch
 import pytest
 from click.testing import CliRunner
 
-from paidsearchnav.cli.accounts import accounts
-from paidsearchnav.cli.geo import geo
-from paidsearchnav.cli.utils import (
+from paidsearchnav_mcp.cli.accounts import accounts
+from paidsearchnav_mcp.cli.geo import geo
+from paidsearchnav_mcp.cli.utils import (
     CLIConfigurationError,
     create_google_ads_client,
     get_settings_safely,

@@ -6,18 +6,18 @@ import random
 from datetime import datetime, timedelta
 from typing import TYPE_CHECKING, Any
 
-from paidsearchnav_mcp.core.models.campaign import (
+from paidsearchnav_mcp.models.campaign import (
     BiddingStrategy,
     Campaign,
     CampaignStatus,
     CampaignType,
 )
-from paidsearchnav_mcp.core.models.keyword import (
+from paidsearchnav_mcp.models.keyword import (
     Keyword,
     KeywordMatchType,
     KeywordStatus,
 )
-from paidsearchnav_mcp.core.models.search_term import SearchTerm, SearchTermMetrics
+from paidsearchnav_mcp.models.search_term import SearchTerm, SearchTermMetrics
 from paidsearchnav_mcp.data_providers.base import DataProvider
 from paidsearchnav_mcp.security.rate_limiting import validate_multiple_id_lists
 

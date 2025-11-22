@@ -1,7 +1,7 @@
 """Tests for BigQuery service functionality."""
 
-from paidsearchnav.core.config import BigQueryConfig, BigQueryTier
-from paidsearchnav.platforms.bigquery.service import BigQueryService
+from paidsearchnav_mcp.core.config import BigQueryConfig, BigQueryTier
+from paidsearchnav_mcp.platforms.bigquery.service import BigQueryService
 
 
 class TestBigQueryService:

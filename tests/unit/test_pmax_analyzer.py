@@ -4,20 +4,20 @@ from datetime import date, datetime
 
 import pytest
 
-from paidsearchnav.analyzers.pmax import PerformanceMaxAnalyzer, PerformanceMaxConfig
-from paidsearchnav.core.models.analysis import (
+from paidsearchnav_mcp.analyzers.pmax import PerformanceMaxAnalyzer, PerformanceMaxConfig
+from paidsearchnav_mcp.models.analysis import (
     PerformanceMaxAnalysisResult,
     Recommendation,
     RecommendationPriority,
     RecommendationType,
 )
-from paidsearchnav.core.models.campaign import (
+from paidsearchnav_mcp.models.campaign import (
     BiddingStrategy,
     Campaign,
     CampaignStatus,
     CampaignType,
 )
-from paidsearchnav.core.models.search_term import SearchTerm, SearchTermMetrics
+from paidsearchnav_mcp.models.search_term import SearchTerm, SearchTermMetrics
 
 
 class MockDataProvider:

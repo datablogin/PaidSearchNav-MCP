@@ -5,7 +5,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 from fastapi import HTTPException
 
-from paidsearchnav.api.v1.premium_auth import (
+from paidsearchnav_mcp.api.v1.premium_auth import (
     PremiumRateLimiter,
     PremiumTierInfo,
     UsageTracker,
@@ -16,7 +16,7 @@ from paidsearchnav.api.v1.premium_auth import (
     validate_premium_access,
     validate_query_cost,
 )
-from paidsearchnav.core.config import BigQueryTier
+from paidsearchnav_mcp.core.config import BigQueryTier
 
 
 @pytest.fixture

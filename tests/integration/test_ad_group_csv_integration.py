@@ -5,8 +5,8 @@ from pathlib import Path
 
 import pytest
 
-from paidsearchnav.analyzers.ad_group_performance import AdGroupPerformanceAnalyzer
-from paidsearchnav.core.models.analysis import (
+from paidsearchnav_mcp.analyzers.ad_group_performance import AdGroupPerformanceAnalyzer
+from paidsearchnav_mcp.models.analysis import (
     RecommendationPriority,
     RecommendationType,
 )

@@ -1,13 +1,13 @@
 """Unit tests for Google Ads export validators."""
 
-from paidsearchnav.core.models.analysis import Recommendation, RecommendationType
-from paidsearchnav.core.models.export_models import (
+from paidsearchnav_mcp.models.analysis import Recommendation, RecommendationType
+from paidsearchnav_mcp.models.export_models import (
     BidAdjustment,
     CampaignChange,
     KeywordChange,
     NegativeKeyword,
 )
-from paidsearchnav.exporters.validators import FormatValidator, ImportSimulator
+from paidsearchnav_mcp.exporters.validators import FormatValidator, ImportSimulator
 
 
 class TestFormatValidator:

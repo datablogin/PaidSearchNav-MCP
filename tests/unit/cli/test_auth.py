@@ -6,8 +6,8 @@ from unittest.mock import Mock, patch
 import pytest
 from click.testing import CliRunner
 
-from paidsearchnav.cli.auth import auth
-from paidsearchnav.core.config import Settings
+from paidsearchnav_mcp.cli.auth import auth
+from paidsearchnav_mcp.core.config import Settings
 
 
 @pytest.fixture

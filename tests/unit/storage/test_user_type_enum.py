@@ -2,7 +2,7 @@
 
 import pytest
 
-from paidsearchnav.storage.models import UserType
+from paidsearchnav_mcp.storage.models import UserType
 
 
 class TestUserTypeEnum:

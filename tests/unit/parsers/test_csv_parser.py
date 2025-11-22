@@ -7,8 +7,8 @@ from pathlib import Path
 
 import pytest
 
-from paidsearchnav.parsers.csv_parser import CSVParser
-from paidsearchnav.parsers.field_mappings import get_field_mapping
+from paidsearchnav_mcp.parsers.csv_parser import CSVParser
+from paidsearchnav_mcp.parsers.field_mappings import get_field_mapping
 
 
 class TestCSVParser:

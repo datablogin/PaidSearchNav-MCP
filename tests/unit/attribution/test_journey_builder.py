@@ -6,8 +6,8 @@ from unittest.mock import AsyncMock, Mock, patch
 import pandas as pd
 import pytest
 
-from paidsearchnav.attribution.journey_builder import CustomerJourneyBuilder
-from paidsearchnav.attribution.models import (
+from paidsearchnav_mcp.attribution.journey_builder import CustomerJourneyBuilder
+from paidsearchnav_mcp.attribution.models import (
     AttributionTouch,
     ConversionType,
     CustomerJourney,

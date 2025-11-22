@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 import pytest
 from pydantic import Field, ValidationError
 
-from paidsearchnav.core.models.base import BaseModel, BasePSNModel, utc_now
+from paidsearchnav_mcp.models.base import BaseModel, BasePSNModel, utc_now
 
 
 class TestUtcNow:

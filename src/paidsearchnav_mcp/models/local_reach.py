@@ -7,8 +7,8 @@ from typing import List, Optional
 
 from pydantic import BaseModel, ConfigDict, computed_field, field_validator
 
-from paidsearchnav_mcp.core.models.analysis import AnalysisResult
-from paidsearchnav_mcp.core.models.base import (
+from paidsearchnav_mcp.models.analysis import AnalysisResult
+from paidsearchnav_mcp.models.base import (
     EnhancedKeyMetrics,
     MetricPeriod,
     MetricWithContext,

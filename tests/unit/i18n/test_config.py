@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from paidsearchnav.i18n.config import CurrencyConfig, I18nConfig, LocaleConfig
+from paidsearchnav_mcp.i18n.config import CurrencyConfig, I18nConfig, LocaleConfig
 
 
 class TestI18nConfig:

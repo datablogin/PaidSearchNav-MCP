@@ -2,7 +2,7 @@
 
 from datetime import datetime
 
-from paidsearchnav.alerts.models import (
+from paidsearchnav_mcp.alerts.models import (
     Alert,
     AlertBatch,
     AlertConfig,

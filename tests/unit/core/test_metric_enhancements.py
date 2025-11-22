@@ -2,7 +2,7 @@
 
 import pytest
 
-from paidsearchnav.core.models.base import (
+from paidsearchnav_mcp.models.base import (
     EnhancedKeyMetrics,
     MetricPeriod,
     MetricWithContext,

@@ -5,8 +5,8 @@ from pathlib import Path
 
 import pytest
 
-from paidsearchnav.parsers.csv_parser import GoogleAdsCSVParser
-from paidsearchnav.utils.csv_parsing import (
+from paidsearchnav_mcp.parsers.csv_parser import GoogleAdsCSVParser
+from paidsearchnav_mcp.utils.csv_parsing import (
     CSVValidationResult,
     parse_csv_with_fallbacks,
     validate_csv_structure,

@@ -7,7 +7,7 @@ from typing import Any
 import pandas as pd
 from pydantic import Field, computed_field, field_validator, model_validator
 
-from paidsearchnav_mcp.core.models.base import BasePSNModel
+from paidsearchnav_mcp.models.base import BasePSNModel
 
 
 class SearchTermStatus(str, Enum):

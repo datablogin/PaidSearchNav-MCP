@@ -8,17 +8,17 @@ from typing import Any
 
 import pytest
 
-from paidsearchnav.core.interfaces import (
+from paidsearchnav_mcp.core.interfaces import (
     Analyzer,
     DataProvider,
     Exporter,
     ReportGenerator,
     Storage,
 )
-from paidsearchnav.core.models.analysis import AnalysisResult
-from paidsearchnav.core.models.campaign import Campaign
-from paidsearchnav.core.models.keyword import Keyword
-from paidsearchnav.core.models.search_term import SearchTerm
+from paidsearchnav_mcp.models.analysis import AnalysisResult
+from paidsearchnav_mcp.models.campaign import Campaign
+from paidsearchnav_mcp.models.keyword import Keyword
+from paidsearchnav_mcp.models.search_term import SearchTerm
 
 
 class TestDataProvider:

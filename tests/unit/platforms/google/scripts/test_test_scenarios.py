@@ -3,7 +3,7 @@
 import tempfile
 from pathlib import Path
 
-from paidsearchnav.platforms.google.scripts.test_scenarios import (
+from paidsearchnav_mcp.platforms.google.scripts.test_scenarios import (
     ConflictDetectionTestCase,
     EndToEndAccuracyScenario,
     GeographicPerformanceTestCase,
@@ -17,7 +17,7 @@ from paidsearchnav.platforms.google.scripts.test_scenarios import (
     ScaleAndPerformanceScenario,
     ScalePerformanceTestCase,
 )
-from paidsearchnav.platforms.google.scripts.testing_framework import (
+from paidsearchnav_mcp.platforms.google.scripts.testing_framework import (
     ScriptScriptTestCaseConfig,
     ScriptScriptTestDataManager,
     ScriptScriptTestResult,

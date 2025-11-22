@@ -5,12 +5,12 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from paidsearchnav.core.config import RedisConfig, Settings
-from paidsearchnav.platforms.google.rate_limiting import (
+from paidsearchnav_mcp.core.config import RedisConfig, Settings
+from paidsearchnav_mcp.platforms.google.rate_limiting import (
     GoogleAdsRateLimiter,
     OperationType,
 )
-from paidsearchnav.platforms.google.storage import (
+from paidsearchnav_mcp.platforms.google.storage import (
     FailoverRedisRateLimitStorage,
     InMemoryRateLimitStorage,
     RedisRateLimitStorage,

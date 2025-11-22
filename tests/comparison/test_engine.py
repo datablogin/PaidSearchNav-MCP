@@ -5,8 +5,8 @@ from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 
-from paidsearchnav.comparison.engine import AuditComparator
-from paidsearchnav.comparison.models import AuditResult, ComparisonOptions
+from paidsearchnav_mcp.comparison.engine import AuditComparator
+from paidsearchnav_mcp.comparison.models import AuditResult, ComparisonOptions
 
 
 class TestAuditComparator:
