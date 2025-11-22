@@ -1,0 +1,28 @@
+Row Type,Action,Keyword status,Campaign ID,Campaign,Ad group ID,Ad group,Keyword ID,Keyword,Type,Label,Default max. CPC,Max. CPV,Final URL,Mobile final URL,Final URL suffix,Tracking template,Custom parameter
+"# Optional.
+Supported values: Keyword","Optional.
+Supported values: Add; Edit; Remove","Optional.
+Supported values: Enabled; Removed; Paused","Optional.
+Example(s): 1234","Required.
+Example(s): Shoe campaign","Optional.
+Example(s): 1234","Required.
+Example(s): Shoe ad group","Optional.
+Example(s): 1234","Required on create.
+Example(s): buy frisbee","Optional.
+Supported values: Exact match; Phrase match; Broad match","Optional.
+Example(s): label 1; label 2; label 3 [123-456-7890]
+Supports remove_value","Optional.
+Example(s): 12.34
+Supports remove_value","Optional.
+Example(s): 12.34
+Supports remove_value","Optional.
+Example(s): http://www.example.com ; https://www.example.org
+Supports remove_value","Optional.
+Example(s): http://m.example.com ; https://m.example.org
+Supports remove_value","Optional.
+Example(s): x=y
+Supports remove_value","Optional.
+Example(s): http://www.abc.com/tracking?param1=create&url={lpurl}
+Supports remove_value","Optional.
+Example(s): {_color}=red ; {_bg}=blue
+Supports remove_value"

@@ -1,0 +1,104 @@
+"# Assets can be shown in any order, so make sure that they make sense individually or in combination, and don’t violate our policies or local law."
+"# IMPORTANT: For each responsive search ad, provide at least 5 distinct headlines that do not repeat the same or similar phrases. Providing redundant headlines will restrict our ability to generate combinations."
+Row Type,Action,Ad status,Campaign ID,Campaign,Ad group ID,Ad group,Ad ID,Ad type,Label,Headline 1,Headline 2,Headline 3,Headline 4,Headline 5,Headline 6,Headline 7,Headline 8,Headline 9,Headline 10,Headline 11,Headline 12,Headline 13,Headline 14,Headline 15,Description 1,Description 2,Description 3,Description 4,Headline 1 position,Headline 2 position,Headline 3 position,Headline 4 position,Headline 5 position,Headline 6 position,Headline 7 position,Headline 8 position,Headline 9 position,Headline 10 position,Headline 11 position,Headline 12 position,Headline 13 position,Headline 14 position,Headline 15 position,Description 1 position,Description 2 position,Description 3 position,Description 4 position,Path 1,Path 2,Final URL,Mobile final URL,Tracking template,Final URL suffix,Custom parameter
+"# Optional.
+Supported values: Ad","Optional.
+Supported values: Add; Edit; Remove","Optional.
+Supported values: Enabled; Paused; Removed","Optional.
+Example(s): 1234","Required.
+Example(s): Shoe campaign","Optional.
+Example(s): 1234","Required.
+Example(s): Shoe ad group","Required on edit.
+Example(s): 1234","Required on create.
+Supported values: Responsive search ad","Optional.
+Example(s): label 1; label 2; label 3 [123-456-7890]
+Supports remove_value","Optional.
+Example(s): headline 1
+Supports remove_value","Optional.
+Example(s): headline 2
+Supports remove_value","Optional.
+Example(s): headline 3
+Supports remove_value","Optional.
+Example(s): headline 4
+Supports remove_value","Optional.
+Example(s): headline 5
+Supports remove_value","Optional.
+Example(s): headline 6
+Supports remove_value","Optional.
+Example(s): headline 7
+Supports remove_value","Optional.
+Example(s): headline 8
+Supports remove_value","Optional.
+Example(s): headline 9
+Supports remove_value","Optional.
+Example(s): headline 10
+Supports remove_value","Optional.
+Example(s): headline 11
+Supports remove_value","Optional.
+Example(s): headline 12
+Supports remove_value","Optional.
+Example(s): headline 13
+Supports remove_value","Optional.
+Example(s): headline 14
+Supports remove_value","Optional.
+Example(s): headline 15
+Supports remove_value","Optional.
+Example(s): description 1
+Supports remove_value","Optional.
+Example(s): description 2
+Supports remove_value","Optional.
+Example(s): description 3
+Supports remove_value","Optional.
+Example(s): description 4
+Supports remove_value","Optional.
+Supported values: 1; 2; 3
+Supports remove_value","Optional.
+Supported values: 1; 2; 3
+Supports remove_value","Optional.
+Supported values: 1; 2; 3
+Supports remove_value","Optional.
+Supported values: 1; 2; 3
+Supports remove_value","Optional.
+Supported values: 1; 2; 3
+Supports remove_value","Optional.
+Supported values: 1; 2; 3
+Supports remove_value","Optional.
+Supported values: 1; 2; 3
+Supports remove_value","Optional.
+Supported values: 1; 2; 3
+Supports remove_value","Optional.
+Supported values: 1; 2; 3
+Supports remove_value","Optional.
+Supported values: 1; 2; 3
+Supports remove_value","Optional.
+Supported values: 1; 2; 3
+Supports remove_value","Optional.
+Supported values: 1; 2; 3
+Supports remove_value","Optional.
+Supported values: 1; 2; 3
+Supports remove_value","Optional.
+Supported values: 1; 2; 3
+Supports remove_value","Optional.
+Supported values: 1; 2; 3
+Supports remove_value","Optional.
+Supported values: 1; 2
+Supports remove_value","Optional.
+Supported values: 1; 2
+Supports remove_value","Optional.
+Supported values: 1; 2
+Supports remove_value","Optional.
+Supported values: 1; 2
+Supports remove_value","Optional.
+Example(s): path 1
+Supports remove_value","Optional.
+Example(s): path 2
+Supports remove_value","Required on create.
+Example(s): http://www.example.com ; https://www.example.org","Optional.
+Example(s): http://m.example.com ; https://m.example.org
+Supports remove_value","Optional.
+Example(s): http://www.abc.com/tracking?param1=create&url={lpurl}
+Supports remove_value","Optional.
+Example(s): x=y
+Supports remove_value","Optional.
+Example(s): {_color}=red ; {_bg}=blue
+Supports remove_value"

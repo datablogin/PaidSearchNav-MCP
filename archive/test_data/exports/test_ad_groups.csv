@@ -1,0 +1,15 @@
+# Ad group report
+# Downloaded from Google Ads on 2025-07-30
+# Account: Test Account
+
+Campaign,Ad group,Ad group state,Default max. CPC,Target CPA,Target ROAS,Impr.,Clicks,Cost,Conversions,Conv. rate,Avg. CPC
+Test Campaign 1,General_Gyms_Near Me,Enabled,1.50,,,"10,000",500,750.00,25,5.00,1.50
+Test Campaign 1,General_Membership,Enabled,2.00,,,"8,000",300,600.00,18,6.00,2.00
+Test Campaign 1,Term Only_Exact,Enabled,3.00,,,"5,000",400,1200.00,52,13.00,3.00
+Test Campaign 1,General_Gyms_Location,Paused,1.25,,,"2,000",100,125.00,2,2.00,1.25
+Test Campaign 2,General_Gyms_Personal Training,Enabled,,25.00,,"3,000",150,375.00,15,10.00,2.50
+Test Campaign 2,Brand_Exact_Match,Enabled,1.00,,,"15,000",800,800.00,80,10.00,1.00
+Test Campaign 2,Local_City_Houston,Enabled,1.75,,,"6,000",200,350.00,10,5.00,1.75
+Test Campaign 3,Membership_Premium,Paused,2.50,,,,"4,000",120,300.00,6,5.00,2.50
+Test Campaign 3,Near_Location_Search,Enabled,1.80,,,,"7,000",250,450.00,12,4.80,1.80
+Test Campaign 3,Other_Theme_Test,Enabled,2.25,,,,"5,500",180,405.00,9,5.00,2.25

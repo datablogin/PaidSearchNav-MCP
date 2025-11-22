@@ -1,0 +1,35 @@
+version: '3.8'
+
+# Production override for docker-compose
+# Usage: docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+
+services:
+  app:
+    image: ${ECR_REGISTRY}/paidsearchnav:${VERSION:-latest}
+    environment:
+      PSN_ENV: production
+      PSN_DEBUG: "false"
+      PSN_LOG_LEVEL: WARNING
+      # Workers for production
+      PSN_API_WORKERS: "4"
+    command: >
+      sh -c "
+        alembic upgrade head &&
+        gunicorn paidsearchnav.api.app:app \
+          --bind 0.0.0.0:8000 \
+          --workers 4 \
+          --worker-class uvicorn.workers.UvicornWorker \
+          --access-logfile - \
+          --error-logfile -
+      "
+    restart: always
+
+  scheduler:
+    image: ${ECR_REGISTRY}/paidsearchnav:${VERSION:-latest}
+    environment:
+      PSN_ENV: production
+      PSN_LOG_LEVEL: WARNING
+    restart: always
+
+  nginx:
+    profiles: []  # Enable nginx in production

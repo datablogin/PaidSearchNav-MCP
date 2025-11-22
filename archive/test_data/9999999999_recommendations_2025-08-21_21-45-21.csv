@@ -1,0 +1,2 @@
+type,priority,title,description,estimated_savings,campaign,keywords
+negative_keyword,high,Add negative keyword: 'free',Block searches for 'free' to reduce wasted spend,125.0,Summer Sale,"['free running shoes', 'free shoes']"

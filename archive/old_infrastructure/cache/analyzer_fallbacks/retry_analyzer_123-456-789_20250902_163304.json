@@ -1,0 +1,41 @@
+{
+  "execution_metadata": {
+    "correlation_id": "3f5f8ffa-64a2-4bd6-84cc-0734e2037f41",
+    "analyzer": "Retry Analyzer",
+    "customer_id": "123-456-789",
+    "start_date": "2025-01-01T00:00:00",
+    "end_date": "2025-01-31T00:00:00",
+    "timestamp": "2025-09-02T16:33:04.407426",
+    "success": true
+  },
+  "analysis_metadata": {
+    "analysis_type": "test",
+    "analyzer_name": "Retry Analyzer",
+    "recommendations_count": 1
+  },
+  "metrics": {
+    "created_at": "2025-09-02T21:33:04.405359+00:00",
+    "updated_at": "2025-09-02T21:33:04.405361+00:00",
+    "total_keywords_analyzed": 100,
+    "total_search_terms_analyzed": 500,
+    "total_campaigns_analyzed": 0,
+    "issues_found": 1,
+    "critical_issues": 0,
+    "potential_cost_savings": 250.0,
+    "potential_conversion_increase": 5.0,
+    "custom_metrics": {}
+  },
+  "recommendations": [
+    {
+      "type": "OPTIMIZE_KEYWORDS",
+      "priority": "HIGH",
+      "title": "Test Recommendation",
+      "description": "This is a test recommendation from mock analyzer",
+      "action_data": {}
+    }
+  ],
+  "raw_data": {
+    "test_data": "mock_result"
+  },
+  "errors": [],
+  "created_at": 

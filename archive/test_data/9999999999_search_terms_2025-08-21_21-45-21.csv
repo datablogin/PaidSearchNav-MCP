@@ -1,0 +1,3 @@
+campaign,ad_group,search_term,match_type,clicks,impressions,cost,conversions,conversion_value,date
+Summer Sale,Running Shoes,nike running shoes,BROAD,25,1250,37.5,2,159.98,2024-01-15
+Winter Sale,Boots,winter boots,EXACT,15,300,22.5,3,89.97,2024-01-15

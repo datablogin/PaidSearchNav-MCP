@@ -1,0 +1,988 @@
+"""Local Intent Enhancement and Geographic Optimization for Google Ads Scripts."""
+
+import json
+import logging
+import re
+from dataclasses import dataclass
+from enum import Enum
+from typing import Any, Dict, List, Optional, Set
+
+from paidsearchnav.core.exceptions import (
+    APIError,
+    ValidationError,
+)
+from paidsearchnav.platforms.google.client import GoogleAdsClient
+
+from .base import ScriptBase, ScriptConfig, ScriptResult, ScriptStatus, ScriptType
+
+logger = logging.getLogger(__name__)
+
+
+class LocalIntentType(Enum):
+    """Types of local intent patterns."""
+
+    NEAR_ME = "near_me"
+    CITY_SPECIFIC = "city_specific"
+    NEIGHBORHOOD = "neighborhood"
+    DIRECTION_MODIFIER = "direction_modifier"
+    LANDMARK_REFERENCE = "landmark_reference"
+    STORE_SPECIFIC = "store_specific"
+
+
+@dataclass
+class StoreLocation:
+    """Represents a physical store location."""
+
+    store_id: str
+    name: str
+    address: str
+    city: str
+    state: str
+    zip_code: str
+    latitude: float
+    longitude: float
+    radius_miles: int = 25
+    landing_page: Optional[str] = None
+    store_type: str = "retail"
+
+
+@dataclass
+class LocalIntentMatch:
+    """Represents a local intent search term match."""
+
+    search_term: str
+    intent_type: LocalIntentType
+    confidence_score: float
+    matched_stores: List[StoreLocation]
+    geographic_modifier: str
+    suggested_bid_adjustment: float
+    landing_page_recommendation: Optional[str] = None
+
+
+@dataclass
+class GeographicPerformanceMetric:
+    """Geographic performance data for optimization."""
+
+    location: str
+    radius_miles: int
+    impressions: int
+    clicks: int
+    conversions: int
+    cost: float
+    store_visits: int = 0
+    ctr: float = 0.0
+    cpc: float = 0.0
+    conversion_rate: float = 0.0
+    efficiency_score: float = 0.0
+
+
+class LocalIntentDetectionEngine(ScriptBase):
+    """Engine for detecting and optimizing local intent search terms."""
+
+    def __init__(self, client: GoogleAdsClient, config: ScriptConfig):
+        super().__init__(client, config)
+        self.store_locations: List[StoreLocation] = []
+        self.local_intent_patterns = self._build_intent_patterns()
+        self.geographic_exclusions: Set[str] = set()
+
+    def _sanitize_js_value(self, value: str) -> str:
+        """Sanitize values for JavaScript generation."""
+        if not isinstance(value, str):
+            return str(value)
+        return json.dumps(value)[1:-1]  # Remove outer quotes for JS string embedding
+
+    def _build_intent_patterns(self) -> Dict[LocalIntentType, List[str]]:
+        """Build regex patterns for local intent detection."""
+        # Get cities from store locations configuration
+        cities = set()
+        neighborhoods = set()
+        store_locations = self.config.parameters.get("store_locations", [])
+
+        for store_data in store_locations:
+            if isinstance(store_data, dict):
+                city = store_data.get("city", "").lower()
+                if city:
+                    cities.add(city)  # Don't escape for common city names
+
+                # Extract neighborhoods if available
+                for neighborhood in store_data.get("neighborhoods", []):
+                    neighborhoods.add(neighborhood.lower())
+
+        # Build city pattern
+        city_pattern = "|".join(cities) if cities else "dallas|houston|austin"
+        neighborhood_pattern = (
+            "|".join(neighborhoods) if neighborhoods else "downtown|uptown|midtown"
+        )
+
+        return {
+            LocalIntentType.NEAR_ME: [
+                r".*\s+near\s+me\b",
+                r".*\s+nearby\b",
+                r".*\s+close\s+to\s+me\b",
+                r".*\s+around\s+me\b",
+            ],
+            LocalIntentType.CITY_SPECIFIC: [
+                rf".*\s+({city_pattern})\b",
+                rf".*({city_pattern})\s+.*",
+            ],
+            LocalIntentType.NEIGHBORHOOD: [
+                rf".*\s+({neighborhood_pattern})\b",
+                r".*\s+(northside|southside|eastside|westside)\b",
+            ],
+            LocalIntentType.DIRECTION_MODIFIER: [
+                r".*\s+(north|south|east|west|northeast|northwest|southeast|southwest)\s+.*",
+                r".*\s+(northern|southern|eastern|western)\s+.*",
+            ],
+            LocalIntentType.LANDMARK_REFERENCE: [
+                r".*\s+(mall|airport|stadium|university|hospital)\b",
+                r".*\s+(galleria|centro|legacy)\b",
+            ],
+            LocalIntentType.STORE_SPECIFIC: [
+                r".*\s+(location|store|branch|gym)\s+.*",
+                r".*\s+(center|facility|club)\s+.*",
+            ],
+        }
+
+    def generate_script(self) -> str:
+        """Generate Google Ads Script for local intent optimization."""
+        store_locations_js = self._generate_store_locations_js()
+        detection_patterns_js = self._generate_detection_patterns_js()
+
+        return f"""
+/**
+ * Local Intent Enhancement and Geographic Optimization Script
+ * Generated by PaidSearchNav Issue #468
+ */
+
+{store_locations_js}
+
+{detection_patterns_js}
+
+// Configuration
+const CONFIG = {{
+  LOOKBACK_DAYS: {self.config.parameters.get("lookback_days", 30)},
+  MIN_IMPRESSIONS: {self.config.parameters.get("min_impressions", 100)},
+  MIN_CONFIDENCE_SCORE: {self.config.parameters.get("min_confidence_score", 0.8)},
+  MAX_BID_ADJUSTMENT: {self.config.parameters.get("max_bid_adjustment", 50)},
+  ENABLE_AUTO_BIDDING: {str(self.config.parameters.get("enable_auto_bidding", False)).lower()},
+  ENABLE_GEO_EXCLUSIONS: {str(self.config.parameters.get("enable_geo_exclusions", True)).lower()},
+}};
+
+function main() {{
+  console.log('🎯 Starting Local Intent Enhancement and Geographic Optimization');
+  console.log('=' * 80);
+
+  try {{
+    // Initialize results tracking
+    const results = {{
+      nearMeTermsAnalyzed: [],
+      storeSpecificOptimizations: [],
+      geographicAdjustments: [],
+      crossLocationConflicts: [],
+      localKeywordExpansions: [],
+      landingPageMatches: [],
+      timestamp: new Date().toISOString(),
+    }};
+
+    // Analyze local intent search terms
+    console.log('📍 Analyzing local intent search terms...');
+    results.nearMeTermsAnalyzed = analyzeLocalIntentTerms();
+
+    // Optimize store-level performance
+    console.log('🏪 Optimizing store-level performance...');
+    results.storeSpecificOptimizations = optimizeStorePerformance();
+
+    // Enhance geographic targeting
+    console.log('🗺️ Enhancing geographic targeting...');
+    results.geographicAdjustments = enhanceGeographicTargeting();
+
+    // Detect cross-location conflicts
+    console.log('⚠️ Detecting cross-location conflicts...');
+    results.crossLocationConflicts = detectCrossLocationConflicts();
+
+    // Expand local keywords
+    console.log('📈 Expanding local keyword opportunities...');
+    results.localKeywordExpansions = expandLocalKeywords();
+
+    // Match landing pages
+    console.log('🔗 Optimizing landing page matches...');
+    results.landingPageMatches = optimizeLandingPageMatches();
+
+    // Generate comprehensive report
+    const report = generateLocalOptimizationReport(results);
+    console.log('📊 Local optimization analysis complete');
+
+    return results;
+
+  }} catch (error) {{
+    console.error('❌ Local intent optimization failed:', error);
+    throw error;
+  }}
+}}
+
+/**
+ * Analyze search terms for local intent patterns
+ */
+function analyzeLocalIntentTerms() {{
+  const localTerms = [];
+  const searchTermsReport = AdsApp.report(
+    'SELECT SearchTerm, Impressions, Clicks, Conversions, Cost, CampaignName, AdGroupName ' +
+    'FROM SEARCH_QUERY_PERFORMANCE_REPORT ' +
+    'WHERE Impressions > ' + CONFIG.MIN_IMPRESSIONS + ' ' +
+    'DURING LAST_' + CONFIG.LOOKBACK_DAYS + '_DAYS'
+  );
+
+  const searchTermsIterator = searchTermsReport.rows();
+
+  while (searchTermsIterator.hasNext()) {{
+    const row = searchTermsIterator.next();
+    const searchTerm = row['SearchTerm'].toLowerCase();
+
+    // Detect local intent patterns
+    const intentMatch = detectLocalIntent(searchTerm);
+
+    if (intentMatch && intentMatch.confidenceScore >= CONFIG.MIN_CONFIDENCE_SCORE) {{
+      // Find matching store locations
+      const matchedStores = findMatchingStores(searchTerm, intentMatch.intentType);
+
+      // Calculate performance metrics
+      const performanceMetrics = {{
+        impressions: parseInt(row['Impressions']),
+        clicks: parseInt(row['Clicks']),
+        conversions: parseInt(row['Conversions']),
+        cost: parseFloat(row['Cost']),
+        ctr: (parseInt(row['Clicks']) / parseInt(row['Impressions'])) * 100,
+        cpc: parseFloat(row['Cost']) / parseInt(row['Clicks']),
+      }};
+
+      // Generate optimization recommendations
+      const optimization = generateLocalOptimization(
+        searchTerm,
+        intentMatch,
+        matchedStores,
+        performanceMetrics
+      );
+
+      localTerms.push(optimization);
+    }}
+  }}
+
+  console.log(`Found ${{localTerms.length}} local intent search terms`);
+  return localTerms;
+}}
+
+/**
+ * Detect local intent in search terms
+ */
+function detectLocalIntent(searchTerm) {{
+  for (const [intentType, patterns] of Object.entries(DETECTION_PATTERNS)) {{
+    for (const pattern of patterns) {{
+      const regex = new RegExp(pattern, 'i');
+      if (regex.test(searchTerm)) {{
+        const confidenceScore = calculateConfidenceScore(searchTerm, intentType, pattern);
+        return {{
+          intentType: intentType,
+          pattern: pattern,
+          confidenceScore: confidenceScore,
+          geographicModifier: extractGeographicModifier(searchTerm),
+        }};
+      }}
+    }}
+  }}
+  return null;
+}}
+
+/**
+ * Find store locations matching search term
+ */
+function findMatchingStores(searchTerm, intentType) {{
+  const matchedStores = [];
+
+  for (const store of STORE_LOCATIONS) {{
+    let matchScore = 0;
+
+    // Check for direct city/location matches
+    if (searchTerm.includes(store.city.toLowerCase())) {{
+      matchScore += 0.8;
+    }}
+
+    // Check for store-specific references
+    if (searchTerm.includes(store.name.toLowerCase())) {{
+      matchScore += 0.9;
+    }}
+
+    // For "near me" terms, include all stores within radius
+    if (intentType === 'near_me') {{
+      matchScore += 0.6; // Base score for "near me" terms
+    }}
+
+    // Check for neighborhood/landmark matches
+    const storeKeywords = [store.name, store.city, ...store.neighborhoods || []];
+    for (const keyword of storeKeywords) {{
+      if (searchTerm.includes(keyword.toLowerCase())) {{
+        matchScore += 0.5;
+      }}
+    }}
+
+    if (matchScore >= 0.6) {{
+      matchedStores.push({{
+        ...store,
+        matchScore: matchScore,
+      }});
+    }}
+  }}
+
+  // Sort by match score descending
+  return matchedStores.sort((a, b) => b.matchScore - a.matchScore);
+}}
+
+/**
+ * Optimize store-level performance
+ */
+function optimizeStorePerformance() {{
+  const storeOptimizations = [];
+
+  for (const store of STORE_LOCATIONS) {{
+    // Analyze performance by radius segments
+    const radiusAnalysis = analyzeRadiusPerformance(store);
+
+    // Generate store-specific bid recommendations
+    const bidRecommendations = generateStoreBidRecommendations(store, radiusAnalysis);
+
+    // Identify local keyword opportunities
+    const keywordOpportunities = identifyLocalKeywordOpportunities(store);
+
+    storeOptimizations.push({{
+      storeId: store.storeId,
+      storeName: store.name,
+      radiusAnalysis: radiusAnalysis,
+      bidRecommendations: bidRecommendations,
+      keywordOpportunities: keywordOpportunities,
+      optimizationPriority: calculateOptimizationPriority(radiusAnalysis),
+    }});
+  }}
+
+  return storeOptimizations;
+}}
+
+/**
+ * Enhance geographic targeting
+ */
+function enhanceGeographicTargeting() {{
+  const geoAdjustments = [];
+
+  // Analyze location performance report
+  const locationReport = AdsApp.report(
+    'SELECT CountryCriteriaId, RegionCriteriaId, CityCriteriaId, LocationType, ' +
+    'Impressions, Clicks, Conversions, Cost, CampaignName ' +
+    'FROM GEO_PERFORMANCE_REPORT ' +
+    'WHERE Impressions > ' + CONFIG.MIN_IMPRESSIONS + ' ' +
+    'DURING LAST_' + CONFIG.LOOKBACK_DAYS + '_DAYS'
+  );
+
+  const locationIterator = locationReport.rows();
+  const locationPerformance = {{}};
+
+  while (locationIterator.hasNext()) {{
+    const row = locationIterator.next();
+    const locationId = row['CityCriteriaId'] || row['RegionCriteriaId'];
+
+    if (!locationPerformance[locationId]) {{
+      locationPerformance[locationId] = {{
+        impressions: 0,
+        clicks: 0,
+        conversions: 0,
+        cost: 0,
+        campaigns: new Set(),
+      }};
+    }}
+
+    locationPerformance[locationId].impressions += parseInt(row['Impressions']);
+    locationPerformance[locationId].clicks += parseInt(row['Clicks']);
+    locationPerformance[locationId].conversions += parseInt(row['Conversions']);
+    locationPerformance[locationId].cost += parseFloat(row['Cost']);
+    locationPerformance[locationId].campaigns.add(row['CampaignName']);
+  }}
+
+  // Generate geographic optimization recommendations
+  for (const [locationId, performance] of Object.entries(locationPerformance)) {{
+    const efficiency = calculateGeographicEfficiency(performance);
+
+    if (efficiency.shouldExclude) {{
+      geoAdjustments.push({{
+        action: 'exclude',
+        locationId: locationId,
+        reason: efficiency.reason,
+        potentialSavings: efficiency.potentialSavings,
+      }});
+    }} else if (efficiency.bidAdjustment !== 0) {{
+      geoAdjustments.push({{
+        action: 'adjust_bid',
+        locationId: locationId,
+        bidAdjustment: efficiency.bidAdjustment,
+        reason: efficiency.reason,
+        expectedImpact: efficiency.expectedImpact,
+      }});
+    }}
+  }}
+
+  return geoAdjustments;
+}}
+
+/**
+ * Detect cross-location campaign conflicts
+ */
+function detectCrossLocationConflicts() {{
+  const conflicts = [];
+  const campaignsByLocation = {{}};
+
+  // Group campaigns by location
+  const campaigns = AdsApp.campaigns()
+    .withCondition('Status = ENABLED')
+    .get();
+
+  while (campaigns.hasNext()) {{
+    const campaign = campaigns.next();
+    const campaignName = campaign.getName();
+    const location = extractLocationFromCampaignName(campaignName);
+
+    if (location) {{
+      if (!campaignsByLocation[location]) {{
+        campaignsByLocation[location] = [];
+      }}
+      campaignsByLocation[location].push({{
+        name: campaignName,
+        id: campaign.getId(),
+        location: location,
+      }});
+    }}
+  }}
+
+  // Detect potential conflicts between locations
+  for (const [location1, campaigns1] of Object.entries(campaignsByLocation)) {{
+    for (const [location2, campaigns2] of Object.entries(campaignsByLocation)) {{
+      if (location1 !== location2) {{
+        const overlapConflicts = detectLocationOverlap(
+          location1, campaigns1,
+          location2, campaigns2
+        );
+        conflicts.push(...overlapConflicts);
+      }}
+    }}
+  }}
+
+  return conflicts;
+}}
+
+/**
+ * Expand local keyword opportunities
+ */
+function expandLocalKeywords() {{
+  const expansions = [];
+
+  for (const store of STORE_LOCATIONS) {{
+    // Generate local modifier combinations
+    const localModifiers = generateLocalModifiers(store);
+
+    // Get existing keywords for the store's campaigns
+    const existingKeywords = getStoreKeywords(store);
+
+    // Generate expansion opportunities
+    for (const baseKeyword of existingKeywords) {{
+      for (const modifier of localModifiers) {{
+        const expandedKeyword = `${{baseKeyword}} ${{modifier}}`;
+
+        // Check if keyword already exists
+        if (!keywordExists(expandedKeyword)) {{
+          const opportunity = evaluateKeywordOpportunity(
+            expandedKeyword,
+            store,
+            baseKeyword
+          );
+
+          if (opportunity.score >= CONFIG.MIN_CONFIDENCE_SCORE) {{
+            expansions.push(opportunity);
+          }}
+        }}
+      }}
+    }}
+  }}
+
+  return expansions;
+}}
+
+/**
+ * Optimize landing page matches for local intent
+ */
+function optimizeLandingPageMatches() {{
+  const matches = [];
+
+  // Analyze current ad groups and their landing pages
+  const adGroups = AdsApp.adGroups()
+    .withCondition('Status = ENABLED')
+    .get();
+
+  while (adGroups.hasNext()) {{
+    const adGroup = adGroups.next();
+    const adGroupName = adGroup.getName();
+    const campaignName = adGroup.getCampaign().getName();
+
+    // Extract location intent from ad group
+    const locationIntent = extractLocationIntent(adGroupName, campaignName);
+
+    if (locationIntent) {{
+      // Find matching store
+      const matchedStore = findBestStoreMatch(locationIntent);
+
+      if (matchedStore && matchedStore.landingPage) {{
+        // Check current ads' landing pages
+        const ads = adGroup.ads().withCondition('Status = ENABLED').get();
+
+        while (ads.hasNext()) {{
+          const ad = ads.next();
+          const currentLandingPage = ad.urls().getFinalUrl();
+
+          if (currentLandingPage !== matchedStore.landingPage) {{
+            matches.push({{
+              adGroupId: adGroup.getId(),
+              adGroupName: adGroupName,
+              campaignName: campaignName,
+              currentLandingPage: currentLandingPage,
+              recommendedLandingPage: matchedStore.landingPage,
+              matchedStore: matchedStore.name,
+              confidenceScore: matchedStore.matchScore,
+              reasonForChange: generateLandingPageReason(locationIntent, matchedStore),
+            }});
+          }}
+        }}
+      }}
+    }}
+  }}
+
+  return matches;
+}}
+
+/**
+ * Generate comprehensive local optimization report
+ */
+function generateLocalOptimizationReport(results) {{
+  const summary = {{
+    totalLocalTermsAnalyzed: results.nearMeTermsAnalyzed.length,
+    storesOptimized: results.storeSpecificOptimizations.length,
+    geographicAdjustments: results.geographicAdjustments.length,
+    crossLocationConflicts: results.crossLocationConflicts.length,
+    keywordExpansions: results.localKeywordExpansions.length,
+    landingPageOptimizations: results.landingPageMatches.length,
+
+    // Performance impact estimates
+    estimatedImprovements: {{
+      localConversionIncrease: calculateEstimatedConversionIncrease(results),
+      storeVisitIncrease: calculateEstimatedStoreVisitIncrease(results),
+      costEfficiencyImprovement: calculateEstimatedCostEfficiency(results),
+      localSearchRankingImprovement: calculateEstimatedRankingImprovement(results),
+    }},
+  }};
+
+  console.log('📈 Local Optimization Summary:');
+  console.log(`- Local Intent Terms Analyzed: ${{summary.totalLocalTermsAnalyzed}}`);
+  console.log(`- Store-Level Optimizations: ${{summary.storesOptimized}}`);
+  console.log(`- Geographic Adjustments: ${{summary.geographicAdjustments}}`);
+  console.log(`- Cross-Location Conflicts: ${{summary.crossLocationConflicts}}`);
+  console.log(`- Keyword Expansions: ${{summary.keywordExpansions}}`);
+  console.log(`- Landing Page Optimizations: ${{summary.landingPageOptimizations}}`);
+
+  return summary;
+}}
+
+// Helper functions would continue here...
+// (Additional utility functions for calculations, matching, etc.)
+"""
+
+    def _generate_store_locations_js(self) -> str:
+        """Generate JavaScript representation of store locations."""
+        stores_data = []
+        for store in self.config.parameters.get("store_locations", []):
+            stores_data.append(
+                f"""  {{
+    storeId: '{self._sanitize_js_value(store.get("store_id", ""))}',
+    name: '{self._sanitize_js_value(store.get("name", ""))}',
+    city: '{self._sanitize_js_value(store.get("city", ""))}',
+    state: '{self._sanitize_js_value(store.get("state", ""))}',
+    latitude: {store.get("latitude", 0)},
+    longitude: {store.get("longitude", 0)},
+    radiusMiles: {store.get("radius_miles", 25)},
+    landingPage: '{self._sanitize_js_value(store.get("landing_page", ""))}',
+    neighborhoods: {json.dumps(store.get("neighborhoods", []))},
+  }}"""
+            )
+
+        return f"""
+// Store Locations Configuration
+const STORE_LOCATIONS = [
+{",".join(stores_data)}
+];"""
+
+    def _generate_detection_patterns_js(self) -> str:
+        """Generate JavaScript representation of detection patterns."""
+        patterns_js = []
+        for intent_type, patterns in self.local_intent_patterns.items():
+            patterns_list = json.dumps(patterns)
+            patterns_js.append(f"  {intent_type.value}: {patterns_list}")
+
+        return f"""
+// Local Intent Detection Patterns
+const DETECTION_PATTERNS = {{
+{",".join(patterns_js)}
+}};"""
+
+    def process_results(self, results: Dict[str, Any]) -> ScriptResult:
+        """Process local intent optimization results."""
+        try:
+            # Parse results from script execution
+            near_me_terms = results.get("nearMeTermsAnalyzed", [])
+            store_optimizations = results.get("storeSpecificOptimizations", [])
+            geo_adjustments = results.get("geographicAdjustments", [])
+            conflicts = results.get("crossLocationConflicts", [])
+            keyword_expansions = results.get("localKeywordExpansions", [])
+            landing_page_matches = results.get("landingPageMatches", [])
+
+            # Calculate total changes
+            total_changes = (
+                len(near_me_terms)
+                + len(store_optimizations)
+                + len(geo_adjustments)
+                + len(keyword_expansions)
+                + len(landing_page_matches)
+            )
+
+            # Generate warnings for conflicts
+            warnings = []
+            if conflicts:
+                warnings.append(
+                    f"Found {len(conflicts)} cross-location conflicts requiring attention"
+                )
+
+            # Check for high-priority optimizations
+            high_priority_stores = [
+                opt
+                for opt in store_optimizations
+                if opt.get("optimizationPriority", 0) > 0.8
+            ]
+            if high_priority_stores:
+                warnings.append(
+                    f"{len(high_priority_stores)} stores need immediate optimization"
+                )
+
+            return ScriptResult(
+                status=ScriptStatus.COMPLETED.value,
+                execution_time=0.0,  # Will be set by executor
+                rows_processed=len(near_me_terms) + len(store_optimizations),
+                changes_made=total_changes,
+                errors=[],
+                warnings=warnings,
+                details={
+                    "local_intent_analysis": {
+                        "near_me_terms_analyzed": len(near_me_terms),
+                        "high_confidence_matches": len(
+                            [
+                                t
+                                for t in near_me_terms
+                                if t.get("confidenceScore", 0) > 0.9
+                            ]
+                        ),
+                        "stores_with_optimization": len(store_optimizations),
+                    },
+                    "geographic_optimization": {
+                        "bid_adjustments_recommended": len(
+                            [
+                                adj
+                                for adj in geo_adjustments
+                                if adj.get("action") == "adjust_bid"
+                            ]
+                        ),
+                        "exclusions_recommended": len(
+                            [
+                                adj
+                                for adj in geo_adjustments
+                                if adj.get("action") == "exclude"
+                            ]
+                        ),
+                    },
+                    "keyword_expansion": {
+                        "new_opportunities_identified": len(keyword_expansions),
+                        "high_potential_keywords": len(
+                            [
+                                kw
+                                for kw in keyword_expansions
+                                if kw.get("score", 0) > 0.8
+                            ]
+                        ),
+                    },
+                    "landing_page_optimization": {
+                        "mismatched_pages_found": len(landing_page_matches),
+                        "high_confidence_recommendations": len(
+                            [
+                                lp
+                                for lp in landing_page_matches
+                                if lp.get("confidenceScore", 0) > 0.9
+                            ]
+                        ),
+                    },
+                    "conflict_detection": {
+                        "cross_location_conflicts": len(conflicts),
+                        "cannibalization_risks": len(
+                            [
+                                c
+                                for c in conflicts
+                                if "cannibalization" in c.get("type", "")
+                            ]
+                        ),
+                    },
+                },
+            )
+
+        except ValidationError as e:
+            logger.error(f"Validation error in local intent optimization: {str(e)}")
+            return ScriptResult(
+                status=ScriptStatus.FAILED.value,
+                execution_time=0.0,
+                rows_processed=0,
+                changes_made=0,
+                errors=[f"Validation error: {str(e)}"],
+                warnings=[],
+                details={},
+            )
+        except APIError as e:
+            logger.error(f"Google Ads API error in local intent optimization: {str(e)}")
+            return ScriptResult(
+                status=ScriptStatus.FAILED.value,
+                execution_time=0.0,
+                rows_processed=0,
+                changes_made=0,
+                errors=[f"API error: {str(e)}"],
+                warnings=[],
+                details={},
+            )
+        except Exception as e:
+            logger.error(
+                f"Unexpected error processing local intent optimization results: {str(e)}"
+            )
+            return ScriptResult(
+                status=ScriptStatus.FAILED.value,
+                execution_time=0.0,
+                rows_processed=0,
+                changes_made=0,
+                errors=[f"Results processing error: {str(e)}"],
+                warnings=[],
+                details={},
+            )
+
+    def get_required_parameters(self) -> List[str]:
+        """Get required parameters for local intent optimization."""
+        return [
+            "store_locations",  # List of store location data
+            "lookback_days",  # Days to analyze
+            "min_impressions",  # Minimum impressions threshold
+        ]
+
+    def detect_local_intent(self, search_term: str) -> Optional[LocalIntentMatch]:
+        """Detect local intent in a search term."""
+        # Input validation
+        if not search_term or not isinstance(search_term, str):
+            raise ValidationError("Search term must be a non-empty string")
+
+        if len(search_term.strip()) < 3:
+            return None  # Too short to have meaningful local intent
+
+        search_term_lower = search_term.lower()
+
+        for intent_type, patterns in self.local_intent_patterns.items():
+            for pattern in patterns:
+                if re.search(pattern, search_term_lower):
+                    confidence = self._calculate_confidence_score(
+                        search_term_lower, intent_type, pattern
+                    )
+
+                    geographic_modifier = self._extract_geographic_modifier(
+                        search_term_lower
+                    )
+                    matched_stores = self._find_matching_stores(
+                        search_term_lower, intent_type
+                    )
+                    bid_adjustment = self._suggest_bid_adjustment(
+                        intent_type, confidence, matched_stores
+                    )
+
+                    return LocalIntentMatch(
+                        search_term=search_term,
+                        intent_type=intent_type,
+                        confidence_score=confidence,
+                        matched_stores=matched_stores,
+                        geographic_modifier=geographic_modifier,
+                        suggested_bid_adjustment=bid_adjustment,
+                        landing_page_recommendation=self._recommend_landing_page(
+                            matched_stores
+                        ),
+                    )
+
+        return None
+
+    def _calculate_confidence_score(
+        self, search_term: str, intent_type: LocalIntentType, pattern: str
+    ) -> float:
+        """Calculate confidence score for local intent match."""
+        base_score = 0.7
+
+        # Boost score for exact "near me" matches
+        if intent_type == LocalIntentType.NEAR_ME and "near me" in search_term:
+            base_score += 0.2
+
+        # Boost score for specific city mentions
+        if intent_type == LocalIntentType.CITY_SPECIFIC:
+            base_score += 0.15
+
+        # Boost score for multiple local indicators
+        local_indicators = ["near", "close", "nearby", "local", "area", "around"]
+        indicator_count = sum(
+            1 for indicator in local_indicators if indicator in search_term
+        )
+        base_score += min(indicator_count * 0.05, 0.15)
+
+        return min(base_score, 1.0)
+
+    def _extract_geographic_modifier(self, search_term: str) -> str:
+        """Extract geographic modifier from search term."""
+        # Common geographic modifiers
+        geo_patterns = [
+            r"\b(dallas|san antonio|houston|austin|fort worth)\b",
+            r"\b(north|south|east|west|northeast|northwest|southeast|southwest)\b",
+            r"\b(downtown|uptown|midtown|suburb)\b",
+            r"\bnear\s+(.+?)(?:\s|$)",
+        ]
+
+        for pattern in geo_patterns:
+            match = re.search(pattern, search_term, re.IGNORECASE)
+            if match:
+                return match.group(1) if match.groups() else match.group(0)
+
+        return ""
+
+    def _find_matching_stores(
+        self, search_term: str, intent_type: LocalIntentType
+    ) -> List[StoreLocation]:
+        """Find store locations matching the search term."""
+        matched_stores = []
+
+        for store in self.store_locations:
+            match_score = 0.0
+
+            # Direct city match
+            if store.city.lower() in search_term:
+                match_score += 0.8
+
+            # Store name match
+            if store.name.lower() in search_term:
+                match_score += 0.9
+
+            # For "near me" terms, include all stores within reasonable distance
+            if intent_type == LocalIntentType.NEAR_ME:
+                match_score += 0.6
+
+            if match_score >= 0.6:
+                matched_stores.append(store)
+
+        return sorted(matched_stores, key=lambda s: s.name)
+
+    def _suggest_bid_adjustment(
+        self,
+        intent_type: LocalIntentType,
+        confidence: float,
+        matched_stores: List[StoreLocation],
+    ) -> float:
+        """Suggest bid adjustment for local intent terms."""
+        base_adjustment = 0.0
+
+        # Higher bids for high-intent local searches
+        if intent_type == LocalIntentType.NEAR_ME:
+            base_adjustment = 15.0
+        elif intent_type == LocalIntentType.CITY_SPECIFIC:
+            base_adjustment = 10.0
+        elif intent_type == LocalIntentType.STORE_SPECIFIC:
+            base_adjustment = 20.0
+
+        # Adjust based on confidence
+        adjustment = base_adjustment * confidence
+
+        # Adjust based on store count (more competition = higher bids)
+        if len(matched_stores) > 2:
+            adjustment *= 1.1
+
+        return min(adjustment, self.config.parameters.get("max_bid_adjustment", 50.0))
+
+    def _recommend_landing_page(
+        self, matched_stores: List[StoreLocation]
+    ) -> Optional[str]:
+        """Recommend best landing page for matched stores."""
+        if not matched_stores:
+            return None
+
+        # Prefer stores with specific landing pages
+        stores_with_pages = [s for s in matched_stores if s.landing_page]
+        if stores_with_pages:
+            return stores_with_pages[0].landing_page
+
+        return None
+
+    def analyze_store_performance(
+        self, store: StoreLocation, lookback_days: int = 30
+    ) -> GeographicPerformanceMetric:
+        """Analyze performance metrics for a specific store location."""
+        # This would integrate with the Google Ads API to get real performance data
+        # For now, return a placeholder metric
+        return GeographicPerformanceMetric(
+            location=f"{store.city}, {store.state}",
+            radius_miles=store.radius_miles,
+            impressions=1000,  # Placeholder
+            clicks=50,  # Placeholder
+            conversions=5,  # Placeholder
+            cost=125.0,  # Placeholder
+            store_visits=8,  # Placeholder
+            ctr=5.0,
+            cpc=2.50,
+            conversion_rate=10.0,
+        )
+
+
+# Update ScriptType enum to include local intent optimization
+class ExtendedScriptType(Enum):
+    """Extended script types including local intent optimization."""
+
+    NEGATIVE_KEYWORD = "negative_keyword"
+    CONFLICT_DETECTION = "conflict_detection"
+    PLACEMENT_AUDIT = "placement_audit"
+    MASTER_NEGATIVE_LIST = "master_negative_list"
+    N_GRAM_ANALYSIS = "n_gram_analysis"
+    LOCAL_INTENT_OPTIMIZATION = "local_intent_optimization"
+
+
+def create_local_intent_config(
+    store_locations: List[Dict[str, Any]],
+    lookback_days: int = 30,
+    min_impressions: int = 100,
+    enable_auto_bidding: bool = False,
+) -> ScriptConfig:
+    """Create configuration for local intent optimization script."""
+    return ScriptConfig(
+        name="Local Intent Enhancement and Geographic Optimization",
+        type=ScriptType.MASTER_NEGATIVE_LIST,  # Using existing enum for compatibility
+        description="Automated local intent identification and geographic optimization for retail businesses",
+        parameters={
+            "store_locations": store_locations,
+            "lookback_days": lookback_days,
+            "min_impressions": min_impressions,
+            "min_confidence_score": 0.8,
+            "max_bid_adjustment": 50.0,
+            "enable_auto_bidding": enable_auto_bidding,
+            "enable_geo_exclusions": True,
+        },
+    )

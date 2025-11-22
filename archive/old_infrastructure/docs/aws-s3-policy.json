@@ -1,0 +1,50 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowBucketListAndLocation",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetBucketLocation",
+                "s3:GetBucketVersioning"
+            ],
+            "Resource": [
+                "arn:aws:s3:::paidsearchnav-customer-data",
+                "arn:aws:s3:::paidsearchnav-customer-data-dev"
+            ]
+        },
+        {
+            "Sid": "AllowObjectOperations",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:GetObjectVersion",
+                "s3:GetObjectMetadata",
+                "s3:PutObject",
+                "s3:PutObjectAcl",
+                "s3:DeleteObject",
+                "s3:DeleteObjectVersion"
+            ],
+            "Resource": [
+                "arn:aws:s3:::paidsearchnav-customer-data/PaidSearchNav/*",
+                "arn:aws:s3:::paidsearchnav-customer-data-dev/PaidSearchNav/*"
+            ]
+        },
+        {
+            "Sid": "AllowMultipartUploads",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListMultipartUploadParts",
+                "s3:AbortMultipartUpload",
+                "s3:ListBucketMultipartUploads"
+            ],
+            "Resource": [
+                "arn:aws:s3:::paidsearchnav-customer-data",
+                "arn:aws:s3:::paidsearchnav-customer-data/PaidSearchNav/*",
+                "arn:aws:s3:::paidsearchnav-customer-data-dev",
+                "arn:aws:s3:::paidsearchnav-customer-data-dev/PaidSearchNav/*"
+            ]
+        }
+    ]
+}

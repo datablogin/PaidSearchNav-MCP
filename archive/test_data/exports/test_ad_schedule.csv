@@ -1,0 +1,20 @@
+# Ad schedule report
+# Downloaded from Google Ads on 2025-07-30
+# Account: Test Account
+
+Day & time,Campaign,Bid adj.,Currency code,Avg. CPM,Impr.,Interactions,Interaction rate,Avg. cost,Cost,Conv. rate,Conversions,Cost / conv.
+"Mondays, 8:00 AM - 6:00 PM",Test Campaign BRN,+0%,USD,14.52,"3,500",890,25.43%,0.87,774.30,15.73%,140,5.53
+"Tuesdays, 8:00 AM - 6:00 PM",Test Campaign BRN,+0%,USD,13.98,"4,200",1068,25.43%,0.75,801.00,14.89%,159,5.04
+"Wednesdays, 8:00 AM - 6:00 PM",Test Campaign BRN,+0%,USD,15.21,"3,800",912,24.00%,0.88,803.56,16.12%,147,5.47
+"Thursdays, 8:00 AM - 6:00 PM",Test Campaign BRN,+0%,USD,14.75,"4,100",1025,25.00%,0.82,840.50,15.51%,159,5.28
+"Fridays, 8:00 AM - 6:00 PM",Test Campaign BRN,+0%,USD,16.30,"3,600",900,25.00%,0.95,855.00,14.67%,132,6.48
+"Mondays, 6:00 PM - 12:00 AM",Test Campaign GEN,-20%,USD,45.20,"1,200",89,7.42%,9.75,868.75,8.99%,8,108.59
+"Tuesdays, 6:00 PM - 12:00 AM",Test Campaign GEN,-20%,USD,42.88,"1,350",100,7.41%,8.69,869.00,9.00%,9,96.56
+"Wednesdays, 6:00 PM - 12:00 AM",Test Campaign GEN,-20%,USD,48.15,"1,180",87,7.37%,10.25,891.75,8.05%,7,127.39
+"Thursdays, 6:00 PM - 12:00 AM",Test Campaign GEN,-20%,USD,44.32,"1,400",105,7.50%,9.12,957.60,7.62%,8,119.70
+"Fridays, 6:00 PM - 12:00 AM",Test Campaign GEN,-20%,USD,46.75,"1,250",92,7.36%,9.88,908.96,6.52%,6,151.49
+"Saturdays, all day",Test Campaign BRN,--,USD,18.45,"2,800",504,18.00%,1.65,831.60,12.70%,64,12.99
+"Sundays, all day",Test Campaign BRN,--,USD,17.92,"2,650",477,18.00%,1.72,820.44,11.32%,54,15.19
+"Mondays, 12:00 AM - 8:00 AM",Test Campaign GEN,--,USD,52.30,"800",48,6.00%,12.50,600.00,4.17%,2,300.00
+"Tuesdays, 12:00 AM - 8:00 AM",Test Campaign GEN,--,USD,48.90,"900",54,6.00%,11.85,639.90,3.70%,2,319.95
+"Wednesdays, 12:00 AM - 8:00 AM",Test Campaign GEN,--,USD,55.75,"750",45,6.00%,13.33,599.85,2.22%,1,599.85

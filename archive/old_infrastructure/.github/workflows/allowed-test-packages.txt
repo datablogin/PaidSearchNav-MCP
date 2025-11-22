@@ -1,0 +1,18 @@
+# Allowed test-related package names for supply chain security check
+# These packages are known to be legitimate despite containing "test" in their name
+# One package per line, comments start with #
+
+pytest
+pytest-cov
+pytest-asyncio
+pytest-timeout
+testcontainers
+pytest-mock
+pytest-env
+pytest-xdist
+pytest-benchmark
+pytest-html
+pytest-sugar
+pytest-parallel
+hypothesis
+unittest-xml-reporting

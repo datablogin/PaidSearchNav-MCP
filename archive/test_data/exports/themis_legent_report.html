@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Themis & Legent Search Terms Analysis Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
+        .header { color: #1a73e8; border-bottom: 3px solid #1a73e8; padding-bottom: 10px; margin-bottom: 30px; }
+        .summary { background: #f8f9fa; padding: 20px; margin: 20px 0; border-radius: 8px; border-left: 5px solid #1a73e8; }
+        .metric { display: inline-block; margin: 10px 20px 10px 0; }
+        .metric-value { font-size: 2em; font-weight: bold; color: #1a73e8; }
+        .metric-label { font-size: 0.9em; color: #666; }
+        .section { margin: 30px 0; }
+        .section h2 { color: #333; border-bottom: 2px solid #e0e0e0; padding-bottom: 5px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #f2f2f2; font-weight: bold; }
+        .add-candidate { background-color: #e8f5e8; }
+        .negative-candidate { background-color: #ffeaea; }
+        .review-needed { background-color: #fff3cd; }
+        .classification { padding: 4px 8px; border-radius: 4px; font-size: 0.85em; font-weight: bold; }
+        .add { background: #28a745; color: white; }
+        .negative { background: #dc3545; color: white; }
+        .review { background: #ffc107; color: black; }
+    </style>
+</head>
+<body>
+    <h1 class="header">Themis & Legent Search Terms Analysis Report</h1>
+
+    <div class="summary">
+        <h3>Executive Summary</h3>
+        <div class="metric">
+            <div class="metric-value">15</div>
+            <div class="metric-label">Total Search Terms</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value">0</div>
+            <div class="metric-label">Add Candidates</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value">0</div>
+            <div class="metric-label">Negative Candidates</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value">15</div>
+            <div class="metric-label">Review Needed</div>
+        </div>
+    </div>
+    <div class="section">
+        <h2>🟡 Review Needed - Requires Manual Assessment</h2>
+        <table>
+            <tr>
+                <th>Search Term</th>
+                <th>Campaign</th>
+                <th>Ad Group</th>
+                <th>Classification Reason</th>
+            </tr>
+            <tr class="review-needed">
+                <td><strong>{'campaign_id': '1002', 'campaign_name': 'Generic Campaign', 'ad_group_id': '2002', 'ad_group_name': 'Widget Terms', 'search_term': 'best widgets 2024', 'keyword_id': '123456791', 'keyword_text': 'buy widgets online', 'match_type': 'Broad match', 'metrics.clicks': '300', 'metrics.cost': '600.00', 'metrics.conversions': '30.00', 'metrics.conversion_value': '3,000.00', 'Impressions': '5,000'}</strong></td>
+                <td>Unknown Campaign</td>
+                <td>Unknown Ad Group</td>
+                <td>No metrics available</td>
+            </tr>
+            <tr class="review-needed">
+                <td><strong>{'campaign_id': '1003', 'campaign_name': 'Local Campaign', 'ad_group_id': '2003', 'ad_group_name': 'Local Terms', 'search_term': 'widget repair near me', 'keyword_id': '123456793', 'keyword_text': 'widget store near me', 'match_type': 'Phrase match', 'metrics.clicks': '200', 'metrics.cost': '400.00', 'metrics.conversions': '20.00', 'metrics.conversion_value': '2,000.00', 'Impressions': '3,000'}</strong></td>
+                <td>Unknown Campaign</td>
+                <td>Unknown Ad Group</td>
+                <td>No metrics available</td>
+            </tr>
+            <tr class="review-needed">
+                <td><strong>{'campaign_id': '1002', 'campaign_name': 'Generic Campaign', 'ad_group_id': '2002', 'ad_group_name': 'Widget Terms', 'search_term': 'free widgets download', 'keyword_id': '123456791', 'keyword_text': 'buy widgets online', 'match_type': 'Broad match', 'metrics.clicks': '100', 'metrics.cost': '200.00', 'metrics.conversions': '0.00', 'metrics.conversion_value': '0.00', 'Impressions': '2,000'}</strong></td>
+                <td>Unknown Campaign</td>
+                <td>Unknown Ad Group</td>
+                <td>No metrics available</td>
+            </tr>
+            <tr class="review-needed">
+                <td><strong>{'campaign_id': '1003', 'campaign_name': 'Local Campaign', 'ad_group_id': '2003', 'ad_group_name': 'Local Terms', 'search_term': 'widget store chicago', 'keyword_id': '123456793', 'keyword_text': 'widget store near me', 'match_type': 'Phrase match', 'metrics.clicks': '120', 'metrics.cost': '240.00', 'metrics.conversions': '12.00', 'metrics.conversion_value': '1,200.00', 'Impressions': '1,500'}</strong></td>
+                <td>Unknown Campaign</td>
+                <td>Unknown Ad Group</td>
+                <td>No metrics available</td>
+            </tr>
+            <tr class="review-needed">
+                <td><strong>{'campaign_id': '1002', 'campaign_name': 'Generic Campaign', 'ad_group_id': '2005', 'ad_group_name': 'Problem Terms', 'search_term': 'how to fix widgets', 'keyword_id': '123456799', 'keyword_text': 'widget repair', 'match_type': 'Broad match', 'metrics.clicks': '50', 'metrics.cost': '75.00', 'metrics.conversions': '0.00', 'metrics.conversion_value': '0.00', 'Impressions': '1000'}</strong></td>
+                <td>Unknown Campaign</td>
+                <td>Unknown Ad Group</td>
+                <td>No metrics available</td>
+            </tr>
+            <tr class="review-needed">
+                <td><strong>{'campaign_id': '1001', 'campaign_name': 'Brand Campaign', 'ad_group_id': '2001', 'ad_group_name': 'Brand Terms', 'search_term': 'company name reviews', 'keyword_id': '123456789', 'keyword_text': 'company name', 'match_type': 'Exact match', 'metrics.clicks': '400', 'metrics.cost': '800.00', 'metrics.conversions': '40.00', 'metrics.conversion_value': '4,000.00', 'Impressions': '4,000'}</strong></td>
+                <td>Unknown Campaign</td>
+                <td>Unknown Ad Group</td>
+                <td>No metrics available</td>
+            </tr>
+            <tr class="review-needed">
+                <td><strong>{'campaign_id': '1002', 'campaign_name': 'Generic Campaign', 'ad_group_id': '2006', 'ad_group_name': 'Service Terms', 'search_term': 'professional widget installation', 'keyword_id': '123456800', 'keyword_text': 'widget services', 'match_type': 'Broad match', 'metrics.clicks': '80', 'metrics.cost': '240.00', 'metrics.conversions': '8.00', 'metrics.conversion_value': '800.00', 'Impressions': '800'}</strong></td>
+                <td>Unknown Campaign</td>
+                <td>Unknown Ad Group</td>
+                <td>No metrics available</td>
+            </tr>
+            <tr class="review-needed">
+                <td><strong>{'campaign_id': '1003', 'campaign_name': 'Local Campaign', 'ad_group_id': '2003', 'ad_group_name': 'Local Terms', 'search_term': 'widgets near me open now', 'keyword_id': '123456793', 'keyword_text': 'widget store near me', 'match_type': 'Phrase match', 'metrics.clicks': '250', 'metrics.cost': '500.00', 'metrics.conversions': '25.00', 'metrics.conversion_value': '2,500.00', 'Impressions': '2,500'}</strong></td>
+                <td>Unknown Campaign</td>
+                <td>Unknown Ad Group</td>
+                <td>No metrics available</td>
+            </tr>
+            <tr class="review-needed">
+                <td><strong>{'campaign_id': '1002', 'campaign_name': 'Generic Campaign', 'ad_group_id': '2005', 'ad_group_name': 'Problem Terms', 'search_term': 'discount widgets online', 'keyword_id': '123456797', 'keyword_text': 'cheap widgets', 'match_type': 'Broad match', 'metrics.clicks': '90', 'metrics.cost': '90.00', 'metrics.conversions': '0.00', 'metrics.conversion_value': '0.00', 'Impressions': '1,800'}</strong></td>
+                <td>Unknown Campaign</td>
+                <td>Unknown Ad Group</td>
+                <td>No metrics available</td>
+            </tr>
+            <tr class="review-needed">
+                <td><strong>{'campaign_id': '1003', 'campaign_name': 'Local Campaign', 'ad_group_id': '2003', 'ad_group_name': 'Local Terms', 'search_term': 'widget store hours', 'keyword_id': '123456793', 'keyword_text': 'widget store near me', 'match_type': 'Phrase match', 'metrics.clicks': '60', 'metrics.cost': '120.00', 'metrics.conversions': '6.00', 'metrics.conversion_value': '600.00', 'Impressions': '600'}</strong></td>
+                <td>Unknown Campaign</td>
+                <td>Unknown Ad Group</td>
+                <td>No metrics available</td>
+            </tr>
+            <tr class="review-needed">
+                <td><strong>{'campaign_id': '1002', 'campaign_name': 'Generic Campaign', 'ad_group_id': '2002', 'ad_group_name': 'Widget Terms', 'search_term': 'widget pricing calculator', 'keyword_id': '123456801', 'keyword_text': 'widget prices', 'match_type': 'Broad match', 'metrics.clicks': '20', 'metrics.cost': '60.00', 'metrics.conversions': '2.00', 'metrics.conversion_value': '200.00', 'Impressions': '400'}</strong></td>
+                <td>Unknown Campaign</td>
+                <td>Unknown Ad Group</td>
+                <td>No metrics available</td>
+            </tr>
+            <tr class="review-needed">
+                <td><strong>{'campaign_id': '1002', 'campaign_name': 'Generic Campaign', 'ad_group_id': '2006', 'ad_group_name': 'Service Terms', 'search_term': 'emergency widget repair', 'keyword_id': '123456799', 'keyword_text': 'widget repair', 'match_type': 'Broad match', 'metrics.clicks': '30', 'metrics.cost': '150.00', 'metrics.conversions': '3.00', 'metrics.conversion_value': '450.00', 'Impressions': '300'}</strong></td>
+                <td>Unknown Campaign</td>
+                <td>Unknown Ad Group</td>
+                <td>No metrics available</td>
+            </tr>
+            <tr class="review-needed">
+                <td><strong>{'campaign_id': '1003', 'campaign_name': 'Local Campaign', 'ad_group_id': '2003', 'ad_group_name': 'Local Terms', 'search_term': 'widget store near me open sunday', 'keyword_id': '123456793', 'keyword_text': 'widget store near me', 'match_type': 'Phrase match', 'metrics.clicks': '25', 'metrics.cost': '50.00', 'metrics.conversions': '2.50', 'metrics.conversion_value': '250.00', 'Impressions': '250'}</strong></td>
+                <td>Unknown Campaign</td>
+                <td>Unknown Ad Group</td>
+                <td>No metrics available</td>
+            </tr>
+            <tr class="review-needed">
+                <td><strong>{'campaign_id': '1002', 'campaign_name': 'Generic Campaign', 'ad_group_id': '2007', 'ad_group_name': 'Research Terms', 'search_term': 'compare widget brands', 'keyword_id': '123456802', 'keyword_text': 'widget comparison', 'match_type': 'Broad match', 'metrics.clicks': '15', 'metrics.cost': '45.00', 'metrics.conversions': '0.00', 'metrics.conversion_value': '0.00', 'Impressions': '350'}</strong></td>
+                <td>Unknown Campaign</td>
+                <td>Unknown Ad Group</td>
+                <td>No metrics available</td>
+            </tr>
+            <tr class="review-needed">
+                <td><strong>{'campaign_id': '1002', 'campaign_name': 'Generic Campaign', 'ad_group_id': '2005', 'ad_group_name': 'Problem Terms', 'search_term': 'widget wholesale prices', 'keyword_id': '123456797', 'keyword_text': 'cheap widgets', 'match_type': 'Broad match', 'metrics.clicks': '25', 'metrics.cost': '25.00', 'metrics.conversions': '0.00', 'metrics.conversion_value': '0.00', 'Impressions': '500'}</strong></td>
+                <td>Unknown Campaign</td>
+                <td>Unknown Ad Group</td>
+                <td>No metrics available</td>
+            </tr>
+        </table>
+    </div>
+    <hr style="margin: 40px 0;">
+    <p style="text-align: center; color: #666; font-size: 0.9em;">
+        <em>Report generated by PaidSearchNav - Themis & Legent Analysis</em><br>
+        Generated on: /Users/robertwelborn/PycharmProjects/PaidSearchNav/test_data
+    </p>
+</body>
+</html>

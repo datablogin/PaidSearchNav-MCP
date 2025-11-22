@@ -1,0 +1,13 @@
+{
+  "generated_at": "2025-08-19T17:26:19.522624",
+  "fitness_connection": {
+    "customer_id": "6469906417",
+    "date_range": "LAST_90_DAYS",
+    "location_indicators_count": 22
+  },
+  "cotton_patch_cafe": {
+    "customer_id": "9524080160",
+    "date_range": "LAST_90_DAYS",
+    "location_indicators_count": 26
+  }
+}

@@ -1,0 +1,175 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'prod'
+        type: choice
+        options:
+        - prod
+        - dev
+
+env:
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: paidsearchnav
+
+jobs:
+  deploy:
+    name: Deploy to AWS
+    runs-on: ubuntu-latest
+    environment: 
+      name: ${{ github.event.inputs.environment || 'prod' }}
+      
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v5
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v2
+
+    - name: Build, tag, and push image to Amazon ECR
+      id: build-image
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        # Build a docker container and push it to ECR
+        echo "Building Docker image..."
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
+        
+        echo "Pushing image to ECR..."
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+        
+        echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.6.0
+
+    - name: Deploy to ECS
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        IMAGE_TAG: ${{ github.sha }}
+        ENVIRONMENT: ${{ github.event.inputs.environment || 'prod' }}
+        TF_VAR_google_ads_developer_token: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+        TF_VAR_google_ads_client_id: ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
+        TF_VAR_google_ads_client_secret: ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
+        TF_VAR_jwt_secret_key: ${{ secrets.JWT_SECRET_KEY }}
+      run: |
+        cd infrastructure/terraform
+        
+        # Initialize Terraform
+        terraform init
+        terraform workspace select $ENVIRONMENT || terraform workspace new $ENVIRONMENT
+        
+        # Handle potential state lock issues from previous cancelled runs
+        echo "🔒 Checking for stuck state locks..."
+        if ! terraform plan -lock-timeout=30s -detailed-exitcode >/dev/null 2>&1; then
+          echo "⚠️  State may be locked from previous run, attempting to continue..."
+          # We'll retry with force-unlock if plan fails due to lock
+        fi
+        
+        # Import existing resources to fix state drift (ignore errors if already in state)
+        echo "🔧 Checking for state drift and importing existing resources..."
+        terraform import aws_db_instance.main "paidsearchnav-$ENVIRONMENT" 2>/dev/null || echo "ℹ️  RDS instance already in state or doesn't exist"
+        terraform import aws_secretsmanager_secret.app_secrets "paidsearchnav-$ENVIRONMENT-app-secrets" 2>/dev/null || echo "ℹ️  App secrets already in state or doesn't exist"  
+        terraform import aws_secretsmanager_secret.db_credentials "paidsearchnav-$ENVIRONMENT-db-credentials" 2>/dev/null || echo "ℹ️  DB credentials already in state or doesn't exist"
+        
+        # Plan first to check for issues
+        echo "📋 Planning infrastructure changes..."
+        terraform plan \
+          -var="ecr_image_uri=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" \
+          -var="google_ads_developer_token=${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}" \
+          -var="google_ads_client_id=${{ secrets.GOOGLE_ADS_CLIENT_ID }}" \
+          -var="google_ads_client_secret=${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}" \
+          -var="jwt_secret_key=${{ secrets.JWT_SECRET_KEY }}" \
+          -var-file="environments/$ENVIRONMENT.tfvars"
+        
+        # Apply infrastructure changes
+        echo "🚀 Applying infrastructure changes..."
+        terraform apply -auto-approve \
+          -var="ecr_image_uri=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" \
+          -var="google_ads_developer_token=${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}" \
+          -var="google_ads_client_id=${{ secrets.GOOGLE_ADS_CLIENT_ID }}" \
+          -var="google_ads_client_secret=${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}" \
+          -var="jwt_secret_key=${{ secrets.JWT_SECRET_KEY }}" \
+          -var-file="environments/$ENVIRONMENT.tfvars"
+
+    - name: Verify deployment
+      env:
+        ENVIRONMENT: ${{ github.event.inputs.environment || 'prod' }}
+      run: |
+        cd infrastructure/terraform
+        
+        # Get ALB URL
+        ALB_URL=$(terraform output -raw alb_url)
+        
+        # Wait for service to be stable
+        echo "Waiting for ECS service to stabilize..."
+        aws ecs wait services-stable \
+          --cluster paidsearchnav-$ENVIRONMENT \
+          --services paidsearchnav-api-$ENVIRONMENT
+        
+        # Health check
+        echo "Performing health check..."
+        sleep 30  # Give ALB time to update
+        
+        for i in {1..10}; do
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" $ALB_URL/api/v1/health || echo "000")
+          if [ "$HTTP_CODE" = "200" ]; then
+            echo "✅ Health check passed!"
+            break
+          else
+            echo "⏳ Health check failed (attempt $i/10), HTTP code: $HTTP_CODE"
+            if [ $i -eq 10 ]; then
+              echo "❌ Health check failed after 10 attempts"
+              exit 1
+            fi
+            sleep 30
+          fi
+        done
+        
+        echo "🚀 Deployment successful!"
+        echo "Application URL: $ALB_URL"
+
+    - name: Run database migrations
+      env:
+        ENVIRONMENT: ${{ github.event.inputs.environment || 'prod' }}
+      run: |
+        cd infrastructure/terraform
+        
+        # Get database connection info
+        echo "Database migrations will be handled automatically by the ECS service on startup"
+        echo "Application includes Alembic migrations that run when the container starts"
+
+    - name: Notify on success
+      if: success()
+      run: |
+        echo "✅ Deployment completed successfully"
+        echo "Environment: ${{ github.event.inputs.environment || 'prod' }}"
+        echo "Image: ${{ steps.build-image.outputs.image }}"
+
+    - name: Notify on failure
+      if: failure()
+      run: |
+        echo "❌ Deployment failed"
+        echo "Please check the logs and infrastructure state"

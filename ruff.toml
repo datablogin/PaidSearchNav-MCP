@@ -1,0 +1,30 @@
+[lint]
+# Ignore specific rules that are causing CI failures but aren't critical
+ignore = [
+    "B008",  # Do not perform function call in argument defaults (FastAPI Depends pattern)
+    "N805",  # First argument of a method should be named `self` (Pydantic validators use `cls`)
+    "B904",  # Within an `except` clause, raise exceptions with `raise ... from err`
+    "F841",  # Local variable assigned to but never used (in test files)
+]
+
+# Select the rules to check
+select = [
+    "E",   # pycodestyle errors  
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+]
+
+# Additional ignores to allow project's current style
+extend-ignore = [
+    "E501",  # Line too long (ignore line length for now)
+]
+
+# Files to exclude
+exclude = [
+    ".git",
+    "__pycache__",
+    ".venv", 
+    "build",
+    "dist",
+]

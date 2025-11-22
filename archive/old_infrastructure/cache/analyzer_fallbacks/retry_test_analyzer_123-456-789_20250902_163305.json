@@ -1,0 +1,33 @@
+{
+  "execution_metadata": {
+    "correlation_id": "e9398c58-eab5-48d5-8184-f9ec3eb03d5e",
+    "analyzer": "Retry Test Analyzer",
+    "customer_id": "123-456-789",
+    "start_date": "2025-01-01T00:00:00",
+    "end_date": "2025-01-31T00:00:00",
+    "timestamp": "2025-09-02T16:33:05.353303",
+    "success": true
+  },
+  "analysis_metadata": {
+    "analysis_type": "test",
+    "analyzer_name": "Test",
+    "recommendations_count": 0
+  },
+  "metrics": {
+    "created_at": "2025-09-02T21:33:05.352290+00:00",
+    "updated_at": "2025-09-02T21:33:05.352293+00:00",
+    "total_keywords_analyzed": 1,
+    "total_search_terms_analyzed": 1,
+    "total_campaigns_analyzed": 0,
+    "issues_found": 0,
+    "critical_issues": 0,
+    "potential_cost_savings": 0.0,
+    "potential_conversion_increase": 0.0,
+    "custom_metrics": {}
+  },
+  "recommendations": [],
+  "raw_data": {
+    "test": "data"
+  },
+  "errors": [],
+  "created_at": 

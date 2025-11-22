@@ -1,0 +1,386 @@
+name: Migration Tests
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'paidsearchnav/storage/migrations/**'
+      - 'paidsearchnav/storage/models.py'
+      - 'tests/**/test_migration*.py'
+      - '.github/workflows/migration-tests.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'paidsearchnav/storage/migrations/**'
+      - 'paidsearchnav/storage/models.py'
+      - 'tests/**/test_migration*.py'
+      - '.github/workflows/migration-tests.yml'
+
+env:
+  PYTHONPATH: ${{ github.workspace }}
+
+jobs:
+  migration-tests-sqlite:
+    name: Migration Tests (SQLite)
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v5
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
+      with:
+        version: "latest"
+    
+    - name: Install dependencies
+      run: |
+        uv pip install --system -e ".[dev,test]"
+    
+    - name: Create data directory
+      run: mkdir -p data
+    
+    - name: Run migration tests (SQLite)
+      run: |
+        pytest tests/unit/storage/test_migrations.py \
+          tests/unit/storage/test_migration_utils.py \
+          -v --tb=short \
+          -m "not integration"
+    
+    - name: Test migration upgrade/downgrade cycle
+      run: |
+        # Test clean migration from scratch
+        python -m alembic upgrade head
+        python -m alembic downgrade base
+        python -m alembic upgrade head
+      env:
+        PSN_ENVIRONMENT: development
+        PSN_DATA_DIR: ./data
+    
+    - name: Test migration idempotency
+      run: |
+        # Run migrations twice to test idempotency
+        python -m alembic upgrade head
+        python -m alembic upgrade head
+      env:
+        PSN_ENVIRONMENT: development
+        PSN_DATA_DIR: ./data
+
+  migration-tests-postgresql:
+    name: Migration Tests (PostgreSQL)
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: testpassword
+          POSTGRES_USER: testuser
+          POSTGRES_DB: testdb
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    
+    steps:
+    - uses: actions/checkout@v5
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
+      with:
+        version: "latest"
+    
+    - name: Install dependencies
+      run: |
+        uv pip install --system -e ".[dev,test]"
+        uv pip install --system pg8000
+    
+    - name: Wait for PostgreSQL
+      run: |
+        until pg_isready -h localhost -p 5432 -U testuser; do
+          echo "Waiting for PostgreSQL..."
+          sleep 2
+        done
+    
+    - name: Run migration tests (PostgreSQL)
+      run: |
+        pytest tests/unit/storage/test_migrations.py::TestMigrationWithPostgreSQL \
+          -v --tb=short
+      env:
+        TEST_POSTGRES_URL: postgresql://testuser:testpassword@localhost:5432/testdb
+    
+    - name: Test PostgreSQL migration upgrade/downgrade
+      run: |
+        python -m alembic upgrade head
+        python -m alembic downgrade base
+        python -m alembic upgrade head
+      env:
+        PSN_ENVIRONMENT: production
+        PSN_DATABASE_URL: postgresql://testuser:testpassword@localhost:5432/testdb
+
+  migration-performance:
+    name: Migration Performance Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v5
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
+      with:
+        version: "latest"
+    
+    - name: Install dependencies
+      run: |
+        uv pip install --system -e ".[dev,test]"
+    
+    - name: Run performance tests
+      run: |
+        pytest tests/unit/storage/test_migrations.py::TestMigrationPerformance \
+          -v --tb=short
+    
+    - name: Benchmark migration time
+      run: |
+        mkdir -p data
+        time python -m alembic upgrade head
+      env:
+        PSN_ENVIRONMENT: development
+        PSN_DATA_DIR: ./data
+
+  migration-compatibility:
+    name: Migration Compatibility Tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.11', '3.12']
+    
+    steps:
+    - uses: actions/checkout@v5
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
+      with:
+        version: "latest"
+    
+    - name: Install dependencies
+      run: |
+        uv pip install --system -e ".[dev,test]"
+    
+    - name: Test migration compatibility
+      run: |
+        pytest tests/unit/storage/test_migrations.py::TestMigrationCompatibility \
+          -v --tb=short
+
+  migration-docs:
+    name: Migration Documentation
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v5
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
+      with:
+        version: "latest"
+    
+    - name: Install dependencies
+      run: |
+        uv pip install --system -e ".[dev,test]"
+    
+    - name: Generate migration documentation
+      run: |
+        python -c "
+        from alembic.config import Config
+        from alembic.script import ScriptDirectory
+        
+        config = Config()
+        config.set_main_option('script_location', 'paidsearchnav/storage/migrations')
+        script_dir = ScriptDirectory.from_config(config)
+        
+        print('# Migration History\\n')
+        for revision in reversed(list(script_dir.walk_revisions())):
+            print(f'- **{revision.revision}**: {revision.doc or \"No description\"}')
+            if revision.down_revision:
+                print(f'  - Down revision: {revision.down_revision}')
+            print()
+        "
+    
+    - name: Validate migration scripts
+      run: |
+        python -c "
+        import ast
+        from pathlib import Path
+        
+        migrations_dir = Path('paidsearchnav/storage/migrations/versions')
+        for migration_file in migrations_dir.glob('*.py'):
+            print(f'Validating {migration_file.name}...')
+            try:
+                with open(migration_file) as f:
+                    ast.parse(f.read())
+                print(f'  ✓ Valid Python syntax')
+            except SyntaxError as e:
+                print(f'  ✗ Syntax error: {e}')
+                exit(1)
+        "
+
+  migration-security:
+    name: Migration Security Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v5
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
+      with:
+        version: "latest"
+    
+    - name: Install dependencies
+      run: |
+        uv pip install --system -e ".[dev,test]"
+        uv pip install --system bandit
+    
+    - name: Run security scan on migrations
+      run: |
+        bandit -r paidsearchnav/storage/migrations/ \
+          -f json -o migration-security-report.json
+        
+        # Check for common security issues in migrations
+        python -c "
+        import json
+        import sys
+        
+        try:
+            with open('migration-security-report.json') as f:
+                report = json.load(f)
+            
+            high_severity = [r for r in report.get('results', []) if r.get('issue_severity') == 'HIGH']
+            if high_severity:
+                print('HIGH severity security issues found in migrations:')
+                for issue in high_severity:
+                    print(f'  - {issue[\"issue_text\"]} in {issue[\"filename\"]}:{issue[\"line_number\"]}')
+                sys.exit(1)
+            else:
+                print('No high-severity security issues found in migrations.')
+        except FileNotFoundError:
+            print('No security report generated.')
+        "
+    
+    - name: Check for sensitive data in migrations
+      run: |
+        # Check for potential sensitive data patterns
+        python -c "
+        import re
+        from pathlib import Path
+        
+        sensitive_patterns = [
+            r'password\s*=\s*[\"\\'][^\"\\']',
+            r'secret\s*=\s*[\"\\'][^\"\\']',
+            r'api[_-]?key\s*=\s*[\"\\'][^\"\\']',
+            r'token\s*=\s*[\"\\'][^\"\\']'
+        ]
+        
+        migrations_dir = Path('paidsearchnav/storage/migrations/versions')
+        issues_found = False
+        
+        for migration_file in migrations_dir.glob('*.py'):
+            with open(migration_file) as f:
+                content = f.read()
+                for pattern in sensitive_patterns:
+                    matches = re.finditer(pattern, content, re.IGNORECASE)
+                    for match in matches:
+                        line_num = content[:match.start()].count('\\n') + 1
+                        print(f'Potential sensitive data in {migration_file.name}:{line_num}: {match.group()}')
+                        issues_found = True
+        
+        if not issues_found:
+            print('No sensitive data patterns found in migrations.')
+        "
+
+  notify-on-failure:
+    name: Notify on Migration Test Failure
+    runs-on: ubuntu-latest
+    needs: [migration-tests-sqlite, migration-tests-postgresql, migration-performance, migration-compatibility]
+    if: failure()
+    
+    steps:
+    - name: Create Issue on Migration Test Failure
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const title = `Migration Test Failure - ${context.sha.substring(0, 7)}`;
+          const body = `
+          ## Migration Test Failure
+          
+          **Commit**: ${context.sha}
+          **Branch**: ${context.ref}
+          **Workflow**: ${context.workflow}
+          **Run**: ${context.runNumber}
+          
+          One or more migration tests have failed. Please check the workflow logs for details.
+          
+          ### Failed Jobs
+          ${context.payload.workflow_run?.conclusion === 'failure' ? 'Multiple jobs failed' : 'See workflow for details'}
+          
+          ### Next Steps
+          1. Review the failing test logs
+          2. Check migration scripts for issues
+          3. Verify database schema compatibility
+          4. Test migrations locally before pushing
+          
+          **Auto-generated by Migration Test Workflow**
+          `;
+          
+          // Only create issue if one doesn't already exist for this workflow run
+          const issues = await github.rest.issues.listForRepo({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            state: 'open',
+            labels: 'migration-test-failure'
+          });
+          
+          const existingIssue = issues.data.find(issue => 
+            issue.title.includes(context.sha.substring(0, 7))
+          );
+          
+          if (!existingIssue) {
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: ['bug', 'migration-test-failure', 'priority: high']
+            });
+          }

@@ -1,0 +1,79 @@
+{
+  "family": "paidsearchnav-prod-api",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048",
+  "executionRoleArn": "arn:aws:iam::039612890670:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::039612890670:role/PaidSearchNavS3Role",
+  "containerDefinitions": [
+    {
+      "name": "paidsearchnav-api",
+      "image": "your-ecr-repo/paidsearchnav:latest",
+      "portMappings": [
+        {
+          "containerPort": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [
+        {"name": "PSN_ENV", "value": "production"},
+        {"name": "PSN_API_HOST", "value": "0.0.0.0"},
+        {"name": "PSN_API_PORT", "value": "8000"},
+        {"name": "PSN_S3_ENABLED", "value": "true"},
+        {"name": "PSN_S3_BUCKET_NAME", "value": "paidsearchnav-customer-data"},
+        {"name": "PSN_S3_REGION", "value": "us-east-1"},
+        {"name": "PSN_S3_PREFIX", "value": "PaidSearchNav"}
+      ],
+      "secrets": [
+        {
+          "name": "PSN_GOOGLE_ADS_DEVELOPER_TOKEN",
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:039612890670:secret:paidsearchnav-secrets:google_ads_developer_token::"
+        },
+        {
+          "name": "PSN_GOOGLE_ADS_CLIENT_ID",
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:039612890670:secret:paidsearchnav-secrets:google_ads_client_id::"
+        },
+        {
+          "name": "PSN_GOOGLE_ADS_CLIENT_SECRET",
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:039612890670:secret:paidsearchnav-secrets:google_ads_client_secret::"
+        },
+        {
+          "name": "PSN_DATABASE_URL",
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:039612890670:secret:paidsearchnav-secrets:database_url::"
+        },
+        {
+          "name": "PSN_DATABASE_SYNC_URL",
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:039612890670:secret:paidsearchnav-secrets:database_sync_url::"
+        },
+        {
+          "name": "PSN_JWT_SECRET_KEY",
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:039612890670:secret:paidsearchnav-secrets:jwt_secret_key::"
+        },
+        {
+          "name": "PSN_SECRET_KEY",
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:039612890670:secret:paidsearchnav-secrets:secret_key::"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/paidsearchnav/api",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "curl -f http://localhost:8000/api/v1/health || exit 1"
+        ],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 60
+      }
+    }
+  ]
+}

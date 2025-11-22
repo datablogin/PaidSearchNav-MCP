@@ -1,0 +1,52 @@
+{
+  "execution_metadata": {
+    "correlation_id": "bb4e4294-1559-48ab-84f1-791e91aed654",
+    "analyzer": "Success Analyzer",
+    "customer_id": "123-456-789",
+    "start_date": "2025-01-01T00:00:00",
+    "end_date": "2025-01-31T00:00:00",
+    "timestamp": "2025-09-02T17:49:00.641751",
+    "success": true,
+    "is_fallback": false,
+    "fallback_reason": null
+  },
+  "analysis_metadata": {
+    "analysis_type": "test",
+    "analyzer_name": "Success Analyzer",
+    "recommendations_count": 1
+  },
+  "metrics": {
+    "created_at": "2025-09-02T22:49:00.641168+00:00",
+    "updated_at": "2025-09-02T22:49:00.641168+00:00",
+    "total_keywords_analyzed": 100,
+    "total_search_terms_analyzed": 500,
+    "total_campaigns_analyzed": 0,
+    "issues_found": 1,
+    "critical_issues": 0,
+    "potential_cost_savings": 250.0,
+    "potential_conversion_increase": 5.0,
+    "custom_metrics": {}
+  },
+  "recommendations": [
+    {
+      "type": "OPTIMIZE_KEYWORDS",
+      "priority": "HIGH",
+      "title": "Test Recommendation",
+      "description": "This is a test recommendation from mock analyzer",
+      "action_data": {}
+    }
+  ],
+  "raw_data": {
+    "test_data": "mock_result"
+  },
+  "errors": [],
+  "created_at": "2025-09-02T22:49:00.641174+00:00",
+  "updated_at": "2025-09-02T22:49:00.641175+00:00",
+  "status": "completed",
+  "cache_metadata": {
+    "cached_at": "2025-09-02T17:49:00.641797",
+    "analyzer": "Success Analyzer",
+    "customer_id": "123-456-789",
+    "cache_type": "successful_execution"
+  }
+}

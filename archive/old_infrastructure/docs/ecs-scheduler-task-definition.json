@@ -1,0 +1,70 @@
+{
+  "family": "paidsearchnav-prod-scheduler",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::039612890670:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::039612890670:role/PaidSearchNavS3Role",
+  "containerDefinitions": [
+    {
+      "name": "paidsearchnav-scheduler",
+      "image": "your-ecr-repo/paidsearchnav:latest",
+      "command": [
+        "python", "-m", "paidsearchnav.scheduler.service",
+        "--mode", "daemon"
+      ],
+      "essential": true,
+      "environment": [
+        {"name": "PSN_ENV", "value": "production"},
+        {"name": "PSN_HEADLESS", "value": "true"},
+        {"name": "PSN_S3_ENABLED", "value": "true"},
+        {"name": "PSN_S3_BUCKET_NAME", "value": "paidsearchnav-customer-data"},
+        {"name": "PSN_S3_REGION", "value": "us-east-1"},
+        {"name": "PSN_S3_PREFIX", "value": "PaidSearchNav"},
+        {"name": "PSN_SCHEDULER_MAX_CONCURRENT_JOBS", "value": "3"},
+        {"name": "PSN_SCHEDULER_JOB_TIMEOUT", "value": "3600"}
+      ],
+      "secrets": [
+        {
+          "name": "PSN_GOOGLE_ADS_DEVELOPER_TOKEN",
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:039612890670:secret:paidsearchnav-secrets:google_ads_developer_token::"
+        },
+        {
+          "name": "PSN_GOOGLE_ADS_CLIENT_ID",
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:039612890670:secret:paidsearchnav-secrets:google_ads_client_id::"
+        },
+        {
+          "name": "PSN_GOOGLE_ADS_CLIENT_SECRET",
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:039612890670:secret:paidsearchnav-secrets:google_ads_client_secret::"
+        },
+        {
+          "name": "PSN_DATABASE_URL",
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:039612890670:secret:paidsearchnav-secrets:database_url::"
+        },
+        {
+          "name": "PSN_DATABASE_SYNC_URL",
+          "valueFrom": "arn:aws:secretsmanager:us-east-1:039612890670:secret:paidsearchnav-secrets:database_sync_url::"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/paidsearchnav/scheduler",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "python -c 'from paidsearchnav.scheduler.health_check import check_scheduler_health; exit(0 if check_scheduler_health() else 1)'"
+        ],
+        "interval": 60,
+        "timeout": 10,
+        "retries": 3,
+        "startPeriod": 120
+      }
+    }
+  ]
+}

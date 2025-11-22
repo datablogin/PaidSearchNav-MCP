@@ -1,0 +1,13 @@
+Row Type,Action,Keyword status,Level,Campaign ID,Campaign,Ad group ID,Ad group,Keyword ID,Negative keyword,Type
+"# Optional.
+Supported values: Negative keyword","Optional.
+Supported values: Add; Edit; Remove","Optional.
+Supported values: Enabled; Removed; Paused","Optional.
+Supported values: Ad group; Campaign","Optional.
+Example(s): 1234","Required.
+Example(s): Shoe campaign","Optional.
+Example(s): 1234","Required.
+Example(s): Shoe ad group","Optional.
+Example(s): 1234","Required on create.
+Example(s): cat","Optional.
+Supported values: Exact match; Phrase match; Broad match"

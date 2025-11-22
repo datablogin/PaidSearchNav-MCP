@@ -1,0 +1,38 @@
+{
+  "tools": {
+    "enabled": true,
+    "allowedTools": ["all"]
+  },
+  "hooks": {
+    "beforeCommand": {
+      "enabled": true,
+      "commands": [
+        {
+          "pattern": "git checkout -b feature/*",
+          "preHook": "git checkout main && git pull origin main"
+        }
+      ]
+    },
+    "afterCommand": {
+      "enabled": true,
+      "commands": [
+        {
+          "pattern": "git push*",
+          "postHook": "echo 'Remember to create PR with closes #XXX in description'"
+        }
+      ]
+    }
+  },
+  "prompts": {
+    "templates": [
+      {
+        "name": "start-issue",
+        "template": "Checkout main, pull latest, and start working on GitHub issue #{number}. Create feature branch and implement the requirements. When done, create a PR that closes the issue."
+      },
+      {
+        "name": "fix-ci",
+        "template": "Implement the Claude review recommendations and fix any CI test failures for the current PR."
+      }
+    ]
+  }
+}

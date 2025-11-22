@@ -1,0 +1,12 @@
+Campaign,Campaign ID,Ad group,Ad group ID,Negative keyword,Match type,Level
+"Spine Surgery - Search",123456789,"Back Pain Treatment",987654321,"chiropractor","PHRASE","Ad group"
+"Spine Surgery - Search",123456789,"Back Pain Treatment",987654321,"massage","BROAD","Ad group"
+"Spine Surgery - Search",123456789,"Spine Surgery - Exact",987654322,"free","EXACT","Ad group"
+"Spine Surgery - Search",123456789,"Spine Surgery - Exact",987654322,"diy","PHRASE","Ad group"
+"Spine Surgery - Search",123456789,,,"-lawsuit","EXACT","Campaign"
+"Spine Surgery - Search",123456789,,,"-attorney","PHRASE","Campaign"
+"Spine Surgery - Search",123456789,,,"-lawyer","BROAD","Campaign"
+"Orthopedic Services",123456790,"Knee Replacement",987654323,"arthroscopy","EXACT","Ad group"
+"Orthopedic Services",123456790,"Knee Replacement",987654323,"physical therapy","PHRASE","Ad group"
+"Orthopedic Services",123456790,,,"-jobs","EXACT","Campaign"
+"Orthopedic Services",123456790,,,"-career","PHRASE","Campaign"

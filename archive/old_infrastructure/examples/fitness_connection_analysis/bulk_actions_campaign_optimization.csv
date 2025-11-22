@@ -1,0 +1,16 @@
+Action,Campaign,Campaign Type,Status,Budget,Budget Type,Bid Strategy Type,Target CPA,Location,Language,Network
+PAUSE,PP_FIT_VIDE_YouTube_CNS_000_Traffic_Nevada,Video,Paused,,,,,,,
+PAUSE,PP_FIT_VIDE_YouTube_CNS_000_Traffic_Morrow,Video,Paused,,,,,,,
+EDIT,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Search,Enabled,5000,Daily,Target CPA,35,Dallas TX,English,Google Search
+EDIT,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,Search,Enabled,3500,Daily,Target CPA,30,San Antonio TX,English,Google Search
+EDIT,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,Search,Enabled,3000,Daily,Target CPA,32,Atlanta GA,English,Google Search
+EDIT,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,Search,Enabled,4000,Daily,Target CPA,28,Fayetteville NC,English,Google Search
+EDIT,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaMorrow,Search,Enabled,3200,Daily,Target CPA,30,Atlanta GA,English,Google Search
+EDIT,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Houston,Search,Enabled,6000,Daily,Target CPA,33,Houston TX,English,Google Search
+EDIT,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioWestover,Search,Enabled,2800,Daily,Target CPA,28,San Antonio TX,English,Google Search
+EDIT,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioSouthPark,Search,Enabled,3200,Daily,Target CPA,30,San Antonio TX,English,Google Search
+CREATE,PP_FIT_PMAX_SanAntonio_StoreVisits,Performance Max,Enabled,4000,Daily,Maximize Conversions,,San Antonio TX,English,Google Search+Display+YouTube
+CREATE,PP_FIT_PMAX_Dallas_StoreVisits,Performance Max,Enabled,5000,Daily,Maximize Conversions,,Dallas TX,English,Google Search+Display+YouTube
+CREATE,PP_FIT_PMAX_Atlanta_StoreVisits,Performance Max,Enabled,4500,Daily,Maximize Conversions,,Atlanta GA,English,Google Search+Display+YouTube
+CREATE,PP_FIT_PMAX_Fayetteville_StoreVisits,Performance Max,Enabled,3500,Daily,Maximize Conversions,,Fayetteville NC,English,Google Search+Display+YouTube
+CREATE,PP_FIT_PMAX_Houston_StoreVisits,Performance Max,Enabled,5500,Daily,Maximize Conversions,,Houston TX,English,Google Search+Display+YouTube

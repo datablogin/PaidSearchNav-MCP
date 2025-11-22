@@ -1,0 +1,12 @@
+{
+  "analysis_id": "sample-analysis-123",
+  "customer_id": "609d41e7-a4a2-4ef3-9e16-0348af384563",
+  "s3_source": "s3://paidsearchnav-customer-data-dev/ret/fitness-connection_2879C12F-C38/inputs/Search keyword report (1).csv",
+  "status": "parsing_failed_but_would_work_with_proper_format",
+  "total_records": 0,
+  "sample_insights": {
+    "message": "S3 integration working - file downloaded successfully",
+    "file_size_bytes": 677383,
+    "would_analyze": "3000+ keywords if format was compatible"
+  }
+}

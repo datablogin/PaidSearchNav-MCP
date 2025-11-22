@@ -1,0 +1,53 @@
+{
+  "client_name": "TopGolf",
+  "customer_id": "577-746-1198",
+  "bigquery": {
+    "enabled": true,
+    "tier": "enterprise",
+    "project_id": "topgolf-460202",
+    "dataset_id": "topgolf_production",
+    "location": "US",
+    "use_default_credentials": false,
+    "service_account_path": null,
+    "service_account_json": null,
+    "daily_cost_limit_usd": 100.0,
+    "cost_alert_threshold_usd": 80.0,
+    "max_query_bytes": 1073741824,
+    "query_timeout_seconds": 300,
+    "enable_query_cache": true,
+    "cache_ttl_seconds": 3600,
+    "streaming_insert_batch_size": 1000,
+    "enable_ml_models": true,
+    "enable_real_time_streaming": true
+  },
+  "google_ads": {
+    "customer_id": "577-746-1198",
+    "login_customer_id": null,
+    "api_version": "v20",
+    "default_page_size": 1000,
+    "max_page_size": 10000
+  },
+  "ga4": {
+    "enabled": true,
+    "property_id": "354237306",
+    "use_application_default_credentials": true,
+    "enable_rate_limiting": true,
+    "_rate_limit_notes": "Conservative limits for enterprise tier: 60/min = 1 req/sec, allows 24/7 operation within daily quota",
+    "requests_per_minute": 60,
+    "requests_per_hour": 3600,
+    "requests_per_day": 86400,
+    "enable_cost_monitoring": true,
+    "daily_cost_limit_usd": 50.0,
+    "cost_alert_threshold_usd": 40.0,
+    "average_cpa_usd": 75.0,
+    "cache_ttl_seconds": 300,
+    "enable_realtime_data": true,
+    "max_data_lag_hours": 2
+  },
+  "business_context": {
+    "industry": "Entertainment/Recreation",
+    "locations": "Multi-location franchise",
+    "primary_goals": ["drive_store_visits", "membership_signups"],
+    "local_intent_keywords": ["near me", "nearby", "topgolf", "driving range"]
+  }
+}

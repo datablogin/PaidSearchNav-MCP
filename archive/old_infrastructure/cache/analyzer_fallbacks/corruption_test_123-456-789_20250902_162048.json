@@ -1,0 +1,17 @@
+{
+  "execution_metadata": {
+    "correlation_id": "a2096543-637c-44a5-869d-34aa9508493b",
+    "analyzer": "Corruption Test",
+    "customer_id": "123-456-789",
+    "start_date": "2025-01-01T00:00:00",
+    "end_date": "2025-01-31T00:00:00",
+    "timestamp": "2025-09-02T16:20:48.055043",
+    "success": true
+  },
+  "analysis_metadata": {
+    "analysis_type": "test",
+    "analyzer_name": "Corruption Test",
+    "recommendations_count": 1
+  },
+  "metrics": {
+    "created_at": 

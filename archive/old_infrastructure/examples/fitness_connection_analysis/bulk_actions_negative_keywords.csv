@@ -1,0 +1,91 @@
+Action,Campaign,Ad Group,Keyword,Match Type,Status,Level
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[free],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[cheap],Broad,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[jobs],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[careers],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[application],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[employment],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[hiring],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[reviews],Broad,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[complaints],Broad,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[hours],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[phone number],Phrase,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[address],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[directions],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[cancel membership],Phrase,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[cancel],Broad,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[refund],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[lawsuit],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[scam],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[fraud],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[kids],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[children],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[seniors],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[elderly],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[home gym],Phrase,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[equipment],Broad,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[weights],Broad,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,,[machines],Broad,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,,[free],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,,[cheap],Broad,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,,[jobs],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,,[careers],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,,[application],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,,[employment],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,,[hiring],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,,[reviews],Broad,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,,[complaints],Broad,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,,[hours],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,,[phone number],Phrase,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,,[address],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,,[directions],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,,[cancel membership],Phrase,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,,[cancel],Broad,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,,[refund],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,,[lawsuit],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,,[scam],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,,[fraud],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,,[home gym],Phrase,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,,[equipment],Broad,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,,[free],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,,[cheap],Broad,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,,[jobs],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,,[careers],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,,[application],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,,[employment],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,,[hiring],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,,[reviews],Broad,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,,[complaints],Broad,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,,[hours],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,,[phone number],Phrase,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,,[address],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,,[directions],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,,[cancel membership],Phrase,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,,[cancel],Broad,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,,[refund],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,,[lawsuit],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,,[scam],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,,[fraud],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,,[home gym],Phrase,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,,[equipment],Broad,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,,[free],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,,[cheap],Broad,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,,[jobs],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,,[careers],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,,[application],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,,[employment],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,,[hiring],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,,[reviews],Broad,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,,[complaints],Broad,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,,[hours],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,,[phone number],Phrase,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,,[address],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,,[directions],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,,[cancel membership],Phrase,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,,[cancel],Broad,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,,[refund],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,,[lawsuit],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,,[scam],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,,[fraud],Exact,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,,[home gym],Phrase,Enabled,Campaign
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,,[equipment],Broad,Enabled,Campaign

@@ -1,0 +1,8 @@
+include README.md
+include LICENSE
+recursive-include paidsearchnav *.py
+recursive-include translations *.po *.pot *.mo
+recursive-include paidsearchnav/templates *.html *.jinja2
+recursive-include paidsearchnav/static *
+global-exclude __pycache__
+global-exclude *.py[co]

@@ -1,0 +1,30 @@
+Row Type,Action,Ad group status,Campaign ID,Campaign,Ad group ID,Ad group,Ad group type,Ad rotation,Default max. CPC,CPC%,Max. CPM,Max. CPV,Target CPA,Target CPM,Target CPV,Label,Tracking template,Final URL suffix,Custom parameter,Target ROAS
+"# Optional.
+Supported values: Ad group","Optional.
+Supported values: Add; Edit; Remove","Optional.
+Supported values: Enabled; Paused; Removed","Optional.
+Example(s): 1234","Required.
+Example(s): Shoe campaign","Optional.
+Example(s): 1234","Required.
+Example(s): Shoe ad group","Optional.
+The value cannot be edited after creation.
+Supported values: Standard; Dynamic; Display; Display engagement; Shopping - Product; Shopping - Showcase; Shopping - Smart; In-stream; In-feed video; Bumper; Non-skippable; Hotel; Hotels - Property promotion; Efficient reach; Responsive video ad","Optional.
+Supported values: Optimize; Do not optimize
+Supports remove_value","Optional.
+Example(s): 12.34","Optional.
+Example(s): 12.3%","Optional.
+Example(s): 12.34","Optional.
+Example(s): 12.34","Optional.
+Example(s): 12.34","Optional.
+Example(s): 12.34","Optional.
+Example(s): 12.34","Optional.
+Example(s): label 1; label 2; label 3 [123-456-7890]
+Supports remove_value","Optional.
+Example(s): http://www.abc.com/tracking?param1=create&url={lpurl}
+Supports remove_value","Optional.
+Example(s): x=y
+Supports remove_value","Optional.
+Example(s): {_color}=red ; {_bg}=blue
+Supports remove_value","Optional.
+Example(s): 12%
+Supports remove_value"

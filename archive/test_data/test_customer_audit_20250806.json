@@ -1,0 +1,41 @@
+{
+  "customer_id": "1234567890",
+  "customer_name": "Test Customer",
+  "audit_date": "2025-08-06T23:00:52.353970",
+  "campaigns": [
+    {
+      "id": "123",
+      "name": "Test Campaign",
+      "status": "ENABLED",
+      "type": "SEARCH",
+      "impressions": 1000,
+      "clicks": 50,
+      "cost": 100.0,
+      "conversions": 5
+    }
+  ],
+  "ad_groups": [],
+  "keywords": [
+    {
+      "campaign_id": "123",
+      "campaign_name": "Test Campaign",
+      "ad_group_id": "456",
+      "ad_group_name": "Test Ad Group",
+      "keyword_id": "789",
+      "keyword_text": "test keyword",
+      "match_type": "EXACT",
+      "status": "ENABLED",
+      "impressions": 100,
+      "clicks": 5,
+      "cost": 10.0
+    }
+  ],
+  "search_terms": [],
+  "recommendations": [],
+  "customer_info": {
+    "id": "1234567890",
+    "name": "Test Customer",
+    "currency": "USD",
+    "timezone": "America/New_York"
+  }
+}

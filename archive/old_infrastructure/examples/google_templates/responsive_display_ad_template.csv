@@ -1,0 +1,66 @@
+"# Assets can be shown in any order, so make sure that they make sense individually or in combination, and don’t violate our policies or local law."
+Row Type,Action,Ad status,Customer ID,Campaign ID,Campaign,Ad group ID,Ad group,Ad ID,Ad type,Label,Headline,Headline 2,Headline 3,Headline 4,Headline 5,Long headline,Description,Description 2,Description 3,Description 4,Description 5,Image ID,Square image ID,Logo ID,Landscape logo ID,Video ID,Business name,Call to action text,Accent color,Main color,Allow flexible color,Ad format preference,Promotion text,Price prefix,Final URL,Mobile final URL,Tracking template,Final URL suffix,Custom parameter
+"# Optional.
+Supported values: Ad","Optional.
+Supported values: Add; Edit; Remove","Optional.
+Supported values: Enabled; Paused; Removed","Optional.
+Example(s): 123-456-7890","Optional.
+Example(s): 1234","Required.
+Example(s): Shoe campaign","Optional.
+Example(s): 1234","Required.
+Example(s): Shoe ad group","Required on edit.
+Example(s): 1234","Required on create.
+Supported values: Responsive display ad","Optional.
+Example(s): label 1; label 2; label 3 [123-456-7890]
+Supports remove_value","Required on create.
+Example(s): headline","Optional.
+Example(s): headline 2
+Supports remove_value","Optional.
+Example(s): headline 3
+Supports remove_value","Optional.
+Example(s): headline 4
+Supports remove_value","Optional.
+Example(s): headline 5
+Supports remove_value","Required on create.
+Example(s): long headline","Required on create.
+Example(s): description","Optional.
+Example(s): description 2
+Supports remove_value","Optional.
+Example(s): description 3
+Supports remove_value","Optional.
+Example(s): description 4
+Supports remove_value","Optional.
+Example(s): description 5
+Supports remove_value","Required on create.
+Example(s): 12345L; https://google.com/image1","Required on create.
+Example(s): 12345L; https://google.com/image1","Optional.
+Example(s): 12345L; https://google.com/image1
+Supports remove_value","Optional.
+Example(s): 12345L; https://google.com/image1
+Supports remove_value","Optional.
+Example(s): 12345; https://www.youtube.com/watch?v=6FMYrlkpG3Y
+Supports remove_value","Required on create.
+Example(s): My business","Optional.
+Example(s): Contact Us
+Supports remove_value","Optional.
+Example(s): #4285f4
+Supports remove_value","Optional.
+Example(s): #ffffff
+Supports remove_value","Optional.
+Supported values: true; false
+Supports remove_value","Optional.
+Supported values: All formats; None native; Native
+Supports remove_value","Optional.
+Example(s): Great Deal
+Supports remove_value","Optional.
+Example(s): $
+Supports remove_value","Required on create.
+Example(s): http://www.example.com ; https://www.example.org","Optional.
+Example(s): http://m.example.com ; https://m.example.org
+Supports remove_value","Optional.
+Example(s): http://www.abc.com/tracking?param1=create&url={lpurl}
+Supports remove_value","Optional.
+Example(s): x=y
+Supports remove_value","Optional.
+Example(s): {_color}=red ; {_bg}=blue
+Supports remove_value"

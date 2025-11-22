@@ -1,0 +1,47 @@
+name: Claude Code Assist
+
+on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'Issue number to work on'
+        required: true
+        type: number
+      action:
+        description: 'Action to perform'
+        required: true
+        type: choice
+        options:
+          - start-issue
+          - fix-ci
+          - implement-review
+
+jobs:
+  claude-assist:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Setup Claude Code
+      run: |
+        # Install Claude Code CLI
+        curl -fsSL https://storage.googleapis.com/claude-code-public/install.sh | sh
+    
+    - name: Run Claude Code
+      env:
+        ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      run: |
+        case "${{ inputs.action }}" in
+          start-issue)
+            claude-code . --prompt "Work on issue #${{ inputs.issue_number }}. Create feature branch, implement requirements, and create PR."
+            ;;
+          fix-ci)
+            claude-code . --prompt "Fix failing CI tests and linting issues in the current PR."
+            ;;
+          implement-review)
+            claude-code . --prompt "Implement all Claude review feedback comments in the current PR."
+            ;;
+        esac

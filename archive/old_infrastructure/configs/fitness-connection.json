@@ -1,0 +1,53 @@
+{
+  "client_name": "Fitness Connection",
+  "customer_id": "987-654-3210",
+  "bigquery": {
+    "enabled": true,
+    "tier": "premium",
+    "project_id": "fitness-connection-469620",
+    "dataset_id": "fitness_production",
+    "location": "US",
+    "use_default_credentials": false,
+    "service_account_path": null,
+    "service_account_json": null,
+    "daily_cost_limit_usd": 50.0,
+    "cost_alert_threshold_usd": 40.0,
+    "max_query_bytes": 1073741824,
+    "query_timeout_seconds": 180,
+    "enable_query_cache": true,
+    "cache_ttl_seconds": 1800,
+    "streaming_insert_batch_size": 500,
+    "enable_ml_models": false,
+    "enable_real_time_streaming": true
+  },
+  "google_ads": {
+    "customer_id": "987-654-3210",
+    "login_customer_id": null,
+    "api_version": "v20",
+    "default_page_size": 1000,
+    "max_page_size": 5000
+  },
+  "ga4": {
+    "enabled": true,
+    "property_id": "327208946",
+    "use_application_default_credentials": true,
+    "enable_rate_limiting": true,
+    "_rate_limit_notes": "Standard limits for premium tier: 60/min = 1 req/sec, optimized for gym chain's multi-location needs",
+    "requests_per_minute": 60,
+    "requests_per_hour": 3600,
+    "requests_per_day": 86400,
+    "enable_cost_monitoring": true,
+    "daily_cost_limit_usd": 30.0,
+    "cost_alert_threshold_usd": 25.0,
+    "average_cpa_usd": 45.0,
+    "cache_ttl_seconds": 300,
+    "enable_realtime_data": true,
+    "max_data_lag_hours": 2
+  },
+  "business_context": {
+    "industry": "Health/Fitness",
+    "locations": "Multi-location gym chain",
+    "primary_goals": ["membership_signups", "trial_visits"],
+    "local_intent_keywords": ["gym near me", "fitness center", "personal training"]
+  }
+}

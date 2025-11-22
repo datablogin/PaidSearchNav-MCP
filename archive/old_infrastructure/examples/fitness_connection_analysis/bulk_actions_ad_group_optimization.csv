@@ -1,0 +1,27 @@
+Action,Campaign,Ad Group,Status,Default Max CPC,Landing Page,Device Bid Adjustment Mobile,Device Bid Adjustment Desktop,Device Bid Adjustment Tablet
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Fitness Connection Dallas,Enabled,2.50,https://fitnessconnection.com/gyms/red-bird-lane,+20%,0%,-10%
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,Fitness Connection San Antonio Blanco,Enabled,2.25,https://fitnessconnection.com/gyms/blanco-west,+20%,0%,-10%
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,Fitness Connection Atlanta Stone Mountain,Enabled,2.40,https://fitnessconnection.com/gyms/stone-mountain,+20%,0%,-10%
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,Fitness Connection Fayetteville,Enabled,2.20,https://fitnessconnection.com/gyms/fayetteville,+20%,0%,-10%
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaMorrow,Fitness Connection Atlanta Morrow,Enabled,2.30,https://fitnessconnection.com/gyms/morrow,+20%,0%,-10%
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Houston,Fitness Connection Houston,Enabled,2.60,https://fitnessconnection.com/gyms/houston,+20%,0%,-10%
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioWestover,Fitness Connection San Antonio Westover,Enabled,2.25,https://fitnessconnection.com/gyms/westover,+20%,0%,-10%
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioSouthPark,Fitness Connection San Antonio South Park,Enabled,2.30,https://fitnessconnection.com/gyms/south-park-mall,+20%,0%,-10%
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Personal Training Dallas,Enabled,3.50,https://fitnessconnection.com/gyms/red-bird-lane#personal-training,+25%,0%,-15%
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,Personal Training San Antonio,Enabled,3.25,https://fitnessconnection.com/gyms/blanco-west#personal-training,+25%,0%,-15%
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,Personal Training Atlanta,Enabled,3.40,https://fitnessconnection.com/gyms/stone-mountain#personal-training,+25%,0%,-15%
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,Personal Training Fayetteville,Enabled,3.20,https://fitnessconnection.com/gyms/fayetteville#personal-training,+25%,0%,-15%
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Group Classes Dallas,Enabled,2.80,https://fitnessconnection.com/gyms/red-bird-lane#classes,+15%,0%,-10%
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,Group Classes San Antonio,Enabled,2.55,https://fitnessconnection.com/gyms/blanco-west#classes,+15%,0%,-10%
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,Group Classes Atlanta,Enabled,2.70,https://fitnessconnection.com/gyms/stone-mountain#classes,+15%,0%,-10%
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,Group Classes Fayetteville,Enabled,2.50,https://fitnessconnection.com/gyms/fayetteville#classes,+15%,0%,-10%
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Membership Dallas,Enabled,2.20,https://fitnessconnection.com/gyms/red-bird-lane#membership,+20%,0%,-10%
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,Membership San Antonio,Enabled,1.95,https://fitnessconnection.com/gyms/blanco-west#membership,+20%,0%,-10%
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,Membership Atlanta,Enabled,2.10,https://fitnessconnection.com/gyms/stone-mountain#membership,+20%,0%,-10%
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,Membership Fayetteville,Enabled,1.90,https://fitnessconnection.com/gyms/fayetteville#membership,+20%,0%,-10%
+PAUSE,PP_FIT_SRCH_Google_CON_GEN_General_SanAntonioBlanco,General_Gyms_Personal Training,Paused,,,,,
+PAUSE,PP_FIT_SRCH_Google_CON_GEN_General_SanAntonioBlanco,General_Gyms_Group Cycle,Paused,,,,,
+PAUSE,PP_FIT_SRCH_Google_CON_GEN_General_SanAntonioBlanco,General_Gyms_Womens Area,Paused,,,,,
+EDIT,PP_FIT_SRCH_Google_CON_GEN_General_SanAntonioBlanco,General_Gyms,Enabled,2.80,https://fitnessconnection.com/gyms/blanco-west,+20%,0%,-10%
+EDIT,PP_FIT_SRCH_Google_CON_GEN_General_SanAntonioBlanco,General_Gyms_Childcare,Enabled,3.20,https://fitnessconnection.com/gyms/blanco-west#childcare,+25%,0%,-15%
+EDIT,PP_FIT_SRCH_Google_CON_GEN_General_SanAntonioBlanco,General_Gyms_Location,Enabled,2.60,https://fitnessconnection.com/gyms/blanco-west,+20%,0%,-10%

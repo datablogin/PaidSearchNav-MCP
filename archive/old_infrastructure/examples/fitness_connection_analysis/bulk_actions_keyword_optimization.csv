@@ -1,0 +1,31 @@
+Action,Campaign,Ad Group,Keyword,Match Type,Max CPC,Landing Page,Status,First Page Bid Estimate,Top of Page Bid Estimate
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Fitness Connection Dallas,[fitness connection dallas],Exact,2.50,https://fitnessconnection.com/gyms/red-bird-lane,Enabled,1.80,2.20
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Fitness Connection Dallas,"fitness connection dallas",Phrase,2.00,https://fitnessconnection.com/gyms/red-bird-lane,Enabled,1.50,1.90
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Fitness Connection Dallas,[fitness connection red bird],Exact,2.60,https://fitnessconnection.com/gyms/red-bird-lane,Enabled,1.90,2.30
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Fitness Connection Dallas,[gym dallas],Exact,3.20,https://fitnessconnection.com/gyms/red-bird-lane,Enabled,2.40,2.80
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Fitness Connection Dallas,"gym near me dallas",Phrase,2.80,https://fitnessconnection.com/gyms/red-bird-lane,Enabled,2.10,2.50
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,Fitness Connection San Antonio Blanco,[fitness connection san antonio],Exact,2.25,https://fitnessconnection.com/gyms/blanco-west,Enabled,1.70,2.10
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,Fitness Connection San Antonio Blanco,"fitness connection blanco",Phrase,2.10,https://fitnessconnection.com/gyms/blanco-west,Enabled,1.60,2.00
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,Fitness Connection San Antonio Blanco,[gym san antonio],Exact,2.90,https://fitnessconnection.com/gyms/blanco-west,Enabled,2.20,2.60
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,Fitness Connection San Antonio Blanco,"gym near me san antonio",Phrase,2.60,https://fitnessconnection.com/gyms/blanco-west,Enabled,2.00,2.40
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,Fitness Connection Atlanta Stone Mountain,[fitness connection atlanta],Exact,2.40,https://fitnessconnection.com/gyms/stone-mountain,Enabled,1.80,2.20
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,Fitness Connection Atlanta Stone Mountain,"fitness connection stone mountain",Phrase,2.20,https://fitnessconnection.com/gyms/stone-mountain,Enabled,1.70,2.10
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,Fitness Connection Atlanta Stone Mountain,[gym atlanta],Exact,3.10,https://fitnessconnection.com/gyms/stone-mountain,Enabled,2.30,2.70
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,Fitness Connection Atlanta Stone Mountain,"gym near me atlanta",Phrase,2.70,https://fitnessconnection.com/gyms/stone-mountain,Enabled,2.10,2.50
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,Fitness Connection Fayetteville,[fitness connection fayetteville],Exact,2.20,https://fitnessconnection.com/gyms/fayetteville,Enabled,1.60,2.00
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,Fitness Connection Fayetteville,"fitness connection nc",Phrase,2.00,https://fitnessconnection.com/gyms/fayetteville,Enabled,1.50,1.90
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,Fitness Connection Fayetteville,[gym fayetteville nc],Exact,2.80,https://fitnessconnection.com/gyms/fayetteville,Enabled,2.10,2.50
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,Fitness Connection Fayetteville,"gym near me fayetteville",Phrase,2.50,https://fitnessconnection.com/gyms/fayetteville,Enabled,1.90,2.30
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Personal Training Dallas,[personal trainer dallas],Exact,3.50,https://fitnessconnection.com/gyms/red-bird-lane#personal-training,Enabled,2.80,3.20
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Personal Training Dallas,"personal training near me dallas",Phrase,3.20,https://fitnessconnection.com/gyms/red-bird-lane#personal-training,Enabled,2.50,2.90
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Personal Training Dallas,[fitness connection personal training],Exact,3.00,https://fitnessconnection.com/gyms/red-bird-lane#personal-training,Enabled,2.30,2.70
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,Personal Training San Antonio,[personal trainer san antonio],Exact,3.25,https://fitnessconnection.com/gyms/blanco-west#personal-training,Enabled,2.60,3.00
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_SanAntonioBlanco,Personal Training San Antonio,"personal training near me san antonio",Phrase,2.95,https://fitnessconnection.com/gyms/blanco-west#personal-training,Enabled,2.30,2.70
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Group Classes Dallas,[group fitness classes dallas],Exact,2.80,https://fitnessconnection.com/gyms/red-bird-lane#classes,Enabled,2.20,2.60
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Group Classes Dallas,"fitness classes near me dallas",Phrase,2.50,https://fitnessconnection.com/gyms/red-bird-lane#classes,Enabled,2.00,2.40
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Group Classes Dallas,[spinning classes dallas],Exact,3.00,https://fitnessconnection.com/gyms/red-bird-lane#classes,Enabled,2.40,2.80
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Group Classes Dallas,[yoga classes dallas],Exact,2.70,https://fitnessconnection.com/gyms/red-bird-lane#classes,Enabled,2.10,2.50
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Membership Dallas,[gym membership dallas],Exact,2.20,https://fitnessconnection.com/gyms/red-bird-lane#membership,Enabled,1.70,2.10
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Membership Dallas,"cheap gym membership dallas",Phrase,2.40,https://fitnessconnection.com/gyms/red-bird-lane#membership,Enabled,1.90,2.30
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Membership Dallas,[fitness connection membership],Exact,1.90,https://fitnessconnection.com/gyms/red-bird-lane#membership,Enabled,1.40,1.80
+CREATE,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Membership Dallas,"no contract gym dallas",Phrase,2.60,https://fitnessconnection.com/gyms/red-bird-lane#membership,Enabled,2.00,2.40

@@ -1,0 +1,52 @@
+Row Type,Action,Campaign status,Campaign ID,Campaign,Campaign type,Networks,Budget,Delivery method,Budget type,Bid strategy type,Bid strategy,Campaign start date,Campaign end date,Language,Location,Exclusion,Devices,Label,Target CPA,Target ROAS,Display URL option,Website description,Target Impression Share,Max CPC Bid Limit for Target IS,Location Goal for Target IS,Tracking template,Final URL suffix,Custom parameter,Inventory type,Campaign subtype,Video ad formats
+"# Optional.
+Supported values: Campaign","Optional.
+Supported values: Add; Edit; Remove","Optional.
+Supported values: Enabled; Paused; Removed","Optional.
+Example(s): 1234","Required.
+Example(s): Shoe campaign","Required on create.
+Supported values (Add): Search; Display; Video
+Supported values (Edit): Unknown; Search; Display; Shopping; Video; App; Smart; Hotel; Demand Gen; Performance Max","Optional.
+Supported values: Google search; Search partners; Display Network; Google TV; YouTube videos","Required on create.
+Example(s): 10.00","Optional.
+Supported values: Standard","Optional.
+Supported values: Daily; Campaign Total; Monthly","Optional.
+Supported values (Add): CPC (enhanced); Manual CPC; cpc; Viewable CPM; cpm; CPA (target); Maximize clicks; Target ROAS; Target CPA; Maximize Conversions; Maximize Conversion Value; Target CPC; Target CPM; CPC%; Target Impression Share; Commission; Invalid; Target Position; Share of voice; Target CPV; Fixed CPM
+Supported values (Edit): CPC (enhanced); Manual CPC; cpc; Viewable CPM; cpm; Enhanced CPC; CPA (target); Target search page location; Maximize clicks; Target ROAS; Target CPA; Maximize Conversions; Maximize Conversion Value; Target Outranking Share; Target CPC; Target CPM; CPC%; Target Impression Share; Commission; Invalid; Target Position; Share of voice; Target CPV; Fixed CPM","Optional.
+Portfolio bid strategy name, if applicable.
+Example(s): my bid strategy
+Supports remove_value","Optional.
+Example(s): 2024-02-29","Optional.
+Example(s): 2024-05-31","Optional.
+Example(s): en; zh_hk:excluded","Optional.
+Example(s): 20 | mi | Seattle, Washington, United States : -5% ; Taipei City, Taiwan : +10% ; Montréal, Québec, Canada ; 600 | km | Redmond, Washington, United States:removed
+Supports remove_value","Optional.
+Example(s): 20 | mi | Seattle, Washington, United States ; Taipei City, Taiwan ; Montréal, Québec, Canada ; 600 | km | Redmond, Washington, United States:removed
+Supports remove_value","Optional.
+Example(s): Computers:+10%; Mobile devices with full browsers:-5%; Tablets with full browsers:+15%","Optional.
+Example(s): label 1; label 2; label 3 [123-456-7890]
+Supports remove_value","Optional.
+Example(s): 10.00
+Supports remove_value","Optional.
+Example(s): 12%
+Supports remove_value","Optional.
+Required for creating Search campaigns in Google Ads Pharmaceutical Accounts.
+Supported values: Ad Display URL; Website Description","Optional.
+Supported values: Prescription treatment website; Prescription treatment website (Spanish); Prescription device website; Prescription device website (Spanish); Medical device website; Medical device website (Spanish); Preventative treatment website; Preventative treatment website (Spanish); Prescription contraception website; Prescription contraception website (Spanish); Prescription vaccine website; Prescription vaccine website (Spanish); Prescription product website; Prescription product website (Spanish)
+Supports remove_value","Optional.
+Example(s): 15%
+Supports remove_value","Optional.
+Example(s): 10.00
+Supports remove_value","Optional.
+Supported values: Anywhere on results page; Top of results page; Absolute top of results page
+Supports remove_value","Optional.
+Example(s): http://www.abc.com/tracking?param1=create&url={lpurl}
+Supports remove_value","Optional.
+Example(s): x=y
+Supports remove_value","Optional.
+Example(s): {_color}=red ; {_bg}=blue
+Supports remove_value","Optional.
+Supported values: Expanded inventory; Standard inventory; Limited inventory","Optional.
+Supported values: Non-skippable; Drive conversions; Standard","Optional.
+A list of formats separated by semicolons.
+Supported values: In-stream; In-feed; Shorts"

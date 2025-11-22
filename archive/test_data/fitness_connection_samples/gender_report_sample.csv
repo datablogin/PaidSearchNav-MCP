@@ -1,0 +1,20 @@
+Gender report
+"May 18, 2025 - August 15, 2025"
+Demographic status,Gender,Campaign,Ad group,Status,Bid adj.,Currency code,Avg. CPM,Impr.,Interactions,Interaction rate,Avg. cost,Cost,Conv. rate,Conversions,Cost / conv.
+Removed,Unknown,PP_FIT_VIDE_YouTube_CNS_000_Traffic_Nevada,Promo Ads,Excluded from ad group, --,USD,0,0,0, --,0,0.00,0.00%,0.00,0.00
+Enabled,Female,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,Term Only_Exact,Eligible, --,USD,89.63,"2,852",566,19.85%,0.45,255.62,7.77%,44.00,5.81
+Enabled,Male,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,Term Only_Exact,Eligible, --,USD,87.64,"2,668",585,21.93%,0.40,233.82,6.28%,36.73,6.37
+Enabled,Male,PP_FIT_VIDE_YouTube_CNS_000_Traffic_Nevada,Promo Ads,Eligible, --,USD,33.47,"21,893","4,405",20.12%,0.17,732.67,0.05%,2.00,366.34
+Removed,Female,PP_FIT_VIDE_YouTube_CNS_000_Traffic_Nevada,Promo Ads,Excluded from ad group, --,USD,0,0,0, --,0,0.00,0.00%,0.00,0.00
+Enabled,Unknown,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Term Only_Exact,Eligible, --,USD,60.85,"35,643","5,058",14.19%,0.43,2168.95,6.29%,318.39,6.81
+Enabled,Unknown,PP_FIT_SRCH_Google_CON_BRN_TermOnly_NCFayetteville,Term Only_Exact,Eligible, --,USD,66.10,"1,892",274,14.48%,0.46,125.06,4.01%,11.00,11.37
+Enabled,Male,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Term Only_Exact,Eligible, --,USD,83.07,"36,809","6,930",18.83%,0.44,3057.72,8.23%,570.13,5.36
+Enabled,Female,PP_FIT_SRCH_Google_CON_BRN_TermOnly_Dallas,Term Only_Exact,Eligible, --,USD,86.88,"39,617","7,650",19.31%,0.45,3441.75,8.33%,637.13,5.40
+Enabled,Male,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaMorrow,Term Only_Exact,Eligible, --,USD,89.49,"2,506",541,21.59%,0.41,224.27,6.10%,33.00,6.80
+Enabled,Female,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaMorrow,Term Only_Exact,Eligible, --,USD,89.75,"2,622",544,20.75%,0.43,235.32,6.95%,37.83,6.22
+Enabled,Unknown,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,Term Only_Exact,Eligible, --,USD,54.60,"1,313",145,11.04%,0.49,71.68,6.89%,9.99,7.17
+Enabled,Female,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,Term Only_Exact,Eligible, --,USD,80.42,"1,981",328,16.56%,0.49,159.31,5.79%,19.00,8.38
+Enabled,Male,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaStoneMountain,Term Only_Exact,Eligible, --,USD,83.59,"1,618",306,18.91%,0.44,135.24,6.48%,19.83,6.82
+Enabled,Unknown,PP_FIT_SRCH_Google_CON_BRN_TermOnly_AtlantaMorrow,Term Only_Exact,Eligible, --,USD,61.10,"1,774",242,13.64%,0.45,108.39,4.13%,10.00,10.84
+Enabled,Male,PP_FIT_SRCH_Google_CON_GEN_General_NCRaleigh,General_Gyms_Membership,Eligible, --,USD,223.24,"1,031",66,6.40%,3.49,230.16,4.55%,3.00,76.72
+Enabled,Female,PP_FIT_SRCH_Google_CON_GEN_General_SanAntonioWestover,General_Gyms_Group Cycle,Eligible, --,USD,164.71,17,2,11.76%,1.40,2.80,0.00%,0.00,0.00

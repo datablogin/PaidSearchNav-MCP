@@ -1,0 +1,140 @@
+{
+  "success": false,
+  "warnings": [
+    "DevicePerformanceAnalyzer failed: DevicePerformanceAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'",
+    "DemographicsAnalyzer failed: DemographicsAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'",
+    "NegativeConflictAnalyzer failed: NegativeConflictAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'",
+    "LandingPageAnalyzer failed: LandingPageAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'",
+    "DaypartingAnalyzer failed: DaypartingAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'",
+    "CompetitorInsightsAnalyzer failed: CompetitorInsightsAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'",
+    "AdGroupPerformanceAnalyzer failed: AdGroupPerformanceAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'",
+    "AdvancedBidAdjustmentAnalyzer failed: AdvancedBidAdjustmentAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'",
+    "VideoCreativeAnalyzer failed: VideoCreativeAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'",
+    "StorePerformanceAnalyzer failed: StorePerformanceAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'",
+    "LocalReachStoreAnalyzer failed: LocalReachStoreAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'",
+    "SharedNegativeValidatorAnalyzer failed: SharedNegativeValidatorAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'"
+  ],
+  "errors": [
+    "BigQuery test failed: 'bool' object is not callable"
+  ],
+  "test_results": {
+    "setup": {
+      "settings_loaded": true,
+      "credentials_available": true,
+      "bigquery_configured": true,
+      "bigquery_tier": "BigQueryTier.PREMIUM",
+      "env_variables": {
+        "PSN_GOOGLE_ADS_DEVELOPER_TOKEN": true,
+        "PSN_GOOGLE_ADS_CLIENT_ID": true,
+        "PSN_GOOGLE_ADS_CLIENT_SECRET": true
+      }
+    },
+    "bigquery": {
+      "error": "BigQuery test failed: 'bool' object is not callable"
+    },
+    "data_simulation": {
+      "search_terms_count": 3,
+      "keywords_count": 2,
+      "device_types": 3,
+      "total_spend": 148205.92,
+      "data_quality": "simulated_high_quality"
+    },
+    "analyzers": {
+      "total_analyzers": 12,
+      "successful_runs": 0,
+      "success_rate": "0.0%",
+      "details": {
+        "DevicePerformanceAnalyzer": {
+          "success": false,
+          "error": "DevicePerformanceAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'"
+        },
+        "DemographicsAnalyzer": {
+          "success": false,
+          "error": "DemographicsAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'"
+        },
+        "NegativeConflictAnalyzer": {
+          "success": false,
+          "error": "NegativeConflictAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'"
+        },
+        "LandingPageAnalyzer": {
+          "success": false,
+          "error": "LandingPageAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'"
+        },
+        "DaypartingAnalyzer": {
+          "success": false,
+          "error": "DaypartingAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'"
+        },
+        "CompetitorInsightsAnalyzer": {
+          "success": false,
+          "error": "CompetitorInsightsAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'"
+        },
+        "AdGroupPerformanceAnalyzer": {
+          "success": false,
+          "error": "AdGroupPerformanceAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'"
+        },
+        "AdvancedBidAdjustmentAnalyzer": {
+          "success": false,
+          "error": "AdvancedBidAdjustmentAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'"
+        },
+        "VideoCreativeAnalyzer": {
+          "success": false,
+          "error": "VideoCreativeAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'"
+        },
+        "StorePerformanceAnalyzer": {
+          "success": false,
+          "error": "StorePerformanceAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'"
+        },
+        "LocalReachStoreAnalyzer": {
+          "success": false,
+          "error": "LocalReachStoreAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'"
+        },
+        "SharedNegativeValidatorAnalyzer": {
+          "success": false,
+          "error": "SharedNegativeValidatorAnalyzer.analyze() missing 2 required positional arguments: 'start_date' and 'end_date'"
+        }
+      }
+    },
+    "storage": {
+      "schemas_tested": 5,
+      "schemas_valid": 5,
+      "storage_ready": true,
+      "details": {
+        "search_terms": {
+          "fields": 19,
+          "valid": true
+        },
+        "keywords": {
+          "fields": 21,
+          "valid": true
+        },
+        "device_performance": {
+          "fields": 20,
+          "valid": true
+        },
+        "demographics": {
+          "fields": 20,
+          "valid": true
+        },
+        "campaigns": {
+          "fields": 17,
+          "valid": true
+        }
+      }
+    },
+    "analytics": {
+      "device_insights": 3,
+      "keyword_recommendations": 2,
+      "negative_keyword_opportunities": 1,
+      "analytics_generated": true,
+      "insights_quality": "high"
+    },
+    "report": {
+      "report_generated": true,
+      "filename": "topgolf_quarterly_audit_20250821_172227.json",
+      "cost_savings": 496.13,
+      "revenue_opportunities": 2558.9,
+      "key_findings_count": 4,
+      "recommendations_count": 4
+    }
+  }
+}

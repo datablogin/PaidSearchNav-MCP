@@ -1,0 +1,41 @@
+{
+  "execution_metadata": {
+    "correlation_id": "f00f2b1e-f376-43b5-9b9f-f5ebc7f73366",
+    "analyzer": "Fast Analyzer",
+    "customer_id": "123-456-789",
+    "start_date": "2025-01-01T00:00:00",
+    "end_date": "2025-01-31T00:00:00",
+    "timestamp": "2025-09-02T16:33:05.585388",
+    "success": true
+  },
+  "analysis_metadata": {
+    "analysis_type": "test",
+    "analyzer_name": "Fast Analyzer",
+    "recommendations_count": 1
+  },
+  "metrics": {
+    "created_at": "2025-09-02T21:33:05.584488+00:00",
+    "updated_at": "2025-09-02T21:33:05.584489+00:00",
+    "total_keywords_analyzed": 100,
+    "total_search_terms_analyzed": 500,
+    "total_campaigns_analyzed": 0,
+    "issues_found": 1,
+    "critical_issues": 0,
+    "potential_cost_savings": 250.0,
+    "potential_conversion_increase": 5.0,
+    "custom_metrics": {}
+  },
+  "recommendations": [
+    {
+      "type": "OPTIMIZE_KEYWORDS",
+      "priority": "HIGH",
+      "title": "Test Recommendation",
+      "description": "This is a test recommendation from mock analyzer",
+      "action_data": {}
+    }
+  ],
+  "raw_data": {
+    "test_data": "mock_result"
+  },
+  "errors": [],
+  "created_at": 

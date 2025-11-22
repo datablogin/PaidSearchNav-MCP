@@ -1,0 +1,74 @@
+name: Unlock Terraform State
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to unlock'
+        required: true
+        default: 'prod'
+        type: choice
+        options:
+        - prod
+        - dev
+      lock_id:
+        description: 'Lock ID to force unlock (from error message)'
+        required: true
+        type: string
+
+env:
+  AWS_REGION: us-east-1
+
+jobs:
+  unlock:
+    name: Force Unlock Terraform State
+    runs-on: ubuntu-latest
+    environment: 
+      name: ${{ github.event.inputs.environment }}
+      
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v5
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.6.0
+
+    - name: Force Unlock Terraform State
+      env:
+        ENVIRONMENT: ${{ github.event.inputs.environment }}
+        LOCK_ID: ${{ github.event.inputs.lock_id }}
+      run: |
+        cd infrastructure/terraform
+        
+        # Initialize Terraform
+        terraform init
+        terraform workspace select $ENVIRONMENT || terraform workspace new $ENVIRONMENT
+        
+        echo "🔓 Force unlocking Terraform state..."
+        echo "Environment: $ENVIRONMENT"
+        echo "Lock ID: $LOCK_ID"
+        
+        # Force unlock the state
+        terraform force-unlock -force "$LOCK_ID"
+        
+        echo "✅ Terraform state unlocked successfully!"
+        echo "You can now retry the deployment."
+
+    - name: Verify unlock
+      env:
+        ENVIRONMENT: ${{ github.event.inputs.environment }}
+      run: |
+        cd infrastructure/terraform
+        
+        # Quick plan to verify state is accessible
+        echo "🔍 Verifying state is accessible..."
+        terraform plan -lock-timeout=10s -detailed-exitcode || echo "State verification complete"
