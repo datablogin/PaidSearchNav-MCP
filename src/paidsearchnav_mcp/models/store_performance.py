@@ -5,8 +5,9 @@ from __future__ import annotations
 from enum import Enum
 from typing import List, Optional
 
-from paidsearchnav.core.models.analysis import AnalysisResult
 from pydantic import BaseModel, ConfigDict, computed_field, field_validator
+
+from paidsearchnav_mcp.core.models.analysis import AnalysisResult
 
 
 class StoreIssueType(Enum):
@@ -65,7 +66,7 @@ class StoreMetrics(BaseModel):
     @classmethod
     def clean_and_validate_metrics(cls, v) -> int:
         """Clean numeric values and validate that metrics are non-negative."""
-        from paidsearchnav.utils.csv_parsing import clean_numeric_value
+        from paidsearchnav_mcp.utils.csv_parsing import clean_numeric_value
 
         cleaned = clean_numeric_value(v)
         value = int(cleaned) if cleaned is not None else 0

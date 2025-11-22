@@ -9,7 +9,7 @@ import re
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
-from paidsearchnav.platforms.google.client import GoogleAdsClient
+from paidsearchnav_mcp.platforms.google.client import GoogleAdsClient
 
 from .base import ScriptBase, ScriptConfig, ScriptResult, ScriptStatus, ScriptType
 from .quarterly_data_extraction import (

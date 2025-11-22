@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Any, Dict, List, Optional
 
-from paidsearchnav.platforms.google.client import GoogleAdsClient
+from paidsearchnav_mcp.platforms.google.client import GoogleAdsClient
 
 from .base import ScriptBase, ScriptConfig, ScriptResult, ScriptStatus, ScriptType
 from .local_intent_optimization import StoreLocation

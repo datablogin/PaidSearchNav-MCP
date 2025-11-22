@@ -3,8 +3,9 @@
 from datetime import datetime
 from enum import Enum
 
-from paidsearchnav.core.models.base import BasePSNModel
 from pydantic import Field
+
+from paidsearchnav_mcp.core.models.base import BasePSNModel
 
 
 class AccountType(str, Enum):

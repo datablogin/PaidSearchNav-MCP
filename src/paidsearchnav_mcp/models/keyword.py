@@ -3,8 +3,9 @@
 from enum import Enum
 from typing import Any
 
-from paidsearchnav.core.models.base import BasePSNModel
 from pydantic import Field, field_validator
+
+from paidsearchnav_mcp.core.models.base import BasePSNModel
 
 
 class KeywordMatchType(str, Enum):
@@ -82,7 +83,7 @@ class Keyword(BasePSNModel):
     @classmethod
     def clean_integer_fields(cls, v: Any) -> int:
         """Clean and validate integer metric fields."""
-        from paidsearchnav.utils.csv_parsing import clean_numeric_value
+        from paidsearchnav_mcp.utils.csv_parsing import clean_numeric_value
 
         cleaned = clean_numeric_value(v)
         return int(cleaned) if cleaned is not None else 0
@@ -91,7 +92,7 @@ class Keyword(BasePSNModel):
     @classmethod
     def clean_required_float_fields(cls, v: Any) -> float:
         """Clean and validate required float metric fields."""
-        from paidsearchnav.utils.csv_parsing import clean_numeric_value
+        from paidsearchnav_mcp.utils.csv_parsing import clean_numeric_value
 
         cleaned = clean_numeric_value(v)
         return float(cleaned) if cleaned is not None else 0.0
@@ -106,7 +107,7 @@ class Keyword(BasePSNModel):
     @classmethod
     def clean_optional_float_fields(cls, v: Any) -> float | None:
         """Clean and validate optional float metric fields."""
-        from paidsearchnav.utils.csv_parsing import clean_numeric_value
+        from paidsearchnav_mcp.utils.csv_parsing import clean_numeric_value
 
         cleaned = clean_numeric_value(v)
         return float(cleaned) if cleaned is not None else None
@@ -115,7 +116,7 @@ class Keyword(BasePSNModel):
     @classmethod
     def clean_quality_score(cls, v: Any) -> int | None:
         """Clean and validate quality score field."""
-        from paidsearchnav.utils.csv_parsing import clean_numeric_value
+        from paidsearchnav_mcp.utils.csv_parsing import clean_numeric_value
 
         cleaned = clean_numeric_value(v)
         if cleaned is not None:

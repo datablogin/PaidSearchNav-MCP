@@ -8,7 +8,7 @@ from datetime import datetime
 from enum import Enum
 from typing import Any, Dict, List, Optional, Tuple, TypedDict
 
-from paidsearchnav.platforms.google.client import GoogleAdsClient
+from paidsearchnav_mcp.platforms.google.client import GoogleAdsClient
 
 from .logging_utils import get_structured_logger, set_correlation_id
 from .validation import ParameterValidator, is_retryable_error

@@ -34,9 +34,9 @@ except ImportError:
     GoogleAPIError = Exception
     TooManyRequests = Exception
 
-from paidsearchnav.core.config import GA4Config
-from paidsearchnav.platforms.ga4.auth import GA4Authenticator
-from paidsearchnav.platforms.ga4.cache import GA4CacheManager
+from paidsearchnav_mcp.core.config import GA4Config
+from paidsearchnav_mcp.platforms.ga4.auth import GA4Authenticator
+from paidsearchnav_mcp.platforms.ga4.cache import GA4CacheManager
 
 logger = logging.getLogger(__name__)
 

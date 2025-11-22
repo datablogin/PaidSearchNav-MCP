@@ -8,7 +8,7 @@ import logging
 from datetime import datetime
 from typing import Any, Dict, List
 
-from paidsearchnav.platforms.google.client import GoogleAdsClient
+from paidsearchnav_mcp.platforms.google.client import GoogleAdsClient
 
 from .base import ScriptBase, ScriptConfig, ScriptResult, ScriptStatus, ScriptType
 

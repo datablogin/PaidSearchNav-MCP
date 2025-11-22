@@ -6,8 +6,8 @@ from datetime import datetime
 from enum import Enum
 from typing import Any, Optional
 
-from paidsearchnav.core.models.analysis import AnalysisResult
-from paidsearchnav.core.models.base import BasePSNModel
+from paidsearchnav_mcp.core.models.analysis import AnalysisResult
+from paidsearchnav_mcp.core.models.base import BasePSNModel
 
 
 class AssetType(str, Enum):

@@ -8,7 +8,7 @@ import logging
 from datetime import datetime, timedelta
 from typing import Any, Dict, List
 
-from paidsearchnav.platforms.ga4.bigquery_client import GA4BigQueryClient
+from paidsearchnav_mcp.platforms.ga4.bigquery_client import GA4BigQueryClient
 
 logger = logging.getLogger(__name__)
 

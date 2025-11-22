@@ -7,8 +7,8 @@ based on customer tier configuration and feature flags.
 import logging
 from typing import Any, Dict, List, Optional
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.platforms.google.client import GoogleAdsClient
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.platforms.google.client import GoogleAdsClient
 
 from .base import ScriptBase, ScriptConfig, ScriptResult, ScriptType
 from .hybrid_quarterly_extraction import HybridQuarterlyDataExtractionScript

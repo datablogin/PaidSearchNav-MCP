@@ -8,8 +8,8 @@ from google.cloud import bigquery
 from pydantic import BaseModel, Field
 
 try:
-    from paidsearchnav.alerts.manager import AlertManager, get_alert_manager
-    from paidsearchnav.alerts.models import AlertPriority, AlertType
+    from paidsearchnav_mcp.alerts.manager import AlertManager, get_alert_manager
+    from paidsearchnav_mcp.alerts.models import AlertPriority, AlertType
 except ImportError:
     # Graceful degradation if alerts module is not available
     AlertManager = None

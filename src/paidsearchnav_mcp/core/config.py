@@ -1690,7 +1690,7 @@ class Settings(BaseSettings):
                     env_vars.get("PSN_CACHE_TTL_API_RESPONSES")
                 )
 
-            from paidsearchnav.cache.config import (
+            from paidsearchnav_mcp.cache.config import (
                 CacheConfig,
                 CacheTTLConfig,
                 RedisCacheConfig,

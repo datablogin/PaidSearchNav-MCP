@@ -976,7 +976,7 @@ class MockDataExtractionScript(ScriptBase):
         # Initialize with minimal required config
         from unittest.mock import Mock
 
-        from paidsearchnav.platforms.google.client import GoogleAdsClient
+        from paidsearchnav_mcp.platforms.google.client import GoogleAdsClient
 
         mock_client = Mock(spec=GoogleAdsClient)
         config = ScriptConfig(
@@ -1011,7 +1011,7 @@ class MockConflictDetectionScript(ScriptBase):
     def __init__(self):
         from unittest.mock import Mock
 
-        from paidsearchnav.platforms.google.client import GoogleAdsClient
+        from paidsearchnav_mcp.platforms.google.client import GoogleAdsClient
 
         mock_client = Mock(spec=GoogleAdsClient)
         config = ScriptConfig(
@@ -1046,7 +1046,7 @@ class MockPerformanceMaxScript(ScriptBase):
     def __init__(self):
         from unittest.mock import Mock
 
-        from paidsearchnav.platforms.google.client import GoogleAdsClient
+        from paidsearchnav_mcp.platforms.google.client import GoogleAdsClient
 
         mock_client = Mock(spec=GoogleAdsClient)
         config = ScriptConfig(
@@ -1081,7 +1081,7 @@ class MockLocalIntentScript(ScriptBase):
     def __init__(self):
         from unittest.mock import Mock
 
-        from paidsearchnav.platforms.google.client import GoogleAdsClient
+        from paidsearchnav_mcp.platforms.google.client import GoogleAdsClient
 
         mock_client = Mock(spec=GoogleAdsClient)
         config = ScriptConfig(

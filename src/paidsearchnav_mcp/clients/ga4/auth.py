@@ -22,7 +22,7 @@ except ImportError:
     service_account = None
     DefaultCredentialsError = Exception
 
-from paidsearchnav.core.config import GA4Config
+from paidsearchnav_mcp.core.config import GA4Config
 
 logger = logging.getLogger(__name__)
 

@@ -7,7 +7,7 @@ partitioning, clustering, and optimization for all analyzer data.
 import logging
 from typing import Any, Dict, Optional
 
-from paidsearchnav.platforms.bigquery.schema import BigQueryTableSchema
+from paidsearchnav_mcp.platforms.bigquery.schema import BigQueryTableSchema
 
 logger = logging.getLogger(__name__)
 

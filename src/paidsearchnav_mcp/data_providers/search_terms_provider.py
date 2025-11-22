@@ -6,8 +6,8 @@ import logging
 from datetime import datetime
 from typing import TYPE_CHECKING, Any
 
-from paidsearchnav.core.models.search_term import SearchTerm
-from paidsearchnav.data_providers.base import DataProvider
+from paidsearchnav_mcp.core.models.search_term import SearchTerm
+from paidsearchnav_mcp.data_providers.base import DataProvider
 
 if TYPE_CHECKING:
     pass

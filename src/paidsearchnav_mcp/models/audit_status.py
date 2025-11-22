@@ -4,8 +4,9 @@ from datetime import datetime
 from enum import Enum
 from typing import Any
 
-from paidsearchnav.core.models.base import BasePSNModel, utc_now
 from pydantic import Field, field_validator
+
+from paidsearchnav_mcp.core.models.base import BasePSNModel, utc_now
 
 
 class AuditState(str, Enum):

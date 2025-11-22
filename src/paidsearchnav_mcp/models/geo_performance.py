@@ -3,9 +3,10 @@
 from datetime import datetime
 from enum import Enum
 
-from paidsearchnav.core.models.analysis import AnalysisResult
-from paidsearchnav.core.models.base import BasePSNModel
 from pydantic import Field
+
+from paidsearchnav_mcp.core.models.analysis import AnalysisResult
+from paidsearchnav_mcp.core.models.base import BasePSNModel
 
 
 class GeographicLevel(str, Enum):
@@ -58,14 +59,14 @@ class GeoPerformanceData(BasePSNModel):
     @property
     def cost(self) -> float:
         """Cost in currency units."""
-        from paidsearchnav.core.validation import validate_cost_micros
+        from paidsearchnav_mcp.core.validation import validate_cost_micros
 
         return validate_cost_micros(self.cost_micros)
 
     @property
     def revenue(self) -> float:
         """Revenue in currency units."""
-        from paidsearchnav.core.validation import validate_revenue_micros
+        from paidsearchnav_mcp.core.validation import validate_revenue_micros
 
         return validate_revenue_micros(self.revenue_micros)
 
