@@ -6,6 +6,7 @@ import random
 from datetime import datetime, timedelta
 from typing import TYPE_CHECKING, Any
 
+from paidsearchnav_mcp.data_providers.base import DataProvider
 from paidsearchnav_mcp.models.campaign import (
     BiddingStrategy,
     Campaign,
@@ -18,7 +19,6 @@ from paidsearchnav_mcp.models.keyword import (
     KeywordStatus,
 )
 from paidsearchnav_mcp.models.search_term import SearchTerm, SearchTermMetrics
-from paidsearchnav_mcp.data_providers.base import DataProvider
 from paidsearchnav_mcp.security.rate_limiting import validate_multiple_id_lists
 
 if TYPE_CHECKING:
