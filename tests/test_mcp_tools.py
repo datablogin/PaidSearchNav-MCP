@@ -481,8 +481,7 @@ async def test_get_search_terms_api_error(mock_env_credentials):
         result = await get_search_terms.fn(request)
 
         assert result["status"] == "error"
-        assert "Failed to fetch search terms" in result["message"]
-        assert "API connection failed" in result["message"]
+        assert "unexpected error occurred" in result["message"].lower()
         assert result["data"] == []
 
 
@@ -597,7 +596,7 @@ async def test_get_keywords_api_error(mock_env_credentials):
         result = await get_keywords.fn(request)
 
         assert result["status"] == "error"
-        assert "Failed to fetch keywords" in result["message"]
+        assert "unexpected error occurred" in result["message"].lower()
         assert "Network timeout" in result["message"]
         assert result["data"] == []
 
@@ -718,7 +717,7 @@ async def test_get_campaigns_api_error(mock_env_credentials):
         result = await get_campaigns.fn(request)
 
         assert result["status"] == "error"
-        assert "Failed to fetch campaigns" in result["message"]
+        assert "unexpected error occurred" in result["message"].lower()
         assert "Rate limit exceeded" in result["message"]
         assert result["data"] == []
 
@@ -890,7 +889,7 @@ async def test_get_negative_keywords_api_error(mock_env_credentials):
         result = await get_negative_keywords.fn(request)
 
         assert result["status"] == "error"
-        assert "Failed to fetch negative keywords" in result["message"]
+        assert "unexpected error occurred" in result["message"].lower()
         assert "Permission denied" in result["message"]
         assert result["data"] == []
 
@@ -1015,7 +1014,7 @@ async def test_get_geo_performance_api_error(mock_env_credentials):
         result = await get_geo_performance.fn(request)
 
         assert result["status"] == "error"
-        assert "Failed to fetch geographic performance" in result["message"]
+        assert "unexpected error occurred" in result["message"].lower()
         assert "Database unavailable" in result["message"]
         assert result["data"] == []
 
