@@ -4,9 +4,8 @@ from datetime import datetime
 from enum import Enum
 from typing import Any
 
-from pydantic import Field
-
 from paidsearchnav.core.models.base import BasePSNModel
+from pydantic import Field
 
 
 class AuditFrequency(str, Enum):

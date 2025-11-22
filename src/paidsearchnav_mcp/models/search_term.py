@@ -5,9 +5,8 @@ from enum import Enum
 from typing import Any
 
 import pandas as pd
-from pydantic import Field, computed_field, field_validator, model_validator
-
 from paidsearchnav.core.models.base import BasePSNModel
+from pydantic import Field, computed_field, field_validator, model_validator
 
 
 class SearchTermStatus(str, Enum):

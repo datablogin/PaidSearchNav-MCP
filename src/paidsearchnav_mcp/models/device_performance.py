@@ -4,9 +4,8 @@ from datetime import datetime
 from enum import Enum
 from typing import Optional
 
-from pydantic import BaseModel, ConfigDict, Field, computed_field
-
 from paidsearchnav.core.models.analysis import AnalysisResult
+from pydantic import BaseModel, ConfigDict, Field, computed_field
 
 
 class DeviceType(str, Enum):

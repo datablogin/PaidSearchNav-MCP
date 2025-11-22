@@ -5,9 +5,8 @@ from enum import Enum
 from pathlib import Path
 from typing import List, Optional
 
-from pydantic import Field, field_validator
-
 from paidsearchnav.core.models.base import BasePSNModel
+from pydantic import Field, field_validator
 
 
 class ExportFileType(str, Enum):

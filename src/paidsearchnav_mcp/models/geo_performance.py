@@ -3,10 +3,9 @@
 from datetime import datetime
 from enum import Enum
 
-from pydantic import Field
-
 from paidsearchnav.core.models.analysis import AnalysisResult
 from paidsearchnav.core.models.base import BasePSNModel
+from pydantic import Field
 
 
 class GeographicLevel(str, Enum):

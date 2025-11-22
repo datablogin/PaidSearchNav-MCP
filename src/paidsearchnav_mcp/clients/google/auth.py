@@ -43,10 +43,9 @@ from cryptography.fernet import Fernet
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow  # type: ignore[import-untyped]
-from pydantic import BaseModel, Field
-
 from paidsearchnav.core.config import SecretProvider, Settings
 from paidsearchnav.core.exceptions import AuthenticationError, ConfigurationError
+from pydantic import BaseModel, Field
 
 logger = logging.getLogger(__name__)
 

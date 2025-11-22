@@ -13,7 +13,6 @@ from functools import wraps
 from typing import Any, Callable, Dict, Optional, TypeVar
 
 from circuitbreaker import CircuitBreaker
-
 from paidsearchnav.core.config import CircuitBreakerConfig, GA4Config
 from paidsearchnav.platforms.ga4.models import GA4QuotaUsage
 

@@ -10,14 +10,13 @@ from datetime import datetime, timedelta
 from typing import TYPE_CHECKING, Any, Dict, List, Optional
 
 import redis.asyncio as redis
+from paidsearchnav.core.config import RedisConfig
 from tenacity import (
     retry,
     retry_if_exception_type,
     stop_after_attempt,
     wait_exponential,
 )
-
-from paidsearchnav.core.config import RedisConfig
 
 # Avoid circular import by importing OperationType at type checking time only
 if TYPE_CHECKING:

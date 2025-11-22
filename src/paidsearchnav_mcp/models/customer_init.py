@@ -5,10 +5,9 @@ from datetime import datetime
 from enum import Enum
 from typing import Dict, List, Optional
 
+from paidsearchnav.core.models.base import BasePSNModel
 from pydantic import BaseModel, Field, field_validator
 from pydantic_core import PydanticCustomError
-
-from paidsearchnav.core.models.base import BasePSNModel
 
 
 class BusinessType(str, Enum):

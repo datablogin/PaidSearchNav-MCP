@@ -5,14 +5,13 @@ from __future__ import annotations
 from enum import Enum
 from typing import List, Optional
 
-from pydantic import BaseModel, ConfigDict, computed_field, field_validator
-
 from paidsearchnav.core.models.analysis import AnalysisResult
 from paidsearchnav.core.models.base import (
     EnhancedKeyMetrics,
     MetricPeriod,
     MetricWithContext,
 )
+from pydantic import BaseModel, ConfigDict, computed_field, field_validator
 
 
 class LocalReachEfficiencyLevel(Enum):

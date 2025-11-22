@@ -9,7 +9,6 @@ from google.ads.googleads.client import GoogleAdsClient  # type: ignore[import-u
 from google.ads.googleads.errors import (
     GoogleAdsException,  # type: ignore[import-untyped]
 )
-
 from paidsearchnav.core.circuit_breaker import GoogleAdsCircuitBreaker
 from paidsearchnav.core.config import CircuitBreakerConfig, Settings
 from paidsearchnav.core.exceptions import APIError, AuthenticationError, RateLimitError

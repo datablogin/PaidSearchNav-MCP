@@ -4,8 +4,6 @@ from datetime import datetime
 from enum import Enum
 from typing import Any
 
-from pydantic import Field
-
 from paidsearchnav.core.models.base import (
     BasePSNModel,
     EnhancedKeyMetrics,
@@ -13,6 +11,7 @@ from paidsearchnav.core.models.base import (
     MetricWithContext,
 )
 from paidsearchnav.core.models.search_term import SearchTerm, SearchTermClassification
+from pydantic import Field
 
 
 class RecommendationPriority(str, Enum):

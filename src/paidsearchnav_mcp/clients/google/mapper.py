@@ -7,7 +7,6 @@ from datetime import datetime
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-
 from paidsearchnav.core.models.account import (
     Account,
     AccountHierarchy,

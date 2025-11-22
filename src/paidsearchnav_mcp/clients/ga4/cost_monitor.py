@@ -8,10 +8,9 @@ import logging
 from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional
 
-from pydantic import BaseModel, Field
-
 from paidsearchnav.core.config import GA4Config
 from paidsearchnav.platforms.ga4.models import GA4CostEstimate, GA4QuotaUsage
+from pydantic import BaseModel, Field
 
 try:
     from paidsearchnav.alerts.manager import AlertManager, get_alert_manager
