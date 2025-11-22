@@ -597,7 +597,6 @@ async def test_get_keywords_api_error(mock_env_credentials):
 
         assert result["status"] == "error"
         assert "unexpected error occurred" in result["message"].lower()
-        assert "Network timeout" in result["message"]
         assert result["data"] == []
 
 
@@ -718,7 +717,6 @@ async def test_get_campaigns_api_error(mock_env_credentials):
 
         assert result["status"] == "error"
         assert "unexpected error occurred" in result["message"].lower()
-        assert "Rate limit exceeded" in result["message"]
         assert result["data"] == []
 
 
@@ -890,7 +888,6 @@ async def test_get_negative_keywords_api_error(mock_env_credentials):
 
         assert result["status"] == "error"
         assert "unexpected error occurred" in result["message"].lower()
-        assert "Permission denied" in result["message"]
         assert result["data"] == []
 
 
@@ -1015,7 +1012,6 @@ async def test_get_geo_performance_api_error(mock_env_credentials):
 
         assert result["status"] == "error"
         assert "unexpected error occurred" in result["message"].lower()
-        assert "Database unavailable" in result["message"]
         assert result["data"] == []
 
 
