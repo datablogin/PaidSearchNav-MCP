@@ -30,6 +30,8 @@ class CampaignType(str, Enum):
     LOCAL = "LOCAL"
     HOTEL = "HOTEL"
     PERFORMANCE_MAX = "PERFORMANCE_MAX"
+    DEMAND_GEN = "DEMAND_GEN"  # Demand Gen campaigns (newer campaign type)
+    MULTI_CHANNEL = "MULTI_CHANNEL"  # Multi-channel campaigns
     UNKNOWN = "UNKNOWN"
 
 
@@ -40,6 +42,7 @@ class BiddingStrategy(str, Enum):
     MANUAL_CPV = "MANUAL_CPV"
     MANUAL_CPM = "MANUAL_CPM"
     TARGET_CPA = "TARGET_CPA"
+    TARGET_CPM = "TARGET_CPM"  # Target CPM bidding
     TARGET_ROAS = "TARGET_ROAS"
     TARGET_SPEND = "TARGET_SPEND"
     MAXIMIZE_CONVERSIONS = "MAXIMIZE_CONVERSIONS"
