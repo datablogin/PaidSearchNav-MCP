@@ -1090,3 +1090,44 @@ async def test_negative_keywords_request_validation():
         campaign_id="111",
     )
     assert request.campaign_id == "111"
+
+
+# ============================================================================
+# BigQuery Tool Tests
+# ============================================================================
+
+
+def test_bigquery_request_model():
+    """Test BigQueryRequest model can be instantiated."""
+    from paidsearchnav_mcp.server import BigQueryRequest
+
+    request = BigQueryRequest(query="SELECT 1")
+    assert request.query == "SELECT 1"
+    assert request.project_id is None
+
+
+def test_bigquery_schema_request_model():
+    """Test BigQuerySchemaRequest model can be instantiated."""
+    from paidsearchnav_mcp.server import BigQuerySchemaRequest
+
+    request = BigQuerySchemaRequest(dataset_id="my_dataset", table_id="my_table")
+    assert request.dataset_id == "my_dataset"
+    assert request.table_id == "my_table"
+
+
+def test_query_validator_import():
+    """Test that QueryValidator can be imported."""
+    from paidsearchnav_mcp.clients.bigquery.validator import QueryValidator
+
+    # Test basic validation
+    result = QueryValidator.validate_query("SELECT * FROM table LIMIT 10")
+    assert "valid" in result
+    assert "errors" in result
+    assert "warnings" in result
+
+
+def test_bigquery_client_import():
+    """Test that BigQueryClient can be imported."""
+    from paidsearchnav_mcp.clients.bigquery.client import BigQueryClient
+
+    assert BigQueryClient is not None
