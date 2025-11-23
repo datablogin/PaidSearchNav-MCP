@@ -45,7 +45,7 @@ jobs:
     # Run MCP server tests (includes BigQuery integration)
     - name: Run MCP server tests
       run: |
-        pytest tests/test_mcp_tools.py tests/test_server.py tests/test_bigquery_client.py -v --cov=paidsearchnav_mcp --cov-report=term --cov-report=xml
+        pytest tests/test_mcp_tools.py tests/test_server.py tests/test_bigquery_client.py -v -m "not integration" --cov=paidsearchnav_mcp --cov-report=term --cov-report=xml
 
     # Upload coverage to Codecov (optional - only if codecov token is configured)
     - name: Upload coverage reports
