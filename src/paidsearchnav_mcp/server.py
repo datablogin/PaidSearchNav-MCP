@@ -10,6 +10,8 @@ from typing import Any
 from fastmcp import FastMCP
 from pydantic import BaseModel, Field
 
+from paidsearchnav_mcp.clients.bigquery.client import BigQueryClient
+from paidsearchnav_mcp.clients.bigquery.validator import QueryValidator
 from paidsearchnav_mcp.clients.cache import CacheClient
 from paidsearchnav_mcp.clients.google.client import GoogleAdsAPIClient
 from paidsearchnav_mcp.core.exceptions import (
@@ -117,12 +119,12 @@ def _get_google_ads_client() -> GoogleAdsAPIClient:
     - Optimize connection pooling
     - Maintain metrics across requests
 
-    Reads credentials from environment variables:
-    - GOOGLE_ADS_DEVELOPER_TOKEN
-    - GOOGLE_ADS_CLIENT_ID
-    - GOOGLE_ADS_CLIENT_SECRET
-    - GOOGLE_ADS_REFRESH_TOKEN
-    - GOOGLE_ADS_LOGIN_CUSTOMER_ID (optional, for MCC accounts)
+    Reads credentials from environment variables (supports both prefixes):
+    - PSN_GOOGLE_ADS_DEVELOPER_TOKEN or GOOGLE_ADS_DEVELOPER_TOKEN
+    - PSN_GOOGLE_ADS_CLIENT_ID or GOOGLE_ADS_CLIENT_ID
+    - PSN_GOOGLE_ADS_CLIENT_SECRET or GOOGLE_ADS_CLIENT_SECRET
+    - PSN_GOOGLE_ADS_REFRESH_TOKEN or GOOGLE_ADS_REFRESH_TOKEN
+    - PSN_GOOGLE_ADS_LOGIN_CUSTOMER_ID or GOOGLE_ADS_LOGIN_CUSTOMER_ID (optional, for MCC accounts)
 
     Returns:
         Configured GoogleAdsAPIClient instance
@@ -137,11 +139,22 @@ def _get_google_ads_client() -> GoogleAdsAPIClient:
         return _client_instance
 
     # Create new instance
-    developer_token = os.getenv("GOOGLE_ADS_DEVELOPER_TOKEN")
-    client_id = os.getenv("GOOGLE_ADS_CLIENT_ID")
-    client_secret = os.getenv("GOOGLE_ADS_CLIENT_SECRET")
-    refresh_token = os.getenv("GOOGLE_ADS_REFRESH_TOKEN")
-    login_customer_id = os.getenv("GOOGLE_ADS_LOGIN_CUSTOMER_ID")
+    # Support both PSN_GOOGLE_ADS_* and GOOGLE_ADS_* prefixes
+    developer_token = os.getenv("PSN_GOOGLE_ADS_DEVELOPER_TOKEN") or os.getenv(
+        "GOOGLE_ADS_DEVELOPER_TOKEN"
+    )
+    client_id = os.getenv("PSN_GOOGLE_ADS_CLIENT_ID") or os.getenv(
+        "GOOGLE_ADS_CLIENT_ID"
+    )
+    client_secret = os.getenv("PSN_GOOGLE_ADS_CLIENT_SECRET") or os.getenv(
+        "GOOGLE_ADS_CLIENT_SECRET"
+    )
+    refresh_token = os.getenv("PSN_GOOGLE_ADS_REFRESH_TOKEN") or os.getenv(
+        "GOOGLE_ADS_REFRESH_TOKEN"
+    )
+    login_customer_id = os.getenv("PSN_GOOGLE_ADS_LOGIN_CUSTOMER_ID") or os.getenv(
+        "GOOGLE_ADS_LOGIN_CUSTOMER_ID"
+    )
 
     if not all([developer_token, client_id, client_secret, refresh_token]):
         missing = []
@@ -330,6 +343,16 @@ class BigQueryRequest(BaseModel):
     """Request model for executing BigQuery queries."""
 
     query: str = Field(..., description="SQL query to execute")
+    project_id: str | None = Field(
+        None, description="Optional GCP project ID (uses default if not provided)"
+    )
+
+
+class BigQuerySchemaRequest(BaseModel):
+    """Request model for BigQuery schema lookup."""
+
+    dataset_id: str = Field(..., description="BigQuery dataset ID")
+    table_id: str = Field(..., description="BigQuery table ID")
     project_id: str | None = Field(
         None, description="Optional GCP project ID (uses default if not provided)"
     )
@@ -1105,22 +1128,141 @@ async def query_bigquery(request: BigQueryRequest) -> dict[str, Any]:
     """
     Execute a SQL query against BigQuery.
 
-    Allows running custom BigQuery queries for advanced analysis,
-    historical data retrieval, or cross-platform attribution.
-    Useful for joining Google Ads data with GA4 or other data sources.
+    Supports querying Google Ads data exported to BigQuery, GA4 data,
+    and custom datasets. Useful for historical analysis and cross-platform attribution.
+    Includes query validation to prevent destructive operations.
     """
-    # TODO: Implement actual BigQuery query execution
-    return {
-        "status": "success",
-        "message": "BigQuery query execution not yet implemented",
-        "request": {
-            "query_preview": request.query[:100] + "..."
-            if len(request.query) > 100
-            else request.query,
-            "project_id": request.project_id,
-        },
-        "data": [],
-    }
+    try:
+        # Validate query first
+        validation = QueryValidator.validate_query(request.query)
+
+        if not validation["valid"]:
+            logger.warning(f"BigQuery query validation failed: {validation['errors']}")
+            return {
+                "status": "error",
+                "error_code": ErrorCode.INVALID_INPUT,
+                "message": "Query validation failed",
+                "details": {
+                    "error_type": "validation",
+                    "validation_errors": validation["errors"],
+                    "retry_allowed": False,
+                },
+                "data": [],
+            }
+
+        # Initialize BigQuery client
+        client = BigQueryClient(project_id=request.project_id)
+
+        # Execute query
+        results = await client.execute_query(request.query, max_results=10000)
+
+        # Prepare response
+        result = {
+            "status": "success",
+            "message": f"Query executed successfully, returned {len(results)} rows",
+            "metadata": {
+                "project_id": client.project_id,
+                "result_count": len(results),
+                "query_preview": request.query[:200] + "..."
+                if len(request.query) > 200
+                else request.query,
+                "validation_warnings": validation["warnings"],
+            },
+            "data": results,
+        }
+
+        return result
+
+    except ValueError as e:
+        logger.error(
+            f"Invalid BigQuery configuration: {sanitize_error_message(str(e))}",
+            exc_info=True,
+        )
+        return {
+            "status": "error",
+            "error_code": ErrorCode.INVALID_INPUT,
+            "message": f"Invalid input: {str(e)}",
+            "details": {"error_type": "validation", "retry_allowed": False},
+            "data": [],
+        }
+    except Exception as e:
+        logger.error(
+            f"BigQuery query error: {sanitize_error_message(str(e))}", exc_info=True
+        )
+        return {
+            "status": "error",
+            "error_code": ErrorCode.BIGQUERY_FETCH_ERROR,
+            "message": f"BigQuery error: {str(e)}",
+            "details": {
+                "error_type": type(e).__name__,
+                "retry_allowed": True,
+                "query_preview": request.query[:200] + "..."
+                if len(request.query) > 200
+                else request.query,
+            },
+            "data": [],
+        }
+
+
+@mcp.tool()
+async def get_bigquery_schema(request: BigQuerySchemaRequest) -> dict[str, Any]:
+    """
+    Get schema information for a BigQuery table.
+
+    Useful for understanding available fields in Google Ads export tables,
+    GA4 tables, or custom datasets before writing queries.
+    """
+    try:
+        # Initialize BigQuery client
+        client = BigQueryClient(project_id=request.project_id)
+
+        # Get table schema
+        schema_info = await client.get_table_schema(
+            request.dataset_id, request.table_id
+        )
+
+        return {
+            "status": "success",
+            "message": f"Retrieved schema for {schema_info['table']}",
+            "metadata": {
+                "table": schema_info["table"],
+                "num_rows": schema_info["num_rows"],
+                "size_bytes": schema_info["size_bytes"],
+                "field_count": len(schema_info["schema"]),
+            },
+            "data": schema_info["schema"],
+        }
+
+    except ValueError as e:
+        logger.error(
+            f"Invalid BigQuery configuration: {sanitize_error_message(str(e))}",
+            exc_info=True,
+        )
+        return {
+            "status": "error",
+            "error_code": ErrorCode.INVALID_INPUT,
+            "message": f"Invalid input: {str(e)}",
+            "details": {"error_type": "validation", "retry_allowed": False},
+            "data": [],
+        }
+    except Exception as e:
+        logger.error(
+            f"BigQuery schema error: {sanitize_error_message(str(e))}", exc_info=True
+        )
+        table_ref = (
+            f"{request.project_id or 'default'}.{request.dataset_id}.{request.table_id}"
+        )
+        return {
+            "status": "error",
+            "error_code": ErrorCode.BIGQUERY_FETCH_ERROR,
+            "message": f"Failed to retrieve schema: {str(e)}",
+            "details": {
+                "error_type": type(e).__name__,
+                "retry_allowed": True,
+                "table": table_ref,
+            },
+            "data": [],
+        }
 
 
 # ============================================================================
@@ -1137,7 +1279,10 @@ def health_check() -> dict[str, Any]:
         "status": "healthy",
         "version": "1.0.0",
         "server": "PaidSearchNav MCP Server",
-        "google_ads_configured": bool(os.getenv("GOOGLE_ADS_DEVELOPER_TOKEN")),
+        "google_ads_configured": bool(
+            os.getenv("PSN_GOOGLE_ADS_DEVELOPER_TOKEN")
+            or os.getenv("GOOGLE_ADS_DEVELOPER_TOKEN")
+        ),
         "bigquery_configured": bool(os.getenv("GOOGLE_APPLICATION_CREDENTIALS")),
         "tools_available": [
             "get_search_terms",
@@ -1146,6 +1291,7 @@ def health_check() -> dict[str, Any]:
             "get_negative_keywords",
             "get_geo_performance",
             "query_bigquery",
+            "get_bigquery_schema",
         ],
     }
 
@@ -1160,7 +1306,10 @@ def get_config() -> dict[str, Any]:
         "environment": os.getenv("ENVIRONMENT", "development"),
         "features": {
             "google_ads": {
-                "enabled": bool(os.getenv("GOOGLE_ADS_DEVELOPER_TOKEN")),
+                "enabled": bool(
+                    os.getenv("PSN_GOOGLE_ADS_DEVELOPER_TOKEN")
+                    or os.getenv("GOOGLE_ADS_DEVELOPER_TOKEN")
+                ),
                 "api_version": "v17",
             },
             "bigquery": {
@@ -1173,6 +1322,52 @@ def get_config() -> dict[str, Any]:
             },
         },
     }
+
+
+@mcp.resource("resource://bigquery/datasets")
+def list_bigquery_datasets() -> dict[str, Any]:
+    """
+    List available BigQuery datasets in the configured project.
+
+    Provides an overview of all datasets accessible to the service account,
+    which is useful for discovering available data sources before querying.
+    """
+    try:
+        # Initialize BigQuery client
+        client = BigQueryClient()
+
+        # List datasets
+        datasets = list(client.client.list_datasets())
+
+        return {
+            "status": "success",
+            "message": f"Found {len(datasets)} datasets",
+            "metadata": {
+                "project_id": client.project_id,
+                "dataset_count": len(datasets),
+            },
+            "datasets": [
+                {
+                    "dataset_id": dataset.dataset_id,
+                    "full_name": dataset.full_dataset_id,
+                    "location": dataset.location,
+                }
+                for dataset in datasets
+            ],
+        }
+
+    except Exception as e:
+        logger.error(
+            f"Failed to list BigQuery datasets: {sanitize_error_message(str(e))}",
+            exc_info=True,
+        )
+        return {
+            "status": "error",
+            "error": str(e),
+            "error_type": type(e).__name__,
+            "bigquery_configured": bool(os.getenv("GOOGLE_APPLICATION_CREDENTIALS")),
+            "datasets": [],
+        }
 
 
 # ============================================================================
