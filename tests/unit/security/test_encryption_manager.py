@@ -19,7 +19,7 @@ except ImportError:
             super().__init__(str(error_response))
 
 
-from paidsearchnav.security.encryption_manager import (
+from paidsearchnav_mcp.security.encryption_manager import (
     EncryptionKey,
     EncryptionManager,
     EncryptionMethod,

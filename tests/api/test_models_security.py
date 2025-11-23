@@ -5,7 +5,7 @@ from datetime import datetime
 import pytest
 from pydantic import ValidationError
 
-from paidsearchnav.api.models.requests import (
+from paidsearchnav_mcp.api.models.requests import (
     AuditFilters,
     CreateAuditRequest,
     CreateScheduleRequest,
@@ -14,7 +14,7 @@ from paidsearchnav.api.models.requests import (
     GoogleAuthRequest,
     PaginationParams,
 )
-from paidsearchnav.api.models.responses import (
+from paidsearchnav_mcp.api.models.responses import (
     AuthTokenResponse,
     CustomerResponse,
     ErrorResponse,

@@ -7,7 +7,7 @@ import httpx
 import pytest
 from httpx import Response
 
-from paidsearchnav.alerts.handlers.webhook import (
+from paidsearchnav_mcp.alerts.handlers.webhook import (
     BatchWebhookAlertHandler,
     WebhookAlertHandler,
 )

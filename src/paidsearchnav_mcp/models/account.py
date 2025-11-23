@@ -5,7 +5,7 @@ from enum import Enum
 
 from pydantic import Field
 
-from paidsearchnav.core.models.base import BasePSNModel
+from paidsearchnav_mcp.models.base import BasePSNModel
 
 
 class AccountType(str, Enum):

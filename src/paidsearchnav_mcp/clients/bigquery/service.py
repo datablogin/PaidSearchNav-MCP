@@ -3,16 +3,16 @@
 import logging
 from typing import Any, Dict, Optional
 
-from paidsearchnav.core.config import BigQueryTier
-from paidsearchnav.platforms.bigquery.analytics import BigQueryAnalyticsEngine
-from paidsearchnav.platforms.bigquery.auth import BigQueryAuthenticator
-from paidsearchnav.platforms.bigquery.cost_monitor import BigQueryCostMonitor
-from paidsearchnav.platforms.bigquery.streaming import BigQueryDataStreamer
-from paidsearchnav.platforms.bigquery.timeout_client import (
+from paidsearchnav_mcp.core.config import BigQueryTier
+from paidsearchnav_mcp.platforms.bigquery.analytics import BigQueryAnalyticsEngine
+from paidsearchnav_mcp.platforms.bigquery.auth import BigQueryAuthenticator
+from paidsearchnav_mcp.platforms.bigquery.cost_monitor import BigQueryCostMonitor
+from paidsearchnav_mcp.platforms.bigquery.streaming import BigQueryDataStreamer
+from paidsearchnav_mcp.platforms.bigquery.timeout_client import (
     BigQueryTimeoutClient,
     create_timeout_client,
 )
-from paidsearchnav.platforms.bigquery.timeout_config import CustomerTier
+from paidsearchnav_mcp.platforms.bigquery.timeout_config import CustomerTier
 
 logger = logging.getLogger(__name__)
 
@@ -98,7 +98,7 @@ class BigQueryService:
 
             if results and results[0].connectivity_test == 1:
                 # Get timeout configuration for status info
-                from paidsearchnav.platforms.bigquery.timeout_config import (
+                from paidsearchnav_mcp.platforms.bigquery.timeout_config import (
                     get_timeout_config,
                 )
 

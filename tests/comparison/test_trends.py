@@ -6,8 +6,8 @@ from unittest.mock import AsyncMock, patch
 import numpy as np
 import pytest
 
-from paidsearchnav.comparison.models import AuditResult, MetricType, TrendGranularity
-from paidsearchnav.comparison.trends import TrendAnalyzer
+from paidsearchnav_mcp.comparison.models import AuditResult, MetricType, TrendGranularity
+from paidsearchnav_mcp.comparison.trends import TrendAnalyzer
 
 
 class TestTrendAnalyzer:

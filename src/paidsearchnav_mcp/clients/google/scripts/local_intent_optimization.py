@@ -7,11 +7,11 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Any, Dict, List, Optional, Set
 
-from paidsearchnav.core.exceptions import (
+from paidsearchnav_mcp.core.exceptions import (
     APIError,
     ValidationError,
 )
-from paidsearchnav.platforms.google.client import GoogleAdsClient
+from paidsearchnav_mcp.platforms.google.client import GoogleAdsClient
 
 from .base import ScriptBase, ScriptConfig, ScriptResult, ScriptStatus, ScriptType
 

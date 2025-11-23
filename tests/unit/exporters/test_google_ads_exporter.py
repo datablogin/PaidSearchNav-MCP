@@ -6,18 +6,18 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from paidsearchnav.core.models.analysis import (
+from paidsearchnav_mcp.models.analysis import (
     AnalysisResult,
     Recommendation,
     RecommendationPriority,
     RecommendationType,
 )
-from paidsearchnav.core.models.export_models import (
+from paidsearchnav_mcp.models.export_models import (
     ExportRequest,
     ExportStatus,
     ImportPackage,
 )
-from paidsearchnav.exporters.google_ads_exporter import GoogleAdsExportService
+from paidsearchnav_mcp.exporters.google_ads_exporter import GoogleAdsExportService
 
 
 @pytest.fixture

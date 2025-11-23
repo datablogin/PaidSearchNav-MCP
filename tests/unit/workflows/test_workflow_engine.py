@@ -5,16 +5,16 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from paidsearchnav.auth.oauth_manager import OAuth2Manager
-from paidsearchnav.core.config import Settings
-from paidsearchnav.core.exceptions import WorkflowError
-from paidsearchnav.integrations.google_ads_write_client import (
+from paidsearchnav_mcp.auth.oauth_manager import OAuth2Manager
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.core.exceptions import WorkflowError
+from paidsearchnav_mcp.integrations.google_ads_write_client import (
     GoogleAdsWriteClient,
     WriteOperationResult,
     WriteOperationStatus,
     WriteOperationType,
 )
-from paidsearchnav.workflows.workflow_engine import (
+from paidsearchnav_mcp.workflows.workflow_engine import (
     StepStatus,
     WorkflowDefinition,
     WorkflowEngine,

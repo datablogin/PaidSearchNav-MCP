@@ -6,8 +6,8 @@ import pytest
 from starlette.requests import Request
 from starlette.responses import Response
 
-from paidsearchnav.api.middleware import SecurityHeadersMiddleware, TimingMiddleware
-from paidsearchnav.api.middleware_token import (
+from paidsearchnav_mcp.api.middleware import SecurityHeadersMiddleware, TimingMiddleware
+from paidsearchnav_mcp.api.middleware_token import (
     TokenExtractionMiddleware,
     get_current_jwt_token,
 )

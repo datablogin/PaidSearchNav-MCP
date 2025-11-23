@@ -7,8 +7,8 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from paidsearchnav.analyzers.landing_page import LandingPageAnalyzer
-from paidsearchnav.core.models.landing_page import (
+from paidsearchnav_mcp.analyzers.landing_page import LandingPageAnalyzer
+from paidsearchnav_mcp.models.landing_page import (
     LandingPageAnalysisResult,
     OptimizationType,
     TrafficSource,

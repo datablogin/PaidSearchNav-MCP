@@ -1,6 +1,6 @@
 """Unit tests for new field mappings (device, ad_schedule, per_store, auction_insights)."""
 
-from paidsearchnav.parsers.field_mappings import (
+from paidsearchnav_mcp.parsers.field_mappings import (
     get_field_mapping,
     validate_csv_headers,
 )

@@ -3,7 +3,7 @@
 import time
 from datetime import datetime, timezone
 
-from paidsearchnav.api.auth_security import (
+from paidsearchnav_mcp.api.auth_security import (
     AccountLockoutManager,
     check_account_lockout,
     get_lockout_manager,

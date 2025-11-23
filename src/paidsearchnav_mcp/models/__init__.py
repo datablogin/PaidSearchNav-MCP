@@ -1,6 +1,6 @@
 """Core data models for PaidSearchNav."""
 
-from paidsearchnav.core.models.account import (
+from paidsearchnav_mcp.models.account import (
     Account,
     AccountHierarchy,
     AccountStatus,
@@ -8,7 +8,7 @@ from paidsearchnav.core.models.account import (
     AuditOptInStatus,
     SyncResult,
 )
-from paidsearchnav.core.models.analysis import (
+from paidsearchnav_mcp.models.analysis import (
     AnalysisMetrics,
     AnalysisResult,
     KeywordMatchAnalysisResult,
@@ -18,9 +18,9 @@ from paidsearchnav.core.models.analysis import (
     RecommendationType,
     SearchTermAnalysisResult,
 )
-from paidsearchnav.core.models.audit_status import AuditState, AuditStatus
-from paidsearchnav.core.models.base import BaseModel, BasePSNModel
-from paidsearchnav.core.models.bid_adjustment import (
+from paidsearchnav_mcp.models.audit_status import AuditState, AuditStatus
+from paidsearchnav_mcp.models.base import BaseModel, BasePSNModel
+from paidsearchnav_mcp.models.bid_adjustment import (
     BidAdjustment,
     BidAdjustmentAnalysisResult,
     BidAdjustmentAnalysisSummary,
@@ -33,13 +33,13 @@ from paidsearchnav.core.models.bid_adjustment import (
     InteractionType,
     OptimizationStatus,
 )
-from paidsearchnav.core.models.campaign import (
+from paidsearchnav_mcp.models.campaign import (
     BiddingStrategy,
     Campaign,
     CampaignStatus,
     CampaignType,
 )
-from paidsearchnav.core.models.demographics import (
+from paidsearchnav_mcp.models.demographics import (
     AgeGroup,
     DemographicInsight,
     DemographicPerformance,
@@ -51,7 +51,7 @@ from paidsearchnav.core.models.demographics import (
     IncomePercentile,
     ParentalStatus,
 )
-from paidsearchnav.core.models.device_performance import (
+from paidsearchnav_mcp.models.device_performance import (
     DeviceInsight,
     DevicePerformanceAnalysisResult,
     DevicePerformanceData,
@@ -59,7 +59,7 @@ from paidsearchnav.core.models.device_performance import (
     DeviceShareMetrics,
     DeviceType,
 )
-from paidsearchnav.core.models.geo_performance import (
+from paidsearchnav_mcp.models.geo_performance import (
     DistancePerformanceData,
     GeographicLevel,
     GeoPerformanceAnalysisResult,
@@ -67,14 +67,14 @@ from paidsearchnav.core.models.geo_performance import (
     GeoPerformanceSummary,
     LocationInsight,
 )
-from paidsearchnav.core.models.keyword import (
+from paidsearchnav_mcp.models.keyword import (
     Keyword,
     KeywordMatchType,
     KeywordStatus,
     MatchType,
     QualityScoreLevel,
 )
-from paidsearchnav.core.models.landing_page import (
+from paidsearchnav_mcp.models.landing_page import (
     ABTestOpportunity,
     ConversionFunnel,
     LandingPageAnalysisResult,
@@ -86,7 +86,7 @@ from paidsearchnav.core.models.landing_page import (
     TrafficSource,
     TrafficSourcePerformance,
 )
-from paidsearchnav.core.models.local_reach import (
+from paidsearchnav_mcp.models.local_reach import (
     LocalReachAnalysisResult,
     LocalReachEfficiencyLevel,
     LocalReachInsight,
@@ -97,14 +97,14 @@ from paidsearchnav.core.models.local_reach import (
     StoreLocation,
     StoreVisitData,
 )
-from paidsearchnav.core.models.scheduled_audit import AuditFrequency, ScheduledAudit
-from paidsearchnav.core.models.search_term import (
+from paidsearchnav_mcp.models.scheduled_audit import AuditFrequency, ScheduledAudit
+from paidsearchnav_mcp.models.search_term import (
     SearchTerm,
     SearchTermClassification,
     SearchTermMetrics,
     SearchTermStatus,
 )
-from paidsearchnav.core.models.store_performance import (
+from paidsearchnav_mcp.models.store_performance import (
     StoreInsight,
     StoreIssueType,
     StoreLocationData,
@@ -114,7 +114,7 @@ from paidsearchnav.core.models.store_performance import (
     StorePerformanceLevel,
     StorePerformanceSummary,
 )
-from paidsearchnav.core.models.video_creative import (
+from paidsearchnav_mcp.models.video_creative import (
     AssetSource,
     AssetStatus,
     AssetType,

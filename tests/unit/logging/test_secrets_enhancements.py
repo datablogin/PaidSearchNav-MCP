@@ -6,7 +6,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from paidsearchnav.logging.secrets import (
+from paidsearchnav_mcp.logging.secrets import (
     SecretsRegistry,
     get_secrets_registry,
     mask_secrets,

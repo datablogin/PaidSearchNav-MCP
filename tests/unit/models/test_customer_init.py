@@ -5,7 +5,7 @@ from datetime import datetime
 import pytest
 from pydantic import ValidationError
 
-from paidsearchnav.core.models.customer_init import (
+from paidsearchnav_mcp.models.customer_init import (
     BusinessType,
     CustomerInitRequest,
     CustomerRecord,

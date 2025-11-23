@@ -6,9 +6,9 @@ from unittest.mock import MagicMock
 import pytest
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.platforms.google.scripts.runner import GoogleAdsScriptRunner
-from paidsearchnav.storage.models import (
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.platforms.google.scripts.runner import GoogleAdsScriptRunner
+from paidsearchnav_mcp.storage.models import (
     Base,
     Customer,
     GoogleAdsScript,

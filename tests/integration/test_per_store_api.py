@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
-from paidsearchnav.api.main import app
+from paidsearchnav_mcp.api.main import app
 
 
 class TestPerStoreAPI:

@@ -2,7 +2,7 @@
 
 import pytest
 
-from paidsearchnav.platforms.google.validation import GoogleAdsInputValidator
+from paidsearchnav_mcp.platforms.google.validation import GoogleAdsInputValidator
 
 
 class TestGoogleAdsInputValidator:

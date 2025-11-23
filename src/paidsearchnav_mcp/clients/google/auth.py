@@ -45,8 +45,8 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow  # type: ignore[import-untyped]
 from pydantic import BaseModel, Field
 
-from paidsearchnav.core.config import SecretProvider, Settings
-from paidsearchnav.core.exceptions import AuthenticationError, ConfigurationError
+from paidsearchnav_mcp.core.config import SecretProvider, Settings
+from paidsearchnav_mcp.core.exceptions import AuthenticationError, ConfigurationError
 
 logger = logging.getLogger(__name__)
 
@@ -1218,7 +1218,7 @@ def create_token_storage(settings: Settings) -> TokenStorage:
     Returns:
         Token storage instance
     """
-    from paidsearchnav.core.config import TokenStorageBackend
+    from paidsearchnav_mcp.core.config import TokenStorageBackend
 
     # Check if using secret manager backend
     if settings.token_storage_backend == TokenStorageBackend.SECRET_MANAGER:

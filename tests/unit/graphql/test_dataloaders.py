@@ -4,7 +4,7 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from paidsearchnav.graphql.dataloaders import (
+from paidsearchnav_mcp.graphql.dataloaders import (
     DataLoaderRegistry,
     create_audit_loader,
     create_audit_results_loader,

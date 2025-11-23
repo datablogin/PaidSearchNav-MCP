@@ -8,15 +8,15 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from paidsearchnav.core.config import Settings, WorkflowConfig
-from paidsearchnav.orchestration.workflow_engine_db import DatabaseWorkflowOrchestrator
-from paidsearchnav.storage.models import (
+from paidsearchnav_mcp.core.config import Settings, WorkflowConfig
+from paidsearchnav_mcp.orchestration.workflow_engine_db import DatabaseWorkflowOrchestrator
+from paidsearchnav_mcp.storage.models import (
     WorkflowDefinition as DBWorkflowDefinition,
 )
-from paidsearchnav.storage.models import (
+from paidsearchnav_mcp.storage.models import (
     WorkflowExecution as DBWorkflowExecution,
 )
-from paidsearchnav.storage.models import (
+from paidsearchnav_mcp.storage.models import (
     WorkflowStep as DBWorkflowStep,
 )
 

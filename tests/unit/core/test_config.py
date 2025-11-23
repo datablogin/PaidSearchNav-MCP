@@ -4,7 +4,7 @@ import os
 
 import pytest
 
-from paidsearchnav.core.config import (
+from paidsearchnav_mcp.core.config import (
     Environment,
     FeatureFlags,
     GoogleAdsConfig,

@@ -9,13 +9,13 @@ import pytest
 # Skip entire module if imports are not available
 pytest.importorskip("paidsearchnav.core.models")
 
-from paidsearchnav.analyzers.geo_performance import GeoPerformanceAnalyzer
-from paidsearchnav.analyzers.keyword_match import KeywordMatchAnalyzer
-from paidsearchnav.analyzers.negative_conflicts import NegativeConflictAnalyzer
-from paidsearchnav.analyzers.pmax import PerformanceMaxAnalyzer
-from paidsearchnav.analyzers.search_terms import SearchTermsAnalyzer
-from paidsearchnav.analyzers.shared_negatives import SharedNegativeValidatorAnalyzer
-from paidsearchnav.core.models import (
+from paidsearchnav_mcp.analyzers.geo_performance import GeoPerformanceAnalyzer
+from paidsearchnav_mcp.analyzers.keyword_match import KeywordMatchAnalyzer
+from paidsearchnav_mcp.analyzers.negative_conflicts import NegativeConflictAnalyzer
+from paidsearchnav_mcp.analyzers.pmax import PerformanceMaxAnalyzer
+from paidsearchnav_mcp.analyzers.search_terms import SearchTermsAnalyzer
+from paidsearchnav_mcp.analyzers.shared_negatives import SharedNegativeValidatorAnalyzer
+from paidsearchnav_mcp.models import (
     Campaign,
     CampaignStatus,
     CampaignType,
@@ -25,8 +25,8 @@ from paidsearchnav.core.models import (
     SearchTerm,
     SearchTermMetrics,
 )
-from paidsearchnav.core.models.campaign import BiddingStrategy
-from paidsearchnav.platforms.google.client import GoogleAdsAPIClient
+from paidsearchnav_mcp.models.campaign import BiddingStrategy
+from paidsearchnav_mcp.platforms.google.client import GoogleAdsAPIClient
 
 
 class MockIntegrationDataProvider:

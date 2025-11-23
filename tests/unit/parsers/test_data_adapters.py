@@ -4,16 +4,16 @@ from datetime import datetime
 
 import pytest
 
-from paidsearchnav.core.models.geo_performance import GeoPerformanceData
-from paidsearchnav.core.models.keyword import Keyword
-from paidsearchnav.core.models.search_term import SearchTerm
-from paidsearchnav.parsers.data_adapters import (
+from paidsearchnav_mcp.models.geo_performance import GeoPerformanceData
+from paidsearchnav_mcp.models.keyword import Keyword
+from paidsearchnav_mcp.models.search_term import SearchTerm
+from paidsearchnav_mcp.parsers.data_adapters import (
     GeoPerformanceAdapter,
     KeywordAdapter,
     SearchTermAdapter,
     get_adapter,
 )
-from paidsearchnav.platforms.google.models import GeoPerformance
+from paidsearchnav_mcp.platforms.google.models import GeoPerformance
 
 
 class TestGeoPerformanceAdapter:

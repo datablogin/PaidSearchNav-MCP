@@ -14,10 +14,10 @@ from httpx import AsyncClient
 from jose import jwt
 from pydantic import SecretStr
 
-from paidsearchnav.api.dependencies import get_repository, get_settings
-from paidsearchnav.api.main import app
-from paidsearchnav.core.config import Settings
-from paidsearchnav.storage.api_repository import APIRepository
+from paidsearchnav_mcp.api.dependencies import get_repository, get_settings
+from paidsearchnav_mcp.api.main import app
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.storage.api_repository import APIRepository
 
 # Test constants to reduce duplication and ensure consistency
 TEST_CUSTOMER_ID = "1234567890"

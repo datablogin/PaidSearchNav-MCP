@@ -10,23 +10,27 @@ from google.ads.googleads.errors import (
     GoogleAdsException,  # type: ignore[import-untyped]
 )
 
-from paidsearchnav.core.circuit_breaker import GoogleAdsCircuitBreaker
-from paidsearchnav.core.config import CircuitBreakerConfig, Settings
-from paidsearchnav.core.exceptions import APIError, AuthenticationError, RateLimitError
-from paidsearchnav.core.models.campaign import Campaign
-from paidsearchnav.core.models.keyword import Keyword, MatchType
-from paidsearchnav.core.models.search_term import SearchTerm, SearchTermMetrics
-from paidsearchnav.platforms.google.metrics import (
+from paidsearchnav_mcp.clients.google.metrics import (
     APIEfficiencyMetrics,
 )
-from paidsearchnav.platforms.google.rate_limiting import (
+from paidsearchnav_mcp.clients.google.rate_limiting import (
     GoogleAdsRateLimiter,
     OperationType,
     account_info_rate_limited,
     report_rate_limited,
     search_rate_limited,
 )
-from paidsearchnav.platforms.google.validation import GoogleAdsInputValidator
+from paidsearchnav_mcp.clients.google.validation import GoogleAdsInputValidator
+from paidsearchnav_mcp.core.circuit_breaker import GoogleAdsCircuitBreaker
+from paidsearchnav_mcp.core.config import CircuitBreakerConfig, Settings
+from paidsearchnav_mcp.core.exceptions import (
+    APIError,
+    AuthenticationError,
+    RateLimitError,
+)
+from paidsearchnav_mcp.models.campaign import Campaign
+from paidsearchnav_mcp.models.keyword import Keyword, MatchType
+from paidsearchnav_mcp.models.search_term import SearchTerm, SearchTermMetrics
 
 logger = logging.getLogger(__name__)
 
@@ -596,7 +600,7 @@ class GoogleAdsAPIClient:
                     customer.currency_code
                 FROM customer
                 LIMIT 1
-            """
+            """.strip()
 
             response = await asyncio.get_event_loop().run_in_executor(
                 None,
@@ -705,7 +709,7 @@ class GoogleAdsAPIClient:
                 metrics.conversions_value
             FROM campaign
             WHERE campaign.status != 'REMOVED'
-        """
+        """.strip()
 
         if campaign_types:
             # Validate campaign types against enum to prevent injection
@@ -843,7 +847,7 @@ class GoogleAdsAPIClient:
             WHERE ad_group_criterion.type = 'KEYWORD'
                 AND ad_group_criterion.negative = FALSE
                 AND ad_group_criterion.status != 'REMOVED'
-        """
+        """.strip()
 
         if campaigns:
             # Validate campaign IDs to prevent injection
@@ -1009,7 +1013,7 @@ class GoogleAdsAPIClient:
                 metrics.conversions_value
             FROM search_term_view
             WHERE segments.date BETWEEN '{start_date_str}' AND '{end_date_str}'
-        """
+        """.strip()
 
         if campaigns:
             # Validate campaign IDs to prevent injection
@@ -1017,7 +1021,11 @@ class GoogleAdsAPIClient:
                 campaigns
             )
             if campaign_filter:
-                query += f" AND ({campaign_filter})"
+                # Don't wrap in parentheses if it's a single condition
+                if " OR " in campaign_filter:
+                    query += f" AND ({campaign_filter})"
+                else:
+                    query += f" AND {campaign_filter}"
 
         if ad_groups:
             # Validate ad group IDs to prevent injection
@@ -1025,7 +1033,11 @@ class GoogleAdsAPIClient:
                 ad_groups
             )
             if ad_group_filter:
-                query += f" AND ({ad_group_filter})"
+                # Don't wrap in parentheses if it's a single condition
+                if " OR " in ad_group_filter:
+                    query += f" AND ({ad_group_filter})"
+                else:
+                    query += f" AND {ad_group_filter}"
 
         query += " ORDER BY metrics.impressions DESC"
 
@@ -1107,7 +1119,7 @@ class GoogleAdsAPIClient:
             WHERE ad_group_criterion.type = 'KEYWORD'
                 AND ad_group_criterion.negative = TRUE
                 AND ad_group_criterion.status != 'REMOVED'
-        """
+        """.strip()
 
         negative_keywords = []
         try:
@@ -1166,7 +1178,7 @@ class GoogleAdsAPIClient:
             WHERE campaign_criterion.type = 'KEYWORD'
                 AND campaign_criterion.negative = TRUE
                 AND campaign_criterion.status != 'REMOVED'
-        """
+        """.strip()
 
         negative_keywords = []
         try:
@@ -1228,7 +1240,7 @@ class GoogleAdsAPIClient:
             WHERE shared_set.type = 'NEGATIVE_KEYWORDS'
                 AND shared_set.status = 'ENABLED'
                 AND shared_criterion.type = 'KEYWORD'
-        """
+        """.strip()
 
         try:
             # Use paginated search for memory efficiency
@@ -1274,7 +1286,7 @@ class GoogleAdsAPIClient:
                 FROM campaign_shared_set
                 WHERE campaign_shared_set.status = 'ENABLED'
                     AND shared_set.type = 'NEGATIVE_KEYWORDS'
-            """
+            """.strip()
 
             try:
                 # Use paginated search for campaign associations
@@ -1342,7 +1354,11 @@ class GoogleAdsAPIClient:
 
         try:
             # Calculate max_results per method if specified
-            method_max_results = max_results // 3 if max_results else None
+            # Ensure each method gets at least 1 result if max_results is specified
+            if max_results and max_results < 3:
+                method_max_results = 1
+            else:
+                method_max_results = max_results // 3 if max_results else None
 
             # Fetch ad group level negative keywords
             ad_group_negatives = await self._fetch_ad_group_negative_keywords(
@@ -1367,12 +1383,13 @@ class GoogleAdsAPIClient:
             if max_results and len(negative_keywords) > max_results:
                 negative_keywords = negative_keywords[:max_results]
 
-        except StopIteration:
-            logger.warning(
-                "StopIteration encountered: Fewer API responses than expected. "
-                "This may indicate a mocking issue in tests or an API change."
+        except StopIteration as e:
+            logger.error(
+                "Unexpected StopIteration during negative keyword fetch. "
+                "This may indicate an API change or issue.",
+                exc_info=True,
             )
-            # Continue with partial results rather than failing completely
+            raise APIError("Failed to fetch complete negative keyword list") from e
 
         logger.info(
             f"Fetched {len(negative_keywords)} negative keywords for customer {customer_id}"
@@ -1479,7 +1496,7 @@ class GoogleAdsAPIClient:
             FROM geographic_view
             WHERE segments.date BETWEEN '{start_date.strftime("%Y-%m-%d")}'
                 AND '{end_date.strftime("%Y-%m-%d")}'
-        """
+        """.strip()
 
         # Add campaign filter if specified
         if campaign_ids:
@@ -1663,7 +1680,7 @@ class GoogleAdsAPIClient:
             FROM distance_view
             WHERE segments.date BETWEEN '{start_date.strftime("%Y-%m-%d")}'
                 AND '{end_date.strftime("%Y-%m-%d")}'
-        """
+        """.strip()
 
         # Add campaign filter if specified
         if campaign_ids:
@@ -1809,7 +1826,7 @@ class GoogleAdsAPIClient:
             FROM campaign
             WHERE segments.date BETWEEN '{start_date.strftime("%Y-%m-%d")}'
                 AND '{end_date.strftime("%Y-%m-%d")}'
-        """
+        """.strip()
 
         # Add campaign filter if specified
         if campaign_ids:
@@ -1921,7 +1938,7 @@ class GoogleAdsAPIClient:
             FROM campaign_criterion
             WHERE campaign_criterion.type = 'AD_SCHEDULE'
                 AND campaign_criterion.status != 'REMOVED'
-        """
+        """.strip()
 
         # Add campaign filter if specified
         if campaign_ids:
@@ -2031,7 +2048,7 @@ class GoogleAdsAPIClient:
             FROM keyword_view
             WHERE segments.date BETWEEN '{start_date_str}' AND '{end_date_str}'
                 AND ad_group_criterion.status != 'REMOVED'
-        """
+        """.strip()
 
         if campaign_ids:
             campaign_filter = GoogleAdsInputValidator.build_safe_campaign_id_filter(
@@ -2188,7 +2205,7 @@ class GoogleAdsAPIClient:
                 geo_target_constant.canonical_name
             FROM geo_target_constant
             WHERE {criterion_filter}
-        """
+        """.strip()
 
         try:
             response = await asyncio.get_event_loop().run_in_executor(
@@ -2282,7 +2299,7 @@ class GoogleAdsAPIClient:
             FROM campaign
             WHERE campaign.advertising_channel_type = 'PERFORMANCE_MAX'
                 AND segments.date BETWEEN '{start_date_str}' AND '{end_date_str}'
-        """
+        """.strip()
 
         query += " ORDER BY campaign.name"
 
@@ -2433,7 +2450,7 @@ class GoogleAdsAPIClient:
             FROM campaign_search_term_insight
             WHERE segments.date BETWEEN '{start_date_str}' AND '{end_date_str}'
                 AND campaign.advertising_channel_type = 'PERFORMANCE_MAX'
-        """
+        """.strip()
 
         if campaign_ids:
             # Validate campaign IDs to prevent injection
@@ -2535,7 +2552,7 @@ class GoogleAdsAPIClient:
             FROM shared_set
             WHERE shared_set.type = 'NEGATIVE_KEYWORDS'
                 AND shared_set.status = 'ENABLED'
-        """
+        """.strip()
 
         try:
             response = await asyncio.get_event_loop().run_in_executor(
@@ -2610,7 +2627,7 @@ class GoogleAdsAPIClient:
                 AND shared_set.type = 'NEGATIVE_KEYWORDS'
                 AND shared_set.status = 'ENABLED'
                 AND {campaign_filter}
-        """
+        """.strip()
 
         try:
             response = await asyncio.get_event_loop().run_in_executor(
@@ -2686,7 +2703,7 @@ class GoogleAdsAPIClient:
                 AND shared_set.status = 'ENABLED'
                 AND shared_criterion.type = 'KEYWORD'
                 AND {shared_set_filter}
-        """
+        """.strip()
 
         try:
             response = await asyncio.get_event_loop().run_in_executor(
@@ -2785,7 +2802,7 @@ class GoogleAdsAPIClient:
             FROM detail_placement_view
             WHERE segments.date BETWEEN '{start_date_str}' AND '{end_date_str}'
                 AND metrics.impressions > 0
-        """
+        """.strip()
 
         if campaigns:
             # Validate campaign IDs to prevent injection

@@ -8,14 +8,14 @@ from cryptography.fernet import Fernet
 from google.auth.exceptions import RefreshError
 from google.oauth2.credentials import Credentials
 
-from paidsearchnav.core.config import (
+from paidsearchnav_mcp.core.config import (
     GoogleAdsConfig,
     SecretProvider,
     Settings,
     TokenStorageBackend,
 )
-from paidsearchnav.core.exceptions import AuthenticationError
-from paidsearchnav.platforms.google.auth import (
+from paidsearchnav_mcp.core.exceptions import AuthenticationError
+from paidsearchnav_mcp.platforms.google.auth import (
     KeyringTokenStorage,
     OAuth2TokenManager,
     SecretManagerTokenStorage,

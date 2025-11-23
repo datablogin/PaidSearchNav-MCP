@@ -6,11 +6,11 @@ from unittest.mock import MagicMock, patch
 import pytest
 from google.ads.googleads.errors import GoogleAdsException
 
-from paidsearchnav.core.exceptions import APIError, AuthenticationError, RateLimitError
-from paidsearchnav.core.models.campaign import Campaign
-from paidsearchnav.core.models.keyword import Keyword, MatchType
-from paidsearchnav.core.models.search_term import SearchTerm
-from paidsearchnav.platforms.google.client import GoogleAdsAPIClient
+from paidsearchnav_mcp.core.exceptions import APIError, AuthenticationError, RateLimitError
+from paidsearchnav_mcp.models.campaign import Campaign
+from paidsearchnav_mcp.models.keyword import Keyword, MatchType
+from paidsearchnav_mcp.models.search_term import SearchTerm
+from paidsearchnav_mcp.platforms.google.client import GoogleAdsAPIClient
 
 
 @pytest.fixture

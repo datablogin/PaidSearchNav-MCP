@@ -5,7 +5,7 @@ from unittest.mock import patch
 
 import pytest
 
-from paidsearchnav.platforms.bigquery.timeout_config import (
+from paidsearchnav_mcp.platforms.bigquery.timeout_config import (
     CustomerTier,
     Environment,
     OperationTimeouts,

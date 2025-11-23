@@ -11,7 +11,7 @@ from uuid import UUID
 import pytest
 from pydantic import BaseModel, SecretStr
 
-from paidsearchnav.core.utils.serialization import (
+from paidsearchnav_mcp.core.utils.serialization import (
     SerializationError,
     safe_json_dump,
     safe_json_dumps,

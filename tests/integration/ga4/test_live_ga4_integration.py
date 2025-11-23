@@ -9,8 +9,8 @@ from datetime import datetime, timedelta
 
 import pytest
 
-from paidsearchnav.platforms.ga4.bigquery_client import GA4BigQueryClient
-from paidsearchnav.platforms.ga4.validation import GA4DataValidator
+from paidsearchnav_mcp.platforms.ga4.bigquery_client import GA4BigQueryClient
+from paidsearchnav_mcp.platforms.ga4.validation import GA4DataValidator
 
 
 @pytest.mark.integration

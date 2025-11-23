@@ -7,7 +7,7 @@ from typing import Any
 import pandas as pd
 from pydantic import Field, computed_field, field_validator, model_validator
 
-from paidsearchnav.core.models.base import BasePSNModel
+from paidsearchnav_mcp.models.base import BasePSNModel
 
 
 class SearchTermStatus(str, Enum):
@@ -38,7 +38,7 @@ class SearchTermMetrics(BasePSNModel):
     @classmethod
     def clean_integer_fields(cls, v: Any) -> int:
         """Clean and validate integer metric fields."""
-        from paidsearchnav.utils.csv_parsing import clean_numeric_value
+        from paidsearchnav_mcp.utils.csv_parsing import clean_numeric_value
 
         cleaned = clean_numeric_value(v)
         return int(cleaned) if cleaned is not None else 0
@@ -47,7 +47,7 @@ class SearchTermMetrics(BasePSNModel):
     @classmethod
     def clean_float_fields(cls, v: Any) -> float:
         """Clean and validate float metric fields."""
-        from paidsearchnav.utils.csv_parsing import clean_numeric_value
+        from paidsearchnav_mcp.utils.csv_parsing import clean_numeric_value
 
         cleaned = clean_numeric_value(v)
         return float(cleaned) if cleaned is not None else 0.0
@@ -134,7 +134,7 @@ class SearchTerm(BasePSNModel):
     def handle_missing_fields(cls, data: Any) -> Any:
         """Handle missing required fields with smart inference."""
         if isinstance(data, dict):
-            from paidsearchnav.utils.csv_parsing import infer_missing_fields
+            from paidsearchnav_mcp.utils.csv_parsing import infer_missing_fields
 
             data = infer_missing_fields(data)
 
@@ -165,7 +165,7 @@ class SearchTerm(BasePSNModel):
         """Ensure ad_group_name is present with smart defaults."""
         # Use the centralized inference logic if value is missing
         if not v or (v is not None and pd.isna(v)):
-            from paidsearchnav.utils.csv_parsing import infer_missing_fields
+            from paidsearchnav_mcp.utils.csv_parsing import infer_missing_fields
 
             # Create temporary data dict for inference
             temp_data = info.data.copy() if info.data else {}
@@ -180,7 +180,7 @@ class SearchTerm(BasePSNModel):
         """Ensure campaign_name is present with smart defaults."""
         # Use the centralized inference logic if value is missing
         if not v or (v is not None and pd.isna(v)):
-            from paidsearchnav.utils.csv_parsing import infer_missing_fields
+            from paidsearchnav_mcp.utils.csv_parsing import infer_missing_fields
 
             # Create temporary data dict for inference
             temp_data = info.data.copy() if info.data else {}

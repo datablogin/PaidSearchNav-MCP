@@ -3,7 +3,7 @@
 from datetime import date, datetime, time
 from decimal import Decimal
 
-from paidsearchnav.i18n.formatters import (
+from paidsearchnav_mcp.i18n.formatters import (
     format_currency,
     format_date,
     format_datetime,

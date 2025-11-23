@@ -14,8 +14,8 @@ from typing import Any, Callable, Dict, Optional, TypeVar
 
 from circuitbreaker import CircuitBreaker
 
-from paidsearchnav.core.config import CircuitBreakerConfig, GA4Config
-from paidsearchnav.platforms.ga4.models import GA4QuotaUsage
+from paidsearchnav_mcp.core.config import CircuitBreakerConfig, GA4Config
+from paidsearchnav_mcp.platforms.ga4.models import GA4QuotaUsage
 
 try:
     from google.api_core.exceptions import (
@@ -380,7 +380,7 @@ class GA4ResilientClient:
         self.circuit_breaker = GA4CircuitBreaker(ga4_config, circuit_config)
 
         # Import and create base client
-        from paidsearchnav.platforms.ga4.client import GA4DataClient
+        from paidsearchnav_mcp.platforms.ga4.client import GA4DataClient
 
         self.base_client = GA4DataClient(ga4_config)
 

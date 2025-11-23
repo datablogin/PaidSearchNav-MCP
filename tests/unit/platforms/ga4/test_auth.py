@@ -4,8 +4,8 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from paidsearchnav.core.config import GA4Config
-from paidsearchnav.platforms.ga4.auth import GA4AuthenticationError, GA4Authenticator
+from paidsearchnav_mcp.core.config import GA4Config
+from paidsearchnav_mcp.platforms.ga4.auth import GA4AuthenticationError, GA4Authenticator
 
 
 class TestGA4Authenticator:

@@ -4,10 +4,10 @@ from unittest.mock import AsyncMock, Mock
 
 import pytest
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.core.models.analysis import AnalysisResult
-from paidsearchnav.scheduler.jobs import AuditJob, SingleAnalyzerJob
-from paidsearchnav.scheduler.models import AuditJobConfig
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.models.analysis import AnalysisResult
+from paidsearchnav_mcp.scheduler.jobs import AuditJob, SingleAnalyzerJob
+from paidsearchnav_mcp.scheduler.models import AuditJobConfig
 
 
 class TestAuditJobContextValidation:

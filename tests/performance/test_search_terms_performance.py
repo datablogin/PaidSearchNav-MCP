@@ -7,13 +7,13 @@ from typing import Any
 
 import pytest
 
-from paidsearchnav.analyzers.search_terms import (
+from paidsearchnav_mcp.analyzers.search_terms import (
     SearchTermsAnalyzer,
     StreamingAccumulator,
 )
-from paidsearchnav.core.config import AnalyzerThresholds
-from paidsearchnav.core.models import Keyword, SearchTerm, SearchTermMetrics
-from paidsearchnav.data_providers.base import DataProvider
+from paidsearchnav_mcp.core.config import AnalyzerThresholds
+from paidsearchnav_mcp.models import Keyword, SearchTerm, SearchTermMetrics
+from paidsearchnav_mcp.data_providers.base import DataProvider
 
 
 class MockDataProvider(DataProvider):

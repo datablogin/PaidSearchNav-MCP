@@ -1,7 +1,7 @@
 """Unit tests for CampaignAdapter."""
 
-from paidsearchnav.core.models.campaign import Campaign
-from paidsearchnav.parsers.data_adapters import CampaignAdapter
+from paidsearchnav_mcp.models.campaign import Campaign
+from paidsearchnav_mcp.parsers.data_adapters import CampaignAdapter
 
 
 class TestCampaignAdapter:

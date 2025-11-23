@@ -9,10 +9,10 @@ from unittest.mock import ANY, AsyncMock, Mock, patch
 import pytest
 from apscheduler.triggers.cron import CronTrigger
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.scheduler.interfaces import JobStatus, JobType
-from paidsearchnav.scheduler.models import JobExecution, ScheduledJob
-from paidsearchnav.scheduler.service import SchedulerMetrics, SchedulerService
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.scheduler.interfaces import JobStatus, JobType
+from paidsearchnav_mcp.scheduler.models import JobExecution, ScheduledJob
+from paidsearchnav_mcp.scheduler.service import SchedulerMetrics, SchedulerService
 
 
 @pytest.fixture

@@ -8,8 +8,8 @@ import pytest
 from moto import mock_aws
 from pydantic import SecretStr
 
-from paidsearchnav.core.config import S3Config
-from paidsearchnav.integrations.s3 import S3Client, S3ClientError
+from paidsearchnav_mcp.core.config import S3Config
+from paidsearchnav_mcp.integrations.s3 import S3Client, S3ClientError
 
 
 class TestS3Integration:

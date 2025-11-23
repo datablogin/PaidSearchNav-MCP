@@ -5,7 +5,7 @@ from unittest.mock import Mock, patch
 import pytest
 from sqlalchemy.pool import NullPool, QueuePool
 
-from paidsearchnav.monitoring.database_metrics import (
+from paidsearchnav_mcp.monitoring.database_metrics import (
     DatabasePoolMonitor,
     create_pool_monitor,
 )

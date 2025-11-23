@@ -13,9 +13,9 @@ from httpx import AsyncClient
 # Skip entire module if imports are not available
 pytest.importorskip("paidsearchnav.integrations.database")
 
-from paidsearchnav.api.dependencies import get_current_user, get_repository
-from paidsearchnav.api.main import app
-from paidsearchnav.integrations.database import (
+from paidsearchnav_mcp.api.dependencies import get_current_user, get_repository
+from paidsearchnav_mcp.api.main import app
+from paidsearchnav_mcp.integrations.database import (
     DatabaseConnection,
 )
 

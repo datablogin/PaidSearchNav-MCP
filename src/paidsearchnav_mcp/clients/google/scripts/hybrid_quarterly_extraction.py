@@ -11,9 +11,9 @@ import logging
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.exports.hybrid import HybridExportManager
-from paidsearchnav.platforms.google.client import GoogleAdsClient
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.exports.hybrid import HybridExportManager
+from paidsearchnav_mcp.platforms.google.client import GoogleAdsClient
 
 from .base import ScriptBase, ScriptConfig, ScriptResult, ScriptStatus, ScriptType
 

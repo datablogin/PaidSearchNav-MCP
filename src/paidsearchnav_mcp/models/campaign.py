@@ -6,7 +6,7 @@ from typing import Any
 
 from pydantic import Field, field_validator
 
-from paidsearchnav.core.models.base import BasePSNModel
+from paidsearchnav_mcp.models.base import BasePSNModel
 
 
 class CampaignStatus(str, Enum):
@@ -30,6 +30,8 @@ class CampaignType(str, Enum):
     LOCAL = "LOCAL"
     HOTEL = "HOTEL"
     PERFORMANCE_MAX = "PERFORMANCE_MAX"
+    DEMAND_GEN = "DEMAND_GEN"  # Demand Gen campaigns (newer campaign type)
+    MULTI_CHANNEL = "MULTI_CHANNEL"  # Multi-channel campaigns
     UNKNOWN = "UNKNOWN"
 
 
@@ -40,6 +42,7 @@ class BiddingStrategy(str, Enum):
     MANUAL_CPV = "MANUAL_CPV"
     MANUAL_CPM = "MANUAL_CPM"
     TARGET_CPA = "TARGET_CPA"
+    TARGET_CPM = "TARGET_CPM"  # Target CPM bidding
     TARGET_ROAS = "TARGET_ROAS"
     TARGET_SPEND = "TARGET_SPEND"
     MAXIMIZE_CONVERSIONS = "MAXIMIZE_CONVERSIONS"
@@ -94,7 +97,7 @@ class Campaign(BasePSNModel):
     @classmethod
     def clean_integer_fields(cls, v: Any) -> int:
         """Clean and validate integer metric fields."""
-        from paidsearchnav.utils.csv_parsing import clean_numeric_value
+        from paidsearchnav_mcp.utils.csv_parsing import clean_numeric_value
 
         cleaned = clean_numeric_value(v)
         return int(cleaned) if cleaned is not None else 0
@@ -105,7 +108,7 @@ class Campaign(BasePSNModel):
     @classmethod
     def clean_required_float_fields(cls, v: Any) -> float:
         """Clean and validate required float metric fields."""
-        from paidsearchnav.utils.csv_parsing import clean_numeric_value
+        from paidsearchnav_mcp.utils.csv_parsing import clean_numeric_value
 
         cleaned = clean_numeric_value(v)
         return float(cleaned) if cleaned is not None else 0.0
@@ -114,7 +117,7 @@ class Campaign(BasePSNModel):
     @classmethod
     def clean_optional_float_fields(cls, v: Any) -> float | None:
         """Clean and validate optional float metric fields."""
-        from paidsearchnav.utils.csv_parsing import clean_numeric_value
+        from paidsearchnav_mcp.utils.csv_parsing import clean_numeric_value
 
         cleaned = clean_numeric_value(v)
         return float(cleaned) if cleaned is not None else None

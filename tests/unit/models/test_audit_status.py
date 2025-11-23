@@ -5,7 +5,7 @@ from datetime import datetime, timedelta, timezone
 import pytest
 from pydantic import ValidationError
 
-from paidsearchnav.core.models import AuditState, AuditStatus
+from paidsearchnav_mcp.models import AuditState, AuditStatus
 
 
 class TestAuditStatus:

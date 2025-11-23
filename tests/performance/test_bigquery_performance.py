@@ -10,8 +10,8 @@ from unittest.mock import patch
 import psutil
 import pytest
 
-from paidsearchnav.exports.base import ExportRequest
-from paidsearchnav.exports.hybrid import HybridExportManager
+from paidsearchnav_mcp.exports.base import ExportRequest
+from paidsearchnav_mcp.exports.hybrid import HybridExportManager
 from tests.mocks.bigquery_mock import MockBigQueryService, create_mock_bigquery_config
 
 

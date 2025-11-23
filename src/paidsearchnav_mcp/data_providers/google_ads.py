@@ -5,14 +5,14 @@ from __future__ import annotations
 from datetime import datetime
 from typing import TYPE_CHECKING, Any
 
-from paidsearchnav.data_providers.base import DataProvider
-from paidsearchnav.platforms.google.client import GoogleAdsAPIClient
-from paidsearchnav.security.rate_limiting import validate_multiple_id_lists
+from paidsearchnav_mcp.data_providers.base import DataProvider
+from paidsearchnav_mcp.platforms.google.client import GoogleAdsAPIClient
+from paidsearchnav_mcp.security.rate_limiting import validate_multiple_id_lists
 
 if TYPE_CHECKING:
-    from paidsearchnav.core.models.campaign import Campaign
-    from paidsearchnav.core.models.keyword import Keyword
-    from paidsearchnav.core.models.search_term import SearchTerm
+    from paidsearchnav_mcp.models.campaign import Campaign
+    from paidsearchnav_mcp.models.keyword import Keyword
+    from paidsearchnav_mcp.models.search_term import SearchTerm
 
 
 class GoogleAdsDataProvider(DataProvider):

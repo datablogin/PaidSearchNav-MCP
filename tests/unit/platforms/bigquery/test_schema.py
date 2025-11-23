@@ -2,7 +2,7 @@
 
 import pytest
 
-from paidsearchnav.platforms.bigquery.schema import BigQueryTableSchema
+from paidsearchnav_mcp.platforms.bigquery.schema import BigQueryTableSchema
 
 
 class TestBigQueryTableSchema:

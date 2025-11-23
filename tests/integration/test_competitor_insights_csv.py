@@ -5,8 +5,8 @@ from pathlib import Path
 
 import pytest
 
-from paidsearchnav.analyzers.competitor_insights import CompetitorInsightsAnalyzer
-from paidsearchnav.core.models import RecommendationType
+from paidsearchnav_mcp.analyzers.competitor_insights import CompetitorInsightsAnalyzer
+from paidsearchnav_mcp.models import RecommendationType
 
 
 class TestCompetitorInsightsCSVIntegration:

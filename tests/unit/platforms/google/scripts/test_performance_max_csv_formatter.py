@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-from paidsearchnav.platforms.google.scripts.performance_max_csv_formatter import (
+from paidsearchnav_mcp.platforms.google.scripts.performance_max_csv_formatter import (
     PerformanceMaxCSVFormatter,
 )
 

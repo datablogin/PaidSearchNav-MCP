@@ -9,13 +9,13 @@ import logging
 from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional
 
-from paidsearchnav.core.config import GA4Config
-from paidsearchnav.platforms.ga4.client import GA4DataClient
-from paidsearchnav.platforms.ga4.models import GA4Alert, GA4AlertThreshold
+from paidsearchnav_mcp.core.config import GA4Config
+from paidsearchnav_mcp.platforms.ga4.client import GA4DataClient
+from paidsearchnav_mcp.platforms.ga4.models import GA4Alert, GA4AlertThreshold
 
 try:
-    from paidsearchnav.alerts.manager import AlertManager, get_alert_manager
-    from paidsearchnav.alerts.models import Alert, AlertPriority, AlertType
+    from paidsearchnav_mcp.alerts.manager import AlertManager, get_alert_manager
+    from paidsearchnav_mcp.alerts.models import Alert, AlertPriority, AlertType
 
     ALERTS_AVAILABLE = True
 except ImportError:

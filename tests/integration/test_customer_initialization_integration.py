@@ -8,13 +8,13 @@ import pytest
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 
-from paidsearchnav.core.models.customer_init import (
+from paidsearchnav_mcp.models.customer_init import (
     BusinessType,
     CustomerInitRequest,
     InitializationStatus,
 )
-from paidsearchnav.services.customer_initialization import CustomerInitializationService
-from paidsearchnav.storage.models import Base, User
+from paidsearchnav_mcp.services.customer_initialization import CustomerInitializationService
+from paidsearchnav_mcp.storage.models import Base, User
 
 
 class TestCustomerInitializationIntegration:

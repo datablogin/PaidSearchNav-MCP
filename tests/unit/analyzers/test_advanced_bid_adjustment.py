@@ -5,10 +5,10 @@ from datetime import datetime
 import pandas as pd
 import pytest
 
-from paidsearchnav.analyzers.advanced_bid_adjustment import (
+from paidsearchnav_mcp.analyzers.advanced_bid_adjustment import (
     AdvancedBidAdjustmentAnalyzer,
 )
-from paidsearchnav.core.models.bid_adjustment import (
+from paidsearchnav_mcp.models.bid_adjustment import (
     BidAdjustment,
     BidAdjustmentAnalysisResult,
     BidOptimization,

@@ -5,7 +5,7 @@ from io import StringIO
 
 import pytest
 
-from paidsearchnav.platforms.google.scripts.csv_formatter import (
+from paidsearchnav_mcp.platforms.google.scripts.csv_formatter import (
     CSVCompatibilityValidator,
     CSVFormatter,
 )

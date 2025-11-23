@@ -6,13 +6,16 @@ from typing import Any
 
 from pydantic import Field
 
-from paidsearchnav.core.models.base import (
+from paidsearchnav_mcp.models.base import (
     BasePSNModel,
     EnhancedKeyMetrics,
     MetricPeriod,
     MetricWithContext,
 )
-from paidsearchnav.core.models.search_term import SearchTerm, SearchTermClassification
+from paidsearchnav_mcp.models.search_term import (
+    SearchTerm,
+    SearchTermClassification,
+)
 
 
 class RecommendationPriority(str, Enum):

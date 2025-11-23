@@ -7,7 +7,7 @@ import pytest
 import respx
 from httpx import AsyncClient
 
-from paidsearchnav.core.config import Settings
+from paidsearchnav_mcp.core.config import Settings
 
 # Import test constants
 TEST_CUSTOMER_ID = "1234567890"

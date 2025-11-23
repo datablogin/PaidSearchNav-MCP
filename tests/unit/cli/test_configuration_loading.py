@@ -5,9 +5,9 @@ from unittest.mock import Mock, patch
 import pytest
 from click.testing import CliRunner
 
-from paidsearchnav.cli.accounts import accounts
-from paidsearchnav.cli.geo import _create_api_client, geo
-from paidsearchnav.core.config import Settings
+from paidsearchnav_mcp.cli.accounts import accounts
+from paidsearchnav_mcp.cli.geo import _create_api_client, geo
+from paidsearchnav_mcp.core.config import Settings
 
 
 class TestCLIConfigurationLoading:

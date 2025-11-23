@@ -5,8 +5,8 @@ from unittest.mock import AsyncMock, Mock, patch
 import pytest
 from fastapi.testclient import TestClient
 
-from paidsearchnav.api.main import create_app
-from paidsearchnav.core.config import Settings
+from paidsearchnav_mcp.api.main import create_app
+from paidsearchnav_mcp.core.config import Settings
 
 
 @pytest.fixture

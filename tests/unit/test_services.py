@@ -4,12 +4,12 @@ from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 
-from paidsearchnav.core.exceptions import (
+from paidsearchnav_mcp.core.exceptions import (
     AuthorizationError,
     ResourceNotFoundError,
     ValidationError,
 )
-from paidsearchnav.services import (
+from paidsearchnav_mcp.services import (
     AnalysisService,
     AuditService,
     CustomerService,

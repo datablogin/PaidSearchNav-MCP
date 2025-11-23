@@ -6,8 +6,8 @@ import pytest
 from fastapi import HTTPException
 from fastapi.testclient import TestClient
 
-from paidsearchnav.api.main import app
-from paidsearchnav.api.v1.premium_utils import (
+from paidsearchnav_mcp.api.main import app
+from paidsearchnav_mcp.api.v1.premium_utils import (
     parse_date_range,
     validate_campaign_ids,
     validate_customer_id,

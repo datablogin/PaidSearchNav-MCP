@@ -2,7 +2,7 @@
 
 import pytest
 
-from paidsearchnav.services.file_validation import FileValidator
+from paidsearchnav_mcp.services.file_validation import FileValidator
 
 
 @pytest.fixture

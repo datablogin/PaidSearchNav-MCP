@@ -4,8 +4,8 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from paidsearchnav.platforms.google.scripts.runner import GoogleAdsScriptRunner
-from paidsearchnav.storage.models import GoogleAdsScript, ScriptExecution
+from paidsearchnav_mcp.platforms.google.scripts.runner import GoogleAdsScriptRunner
+from paidsearchnav_mcp.storage.models import GoogleAdsScript, ScriptExecution
 
 
 class TestScriptValidation:

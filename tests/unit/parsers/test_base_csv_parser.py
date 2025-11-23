@@ -5,7 +5,7 @@ from typing import Dict, List
 
 import pytest
 
-from paidsearchnav.parsers.base_csv_parser import (
+from paidsearchnav_mcp.parsers.base_csv_parser import (
     BaseCSVParser,
     ColumnMapping,
     CSVParsingError,

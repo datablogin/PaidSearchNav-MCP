@@ -9,7 +9,7 @@ from unittest.mock import Mock
 
 import pytest
 
-from paidsearchnav.core.models import (
+from paidsearchnav_mcp.models import (
     AnalysisMetrics,
     AnalysisResult,
     KeywordMatchAnalysisResult,
@@ -22,7 +22,7 @@ from paidsearchnav.core.models import (
     SearchTermClassification,
     SearchTermMetrics,
 )
-from paidsearchnav.reports.generator import ReportFormat, ReportGeneratorImpl
+from paidsearchnav_mcp.reports.generator import ReportFormat, ReportGeneratorImpl
 
 
 @pytest.fixture

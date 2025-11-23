@@ -6,7 +6,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from redis.exceptions import ConnectionError, RedisError
 
-from paidsearchnav.cache.backends import RedisCache
+from paidsearchnav_mcp.cache.backends import RedisCache
 
 
 class TestRedisCache:

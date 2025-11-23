@@ -8,7 +8,7 @@ from unittest.mock import patch
 
 import pytest
 
-from paidsearchnav.parsers.csv_parser import GoogleAdsCSVParser
+from paidsearchnav_mcp.parsers.csv_parser import GoogleAdsCSVParser
 
 
 class TestCSVParserPerformance:

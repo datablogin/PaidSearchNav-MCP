@@ -4,8 +4,8 @@ from datetime import datetime
 
 import pytest
 
-from paidsearchnav.analyzers.search_terms import SearchTermsAnalyzer
-from paidsearchnav.core.models import (
+from paidsearchnav_mcp.analyzers.search_terms import SearchTermsAnalyzer
+from paidsearchnav_mcp.models import (
     Keyword,
     MatchType,
     SearchTerm,

@@ -3,7 +3,7 @@
 import pytest
 from click.testing import CliRunner
 
-from paidsearchnav.cli.main import cli
+from paidsearchnav_mcp.cli.main import cli
 
 
 @pytest.fixture

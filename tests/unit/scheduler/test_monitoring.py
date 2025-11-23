@@ -7,7 +7,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from prometheus_client import CollectorRegistry
 
-from paidsearchnav.scheduler.monitoring import (
+from paidsearchnav_mcp.scheduler.monitoring import (
     CorrelationContext,
     HealthChecker,
     SchedulerMetrics,

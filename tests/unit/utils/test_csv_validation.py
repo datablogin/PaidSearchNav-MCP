@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from paidsearchnav.utils.csv_validation import CSVFormatValidator, suggest_csv_fixes
+from paidsearchnav_mcp.utils.csv_validation import CSVFormatValidator, suggest_csv_fixes
 
 
 @pytest.fixture

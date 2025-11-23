@@ -5,17 +5,17 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from paidsearchnav.core.interfaces import Analyzer
-from paidsearchnav.core.models import (
+from paidsearchnav_mcp.core.interfaces import Analyzer
+from paidsearchnav_mcp.models import (
     AnalysisResult,
     RecommendationPriority,
     RecommendationType,
 )
-from paidsearchnav.exports.analyzer_sql_bridge import (
+from paidsearchnav_mcp.exports.analyzer_sql_bridge import (
     AnalyzerMigrationManager,
     AnalyzerSQLBridge,
 )
-from paidsearchnav.exports.bigquery_views import BigQueryAnalyzerViews
+from paidsearchnav_mcp.exports.bigquery_views import BigQueryAnalyzerViews
 
 
 class TestAnalyzerSQLBridge:

@@ -7,8 +7,8 @@ from unittest.mock import patch
 import pytest
 import yaml
 
-from paidsearchnav.exports.base import ExportConfig, ExportFormat
-from paidsearchnav.exports.config import ExportConfigManager
+from paidsearchnav_mcp.exports.base import ExportConfig, ExportFormat
+from paidsearchnav_mcp.exports.config import ExportConfigManager
 
 
 class TestExportConfigManager:

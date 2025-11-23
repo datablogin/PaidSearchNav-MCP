@@ -5,7 +5,7 @@ from datetime import datetime
 import pytest
 from pydantic import ValidationError
 
-from paidsearchnav.attribution.models import (
+from paidsearchnav_mcp.attribution.models import (
     AttributionInsight,
     AttributionModel,
     AttributionModelType,

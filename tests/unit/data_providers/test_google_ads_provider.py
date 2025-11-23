@@ -5,10 +5,10 @@ from unittest.mock import AsyncMock, Mock
 
 import pytest
 
-from paidsearchnav.core.models.campaign import Campaign
-from paidsearchnav.core.models.keyword import Keyword
-from paidsearchnav.core.models.search_term import SearchTerm
-from paidsearchnav.data_providers.google_ads import GoogleAdsDataProvider
+from paidsearchnav_mcp.models.campaign import Campaign
+from paidsearchnav_mcp.models.keyword import Keyword
+from paidsearchnav_mcp.models.search_term import SearchTerm
+from paidsearchnav_mcp.data_providers.google_ads import GoogleAdsDataProvider
 
 
 class TestGoogleAdsDataProvider:

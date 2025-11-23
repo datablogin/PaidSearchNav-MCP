@@ -6,13 +6,13 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from paidsearchnav.exports.base import (
+from paidsearchnav_mcp.exports.base import (
     ExportConfig,
     ExportConnectionError,
     ExportFormat,
     ExportStatus,
 )
-from paidsearchnav.exports.bigquery import BIGQUERY_AVAILABLE, BigQueryExporter
+from paidsearchnav_mcp.exports.bigquery import BIGQUERY_AVAILABLE, BigQueryExporter
 
 # Import GoogleCloudError for proper exception testing
 try:

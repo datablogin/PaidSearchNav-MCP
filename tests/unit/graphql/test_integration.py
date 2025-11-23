@@ -6,7 +6,7 @@ from unittest.mock import Mock, patch
 import pytest
 from httpx import ASGITransport, AsyncClient
 
-from paidsearchnav.api.main import create_app
+from paidsearchnav_mcp.api.main import create_app
 
 
 class TestGraphQLIntegration:

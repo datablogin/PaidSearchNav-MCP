@@ -8,7 +8,7 @@ from alembic.config import Config
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from paidsearchnav.storage.models import Base
+from paidsearchnav_mcp.storage.models import Base
 
 
 @pytest.fixture

@@ -3,7 +3,7 @@
 import pytest
 from pydantic import ValidationError
 
-from paidsearchnav.core.config import AnalyzerThresholds
+from paidsearchnav_mcp.core.config import AnalyzerThresholds
 
 
 class TestAnalyzerThresholdsValidation:

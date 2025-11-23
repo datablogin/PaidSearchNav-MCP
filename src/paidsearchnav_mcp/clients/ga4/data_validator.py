@@ -8,10 +8,10 @@ import logging
 from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional
 
-from paidsearchnav.core.config import BigQueryConfig, GA4Config
-from paidsearchnav.platforms.ga4.bigquery_client import GA4BigQueryClient
-from paidsearchnav.platforms.ga4.client import GA4DataClient
-from paidsearchnav.platforms.ga4.models import GA4ValidationResult
+from paidsearchnav_mcp.core.config import BigQueryConfig, GA4Config
+from paidsearchnav_mcp.platforms.ga4.bigquery_client import GA4BigQueryClient
+from paidsearchnav_mcp.platforms.ga4.client import GA4DataClient
+from paidsearchnav_mcp.platforms.ga4.models import GA4ValidationResult
 
 logger = logging.getLogger(__name__)
 

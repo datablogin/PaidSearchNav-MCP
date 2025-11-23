@@ -5,12 +5,12 @@ from unittest.mock import patch
 
 import pytest
 
-from paidsearchnav.analyzers.ad_group_performance import (
+from paidsearchnav_mcp.analyzers.ad_group_performance import (
     AdGroupPerformance,
     AdGroupPerformanceAnalyzer,
     AdGroupStatus,
 )
-from paidsearchnav.core.models.analysis import RecommendationType
+from paidsearchnav_mcp.models.analysis import RecommendationType
 
 
 class TestAdGroupPerformanceModel:

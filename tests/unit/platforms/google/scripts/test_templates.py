@@ -6,8 +6,8 @@ from tempfile import NamedTemporaryFile
 
 import pytest
 
-from paidsearchnav.platforms.google.scripts.base import ScriptType
-from paidsearchnav.platforms.google.scripts.templates import (
+from paidsearchnav_mcp.platforms.google.scripts.base import ScriptType
+from paidsearchnav_mcp.platforms.google.scripts.templates import (
     ScriptTemplate,
     TemplateManager,
 )

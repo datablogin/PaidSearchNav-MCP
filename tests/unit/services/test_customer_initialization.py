@@ -5,12 +5,12 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from botocore.exceptions import ClientError
 
-from paidsearchnav.core.models.customer_init import (
+from paidsearchnav_mcp.models.customer_init import (
     BusinessType,
     CustomerInitRequest,
     InitializationStatus,
 )
-from paidsearchnav.services.customer_initialization import (
+from paidsearchnav_mcp.services.customer_initialization import (
     CustomerInitializationError,
     CustomerInitializationService,
     GoogleAdsInitializationError,

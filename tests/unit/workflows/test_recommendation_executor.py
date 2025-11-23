@@ -5,10 +5,10 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.core.exceptions import RecommendationError
-from paidsearchnav.integrations.google_ads_write_client import GoogleAdsWriteClient
-from paidsearchnav.workflows.recommendation_executor import (
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.core.exceptions import RecommendationError
+from paidsearchnav_mcp.integrations.google_ads_write_client import GoogleAdsWriteClient
+from paidsearchnav_mcp.workflows.recommendation_executor import (
     ExecutionResult,
     Recommendation,
     RecommendationBatch,
@@ -16,7 +16,7 @@ from paidsearchnav.workflows.recommendation_executor import (
     RecommendationPriority,
     RecommendationType,
 )
-from paidsearchnav.workflows.workflow_engine import (
+from paidsearchnav_mcp.workflows.workflow_engine import (
     WorkflowDefinition,
     WorkflowEngine,
     WorkflowExecution,

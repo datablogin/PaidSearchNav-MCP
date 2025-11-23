@@ -5,10 +5,10 @@ from unittest.mock import AsyncMock, MagicMock, Mock, patch
 
 import pytest
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.scheduler.interfaces import JobType
-from paidsearchnav.scheduler.jobs import AuditJob, SingleAnalyzerJob
-from paidsearchnav.scheduler.models import AuditJobConfig
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.scheduler.interfaces import JobType
+from paidsearchnav_mcp.scheduler.jobs import AuditJob, SingleAnalyzerJob
+from paidsearchnav_mcp.scheduler.models import AuditJobConfig
 
 
 @pytest.fixture

@@ -4,7 +4,7 @@ import pickle
 
 import pytest
 
-from paidsearchnav.core.exceptions import (
+from paidsearchnav_mcp.core.exceptions import (
     AnalysisError,
     APIError,
     AuthenticationError,

@@ -5,15 +5,15 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from paidsearchnav.alerts.models import (
+from paidsearchnav_mcp.alerts.models import (
     Alert,
     AlertConfig,
     AlertPriority,
     AlertStatus,
     AlertType,
 )
-from paidsearchnav.alerts.processors import AsyncAlertProcessor
-from paidsearchnav.alerts.rate_limiter import AlertRateLimiter
+from paidsearchnav_mcp.alerts.processors import AsyncAlertProcessor
+from paidsearchnav_mcp.alerts.rate_limiter import AlertRateLimiter
 
 
 @pytest.fixture

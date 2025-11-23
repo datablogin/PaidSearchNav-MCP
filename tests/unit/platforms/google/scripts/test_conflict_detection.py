@@ -4,13 +4,13 @@ from unittest.mock import Mock
 
 import pytest
 
-from paidsearchnav.platforms.google.client import GoogleAdsClient
-from paidsearchnav.platforms.google.scripts.base import (
+from paidsearchnav_mcp.platforms.google.client import GoogleAdsClient
+from paidsearchnav_mcp.platforms.google.scripts.base import (
     ScriptConfig,
     ScriptStatus,
     ScriptType,
 )
-from paidsearchnav.platforms.google.scripts.conflict_detection import (
+from paidsearchnav_mcp.platforms.google.scripts.conflict_detection import (
     ConflictDetectionScript,
     ConflictType,
     KeywordConflict,

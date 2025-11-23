@@ -5,8 +5,8 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from paidsearchnav.integrations.base import OfflineConversion
-from paidsearchnav.integrations.offline_conversions import (
+from paidsearchnav_mcp.integrations.base import OfflineConversion
+from paidsearchnav_mcp.integrations.offline_conversions import (
     EnhancedConversionsTracker,
     GCLIDTracker,
 )

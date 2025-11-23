@@ -3,7 +3,7 @@
 import pytest
 import yaml
 
-from paidsearchnav.orchestration.workflow_definitions import (
+from paidsearchnav_mcp.orchestration.workflow_definitions import (
     ParsedWorkflowDefinition,
     WorkflowDefinitionParser,
     WorkflowStep,

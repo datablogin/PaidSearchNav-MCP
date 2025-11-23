@@ -6,12 +6,12 @@ import pytest
 from google.cloud import bigquery
 from google.cloud.exceptions import GoogleCloudError
 
-from paidsearchnav.platforms.bigquery.timeout_client import (
+from paidsearchnav_mcp.platforms.bigquery.timeout_client import (
     BigQueryTimeoutClient,
     BigQueryTimeoutError,
     create_timeout_client,
 )
-from paidsearchnav.platforms.bigquery.timeout_config import CustomerTier
+from paidsearchnav_mcp.platforms.bigquery.timeout_config import CustomerTier
 
 
 class TestBigQueryTimeoutClient:

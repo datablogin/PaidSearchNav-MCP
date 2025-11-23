@@ -6,7 +6,7 @@ from unittest.mock import patch
 
 import pytest
 
-from paidsearchnav.__main__ import cli
+from paidsearchnav_mcp.__main__ import cli
 
 
 class TestMainEntryPoint:

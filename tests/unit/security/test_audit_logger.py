@@ -5,7 +5,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from paidsearchnav.security.audit_logger import (
+from paidsearchnav_mcp.security.audit_logger import (
     AuditEvent,
     AuditEventType,
     AuditLogger,

@@ -5,11 +5,11 @@ from pathlib import Path
 
 import pytest
 
-from paidsearchnav.analyzers.dayparting import (
+from paidsearchnav_mcp.analyzers.dayparting import (
     DaypartingAnalysisResult,
     DaypartingAnalyzer,
 )
-from paidsearchnav.core.models import RecommendationPriority, RecommendationType
+from paidsearchnav_mcp.models import RecommendationPriority, RecommendationType
 
 
 class TestDaypartingCSVIntegration:

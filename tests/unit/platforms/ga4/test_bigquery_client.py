@@ -5,7 +5,7 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from paidsearchnav.platforms.ga4.bigquery_client import GA4BigQueryClient
+from paidsearchnav_mcp.platforms.ga4.bigquery_client import GA4BigQueryClient
 
 
 class TestGA4BigQueryClient:

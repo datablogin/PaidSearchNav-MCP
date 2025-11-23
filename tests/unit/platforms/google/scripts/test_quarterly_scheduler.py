@@ -4,13 +4,13 @@ from unittest.mock import Mock
 
 import pytest
 
-from paidsearchnav.platforms.google.client import GoogleAdsClient
-from paidsearchnav.platforms.google.scripts.base import ScriptConfig, ScriptType
-from paidsearchnav.platforms.google.scripts.quarterly_scheduler import (
+from paidsearchnav_mcp.platforms.google.client import GoogleAdsClient
+from paidsearchnav_mcp.platforms.google.scripts.base import ScriptConfig, ScriptType
+from paidsearchnav_mcp.platforms.google.scripts.quarterly_scheduler import (
     ComprehensiveQuarterlyAuditScript,
     QuarterlyDataExtractionScheduler,
 )
-from paidsearchnav.platforms.google.scripts.scheduler import ScriptScheduler
+from paidsearchnav_mcp.platforms.google.scripts.scheduler import ScriptScheduler
 
 
 class TestQuarterlyDataExtractionScheduler:

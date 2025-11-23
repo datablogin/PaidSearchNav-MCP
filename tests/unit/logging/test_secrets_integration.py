@@ -5,8 +5,8 @@ import logging
 
 import pytest
 
-from paidsearchnav.logging.formatters import ColoredFormatter, JSONFormatter
-from paidsearchnav.logging.secrets import get_secrets_registry
+from paidsearchnav_mcp.logging.formatters import ColoredFormatter, JSONFormatter
+from paidsearchnav_mcp.logging.secrets import get_secrets_registry
 
 
 class TestJSONFormatterSecrets:

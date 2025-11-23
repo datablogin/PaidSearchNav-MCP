@@ -8,9 +8,9 @@ from typing import Any, Dict, List, Optional
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.platforms.google.client import GoogleAdsClient
-from paidsearchnav.storage.models import GoogleAdsScript, ScriptExecution
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.platforms.google.client import GoogleAdsClient
+from paidsearchnav_mcp.storage.models import GoogleAdsScript, ScriptExecution
 
 from .base import ScriptStatus
 from .logging_utils import get_structured_logger, set_correlation_id

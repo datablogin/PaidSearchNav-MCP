@@ -5,20 +5,20 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.core.models.analysis import (
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.models.analysis import (
     AnalysisMetrics,
     AnalysisResult,
     Recommendation,
     RecommendationPriority,
     RecommendationType,
 )
-from paidsearchnav.core.models.audit_files import (
+from paidsearchnav_mcp.models.audit_files import (
     AnalysisWithFiles,
     FileCategory,
     S3FileReference,
 )
-from paidsearchnav.storage.repository import AnalysisRepository
+from paidsearchnav_mcp.storage.repository import AnalysisRepository
 
 
 @pytest.fixture

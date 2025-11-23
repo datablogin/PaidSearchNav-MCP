@@ -7,9 +7,9 @@ import pytest
 from fastapi import HTTPException, Request
 from fastapi.testclient import TestClient
 
-from paidsearchnav.api.main import create_app
-from paidsearchnav.api.version_config import initialize_api_versions
-from paidsearchnav.api.version_transformers import (
+from paidsearchnav_mcp.api.main import create_app
+from paidsearchnav_mcp.api.version_config import initialize_api_versions
+from paidsearchnav_mcp.api.version_transformers import (
     DeprecatedFieldTransformer,
     FieldRenameTransformer,
     ResponseFilterTransformer,
@@ -17,7 +17,7 @@ from paidsearchnav.api.version_transformers import (
     V1ToV1_1Transformer,
     initialize_transformers,
 )
-from paidsearchnav.api.versioning import (
+from paidsearchnav_mcp.api.versioning import (
     ApiVersion,
     VersionedResponse,
     VersionedRoute,

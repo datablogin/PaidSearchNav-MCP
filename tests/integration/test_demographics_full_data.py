@@ -6,8 +6,8 @@ from pathlib import Path
 
 import pytest
 
-from paidsearchnav.analyzers.demographics import DemographicsAnalyzer
-from paidsearchnav.core.models.demographics import DemographicType
+from paidsearchnav_mcp.analyzers.demographics import DemographicsAnalyzer
+from paidsearchnav_mcp.models.demographics import DemographicType
 
 
 class TestDemographicsAnalyzerIntegration:

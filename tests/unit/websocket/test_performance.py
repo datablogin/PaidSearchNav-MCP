@@ -6,8 +6,8 @@ from unittest.mock import AsyncMock
 
 import pytest
 
-from paidsearchnav.api.models.responses import WebSocketMessage
-from paidsearchnav.api.v1.websocket import ConnectionManager
+from paidsearchnav_mcp.api.models.responses import WebSocketMessage
+from paidsearchnav_mcp.api.v1.websocket import ConnectionManager
 
 
 class TestWebSocketPerformance:

@@ -7,9 +7,9 @@ from unittest.mock import AsyncMock, Mock, patch
 import pytest
 from apscheduler.triggers.cron import CronTrigger
 
-from paidsearchnav.core.config import SchedulerConfig, Settings
-from paidsearchnav.scheduler.interfaces import Job, JobStatus, JobType
-from paidsearchnav.scheduler.scheduler import AuditScheduler
+from paidsearchnav_mcp.core.config import SchedulerConfig, Settings
+from paidsearchnav_mcp.scheduler.interfaces import Job, JobStatus, JobType
+from paidsearchnav_mcp.scheduler.scheduler import AuditScheduler
 
 
 def clear_prometheus_registry():

@@ -2,14 +2,14 @@
 
 import pytest
 
-from paidsearchnav.core.models.file_management import FileCategory, FileMetadata
-from paidsearchnav.core.models.file_metadata import (
+from paidsearchnav_mcp.models.file_management import FileCategory, FileMetadata
+from paidsearchnav_mcp.models.file_metadata import (
     AuditFileMetadata,
     FileOperationMetadata,
     FileProcessingMetadata,
     FileVersionMetadata,
 )
-from paidsearchnav.services.metadata_tracker import MetadataTracker
+from paidsearchnav_mcp.services.metadata_tracker import MetadataTracker
 
 
 @pytest.fixture

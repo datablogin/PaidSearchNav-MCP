@@ -8,13 +8,13 @@ from datetime import datetime
 import pandas as pd
 import pytest
 
-from paidsearchnav.core.models import (
+from paidsearchnav_mcp.models import (
     SearchTerm,
     SearchTermAnalysisResult,
     SearchTermClassification,
     SearchTermMetrics,
 )
-from paidsearchnav.exporters.search_terms_exporter import SearchTermsExporter
+from paidsearchnav_mcp.exporters.search_terms_exporter import SearchTermsExporter
 
 
 @pytest.fixture

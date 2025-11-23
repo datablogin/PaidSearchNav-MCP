@@ -1,6 +1,6 @@
 """Tests for API validation utilities security."""
 
-from paidsearchnav.api.utils.validation import (
+from paidsearchnav_mcp.api.utils.validation import (
     VALID_ANALYZERS,
     is_valid_cron,
     validate_analyzers,

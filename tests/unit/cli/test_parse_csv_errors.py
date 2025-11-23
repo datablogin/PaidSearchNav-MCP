@@ -7,7 +7,7 @@ from unittest.mock import Mock, patch
 import pytest
 from click.testing import CliRunner
 
-from paidsearchnav.cli.parse_csv import parse_csv
+from paidsearchnav_mcp.cli.parse_csv import parse_csv
 
 
 @pytest.fixture

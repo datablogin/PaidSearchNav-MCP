@@ -7,7 +7,7 @@ from typing import List, Optional
 
 from pydantic import Field, field_validator
 
-from paidsearchnav.core.models.base import BasePSNModel
+from paidsearchnav_mcp.models.base import BasePSNModel
 
 
 class ExportFileType(str, Enum):

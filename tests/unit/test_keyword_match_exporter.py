@@ -8,7 +8,7 @@ from datetime import datetime
 import pandas as pd
 import pytest
 
-from paidsearchnav.core.models import (
+from paidsearchnav_mcp.models import (
     Keyword,
     KeywordMatchAnalysisResult,
     KeywordMatchType,
@@ -17,7 +17,7 @@ from paidsearchnav.core.models import (
     RecommendationPriority,
     RecommendationType,
 )
-from paidsearchnav.exporters.keyword_match_exporter import KeywordMatchExporter
+from paidsearchnav_mcp.exporters.keyword_match_exporter import KeywordMatchExporter
 
 
 @pytest.fixture

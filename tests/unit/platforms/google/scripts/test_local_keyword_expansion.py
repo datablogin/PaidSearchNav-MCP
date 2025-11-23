@@ -4,14 +4,14 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from paidsearchnav.platforms.google.scripts.base import (
+from paidsearchnav_mcp.platforms.google.scripts.base import (
     ScriptConfig,
     ScriptStatus,
 )
-from paidsearchnav.platforms.google.scripts.local_intent_optimization import (
+from paidsearchnav_mcp.platforms.google.scripts.local_intent_optimization import (
     StoreLocation,
 )
-from paidsearchnav.platforms.google.scripts.local_keyword_expansion import (
+from paidsearchnav_mcp.platforms.google.scripts.local_keyword_expansion import (
     KeywordExpansionType,
     KeywordOpportunity,
     LandingPageMatchType,

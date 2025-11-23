@@ -6,14 +6,14 @@ from unittest.mock import MagicMock, patch
 import pytest
 from google.oauth2.credentials import Credentials
 
-from paidsearchnav.auth.oauth_manager import (
+from paidsearchnav_mcp.auth.oauth_manager import (
     ConsentFlow,
     OAuth2Manager,
     WorkflowTokenData,
 )
-from paidsearchnav.core.config import GoogleAdsConfig, Settings
-from paidsearchnav.core.exceptions import AuthenticationError, ConfigurationError
-from paidsearchnav.platforms.google.auth import TokenData
+from paidsearchnav_mcp.core.config import GoogleAdsConfig, Settings
+from paidsearchnav_mcp.core.exceptions import AuthenticationError, ConfigurationError
+from paidsearchnav_mcp.platforms.google.auth import TokenData
 
 
 @pytest.fixture

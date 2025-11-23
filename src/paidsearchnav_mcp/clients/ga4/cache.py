@@ -10,8 +10,8 @@ import logging
 from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional
 
-from paidsearchnav.core.config import GA4Config
-from paidsearchnav.platforms.ga4.models import GA4CacheEntry
+from paidsearchnav_mcp.core.config import GA4Config
+from paidsearchnav_mcp.platforms.ga4.models import GA4CacheEntry
 
 try:
     import redis

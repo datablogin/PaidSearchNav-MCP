@@ -7,8 +7,8 @@ from unittest.mock import patch
 
 import pytest
 
-from paidsearchnav.exports.base import ExportFormat, ExportStatus
-from paidsearchnav.exports.csv import CSVExporter
+from paidsearchnav_mcp.exports.base import ExportFormat, ExportStatus
+from paidsearchnav_mcp.exports.csv import CSVExporter
 
 
 class TestCSVExporter:

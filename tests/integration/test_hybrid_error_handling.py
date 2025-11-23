@@ -5,9 +5,9 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from paidsearchnav.core.config import BigQueryConfig, BigQueryTier
-from paidsearchnav.exports.base import ExportFormat, ExportRequest, ExportStatus
-from paidsearchnav.exports.hybrid import HybridExportManager
+from paidsearchnav_mcp.core.config import BigQueryConfig, BigQueryTier
+from paidsearchnav_mcp.exports.base import ExportFormat, ExportRequest, ExportStatus
+from paidsearchnav_mcp.exports.hybrid import HybridExportManager
 from tests.mocks.bigquery_mock import create_mock_bigquery_config
 
 

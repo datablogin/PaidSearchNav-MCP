@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from paidsearchnav.parsers.store_csv_parser import StoreCSVParser
+from paidsearchnav_mcp.parsers.store_csv_parser import StoreCSVParser
 
 
 class TestStoreCSVParser:

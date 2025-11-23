@@ -4,9 +4,9 @@ from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 
-from paidsearchnav.alerts.manager import AlertManager, get_alert_manager, send_alert
-from paidsearchnav.alerts.models import AlertConfig, AlertPriority, AlertType
-from paidsearchnav.core.config import Settings
+from paidsearchnav_mcp.alerts.manager import AlertManager, get_alert_manager, send_alert
+from paidsearchnav_mcp.alerts.models import AlertConfig, AlertPriority, AlertType
+from paidsearchnav_mcp.core.config import Settings
 
 
 @pytest.fixture

@@ -6,15 +6,15 @@ from pathlib import Path
 
 import pytest
 
-from paidsearchnav.analyzers.competitor_insights import (
+from paidsearchnav_mcp.analyzers.competitor_insights import (
     CompetitorInsightsAnalyzer,
     CompetitorInsightsResult,
 )
-from paidsearchnav.core.models import (
+from paidsearchnav_mcp.models import (
     RecommendationPriority,
     RecommendationType,
 )
-from paidsearchnav.platforms.google import AuctionInsights
+from paidsearchnav_mcp.platforms.google import AuctionInsights
 
 
 class TestCompetitorInsightsAnalyzer:

@@ -8,8 +8,8 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from fastapi.testclient import TestClient
 
-from paidsearchnav.api.main import app
-from paidsearchnav.core.config import BigQueryTier
+from paidsearchnav_mcp.api.main import app
+from paidsearchnav_mcp.core.config import BigQueryTier
 
 
 @pytest.fixture

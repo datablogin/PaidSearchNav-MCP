@@ -3,8 +3,8 @@
 import json
 import logging
 
-from paidsearchnav.logging.context import add_context, clear_context
-from paidsearchnav.logging.formatters import (
+from paidsearchnav_mcp.logging.context import add_context, clear_context
+from paidsearchnav_mcp.logging.formatters import (
     ColoredFormatter,
     JSONFormatter,
     PrettyJSONFormatter,

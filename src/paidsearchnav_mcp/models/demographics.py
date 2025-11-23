@@ -6,8 +6,8 @@ from datetime import datetime
 from enum import Enum
 from typing import Any
 
-from paidsearchnav.core.models.analysis import AnalysisResult
-from paidsearchnav.core.models.base import BasePSNModel
+from paidsearchnav_mcp.models.analysis import AnalysisResult
+from paidsearchnav_mcp.models.base import BasePSNModel
 
 
 class DemographicType(str, Enum):

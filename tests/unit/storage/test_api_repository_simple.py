@@ -2,8 +2,8 @@
 
 from unittest.mock import patch
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.storage.api_repository import APIRepository
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.storage.api_repository import APIRepository
 
 
 def test_api_repository_creation():

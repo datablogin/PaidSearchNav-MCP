@@ -7,15 +7,15 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from paidsearchnav.exports.base import (
+from paidsearchnav_mcp.exports.base import (
     ExportFormat,
     ExportProgress,
     ExportRequest,
     ExportStatus,
     PaginationConfig,
 )
-from paidsearchnav.exports.csv import CSVExporter
-from paidsearchnav.exports.hybrid import HybridExportManager
+from paidsearchnav_mcp.exports.csv import CSVExporter
+from paidsearchnav_mcp.exports.hybrid import HybridExportManager
 
 
 class TestPaginationConfig:

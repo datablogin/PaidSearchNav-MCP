@@ -5,7 +5,7 @@ from unittest.mock import patch
 
 import pytest
 
-from paidsearchnav.security.rate_limiting import (
+from paidsearchnav_mcp.security.rate_limiting import (
     DEFAULT_MAX_IDS_PER_REQUEST,
     MAX_IDS_ENV_VAR,
     RateLimitError,

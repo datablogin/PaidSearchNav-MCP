@@ -7,9 +7,9 @@ import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from paidsearchnav.alerts.models import AlertPriority
-from paidsearchnav.api.routes.bigquery import router
-from paidsearchnav.platforms.bigquery.cost_monitor_enhanced import (
+from paidsearchnav_mcp.alerts.models import AlertPriority
+from paidsearchnav_mcp.api.routes.bigquery import router
+from paidsearchnav_mcp.platforms.bigquery.cost_monitor_enhanced import (
     CostUsagePattern,
     CustomerBudgetConfig,
 )

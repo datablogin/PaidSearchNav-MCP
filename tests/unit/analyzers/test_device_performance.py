@@ -4,8 +4,8 @@ from datetime import datetime, timezone
 
 import pytest
 
-from paidsearchnav.analyzers.device_performance import DevicePerformanceAnalyzer
-from paidsearchnav.core.models import (
+from paidsearchnav_mcp.analyzers.device_performance import DevicePerformanceAnalyzer
+from paidsearchnav_mcp.models import (
     DeviceInsight,
     DevicePerformanceAnalysisResult,
     DevicePerformanceData,

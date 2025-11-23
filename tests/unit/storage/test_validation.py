@@ -2,7 +2,7 @@
 
 import pytest
 
-from paidsearchnav.storage.repository import (
+from paidsearchnav_mcp.storage.repository import (
     SecurityConfig,
     _detect_sql_injection,
     _validate_customer_id,

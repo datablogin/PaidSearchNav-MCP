@@ -4,14 +4,14 @@ from unittest.mock import patch
 
 import pytest
 
-from paidsearchnav.core.circuit_breaker import (
+from paidsearchnav_mcp.core.circuit_breaker import (
     BigQueryCircuitBreaker,
     BigQueryRetryHandler,
     RetryConfig,
     create_bigquery_circuit_breaker,
     create_bigquery_retry_handler,
 )
-from paidsearchnav.core.config import CircuitBreakerConfig
+from paidsearchnav_mcp.core.config import CircuitBreakerConfig
 
 
 class TestBigQueryCircuitBreaker:

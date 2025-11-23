@@ -10,9 +10,9 @@ from pathlib import Path
 
 import pytest
 
-from paidsearchnav.core.models.geo_performance import GeoPerformanceData
-from paidsearchnav.parsers.csv_parser import GoogleAdsCSVParser
-from paidsearchnav.platforms.google.models import GeoPerformance
+from paidsearchnav_mcp.models.geo_performance import GeoPerformanceData
+from paidsearchnav_mcp.parsers.csv_parser import GoogleAdsCSVParser
+from paidsearchnav_mcp.platforms.google.models import GeoPerformance
 
 
 class TestGeoPerformanceCSVCompatibility:

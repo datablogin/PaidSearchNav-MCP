@@ -5,9 +5,9 @@ from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 
-from paidsearchnav.core.config import CircuitBreakerConfig
-from paidsearchnav.exports.base import ExportConfig, ExportFormat, ExportStatus
-from paidsearchnav.exports.bigquery import BigQueryExporter
+from paidsearchnav_mcp.core.config import CircuitBreakerConfig
+from paidsearchnav_mcp.exports.base import ExportConfig, ExportFormat, ExportStatus
+from paidsearchnav_mcp.exports.bigquery import BigQueryExporter
 
 
 @pytest.fixture

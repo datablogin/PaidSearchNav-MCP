@@ -4,7 +4,7 @@ import pandas as pd
 import pytest
 from pydantic import ValidationError
 
-from paidsearchnav.core.models.search_term import SearchTerm, SearchTermMetrics
+from paidsearchnav_mcp.models.search_term import SearchTerm, SearchTermMetrics
 
 
 class TestSearchTermSmartDefaults:

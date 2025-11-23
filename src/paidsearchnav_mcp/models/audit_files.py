@@ -6,8 +6,8 @@ from typing import Any
 
 from pydantic import Field
 
-from paidsearchnav.core.models.analysis import AnalysisResult
-from paidsearchnav.core.models.base import BasePSNModel
+from paidsearchnav_mcp.models.analysis import AnalysisResult
+from paidsearchnav_mcp.models.base import BasePSNModel
 
 
 class FileCategory(str, Enum):

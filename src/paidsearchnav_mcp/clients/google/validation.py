@@ -2,7 +2,7 @@
 
 import re
 
-from paidsearchnav.core.models.campaign import CampaignType
+from paidsearchnav_mcp.models.campaign import CampaignType
 
 
 class GoogleAdsInputValidator:

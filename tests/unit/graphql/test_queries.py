@@ -6,8 +6,8 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from paidsearchnav.graphql.resolvers.query import Query
-from paidsearchnav.graphql.types import AuditStatus, CustomerFilter
+from paidsearchnav_mcp.graphql.resolvers.query import Query
+from paidsearchnav_mcp.graphql.types import AuditStatus, CustomerFilter
 
 
 class TestGraphQLQueries:

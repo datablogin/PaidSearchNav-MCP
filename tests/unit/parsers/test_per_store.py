@@ -5,13 +5,13 @@ from unittest.mock import patch
 
 import pytest
 
-from paidsearchnav.core.models.store_performance import (
+from paidsearchnav_mcp.models.store_performance import (
     StoreLocationData,
     StoreMetrics,
     StorePerformanceData,
     StorePerformanceLevel,
 )
-from paidsearchnav.parsers.per_store import PerStoreConfig, PerStoreParser
+from paidsearchnav_mcp.parsers.per_store import PerStoreConfig, PerStoreParser
 
 
 class TestPerStoreConfig:

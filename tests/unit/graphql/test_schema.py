@@ -2,8 +2,8 @@
 
 from strawberry import Schema
 
-from paidsearchnav.graphql import schema
-from paidsearchnav.graphql.resolvers import Mutation, Query, Subscription
+from paidsearchnav_mcp.graphql import schema
+from paidsearchnav_mcp.graphql.resolvers import Mutation, Query, Subscription
 
 
 class TestGraphQLSchema:

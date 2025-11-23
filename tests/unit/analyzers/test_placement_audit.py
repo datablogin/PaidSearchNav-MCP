@@ -5,8 +5,8 @@ from unittest.mock import AsyncMock, Mock
 
 import pytest
 
-from paidsearchnav.analyzers.placement_audit import PlacementAuditAnalyzer
-from paidsearchnav.core.models.analysis import (
+from paidsearchnav_mcp.analyzers.placement_audit import PlacementAuditAnalyzer
+from paidsearchnav_mcp.models.analysis import (
     PlacementCategory,
     PlacementQualityScore,
     PlacementType,

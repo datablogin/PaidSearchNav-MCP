@@ -5,7 +5,7 @@ from datetime import datetime
 import pytest
 from pydantic import ValidationError
 
-from paidsearchnav.platforms.ga4.models import (
+from paidsearchnav_mcp.platforms.ga4.models import (
     GA4Alert,
     GA4AlertThreshold,
     GA4APIRequest,

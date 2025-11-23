@@ -1,12 +1,12 @@
 """Unit tests for Google Ads export formatters."""
 
-from paidsearchnav.core.models.export_models import (
+from paidsearchnav_mcp.models.export_models import (
     BidAdjustment,
     CampaignChange,
     KeywordChange,
     NegativeKeyword,
 )
-from paidsearchnav.exporters.formatters import (
+from paidsearchnav_mcp.exporters.formatters import (
     BidAdjustmentFormatter,
     CampaignFormatter,
     KeywordFormatter,

@@ -4,7 +4,7 @@ import csv
 
 import pytest
 
-from paidsearchnav.parsers.csv_parser import GoogleAdsCSVParser
+from paidsearchnav_mcp.parsers.csv_parser import GoogleAdsCSVParser
 
 
 class TestCSVParserErrorHandling:

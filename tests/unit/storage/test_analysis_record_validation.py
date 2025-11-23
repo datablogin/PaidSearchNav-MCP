@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 
 import pytest
 
-from paidsearchnav.storage.models import AnalysisRecord
+from paidsearchnav_mcp.storage.models import AnalysisRecord
 
 
 class TestAnalysisRecordValidation:

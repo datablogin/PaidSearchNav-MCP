@@ -6,7 +6,7 @@ from unittest.mock import patch
 import pytest
 from pydantic import SecretStr
 
-from paidsearchnav.core.config import (
+from paidsearchnav_mcp.core.config import (
     GoogleAdsConfig,
     LoggingConfig,
     SchedulerConfig,

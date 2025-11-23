@@ -4,14 +4,14 @@ from unittest.mock import patch
 
 import pytest
 
-from paidsearchnav.core.config import BigQueryConfig, BigQueryTier
-from paidsearchnav.exports.base import (
+from paidsearchnav_mcp.core.config import BigQueryConfig, BigQueryTier
+from paidsearchnav_mcp.exports.base import (
     ExportFormat,
     ExportRequest,
     ExportResult,
     ExportStatus,
 )
-from paidsearchnav.exports.hybrid import (
+from paidsearchnav_mcp.exports.hybrid import (
     CustomerTier,
     HybridExportConfig,
     HybridExportManager,

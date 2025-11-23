@@ -7,9 +7,9 @@ from datetime import datetime
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
-    from paidsearchnav.core.models.campaign import Campaign
-    from paidsearchnav.core.models.keyword import Keyword
-    from paidsearchnav.core.models.search_term import SearchTerm
+    from paidsearchnav_mcp.models.campaign import Campaign
+    from paidsearchnav_mcp.models.keyword import Keyword
+    from paidsearchnav_mcp.models.search_term import SearchTerm
 
 
 class DataProvider(ABC):

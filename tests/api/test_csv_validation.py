@@ -7,7 +7,7 @@ import pytest
 from fastapi import status
 from fastapi.testclient import TestClient
 
-from paidsearchnav.api.main import create_app
+from paidsearchnav_mcp.api.main import create_app
 
 
 @pytest.fixture

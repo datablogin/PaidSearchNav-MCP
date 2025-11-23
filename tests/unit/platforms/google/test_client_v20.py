@@ -5,7 +5,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from paidsearchnav.platforms.google.client import GoogleAdsAPIClient
+from paidsearchnav_mcp.platforms.google.client import GoogleAdsAPIClient
 
 
 class TestGoogleAdsClientV20Fixes:

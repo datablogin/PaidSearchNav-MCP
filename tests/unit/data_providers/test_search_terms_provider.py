@@ -5,8 +5,8 @@ from unittest.mock import AsyncMock, Mock
 
 import pytest
 
-from paidsearchnav.core.models.search_term import SearchTerm
-from paidsearchnav.data_providers.search_terms_provider import SearchTermsProvider
+from paidsearchnav_mcp.models.search_term import SearchTerm
+from paidsearchnav_mcp.data_providers.search_terms_provider import SearchTermsProvider
 
 
 class TestSearchTermsProvider:

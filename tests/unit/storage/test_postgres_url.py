@@ -3,8 +3,8 @@
 import os
 from unittest.mock import patch
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.storage.repository import AnalysisRepository
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.storage.repository import AnalysisRepository
 
 
 class TestPostgresURLBuilding:

@@ -6,7 +6,7 @@ import pytest
 from fastapi import HTTPException
 from fastapi.testclient import TestClient
 
-from paidsearchnav.api.v1.database import (
+from paidsearchnav_mcp.api.v1.database import (
     DatabaseHealth,
     DatabaseMetrics,
     get_database_health,
@@ -14,7 +14,7 @@ from paidsearchnav.api.v1.database import (
     get_db_connection,
     reset_connection_pool,
 )
-from paidsearchnav.integrations.database import DatabaseConnection
+from paidsearchnav_mcp.integrations.database import DatabaseConnection
 from tests.utils import create_auth_headers
 
 

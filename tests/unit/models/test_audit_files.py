@@ -5,11 +5,11 @@ from datetime import datetime
 import pytest
 from pydantic import ValidationError
 
-from paidsearchnav.core.models.analysis import (
+from paidsearchnav_mcp.models.analysis import (
     AnalysisMetrics,
     AnalysisResult,
 )
-from paidsearchnav.core.models.audit_files import (
+from paidsearchnav_mcp.models.audit_files import (
     AnalysisWithFiles,
     ArchiveReport,
     AuditFileSet,

@@ -8,8 +8,8 @@ import pandas as pd
 import pytest
 from click.testing import CliRunner
 
-from paidsearchnav.cli.geo import geo
-from paidsearchnav.core.models import (
+from paidsearchnav_mcp.cli.geo import geo
+from paidsearchnav_mcp.models import (
     AnalysisMetrics,
     GeographicLevel,
     GeoPerformanceAnalysisResult,

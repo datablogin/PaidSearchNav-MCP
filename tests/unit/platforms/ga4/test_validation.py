@@ -5,8 +5,8 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from paidsearchnav.platforms.ga4.bigquery_client import GA4BigQueryClient
-from paidsearchnav.platforms.ga4.validation import GA4DataValidator
+from paidsearchnav_mcp.platforms.ga4.bigquery_client import GA4BigQueryClient
+from paidsearchnav_mcp.platforms.ga4.validation import GA4DataValidator
 
 
 class TestGA4DataValidator:

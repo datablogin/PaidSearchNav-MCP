@@ -4,7 +4,7 @@ from datetime import date
 
 import pytest
 
-from paidsearchnav.core.models import (
+from paidsearchnav_mcp.models import (
     SearchTerm,
     SearchTermAnalysisResult,
     SearchTermClassification,

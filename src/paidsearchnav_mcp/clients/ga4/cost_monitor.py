@@ -10,12 +10,12 @@ from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel, Field
 
-from paidsearchnav.core.config import GA4Config
-from paidsearchnav.platforms.ga4.models import GA4CostEstimate, GA4QuotaUsage
+from paidsearchnav_mcp.core.config import GA4Config
+from paidsearchnav_mcp.platforms.ga4.models import GA4CostEstimate, GA4QuotaUsage
 
 try:
-    from paidsearchnav.alerts.manager import AlertManager, get_alert_manager
-    from paidsearchnav.alerts.models import AlertPriority, AlertType
+    from paidsearchnav_mcp.alerts.manager import AlertManager, get_alert_manager
+    from paidsearchnav_mcp.alerts.models import AlertPriority, AlertType
 
     ALERTS_AVAILABLE = True
 except ImportError:

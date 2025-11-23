@@ -10,7 +10,7 @@ from fastapi.security import HTTPAuthorizationCredentials
 from jose import jwt
 from pydantic import SecretStr
 
-from paidsearchnav.api.dependencies import (
+from paidsearchnav_mcp.api.dependencies import (
     create_access_token,
     get_current_customer,
     get_current_user,
@@ -19,7 +19,7 @@ from paidsearchnav.api.dependencies import (
     verify_api_key,
     verify_password,
 )
-from paidsearchnav.core.config import Settings
+from paidsearchnav_mcp.core.config import Settings
 
 
 class TestJWTTokenValidation:

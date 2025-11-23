@@ -8,7 +8,7 @@ from httpx import AsyncClient
 from sqlalchemy.exc import DataError as SQLDataError
 from sqlalchemy.exc import IntegrityError, OperationalError
 
-from paidsearchnav.core.exceptions import (
+from paidsearchnav_mcp.core.exceptions import (
     AuthenticationError,
     AuthorizationError,
     ValidationError,

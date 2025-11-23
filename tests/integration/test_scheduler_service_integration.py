@@ -8,10 +8,10 @@ from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.core.interfaces import DataProvider, Storage
-from paidsearchnav.scheduler.interfaces import JobStatus, JobStore, JobType
-from paidsearchnav.scheduler.service import SchedulerService
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.core.interfaces import DataProvider, Storage
+from paidsearchnav_mcp.scheduler.interfaces import JobStatus, JobStore, JobType
+from paidsearchnav_mcp.scheduler.service import SchedulerService
 
 
 class InMemoryJobStore(JobStore):

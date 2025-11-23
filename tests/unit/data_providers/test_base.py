@@ -2,7 +2,7 @@
 
 import pytest
 
-from paidsearchnav.data_providers.base import DataProvider
+from paidsearchnav_mcp.data_providers.base import DataProvider
 
 
 class TestDataProviderInterface:

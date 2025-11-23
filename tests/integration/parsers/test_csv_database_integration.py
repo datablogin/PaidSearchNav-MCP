@@ -16,16 +16,16 @@ import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from paidsearchnav.analyzers.keyword_analyzer import KeywordAnalyzer
-from paidsearchnav.analyzers.search_terms import SearchTermsAnalyzer
-from paidsearchnav.core.config import Settings
-from paidsearchnav.core.interfaces import DataProvider
-from paidsearchnav.core.models.campaign import Campaign
-from paidsearchnav.core.models.keyword import Keyword
-from paidsearchnav.core.models.search_term import SearchTerm
-from paidsearchnav.parsers.csv_parser import GoogleAdsCSVParser
-from paidsearchnav.storage.models import Base, Customer, User
-from paidsearchnav.storage.repository import AnalysisRepository
+from paidsearchnav_mcp.analyzers.keyword_analyzer import KeywordAnalyzer
+from paidsearchnav_mcp.analyzers.search_terms import SearchTermsAnalyzer
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.core.interfaces import DataProvider
+from paidsearchnav_mcp.models.campaign import Campaign
+from paidsearchnav_mcp.models.keyword import Keyword
+from paidsearchnav_mcp.models.search_term import SearchTerm
+from paidsearchnav_mcp.parsers.csv_parser import GoogleAdsCSVParser
+from paidsearchnav_mcp.storage.models import Base, Customer, User
+from paidsearchnav_mcp.storage.repository import AnalysisRepository
 
 
 class MockDataProvider(DataProvider):

@@ -2,7 +2,7 @@
 
 from datetime import datetime
 
-from paidsearchnav.comparison.models import (
+from paidsearchnav_mcp.comparison.models import (
     ComparisonMetrics,
     ComparisonOptions,
     ComparisonRequest,

@@ -6,7 +6,7 @@ from typing import Optional
 
 from pydantic import BaseModel, ConfigDict, Field, computed_field
 
-from paidsearchnav.core.models.analysis import AnalysisResult
+from paidsearchnav_mcp.models.analysis import AnalysisResult
 
 
 class DeviceType(str, Enum):

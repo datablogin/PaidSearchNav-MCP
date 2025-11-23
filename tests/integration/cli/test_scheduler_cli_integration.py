@@ -24,8 +24,8 @@ os.environ.update(
     }
 )
 
-from paidsearchnav.cli.main import cli
-from paidsearchnav.integrations.database import DatabaseConnection
+from paidsearchnav_mcp.cli.main import cli
+from paidsearchnav_mcp.integrations.database import DatabaseConnection
 
 
 @pytest.fixture

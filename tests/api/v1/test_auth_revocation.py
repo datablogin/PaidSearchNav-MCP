@@ -7,8 +7,8 @@ import pytest
 from httpx import AsyncClient
 from jose import jwt
 
-from paidsearchnav.api.token_blacklist import get_token_blacklist
-from paidsearchnav.core.config import Settings
+from paidsearchnav_mcp.api.token_blacklist import get_token_blacklist
+from paidsearchnav_mcp.core.config import Settings
 
 # Test constants
 TEST_USER_ID = "test-user-123"

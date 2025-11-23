@@ -3,7 +3,7 @@
 from pathlib import Path
 from unittest.mock import MagicMock
 
-from paidsearchnav.logging.config import ConfigHelper, LogConfig, LogLevel
+from paidsearchnav_mcp.logging.config import ConfigHelper, LogConfig, LogLevel
 
 
 class TestConfigHelper:

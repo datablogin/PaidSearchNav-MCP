@@ -5,10 +5,10 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from google.ads.googleads.errors import GoogleAdsException
 
-from paidsearchnav.auth.oauth_manager import OAuth2Manager, WorkflowTokenData
-from paidsearchnav.core.config import GoogleAdsConfig, Settings
-from paidsearchnav.core.exceptions import APIError, AuthenticationError
-from paidsearchnav.integrations.google_ads_write_client import (
+from paidsearchnav_mcp.auth.oauth_manager import OAuth2Manager, WorkflowTokenData
+from paidsearchnav_mcp.core.config import GoogleAdsConfig, Settings
+from paidsearchnav_mcp.core.exceptions import APIError, AuthenticationError
+from paidsearchnav_mcp.integrations.google_ads_write_client import (
     BudgetOperation,
     CampaignStatusOperation,
     GoogleAdsWriteClient,

@@ -26,12 +26,12 @@ from tenacity import (
     wait_random,
 )
 
-from paidsearchnav.core.config import Settings
-from paidsearchnav.core.exceptions import RateLimitError
-from paidsearchnav.platforms.google.storage import (
+from paidsearchnav_mcp.clients.google.storage import (
     RateLimitStorageBackend,
     create_storage_backend,
 )
+from paidsearchnav_mcp.core.config import Settings
+from paidsearchnav_mcp.core.exceptions import RateLimitError
 
 logger = logging.getLogger(__name__)
 

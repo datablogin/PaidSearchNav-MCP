@@ -6,8 +6,8 @@ from unittest.mock import AsyncMock, Mock
 
 import pytest
 
-from paidsearchnav.core.exceptions import RateLimitError
-from paidsearchnav.monitoring.quota_manager import (
+from paidsearchnav_mcp.core.exceptions import RateLimitError
+from paidsearchnav_mcp.monitoring.quota_manager import (
     AdvancedQuotaManager,
     AnalyzerExecutionQueue,
     monitor_api_health,

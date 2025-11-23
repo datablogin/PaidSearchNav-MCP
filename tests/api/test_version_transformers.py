@@ -2,7 +2,7 @@
 
 import pytest
 
-from paidsearchnav.api.version_transformers import (
+from paidsearchnav_mcp.api.version_transformers import (
     DeprecatedFieldTransformer,
     FieldRenameTransformer,
     ResponseFilterTransformer,
@@ -10,7 +10,7 @@ from paidsearchnav.api.version_transformers import (
     V1ToV1_1Transformer,
     initialize_transformers,
 )
-from paidsearchnav.api.versioning import TransformerRegistry, transformer_registry
+from paidsearchnav_mcp.api.versioning import TransformerRegistry, transformer_registry
 
 
 class TestTransformerRegistry:
