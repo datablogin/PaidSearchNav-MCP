@@ -1325,7 +1325,7 @@ def get_config() -> dict[str, Any]:
 
 
 @mcp.resource("resource://bigquery/datasets")
-def list_bigquery_datasets() -> dict[str, Any]:
+async def list_bigquery_datasets() -> dict[str, Any]:
     """
     List available BigQuery datasets in the configured project.
 
@@ -1336,8 +1336,13 @@ def list_bigquery_datasets() -> dict[str, Any]:
         # Initialize BigQuery client
         client = BigQueryClient()
 
-        # List datasets
-        datasets = list(client.client.list_datasets())
+        # List datasets (run in thread to avoid blocking)
+        import asyncio
+
+        def _list_datasets():
+            return list(client.client.list_datasets())
+
+        datasets = await asyncio.to_thread(_list_datasets)
 
         return {
             "status": "success",
