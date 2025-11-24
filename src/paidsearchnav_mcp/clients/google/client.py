@@ -855,7 +855,11 @@ class GoogleAdsAPIClient:
                 campaigns
             )
             if campaign_filter:
-                query += f" AND ({campaign_filter})"
+                # Don't wrap in parentheses if it's a single condition
+                if " OR " in campaign_filter:
+                    query += f" AND ({campaign_filter})"
+                else:
+                    query += f" AND {campaign_filter}"
 
         if ad_groups:
             # Validate ad group IDs to prevent injection
@@ -863,7 +867,11 @@ class GoogleAdsAPIClient:
                 ad_groups
             )
             if ad_group_filter:
-                query += f" AND ({ad_group_filter})"
+                # Don't wrap in parentheses if it's a single condition
+                if " OR " in ad_group_filter:
+                    query += f" AND ({ad_group_filter})"
+                else:
+                    query += f" AND {ad_group_filter}"
 
         query += " ORDER BY ad_group_criterion.keyword.text"
 
@@ -2055,14 +2063,22 @@ class GoogleAdsAPIClient:
                 campaign_ids
             )
             if campaign_filter:
-                query += f" AND ({campaign_filter})"
+                # Don't wrap in parentheses if it's a single condition
+                if " OR " in campaign_filter:
+                    query += f" AND ({campaign_filter})"
+                else:
+                    query += f" AND {campaign_filter}"
 
         if ad_group_ids:
             ad_group_filter = GoogleAdsInputValidator.build_safe_ad_group_id_filter(
                 ad_group_ids
             )
             if ad_group_filter:
-                query += f" AND ({ad_group_filter})"
+                # Don't wrap in parentheses if it's a single condition
+                if " OR " in ad_group_filter:
+                    query += f" AND ({ad_group_filter})"
+                else:
+                    query += f" AND {ad_group_filter}"
 
         try:
             # Use paginated search for consistency with other methods
