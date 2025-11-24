@@ -8,10 +8,7 @@ Tests all 5 implemented MCP tools with mocked Google Ads API client:
 - get_geo_performance
 """
 
-import os
-from datetime import datetime
-from typing import Any
-from unittest.mock import AsyncMock, MagicMock, Mock, patch
+from unittest.mock import AsyncMock, patch
 
 import pytest
 
@@ -32,6 +29,7 @@ from paidsearchnav_mcp.server import (
 # Mock the data classes since we're testing the MCP server layer, not the Google Ads client
 class MockMatchType:
     """Mock MatchType enum."""
+
     EXACT = "EXACT"
     PHRASE = "PHRASE"
     BROAD = "BROAD"
@@ -39,8 +37,18 @@ class MockMatchType:
 
 class MockSearchTermMetrics:
     """Mock SearchTermMetrics."""
-    def __init__(self, impressions=0, clicks=0, cost=0.0, conversions=0.0,
-                 conversion_value=0.0, ctr=0.0, avg_cpc=0.0, conversion_rate=0.0):
+
+    def __init__(
+        self,
+        impressions=0,
+        clicks=0,
+        cost=0.0,
+        conversions=0.0,
+        conversion_value=0.0,
+        ctr=0.0,
+        avg_cpc=0.0,
+        conversion_rate=0.0,
+    ):
         self.impressions = impressions
         self.clicks = clicks
         self.cost = cost
@@ -53,8 +61,19 @@ class MockSearchTermMetrics:
 
 class MockSearchTerm:
     """Mock SearchTerm."""
-    def __init__(self, customer_id, campaign_id, campaign_name, ad_group_id,
-                 ad_group_name, search_term, keyword_text, match_type, metrics):
+
+    def __init__(
+        self,
+        customer_id,
+        campaign_id,
+        campaign_name,
+        ad_group_id,
+        ad_group_name,
+        search_term,
+        keyword_text,
+        match_type,
+        metrics,
+    ):
         self.customer_id = customer_id
         self.campaign_id = campaign_id
         self.campaign_name = campaign_name
@@ -68,10 +87,26 @@ class MockSearchTerm:
 
 class MockKeyword:
     """Mock Keyword."""
-    def __init__(self, keyword_id, customer_id, campaign_id, campaign_name,
-                 ad_group_id, ad_group_name, keyword_text, match_type, status,
-                 max_cpc, quality_score, impressions, clicks, cost, conversions,
-                 conversion_value):
+
+    def __init__(
+        self,
+        keyword_id,
+        customer_id,
+        campaign_id,
+        campaign_name,
+        ad_group_id,
+        ad_group_name,
+        keyword_text,
+        match_type,
+        status,
+        max_cpc,
+        quality_score,
+        impressions,
+        clicks,
+        cost,
+        conversions,
+        conversion_value,
+    ):
         self.keyword_id = keyword_id
         self.customer_id = customer_id
         self.campaign_id = campaign_id
@@ -92,10 +127,25 @@ class MockKeyword:
 
 class MockCampaign:
     """Mock Campaign."""
-    def __init__(self, campaign_id, customer_id, name, status, type,
-                 budget_amount, budget_currency, bidding_strategy, target_cpa,
-                 target_roas, impressions, clicks, cost, conversions,
-                 conversion_value):
+
+    def __init__(
+        self,
+        campaign_id,
+        customer_id,
+        name,
+        status,
+        type,
+        budget_amount,
+        budget_currency,
+        bidding_strategy,
+        target_cpa,
+        target_roas,
+        impressions,
+        clicks,
+        cost,
+        conversions,
+        conversion_value,
+    ):
         self.campaign_id = campaign_id
         self.customer_id = customer_id
         self.name = name
@@ -354,9 +404,7 @@ async def test_get_search_terms_success(mock_env_credentials, mock_search_terms)
         campaign_id="111",
     )
 
-    with patch(
-        "paidsearchnav_mcp.server.GoogleAdsAPIClient"
-    ) as mock_client_class:
+    with patch("paidsearchnav_mcp.server.GoogleAdsAPIClient") as mock_client_class:
         mock_client = AsyncMock()
         mock_client.get_search_terms = AsyncMock(return_value=mock_search_terms)
         mock_client_class.return_value = mock_client
@@ -406,9 +454,7 @@ async def test_get_search_terms_no_campaign_filter(
         end_date="2024-01-31",
     )
 
-    with patch(
-        "paidsearchnav_mcp.server.GoogleAdsAPIClient"
-    ) as mock_client_class:
+    with patch("paidsearchnav_mcp.server.GoogleAdsAPIClient") as mock_client_class:
         mock_client = AsyncMock()
         mock_client.get_search_terms = AsyncMock(return_value=mock_search_terms)
         mock_client_class.return_value = mock_client
@@ -469,9 +515,7 @@ async def test_get_search_terms_api_error(mock_env_credentials):
         end_date="2024-01-31",
     )
 
-    with patch(
-        "paidsearchnav_mcp.server.GoogleAdsAPIClient"
-    ) as mock_client_class:
+    with patch("paidsearchnav_mcp.server.GoogleAdsAPIClient") as mock_client_class:
         mock_client = AsyncMock()
         mock_client.get_search_terms = AsyncMock(
             side_effect=Exception("API connection failed")
@@ -495,13 +539,13 @@ async def test_get_keywords_success(mock_env_credentials, mock_keywords):
     """Test successful keywords retrieval."""
     request = KeywordsRequest(
         customer_id="1234567890",
+        start_date="2024-01-01",
+        end_date="2024-01-31",
         campaign_id="111",
         ad_group_id="222",
     )
 
-    with patch(
-        "paidsearchnav_mcp.server.GoogleAdsAPIClient"
-    ) as mock_client_class:
+    with patch("paidsearchnav_mcp.server.GoogleAdsAPIClient") as mock_client_class:
         mock_client = AsyncMock()
         mock_client.get_keywords = AsyncMock(return_value=mock_keywords)
         mock_client_class.return_value = mock_client
@@ -519,6 +563,8 @@ async def test_get_keywords_success(mock_env_credentials, mock_keywords):
         assert metadata["customer_id"] == "1234567890"
         assert metadata["campaign_id"] == "111"
         assert metadata["ad_group_id"] == "222"
+        assert metadata["start_date"] == "2024-01-01"
+        assert metadata["end_date"] == "2024-01-31"
         assert metadata["record_count"] == 2
 
         # Verify data structure
@@ -544,11 +590,13 @@ async def test_get_keywords_success(mock_env_credentials, mock_keywords):
 @pytest.mark.asyncio
 async def test_get_keywords_no_filters(mock_env_credentials, mock_keywords):
     """Test keywords retrieval without campaign or ad group filters."""
-    request = KeywordsRequest(customer_id="1234567890")
+    request = KeywordsRequest(
+        customer_id="1234567890",
+        start_date="2024-01-01",
+        end_date="2024-01-31",
+    )
 
-    with patch(
-        "paidsearchnav_mcp.server.GoogleAdsAPIClient"
-    ) as mock_client_class:
+    with patch("paidsearchnav_mcp.server.GoogleAdsAPIClient") as mock_client_class:
         mock_client = AsyncMock()
         mock_client.get_keywords = AsyncMock(return_value=mock_keywords)
         mock_client_class.return_value = mock_client
@@ -570,7 +618,11 @@ async def test_get_keywords_missing_credentials(monkeypatch):
     monkeypatch.delenv("GOOGLE_ADS_CLIENT_SECRET", raising=False)
     monkeypatch.delenv("GOOGLE_ADS_REFRESH_TOKEN", raising=False)
 
-    request = KeywordsRequest(customer_id="1234567890")
+    request = KeywordsRequest(
+        customer_id="1234567890",
+        start_date="2024-01-01",
+        end_date="2024-01-31",
+    )
 
     result = await get_keywords.fn(request)
 
@@ -582,15 +634,15 @@ async def test_get_keywords_missing_credentials(monkeypatch):
 @pytest.mark.asyncio
 async def test_get_keywords_api_error(mock_env_credentials):
     """Test keywords with API error."""
-    request = KeywordsRequest(customer_id="1234567890")
+    request = KeywordsRequest(
+        customer_id="1234567890",
+        start_date="2024-01-01",
+        end_date="2024-01-31",
+    )
 
-    with patch(
-        "paidsearchnav_mcp.server.GoogleAdsAPIClient"
-    ) as mock_client_class:
+    with patch("paidsearchnav_mcp.server.GoogleAdsAPIClient") as mock_client_class:
         mock_client = AsyncMock()
-        mock_client.get_keywords = AsyncMock(
-            side_effect=Exception("Network timeout")
-        )
+        mock_client.get_keywords = AsyncMock(side_effect=Exception("Network timeout"))
         mock_client_class.return_value = mock_client
 
         result = await get_keywords.fn(request)
@@ -614,9 +666,7 @@ async def test_get_campaigns_success(mock_env_credentials, mock_campaigns):
         end_date="2024-01-31",
     )
 
-    with patch(
-        "paidsearchnav_mcp.server.GoogleAdsAPIClient"
-    ) as mock_client_class:
+    with patch("paidsearchnav_mcp.server.GoogleAdsAPIClient") as mock_client_class:
         mock_client = AsyncMock()
         mock_client.get_campaigns = AsyncMock(return_value=mock_campaigns)
         mock_client_class.return_value = mock_client
@@ -704,9 +754,7 @@ async def test_get_campaigns_api_error(mock_env_credentials):
         end_date="2024-01-31",
     )
 
-    with patch(
-        "paidsearchnav_mcp.server.GoogleAdsAPIClient"
-    ) as mock_client_class:
+    with patch("paidsearchnav_mcp.server.GoogleAdsAPIClient") as mock_client_class:
         mock_client = AsyncMock()
         mock_client.get_campaigns = AsyncMock(
             side_effect=Exception("Rate limit exceeded")
@@ -735,9 +783,7 @@ async def test_get_negative_keywords_success(
         campaign_id="111",
     )
 
-    with patch(
-        "paidsearchnav_mcp.server.GoogleAdsAPIClient"
-    ) as mock_client_class:
+    with patch("paidsearchnav_mcp.server.GoogleAdsAPIClient") as mock_client_class:
         mock_client = AsyncMock()
         mock_client.get_negative_keywords = AsyncMock(
             return_value=mock_negative_keywords
@@ -780,9 +826,7 @@ async def test_get_negative_keywords_no_campaign_filter(
     """Test negative keywords retrieval without campaign filter."""
     request = NegativeKeywordsRequest(customer_id="1234567890")
 
-    with patch(
-        "paidsearchnav_mcp.server.GoogleAdsAPIClient"
-    ) as mock_client_class:
+    with patch("paidsearchnav_mcp.server.GoogleAdsAPIClient") as mock_client_class:
         mock_client = AsyncMock()
         # Add a negative keyword from a different campaign
         all_negative_keywords = mock_negative_keywords + [
@@ -821,9 +865,7 @@ async def test_get_negative_keywords_campaign_filter(
         campaign_id="111",
     )
 
-    with patch(
-        "paidsearchnav_mcp.server.GoogleAdsAPIClient"
-    ) as mock_client_class:
+    with patch("paidsearchnav_mcp.server.GoogleAdsAPIClient") as mock_client_class:
         mock_client = AsyncMock()
         # Add a negative keyword from a different campaign
         all_negative_keywords = mock_negative_keywords + [
@@ -875,9 +917,7 @@ async def test_get_negative_keywords_api_error(mock_env_credentials):
     """Test negative keywords with API error."""
     request = NegativeKeywordsRequest(customer_id="1234567890")
 
-    with patch(
-        "paidsearchnav_mcp.server.GoogleAdsAPIClient"
-    ) as mock_client_class:
+    with patch("paidsearchnav_mcp.server.GoogleAdsAPIClient") as mock_client_class:
         mock_client = AsyncMock()
         mock_client.get_negative_keywords = AsyncMock(
             side_effect=Exception("Permission denied")
@@ -897,9 +937,7 @@ async def test_get_negative_keywords_api_error(mock_env_credentials):
 
 
 @pytest.mark.asyncio
-async def test_get_geo_performance_success(
-    mock_env_credentials, mock_geo_performance
-):
+async def test_get_geo_performance_success(mock_env_credentials, mock_geo_performance):
     """Test successful geo performance retrieval."""
     request = CampaignsRequest(
         customer_id="1234567890",
@@ -907,9 +945,7 @@ async def test_get_geo_performance_success(
         end_date="2024-01-31",
     )
 
-    with patch(
-        "paidsearchnav_mcp.server.GoogleAdsAPIClient"
-    ) as mock_client_class:
+    with patch("paidsearchnav_mcp.server.GoogleAdsAPIClient") as mock_client_class:
         mock_client = AsyncMock()
         mock_client.get_geographic_performance = AsyncMock(
             return_value=mock_geo_performance
@@ -920,9 +956,7 @@ async def test_get_geo_performance_success(
 
         # Verify response structure
         assert result["status"] == "success"
-        assert (
-            "Retrieved 2 geographic performance records" in result["message"]
-        )
+        assert "Retrieved 2 geographic performance records" in result["message"]
         assert "metadata" in result
         assert "data" in result
 
@@ -999,9 +1033,7 @@ async def test_get_geo_performance_api_error(mock_env_credentials):
         end_date="2024-01-31",
     )
 
-    with patch(
-        "paidsearchnav_mcp.server.GoogleAdsAPIClient"
-    ) as mock_client_class:
+    with patch("paidsearchnav_mcp.server.GoogleAdsAPIClient") as mock_client_class:
         mock_client = AsyncMock()
         mock_client.get_geographic_performance = AsyncMock(
             side_effect=Exception("Database unavailable")
@@ -1048,14 +1080,22 @@ async def test_search_terms_request_validation():
 async def test_keywords_request_validation():
     """Test KeywordsRequest model validation."""
     # Valid request with minimal fields
-    request = KeywordsRequest(customer_id="1234567890")
+    request = KeywordsRequest(
+        customer_id="1234567890",
+        start_date="2024-01-01",
+        end_date="2024-01-31",
+    )
     assert request.customer_id == "1234567890"
+    assert request.start_date == "2024-01-01"
+    assert request.end_date == "2024-01-31"
     assert request.campaign_id is None
     assert request.ad_group_id is None
 
     # With all optional fields
     request = KeywordsRequest(
         customer_id="1234567890",
+        start_date="2024-01-01",
+        end_date="2024-01-31",
         campaign_id="111",
         ad_group_id="222",
     )

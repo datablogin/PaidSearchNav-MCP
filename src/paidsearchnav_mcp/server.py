@@ -314,6 +314,8 @@ class KeywordsRequest(BaseModel):
     """Request model for fetching keywords data."""
 
     customer_id: str = Field(..., description="Google Ads customer ID (without dashes)")
+    start_date: str = Field(..., description="Start date in YYYY-MM-DD format")
+    end_date: str = Field(..., description="End date in YYYY-MM-DD format")
     campaign_id: str | None = Field(
         None, description="Optional campaign ID to filter by"
     )
@@ -539,6 +541,9 @@ async def get_keywords(request: KeywordsRequest) -> dict[str, Any]:
     try:
         # Validate inputs
         customer_id = validate_customer_id(request.customer_id)
+        start_date = validate_date_format(request.start_date, "start_date")
+        end_date = validate_date_format(request.end_date, "end_date")
+        validate_date_range(start_date, end_date)
 
         # Initialize clients
         client = _get_google_ads_client()
@@ -552,19 +557,21 @@ async def get_keywords(request: KeywordsRequest) -> dict[str, Any]:
                     "customer_id": customer_id,
                     "campaign_id": request.campaign_id,
                     "ad_group_id": request.ad_group_id,
+                    "start_date": request.start_date,
+                    "end_date": request.end_date,
                 },
             )
             cached_data = await cache.get(cache_key)
             if cached_data:
                 logger.info(
                     f"Cache hit for keywords query: customer={customer_id}, "
-                    f"campaign={request.campaign_id}"
+                    f"campaign={request.campaign_id}, dates={request.start_date} to {request.end_date}"
                 )
                 return cached_data
             else:
                 logger.debug(
                     f"Cache miss for keywords query: customer={customer_id}, "
-                    f"campaign={request.campaign_id}"
+                    f"campaign={request.campaign_id}, dates={request.start_date} to {request.end_date}"
                 )
 
         # Call the client method
@@ -572,6 +579,8 @@ async def get_keywords(request: KeywordsRequest) -> dict[str, Any]:
             customer_id=customer_id,
             campaign_id=request.campaign_id,
             ad_groups=[request.ad_group_id] if request.ad_group_id else None,
+            start_date=start_date,
+            end_date=end_date,
         )
 
         # Convert Keyword objects to dictionaries
@@ -604,6 +613,8 @@ async def get_keywords(request: KeywordsRequest) -> dict[str, Any]:
                 "customer_id": request.customer_id,
                 "campaign_id": request.campaign_id,
                 "ad_group_id": request.ad_group_id,
+                "start_date": request.start_date,
+                "end_date": request.end_date,
                 "record_count": len(data),
             },
             "data": data,
