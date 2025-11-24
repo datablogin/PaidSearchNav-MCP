@@ -1,0 +1,18 @@
+{
+  "name": "KeywordMatchAnalyzer",
+  "version": "1.0.0",
+  "description": "Analyzes keyword match types and recommends exact match opportunities for cost efficiency",
+  "author": "PaidSearchNav",
+  "category": "cost_efficiency",
+  "requires_mcp_tools": [
+    "get_keywords",
+    "get_search_terms"
+  ],
+  "output_format": "markdown",
+  "use_cases": [
+    "Quarterly keyword audits",
+    "Cost efficiency analysis",
+    "Match type optimization"
+  ],
+  "business_value": "Identifies keywords wasting spend on broad/phrase match that should be exact match, typically saving 15-30% on cost per conversion"
+}

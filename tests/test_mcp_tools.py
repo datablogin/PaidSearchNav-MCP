@@ -74,7 +74,7 @@ class MockSearchTerm:
         match_type,
         metrics,
     ):
-        self.customer_id = customer_id
+        # Note: customer_id removed from SearchTerm model - not stored on individual search terms
         self.campaign_id = campaign_id
         self.campaign_name = campaign_name
         self.ad_group_id = ad_group_id
@@ -108,15 +108,17 @@ class MockKeyword:
         conversion_value,
     ):
         self.keyword_id = keyword_id
-        self.customer_id = customer_id
+        # Note: customer_id removed from Keyword model - not stored on individual keywords
         self.campaign_id = campaign_id
         self.campaign_name = campaign_name
         self.ad_group_id = ad_group_id
         self.ad_group_name = ad_group_name
-        self.keyword_text = keyword_text
+        self.text = keyword_text  # Keyword model uses 'text' not 'keyword_text'
+        self.keyword_text = keyword_text  # Keep for backwards compatibility
         self.match_type = match_type
         self.status = status
-        self.max_cpc = max_cpc
+        self.cpc_bid = max_cpc  # Keyword model uses 'cpc_bid' not 'max_cpc'
+        self.max_cpc = max_cpc  # Keep for backwards compatibility
         self.quality_score = quality_score
         self.impressions = impressions
         self.clicks = clicks

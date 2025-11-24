@@ -420,7 +420,7 @@ async def get_search_terms(request: SearchTermsRequest) -> dict[str, Any]:
         # Convert SearchTerm objects to dictionaries
         data = [
             {
-                "customer_id": st.customer_id,
+                "customer_id": customer_id,  # Use validated customer_id from request
                 "campaign_id": st.campaign_id,
                 "campaign_name": st.campaign_name,
                 "ad_group_id": st.ad_group_id,
@@ -587,15 +587,15 @@ async def get_keywords(request: KeywordsRequest) -> dict[str, Any]:
         data = [
             {
                 "keyword_id": kw.keyword_id,
-                "customer_id": kw.customer_id,
+                "customer_id": customer_id,  # Use validated customer_id from request
                 "campaign_id": kw.campaign_id,
                 "campaign_name": kw.campaign_name,
                 "ad_group_id": kw.ad_group_id,
                 "ad_group_name": kw.ad_group_name,
-                "keyword_text": kw.keyword_text,
+                "keyword_text": kw.text,  # Keyword model uses 'text' not 'keyword_text'
                 "match_type": kw.match_type,
                 "status": kw.status,
-                "max_cpc": kw.max_cpc,
+                "max_cpc": kw.cpc_bid,  # Keyword model uses 'cpc_bid' not 'max_cpc'
                 "quality_score": kw.quality_score,
                 "impressions": kw.impressions,
                 "clicks": kw.clicks,
@@ -1384,6 +1384,49 @@ async def list_bigquery_datasets() -> dict[str, Any]:
             "bigquery_configured": bool(os.getenv("GOOGLE_APPLICATION_CREDENTIALS")),
             "datasets": [],
         }
+
+
+@mcp.resource("resource://bigquery/config")
+def get_bigquery_config() -> dict[str, Any]:
+    """
+    Provides BigQuery project configuration for constructing queries.
+
+    Returns the correct GCP project ID and available datasets to help Claude
+    construct properly-formed BigQuery queries. This prevents Claude from
+    inferring incorrect project IDs from context.
+
+    Example usage in skills:
+    - When constructing BigQuery queries, always use the project_id from this resource
+    - Format: `{project_id}.{dataset}.{table}`
+    - Example: `topgolf-460202.paidsearchnav_production.keyword_stats_with_keyword_info_view`
+    """
+    project_id = os.getenv("GCP_PROJECT_ID", "")
+
+    return {
+        "status": "success",
+        "project_id": project_id,
+        "datasets": {
+            "paidsearchnav_production": {
+                "description": "Production PaidSearchNav data with pre-aggregated views",
+                "recommended": True,
+                "key_tables": [
+                    "keyword_stats_with_keyword_info_view",
+                    "search_term_stats_view",
+                    "campaign_performance_view"
+                ]
+            },
+            "google_ads_export": {
+                "description": "Raw Google Ads export tables (partitioned by date)",
+                "recommended": False,
+                "note": "Use wildcards for date-partitioned tables: p_ads_Keyword_*"
+            }
+        },
+        "query_format": {
+            "standard": f"`{project_id}.{{dataset}}.{{table}}`",
+            "example": f"`{project_id}.paidsearchnav_production.keyword_stats_with_keyword_info_view`"
+        },
+        "important_note": "Always use this project_id when constructing BigQuery queries. Do not infer project names from customer names."
+    }
 
 
 # ============================================================================
