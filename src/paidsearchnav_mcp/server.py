@@ -435,7 +435,7 @@ async def get_search_terms(request: SearchTermsRequest) -> dict[str, Any]:
                     "conversions": st.metrics.conversions,
                     "conversion_value": st.metrics.conversion_value,
                     "ctr": st.metrics.ctr,
-                    "avg_cpc": st.metrics.avg_cpc,
+                    "avg_cpc": st.metrics.cpc,  # SearchTermMetrics uses 'cpc' not 'avg_cpc'
                     "conversion_rate": st.metrics.conversion_rate,
                 },
             }
@@ -1274,6 +1274,53 @@ async def get_bigquery_schema(request: BigQuerySchemaRequest) -> dict[str, Any]:
             },
             "data": [],
         }
+
+
+@mcp.tool()
+async def get_bigquery_config() -> dict[str, Any]:
+    """
+    Get BigQuery project configuration for constructing queries.
+
+    Returns the correct GCP project ID and available datasets to help construct
+    properly-formed BigQuery queries. This prevents inferring incorrect project
+    IDs from context (e.g., inferring "topgolf-paid-search" from "Topgolf" customer name).
+
+    Use this tool before constructing any BigQuery queries to ensure you use the
+    correct project_id in your SQL statements.
+
+    Returns:
+        Dictionary with project_id, available datasets, and query format examples
+    """
+    project_id = os.getenv("GCP_PROJECT_ID", "")
+
+    return {
+        "status": "success",
+        "message": "BigQuery configuration retrieved successfully",
+        "data": {
+            "project_id": project_id,
+            "datasets": {
+                "paidsearchnav_production": {
+                    "description": "Production PaidSearchNav data with pre-aggregated views",
+                    "recommended": True,
+                    "key_tables": [
+                        "keyword_stats_with_keyword_info_view",
+                        "search_term_stats_view",
+                        "campaign_performance_view"
+                    ]
+                },
+                "google_ads_export": {
+                    "description": "Raw Google Ads export tables (partitioned by date)",
+                    "recommended": False,
+                    "note": "Use wildcards for date-partitioned tables: p_ads_Keyword_*"
+                }
+            },
+            "query_format": {
+                "standard": f"`{project_id}.{{dataset}}.{{table}}`",
+                "example": f"`{project_id}.paidsearchnav_production.keyword_stats_with_keyword_info_view`"
+            },
+            "important_note": "Always use this project_id when constructing BigQuery queries. Do not infer project names from customer names."
+        }
+    }
 
 
 # ============================================================================
