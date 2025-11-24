@@ -56,6 +56,7 @@ class MockSearchTermMetrics:
         self.conversion_value = conversion_value
         self.ctr = ctr
         self.avg_cpc = avg_cpc
+        self.cpc = avg_cpc  # Alias for compatibility
         self.conversion_rate = conversion_rate
 
 

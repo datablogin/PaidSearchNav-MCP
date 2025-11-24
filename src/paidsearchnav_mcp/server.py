@@ -308,6 +308,15 @@ class SearchTermsRequest(BaseModel):
     campaign_id: str | None = Field(
         None, description="Optional campaign ID to filter by"
     )
+    limit: int | None = Field(
+        None,
+        description="Maximum number of results to return (default: no limit, recommended: 1000 for large accounts)",
+        ge=1,
+        le=10000,
+    )
+    offset: int | None = Field(
+        None, description="Number of results to skip (for pagination)", ge=0
+    )
 
 
 class KeywordsRequest(BaseModel):
@@ -321,6 +330,15 @@ class KeywordsRequest(BaseModel):
     )
     ad_group_id: str | None = Field(
         None, description="Optional ad group ID to filter by"
+    )
+    limit: int | None = Field(
+        None,
+        description="Maximum number of results to return (default: no limit, recommended: 1000 for large accounts)",
+        ge=1,
+        le=10000,
+    )
+    offset: int | None = Field(
+        None, description="Number of results to skip (for pagination)", ge=0
     )
 
 
@@ -373,6 +391,11 @@ async def get_search_terms(request: SearchTermsRequest) -> dict[str, Any]:
     This tool retrieves actual user search queries that triggered your ads,
     along with performance metrics (impressions, clicks, cost, conversions).
     Essential for quarterly keyword audits and cost efficiency analysis.
+
+    Pagination: For large accounts (>5K search terms), use limit parameter
+    (recommended: 1000) to avoid exceeding MCP response size limits. Use
+    offset for subsequent pages. Example: limit=1000, offset=0 for first page,
+    then limit=1000, offset=1000 for second page.
     """
     try:
         # Validate inputs
@@ -409,13 +432,22 @@ async def get_search_terms(request: SearchTermsRequest) -> dict[str, Any]:
                     f"date_range={request.start_date}:{request.end_date}"
                 )
 
-        # Call the client method
+        # Call the client method with pagination support
         search_terms = await client.get_search_terms(
             customer_id=customer_id,
             start_date=start_date,
             end_date=end_date,
             campaigns=[request.campaign_id] if request.campaign_id else None,
+            max_results=request.limit if request.limit else None,
         )
+
+        # Apply offset if specified (client doesn't support offset directly)
+        if request.offset and request.offset > 0:
+            search_terms = search_terms[request.offset :]
+
+        # Apply limit after offset if both are specified
+        if request.limit and request.offset:
+            search_terms = search_terms[: request.limit]
 
         # Convert SearchTerm objects to dictionaries
         data = [
@@ -451,6 +483,13 @@ async def get_search_terms(request: SearchTermsRequest) -> dict[str, Any]:
                 "end_date": request.end_date,
                 "campaign_id": request.campaign_id,
                 "record_count": len(data),
+                "pagination": {
+                    "limit": request.limit,
+                    "offset": request.offset,
+                    "has_more": (
+                        len(search_terms) == request.limit if request.limit else False
+                    ),
+                },
             },
             "data": data,
         }
@@ -537,6 +576,11 @@ async def get_keywords(request: KeywordsRequest) -> dict[str, Any]:
     Retrieves all keywords in your account with their match types, bids,
     quality scores, and performance metrics. Used for keyword match type
     optimization and identifying exact match opportunities.
+
+    Pagination: For large accounts (>5K keywords), use limit parameter
+    (recommended: 1000) to avoid exceeding MCP response size limits. Use
+    offset for subsequent pages. Example: limit=1000, offset=0 for first page,
+    then limit=1000, offset=1000 for second page.
     """
     try:
         # Validate inputs
@@ -574,14 +618,23 @@ async def get_keywords(request: KeywordsRequest) -> dict[str, Any]:
                     f"campaign={request.campaign_id}, dates={request.start_date} to {request.end_date}"
                 )
 
-        # Call the client method
+        # Call the client method with pagination support
         keywords = await client.get_keywords(
             customer_id=customer_id,
             campaign_id=request.campaign_id,
             ad_groups=[request.ad_group_id] if request.ad_group_id else None,
             start_date=start_date,
             end_date=end_date,
+            max_results=request.limit if request.limit else None,
         )
+
+        # Apply offset if specified (client doesn't support offset directly)
+        if request.offset and request.offset > 0:
+            keywords = keywords[request.offset :]
+
+        # Apply limit after offset if both are specified
+        if request.limit and request.offset:
+            keywords = keywords[: request.limit]
 
         # Convert Keyword objects to dictionaries
         data = [
@@ -616,6 +669,13 @@ async def get_keywords(request: KeywordsRequest) -> dict[str, Any]:
                 "start_date": request.start_date,
                 "end_date": request.end_date,
                 "record_count": len(data),
+                "pagination": {
+                    "limit": request.limit,
+                    "offset": request.offset,
+                    "has_more": (
+                        len(keywords) == request.limit if request.limit else False
+                    ),
+                },
             },
             "data": data,
         }
