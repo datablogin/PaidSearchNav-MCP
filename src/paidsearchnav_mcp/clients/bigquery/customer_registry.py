@@ -7,6 +7,7 @@ to dynamically route BigQuery queries to the correct GCP project based on custom
 import logging
 import os
 from dataclasses import dataclass
+from datetime import datetime, timedelta
 from typing import Optional
 
 from google.cloud import bigquery
@@ -26,6 +27,14 @@ class CustomerConfig:
     status: str
 
 
+@dataclass
+class CachedConfig:
+    """Cached customer configuration with expiration."""
+
+    config: CustomerConfig
+    expires_at: datetime
+
+
 class CustomerRegistry:
     """Registry for mapping customer IDs to BigQuery projects."""
 
@@ -35,6 +44,7 @@ class CustomerRegistry:
         registry_dataset: str = "paidsearchnav_production",
         registry_table: str = "customer_registry",
         credentials_path: str | None = None,
+        cache_ttl_seconds: int = 3600,
     ):
         """Initialize the customer registry.
 
@@ -43,14 +53,22 @@ class CustomerRegistry:
             registry_dataset: Dataset containing the registry table
             registry_table: Table name for customer registry
             credentials_path: Path to service account credentials
+            cache_ttl_seconds: Time-to-live for cached configs in seconds (default: 3600 = 1 hour)
         """
-        self.registry_project = registry_project or os.getenv("GCP_PROJECT_ID")
+        # Prefer PSN_REGISTRY_PROJECT_ID for registry-specific project,
+        # fall back to GCP_PROJECT_ID for backward compatibility
+        self.registry_project = (
+            registry_project
+            or os.getenv("PSN_REGISTRY_PROJECT_ID")
+            or os.getenv("GCP_PROJECT_ID")
+        )
         self.registry_dataset = registry_dataset
         self.registry_table = registry_table
+        self.cache_ttl_seconds = cache_ttl_seconds
 
         if not self.registry_project:
             raise ValueError(
-                "registry_project must be provided or GCP_PROJECT_ID must be set"
+                "registry_project must be provided or PSN_REGISTRY_PROJECT_ID/GCP_PROJECT_ID must be set"
             )
 
         # Initialize BigQuery client for registry access
@@ -65,8 +83,8 @@ class CustomerRegistry:
         else:
             self.client = bigquery.Client(project=self.registry_project)
 
-        # Cache for customer configs
-        self._cache: dict[str, CustomerConfig] = {}
+        # Cache for customer configs with TTL
+        self._cache: dict[str, CachedConfig] = {}
 
     def get_customer_config(self, customer_id: str) -> Optional[CustomerConfig]:
         """Get BigQuery configuration for a customer.
@@ -76,10 +94,26 @@ class CustomerRegistry:
 
         Returns:
             CustomerConfig if found, None otherwise
+
+        Note:
+            Results are cached with TTL (default 1 hour). Cache expires when:
+            - TTL seconds have elapsed since last fetch
+            - clear_cache() is called manually
         """
-        # Check cache first
+        # Check cache first and validate expiration
         if customer_id in self._cache:
-            return self._cache[customer_id]
+            cached = self._cache[customer_id]
+            if datetime.now() < cached.expires_at:
+                logger.debug(
+                    f"Returning cached config for customer {customer_id} "
+                    f"(expires at {cached.expires_at})"
+                )
+                return cached.config
+            else:
+                logger.debug(
+                    f"Cache expired for customer {customer_id}, refreshing from database"
+                )
+                del self._cache[customer_id]
 
         # Query registry table
         query = f"""
@@ -120,12 +154,16 @@ class CustomerRegistry:
                 status=row["status"],
             )
 
-            # Cache the result
-            self._cache[customer_id] = config
+            # Cache the result with expiration
+            expires_at = datetime.now() + timedelta(seconds=self.cache_ttl_seconds)
+            self._cache[customer_id] = CachedConfig(
+                config=config, expires_at=expires_at
+            )
 
             logger.info(
                 f"Loaded config for customer {customer_id}: "
-                f"project={config.project_id}, dataset={config.dataset}"
+                f"project={config.project_id}, dataset={config.dataset} "
+                f"(cached until {expires_at})"
             )
 
             return config
@@ -158,10 +196,20 @@ class CustomerRegistry:
         config = self.get_customer_config(customer_id)
         return config.dataset if config else None
 
-    def clear_cache(self):
-        """Clear the customer configuration cache."""
+    def clear_cache(self) -> None:
+        """Clear the customer configuration cache.
+
+        This forces all subsequent get_customer_config() calls to query the database,
+        ignoring any cached values (even if they haven't expired yet).
+
+        Useful when:
+        - Customer registry data has been updated
+        - Testing configuration changes
+        - Forcing a refresh without waiting for TTL expiration
+        """
+        cache_size = len(self._cache)
         self._cache.clear()
-        logger.info("Customer registry cache cleared")
+        logger.info(f"Customer registry cache cleared ({cache_size} entries removed)")
 
     def list_customers(self) -> list[CustomerConfig]:
         """List all active customers in the registry.
