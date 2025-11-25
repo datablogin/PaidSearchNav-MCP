@@ -441,12 +441,15 @@ async def get_search_terms(request: SearchTermsRequest) -> dict[str, Any]:
             max_results=request.limit if request.limit else None,
         )
 
+        # Track original count before pagination for has_more calculation
+        original_count = len(search_terms)
+
         # Apply offset if specified (client doesn't support offset directly)
         if request.offset and request.offset > 0:
             search_terms = search_terms[request.offset :]
 
-        # Apply limit after offset if both are specified
-        if request.limit and request.offset:
+        # Apply limit (whether offset was used or not)
+        if request.limit:
             search_terms = search_terms[: request.limit]
 
         # Convert SearchTerm objects to dictionaries
@@ -486,9 +489,8 @@ async def get_search_terms(request: SearchTermsRequest) -> dict[str, Any]:
                 "pagination": {
                     "limit": request.limit,
                     "offset": request.offset,
-                    "has_more": (
-                        len(search_terms) == request.limit if request.limit else False
-                    ),
+                    "has_more": original_count
+                    > (request.offset or 0) + len(search_terms),
                 },
             },
             "data": data,
@@ -628,12 +630,15 @@ async def get_keywords(request: KeywordsRequest) -> dict[str, Any]:
             max_results=request.limit if request.limit else None,
         )
 
+        # Track original count before pagination for has_more calculation
+        original_count = len(keywords)
+
         # Apply offset if specified (client doesn't support offset directly)
         if request.offset and request.offset > 0:
             keywords = keywords[request.offset :]
 
-        # Apply limit after offset if both are specified
-        if request.limit and request.offset:
+        # Apply limit (whether offset was used or not)
+        if request.limit:
             keywords = keywords[: request.limit]
 
         # Convert Keyword objects to dictionaries
@@ -672,9 +677,7 @@ async def get_keywords(request: KeywordsRequest) -> dict[str, Any]:
                 "pagination": {
                     "limit": request.limit,
                     "offset": request.offset,
-                    "has_more": (
-                        len(keywords) == request.limit if request.limit else False
-                    ),
+                    "has_more": original_count > (request.offset or 0) + len(keywords),
                 },
             },
             "data": data,
