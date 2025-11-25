@@ -58,9 +58,9 @@ async def test_execute_query_with_timeout(mock_bigquery_client):
     client = BigQueryClient()
     await client.execute_query("SELECT 1", timeout=60)
 
-    # Verify timeout was passed to result()
-    mock_query_job.result.assert_called_once()
-    call_kwargs = mock_query_job.result.call_args[1]
+    # Verify timeout was passed to query() (not result())
+    mock_bigquery_client.return_value.query.assert_called_once()
+    call_kwargs = mock_bigquery_client.return_value.query.call_args[1]
     assert call_kwargs["timeout"] == 60
 
 

@@ -1,8 +1,11 @@
 import asyncio
+import logging
 import os
 
 from google.cloud import bigquery
 from google.oauth2 import service_account
+
+logger = logging.getLogger(__name__)
 
 
 class BigQueryClient:
@@ -51,10 +54,16 @@ class BigQueryClient:
         """
 
         def _execute_query():
-            query_job = self.client.query(query)
-            results = query_job.result(max_results=max_results, timeout=timeout)
-            # Convert to list of dicts
-            return [dict(row) for row in results]
+            query_job = self.client.query(query, timeout=timeout)
+            results = []
+            for i, row in enumerate(query_job.result()):
+                if i >= max_results:
+                    logger.warning(
+                        f"Query exceeded max_results ({max_results}), truncating results"
+                    )
+                    break
+                results.append(dict(row))
+            return results
 
         return await asyncio.to_thread(_execute_query)
 

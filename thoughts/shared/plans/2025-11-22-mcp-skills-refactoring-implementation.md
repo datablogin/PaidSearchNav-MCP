@@ -1253,13 +1253,17 @@ Extract the core logic:
 
 Document findings in `docs/analyzer_patterns/keyword_match_logic.md`
 
+**Status**: ✅ Complete - See [docs/analyzer_patterns/keyword_match_logic.md](../../docs/analyzer_patterns/keyword_match_logic.md)
+
 #### 2. Create Skill Structure
-**Create**: New repository `PaidSearchNav-Skills` (separate from MCP server)
+**IMPLEMENTATION NOTE**: Using Option 3 (Hybrid approach) - building skills in this repository first as proof-of-concept, then extracting to separate repository in Phase 8.
+
+**Create**: `skills/` directory within this repository (monorepo approach initially)
 
 Directory structure:
 ```
-PaidSearchNav-Skills/
-├── skills/
+PaidSearchNav-MCP/
+├── skills/                         # NEW: Skills directory
 │   ├── keyword_match_analyzer/
 │   │   ├── skill.json              # Skill metadata
 │   │   ├── prompt.md               # Core analysis prompt
@@ -1267,11 +1271,14 @@ PaidSearchNav-Skills/
 │   │   └── README.md               # Skill documentation
 │   └── .../                        # Future skills
 ├── tests/
-│   └── test_keyword_match.py
+│   └── test_keyword_match.py       # Skill tests
 ├── docs/
-│   └── SKILL_DEVELOPMENT_GUIDE.md
-└── README.md
+│   ├── analyzer_patterns/          # NEW: Analyzer logic documentation
+│   └── SKILL_DEVELOPMENT_GUIDE.md  # NEW: Skill development guide
+└── ... (existing MCP server code)
 ```
+
+**Rationale**: Validate skill architecture before creating separate repository infrastructure. Extraction to `PaidSearchNav-Skills` repository will happen in Phase 8 after all skills are converted.
 
 #### 3. Create Skill Metadata
 **File**: `skills/keyword_match_analyzer/skill.json`
@@ -1725,11 +1732,11 @@ async def test_keyword_match_skill_with_live_mcp():
 ### Success Criteria
 
 #### Automated Verification
-- [ ] `pytest tests/test_keyword_match.py -v` - All skill tests pass
-- [ ] Skill package creates valid .zip file
-- [ ] skill.json validates against schema
-- [ ] prompt.md contains all required sections
-- [ ] Examples show both positive and negative cases
+- [x] `pytest tests/test_keyword_match_skill.py -v` - All skill tests pass (26 passed, 2 skipped)
+- [x] Skill package creates valid .zip file (dist/KeywordMatchAnalyzer_v1.0.0.zip - 12.7KB)
+- [x] skill.json validates against schema
+- [x] prompt.md contains all required sections (Analysis Methodology, Recommendations, Output Format, etc.)
+- [x] Examples show both positive and negative cases (5 scenarios: positive, negative, edge case, complex, well-optimized)
 
 #### Manual Verification
 - [ ] Load skill in Claude and run analysis with sample data
@@ -3419,6 +3426,243 @@ Keep:
 - Before: 135 items in root directory
 - After: <25 items in root directory
 - Cleanup: ~80% reduction in clutter
+
+---
+
+## Phase 8: Extract Skills to Separate Repository
+
+### Overview
+Extract the Skills from the monorepo into a separate `PaidSearchNav-Skills` repository. This was deferred from Phase 3 to validate the skill architecture first.
+
+### Why This Phase Matters
+- **Separation of Concerns**: MCP server (data access) vs Skills (analysis logic)
+- **Independent Versioning**: Skills can evolve independently of the MCP server
+- **Distribution**: Easier to package and distribute skills to users
+- **Repository Focus**: Each repository has a single, clear purpose
+
+### Changes Required
+
+#### 1. Create PaidSearchNav-Skills Repository
+
+**On GitHub**:
+1. Create new repository: `datablogin/PaidSearchNav-Skills`
+2. Initialize with README, LICENSE (same as main repo)
+3. Set up branch protection for `main`
+
+#### 2. Move Skills Directory Structure
+
+**Copy from PaidSearchNav-MCP**:
+```bash
+# Skills and their files
+skills/
+├── keyword_match_analyzer/
+├── search_term_analyzer/
+├── quality_score_analyzer/
+└── ... (all 24 skills)
+
+# Documentation
+docs/SKILL_DEVELOPMENT_GUIDE.md
+docs/analyzer_patterns/
+
+# Tests
+tests/test_keyword_match.py
+tests/test_*.py (all skill tests)
+
+# Packaging
+scripts/package_skill.py
+```
+
+**New structure in PaidSearchNav-Skills**:
+```
+PaidSearchNav-Skills/
+├── skills/                         # All 24 skills
+├── docs/                          # Skill development guides
+├── tests/                         # Skill tests
+├── scripts/                       # Packaging utilities
+├── .github/workflows/             # CI for skills
+├── pyproject.toml                 # Minimal dependencies for testing
+├── README.md                      # Skill catalog and usage
+└── CONTRIBUTING.md                # How to create new skills
+```
+
+#### 3. Update PaidSearchNav-MCP Repository
+
+**Remove from PaidSearchNav-MCP**:
+- `skills/` directory
+- Skill-specific tests
+- `docs/SKILL_DEVELOPMENT_GUIDE.md`
+- `docs/analyzer_patterns/`
+
+**Add to PaidSearchNav-MCP README**:
+```markdown
+## Skills
+
+Analysis logic is provided by Claude Skills. Install skills from:
+- **Repository**: [PaidSearchNav-Skills](https://github.com/datablogin/PaidSearchNav-Skills)
+- **Releases**: [Download .zip packages](https://github.com/datablogin/PaidSearchNav-Skills/releases)
+
+Available skills:
+- Keyword Match Analyzer
+- Search Term Analyzer
+- Quality Score Analyzer
+- ... (see full catalog in Skills repository)
+```
+
+#### 4. Update Skills Repository README
+
+**Create**: `PaidSearchNav-Skills/README.md`
+
+```markdown
+# PaidSearchNav Claude Skills
+
+Analysis skills for quarterly Google Ads audits, designed to work with the [PaidSearchNav MCP Server](https://github.com/datablogin/PaidSearchNav-MCP).
+
+## Available Skills (24 total)
+
+### Priority Tier 1 (Core Efficiency)
+- **Keyword Match Analyzer** - Optimize match types for cost efficiency
+- **Search Term Analyzer** - Identify negative keyword opportunities
+- **Quality Score Analyzer** - Find low-quality expensive keywords
+- **Wasted Spend Analyzer** - Detect budget leaks
+- **Ad Copy Performance Analyzer** - Compare ad creative effectiveness
+
+### Priority Tier 2 (Advanced Optimization)
+- **Geographic Performance Analyzer** - Location-based insights
+- **Device Performance Analyzer** - Mobile/Desktop/Tablet optimization
+- **Dayparting Analyzer** - Time-of-day performance
+- ... (complete list)
+
+### Priority Tier 3 (Specialized Analysis)
+- **Competitor Analysis** - Auction insights
+- **Landing Page Analyzer** - Post-click experience
+- ... (complete list)
+
+## Installation
+
+1. Download skill .zip from [Releases](https://github.com/datablogin/PaidSearchNav-Skills/releases)
+2. Upload to Claude
+3. Connect Claude to your MCP server
+
+## Requirements
+
+- Claude Code or Claude.ai with MCP support
+- [PaidSearchNav MCP Server](https://github.com/datablogin/PaidSearchNav-MCP) running
+
+## Usage Example
+
+```
+User: "Run a keyword match analysis for customer 1234567890 from 2025-08-01 to 2025-11-22"
+
+Claude (using Keyword Match Analyzer skill):
+- Fetches keywords via MCP get_keywords tool
+- Analyzes match type performance
+- Generates prioritized recommendations
+- Estimates cost savings
+```
+
+## Development
+
+See [SKILL_DEVELOPMENT_GUIDE.md](docs/SKILL_DEVELOPMENT_GUIDE.md) for how to:
+- Create new skills
+- Test skills locally
+- Package skills for distribution
+- Convert legacy analyzers
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+```
+
+#### 5. Set Up CI/CD for Skills Repository
+
+**Create**: `.github/workflows/test-skills.yml`
+
+```yaml
+name: Test Skills
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          pip install pytest pytest-asyncio
+      - name: Run skill tests
+        run: pytest tests/ -v
+```
+
+#### 6. Create Skill Packaging Workflow
+
+**Create**: `.github/workflows/package-skills.yml`
+
+```yaml
+name: Package Skills
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Package all skills
+        run: |
+          python scripts/package_all_skills.py
+      - name: Upload to release
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./dist/*.zip
+          asset_name: skills.zip
+          asset_content_type: application/zip
+```
+
+#### 7. Update Cross-Repository References
+
+**In PaidSearchNav-MCP**:
+- README links to Skills repo
+- Documentation references Skills repo for analysis logic
+- CI/CD focuses only on MCP server
+
+**In PaidSearchNav-Skills**:
+- README links to MCP repo
+- Documentation references required MCP tools
+- Examples show MCP + Skills integration
+
+#### 8. Migrate Issues and Milestones
+
+**Review PaidSearchNav-MCP issues**:
+- Move skill-related issues to PaidSearchNav-Skills
+- Keep MCP server issues in original repo
+- Update issue references and links
+
+### Success Criteria
+
+#### Automated Verification
+- [ ] Skills repository CI passes all tests
+- [ ] Package workflow creates valid .zip files
+- [ ] No broken cross-repository links
+- [ ] Both repositories have independent version tags
+
+#### Manual Verification
+- [ ] Can install skill from PaidSearchNav-Skills release
+- [ ] Skill works with MCP server from separate repo
+- [ ] Documentation is clear about which repo to use when
+- [ ] Development workflow is smooth (no cross-repo friction)
+- [ ] Each repository has clear, focused purpose
+
+**Implementation Note**: This phase should only be executed after Phase 6 (all skills converted and tested). The monorepo approach during development speeds up iteration, and extraction is a one-time cost.
 
 ---
 

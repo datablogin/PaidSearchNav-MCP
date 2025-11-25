@@ -308,17 +308,37 @@ class SearchTermsRequest(BaseModel):
     campaign_id: str | None = Field(
         None, description="Optional campaign ID to filter by"
     )
+    limit: int | None = Field(
+        None,
+        description="Maximum number of results to return (default: no limit, recommended: 1000 for large accounts)",
+        ge=1,
+        le=10000,
+    )
+    offset: int | None = Field(
+        None, description="Number of results to skip (for pagination)", ge=0
+    )
 
 
 class KeywordsRequest(BaseModel):
     """Request model for fetching keywords data."""
 
     customer_id: str = Field(..., description="Google Ads customer ID (without dashes)")
+    start_date: str = Field(..., description="Start date in YYYY-MM-DD format")
+    end_date: str = Field(..., description="End date in YYYY-MM-DD format")
     campaign_id: str | None = Field(
         None, description="Optional campaign ID to filter by"
     )
     ad_group_id: str | None = Field(
         None, description="Optional ad group ID to filter by"
+    )
+    limit: int | None = Field(
+        None,
+        description="Maximum number of results to return (default: no limit, recommended: 1000 for large accounts)",
+        ge=1,
+        le=10000,
+    )
+    offset: int | None = Field(
+        None, description="Number of results to skip (for pagination)", ge=0
     )
 
 
@@ -371,6 +391,11 @@ async def get_search_terms(request: SearchTermsRequest) -> dict[str, Any]:
     This tool retrieves actual user search queries that triggered your ads,
     along with performance metrics (impressions, clicks, cost, conversions).
     Essential for quarterly keyword audits and cost efficiency analysis.
+
+    Pagination: For large accounts (>5K search terms), use limit parameter
+    (recommended: 1000) to avoid exceeding MCP response size limits. Use
+    offset for subsequent pages. Example: limit=1000, offset=0 for first page,
+    then limit=1000, offset=1000 for second page.
     """
     try:
         # Validate inputs
@@ -407,18 +432,30 @@ async def get_search_terms(request: SearchTermsRequest) -> dict[str, Any]:
                     f"date_range={request.start_date}:{request.end_date}"
                 )
 
-        # Call the client method
+        # Call the client method with pagination support
         search_terms = await client.get_search_terms(
             customer_id=customer_id,
             start_date=start_date,
             end_date=end_date,
             campaigns=[request.campaign_id] if request.campaign_id else None,
+            max_results=request.limit if request.limit else None,
         )
+
+        # Track original count before pagination for has_more calculation
+        original_count = len(search_terms)
+
+        # Apply offset if specified (client doesn't support offset directly)
+        if request.offset and request.offset > 0:
+            search_terms = search_terms[request.offset :]
+
+        # Apply limit (whether offset was used or not)
+        if request.limit:
+            search_terms = search_terms[: request.limit]
 
         # Convert SearchTerm objects to dictionaries
         data = [
             {
-                "customer_id": st.customer_id,
+                "customer_id": customer_id,  # Use validated customer_id from request
                 "campaign_id": st.campaign_id,
                 "campaign_name": st.campaign_name,
                 "ad_group_id": st.ad_group_id,
@@ -433,7 +470,7 @@ async def get_search_terms(request: SearchTermsRequest) -> dict[str, Any]:
                     "conversions": st.metrics.conversions,
                     "conversion_value": st.metrics.conversion_value,
                     "ctr": st.metrics.ctr,
-                    "avg_cpc": st.metrics.avg_cpc,
+                    "avg_cpc": st.metrics.cpc,  # SearchTermMetrics uses 'cpc' not 'avg_cpc'
                     "conversion_rate": st.metrics.conversion_rate,
                 },
             }
@@ -449,6 +486,12 @@ async def get_search_terms(request: SearchTermsRequest) -> dict[str, Any]:
                 "end_date": request.end_date,
                 "campaign_id": request.campaign_id,
                 "record_count": len(data),
+                "pagination": {
+                    "limit": request.limit,
+                    "offset": request.offset,
+                    "has_more": original_count
+                    > (request.offset or 0) + len(search_terms),
+                },
             },
             "data": data,
         }
@@ -535,10 +578,18 @@ async def get_keywords(request: KeywordsRequest) -> dict[str, Any]:
     Retrieves all keywords in your account with their match types, bids,
     quality scores, and performance metrics. Used for keyword match type
     optimization and identifying exact match opportunities.
+
+    Pagination: For large accounts (>5K keywords), use limit parameter
+    (recommended: 1000) to avoid exceeding MCP response size limits. Use
+    offset for subsequent pages. Example: limit=1000, offset=0 for first page,
+    then limit=1000, offset=1000 for second page.
     """
     try:
         # Validate inputs
         customer_id = validate_customer_id(request.customer_id)
+        start_date = validate_date_format(request.start_date, "start_date")
+        end_date = validate_date_format(request.end_date, "end_date")
+        validate_date_range(start_date, end_date)
 
         # Initialize clients
         client = _get_google_ads_client()
@@ -552,41 +603,57 @@ async def get_keywords(request: KeywordsRequest) -> dict[str, Any]:
                     "customer_id": customer_id,
                     "campaign_id": request.campaign_id,
                     "ad_group_id": request.ad_group_id,
+                    "start_date": request.start_date,
+                    "end_date": request.end_date,
                 },
             )
             cached_data = await cache.get(cache_key)
             if cached_data:
                 logger.info(
                     f"Cache hit for keywords query: customer={customer_id}, "
-                    f"campaign={request.campaign_id}"
+                    f"campaign={request.campaign_id}, dates={request.start_date} to {request.end_date}"
                 )
                 return cached_data
             else:
                 logger.debug(
                     f"Cache miss for keywords query: customer={customer_id}, "
-                    f"campaign={request.campaign_id}"
+                    f"campaign={request.campaign_id}, dates={request.start_date} to {request.end_date}"
                 )
 
-        # Call the client method
+        # Call the client method with pagination support
         keywords = await client.get_keywords(
             customer_id=customer_id,
             campaign_id=request.campaign_id,
             ad_groups=[request.ad_group_id] if request.ad_group_id else None,
+            start_date=start_date,
+            end_date=end_date,
+            max_results=request.limit if request.limit else None,
         )
+
+        # Track original count before pagination for has_more calculation
+        original_count = len(keywords)
+
+        # Apply offset if specified (client doesn't support offset directly)
+        if request.offset and request.offset > 0:
+            keywords = keywords[request.offset :]
+
+        # Apply limit (whether offset was used or not)
+        if request.limit:
+            keywords = keywords[: request.limit]
 
         # Convert Keyword objects to dictionaries
         data = [
             {
                 "keyword_id": kw.keyword_id,
-                "customer_id": kw.customer_id,
+                "customer_id": customer_id,  # Use validated customer_id from request
                 "campaign_id": kw.campaign_id,
                 "campaign_name": kw.campaign_name,
                 "ad_group_id": kw.ad_group_id,
                 "ad_group_name": kw.ad_group_name,
-                "keyword_text": kw.keyword_text,
+                "keyword_text": kw.text,  # Keyword model uses 'text' not 'keyword_text'
                 "match_type": kw.match_type,
                 "status": kw.status,
-                "max_cpc": kw.max_cpc,
+                "max_cpc": kw.cpc_bid,  # Keyword model uses 'cpc_bid' not 'max_cpc'
                 "quality_score": kw.quality_score,
                 "impressions": kw.impressions,
                 "clicks": kw.clicks,
@@ -604,7 +671,14 @@ async def get_keywords(request: KeywordsRequest) -> dict[str, Any]:
                 "customer_id": request.customer_id,
                 "campaign_id": request.campaign_id,
                 "ad_group_id": request.ad_group_id,
+                "start_date": request.start_date,
+                "end_date": request.end_date,
                 "record_count": len(data),
+                "pagination": {
+                    "limit": request.limit,
+                    "offset": request.offset,
+                    "has_more": original_count > (request.offset or 0) + len(keywords),
+                },
             },
             "data": data,
         }
@@ -1373,6 +1447,49 @@ async def list_bigquery_datasets() -> dict[str, Any]:
             "bigquery_configured": bool(os.getenv("GOOGLE_APPLICATION_CREDENTIALS")),
             "datasets": [],
         }
+
+
+@mcp.resource("resource://bigquery/config")
+def get_bigquery_config() -> dict[str, Any]:
+    """
+    Provides BigQuery project configuration for constructing queries.
+
+    Returns the correct GCP project ID and available datasets to help Claude
+    construct properly-formed BigQuery queries. This prevents Claude from
+    inferring incorrect project IDs from context.
+
+    Example usage in skills:
+    - When constructing BigQuery queries, always use the project_id from this resource
+    - Format: `{project_id}.{dataset}.{table}`
+    - Example: `topgolf-460202.paidsearchnav_production.keyword_stats_with_keyword_info_view`
+    """
+    project_id = os.getenv("GCP_PROJECT_ID", "")
+
+    return {
+        "status": "success",
+        "project_id": project_id,
+        "datasets": {
+            "paidsearchnav_production": {
+                "description": "Production PaidSearchNav data with pre-aggregated views",
+                "recommended": True,
+                "key_tables": [
+                    "keyword_stats_with_keyword_info_view",
+                    "search_term_stats_view",
+                    "campaign_performance_view",
+                ],
+            },
+            "google_ads_export": {
+                "description": "Raw Google Ads export tables (partitioned by date)",
+                "recommended": False,
+                "note": "Use wildcards for date-partitioned tables: p_ads_Keyword_*",
+            },
+        },
+        "query_format": {
+            "standard": f"`{project_id}.{{dataset}}.{{table}}`",
+            "example": f"`{project_id}.paidsearchnav_production.keyword_stats_with_keyword_info_view`",
+        },
+        "important_note": "Always use this project_id when constructing BigQuery queries. Do not infer project names from customer names.",
+    }
 
 
 # ============================================================================

@@ -365,6 +365,24 @@ class OAuth2TokenManager:
                 "Google Ads client_id and client_secret are required"
             )
 
+    def _safe_print(self, message: str) -> None:
+        """Safely print to stdout with fallback to logging.
+
+        Protects against BrokenPipeError when stdout is closed (e.g., in MCP context).
+
+        Args:
+            message: Message to print
+        """
+        try:
+            print(message)
+            sys.stdout.flush()
+        except (BrokenPipeError, IOError) as e:
+            # Stdout is closed or broken - fallback to logging
+            logger.debug(f"Unable to write to stdout: {e}. Message: {message}")
+        except Exception as e:
+            # Unexpected error - log it but don't crash
+            logger.warning(f"Unexpected error writing to stdout: {e}")
+
     def get_credentials(
         self, customer_id: str, force_auth_method: str | None = None
     ) -> Credentials:
@@ -616,20 +634,26 @@ class OAuth2TokenManager:
         verification_url = device_response["verification_url"]
         expires_in = device_response["expires_in"]
 
-        print("\n" + "=" * 60)
-        print("🔐 GOOGLE ADS AUTHENTICATION REQUIRED")
-        print("=" * 60)
-        print(f"📱 Go to: {verification_url}")
-        print(f"🔑 Enter code: {user_code}")
-        print("=" * 60)
-        print("📝 Instructions:")
-        print("1. Open the URL above in any web browser")
-        print("2. Sign in to your Google account")
-        print("3. Enter the verification code shown above")
-        print("4. Grant access to Google Ads API")
-        print("5. Return here - authentication will complete automatically")
-        print(f"\n⏰ Code expires in {expires_in // 60} minutes")
-        print("⏳ Waiting for authorization...")
+        # Always log the critical auth info in case stdout fails
+        logger.info(
+            f"Device flow authentication: {verification_url} - Code: {user_code}"
+        )
+
+        # Use safe print to handle broken pipes in MCP context
+        self._safe_print("\n" + "=" * 60)
+        self._safe_print("🔐 GOOGLE ADS AUTHENTICATION REQUIRED")
+        self._safe_print("=" * 60)
+        self._safe_print(f"📱 Go to: {verification_url}")
+        self._safe_print(f"🔑 Enter code: {user_code}")
+        self._safe_print("=" * 60)
+        self._safe_print("📝 Instructions:")
+        self._safe_print("1. Open the URL above in any web browser")
+        self._safe_print("2. Sign in to your Google account")
+        self._safe_print("3. Enter the verification code shown above")
+        self._safe_print("4. Grant access to Google Ads API")
+        self._safe_print("5. Return here - authentication will complete automatically")
+        self._safe_print(f"\n⏰ Code expires in {expires_in // 60} minutes")
+        self._safe_print("⏳ Waiting for authorization...")
 
     def _poll_for_device_authorization(
         self, device_response: dict, customer_id: str
@@ -666,7 +690,8 @@ class OAuth2TokenManager:
             token_result = token_response.json()
 
             if token_response.status_code == 200:
-                print("✅ Authentication successful!")
+                self._safe_print("✅ Authentication successful!")
+                logger.info("Device flow authentication completed successfully")
                 return self._create_credentials_from_token_response(
                     token_result, customer_id
                 )
@@ -674,7 +699,7 @@ class OAuth2TokenManager:
             # Handle various error conditions
             error = token_result.get("error")
             if error == "authorization_pending":
-                print("⏳ Still waiting for authorization...")
+                self._safe_print("⏳ Still waiting for authorization...")
                 continue
             elif error == "slow_down":
                 interval += 1
