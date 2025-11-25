@@ -635,7 +635,9 @@ class OAuth2TokenManager:
         expires_in = device_response["expires_in"]
 
         # Always log the critical auth info in case stdout fails
-        logger.info(f"Device flow authentication: {verification_url} - Code: {user_code}")
+        logger.info(
+            f"Device flow authentication: {verification_url} - Code: {user_code}"
+        )
 
         # Use safe print to handle broken pipes in MCP context
         self._safe_print("\n" + "=" * 60)
