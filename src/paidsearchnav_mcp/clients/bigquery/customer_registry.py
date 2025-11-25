@@ -6,6 +6,7 @@ to dynamically route BigQuery queries to the correct GCP project based on custom
 
 import logging
 import os
+from collections import OrderedDict
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import Optional
@@ -45,6 +46,7 @@ class CustomerRegistry:
         registry_table: str = "customer_registry",
         credentials_path: str | None = None,
         cache_ttl_seconds: int = 3600,
+        max_cache_size: int = 1000,
     ):
         """Initialize the customer registry.
 
@@ -54,21 +56,20 @@ class CustomerRegistry:
             registry_table: Table name for customer registry
             credentials_path: Path to service account credentials
             cache_ttl_seconds: Time-to-live for cached configs in seconds (default: 3600 = 1 hour)
+            max_cache_size: Maximum number of entries to cache (default: 1000)
         """
-        # Prefer PSN_REGISTRY_PROJECT_ID for registry-specific project,
-        # fall back to GCP_PROJECT_ID for backward compatibility
-        self.registry_project = (
-            registry_project
-            or os.getenv("PSN_REGISTRY_PROJECT_ID")
-            or os.getenv("GCP_PROJECT_ID")
-        )
+        # Prefer explicit registry project ID
+        self.registry_project = registry_project or os.getenv("PSN_REGISTRY_PROJECT_ID")
         self.registry_dataset = registry_dataset
         self.registry_table = registry_table
         self.cache_ttl_seconds = cache_ttl_seconds
+        self.max_cache_size = max_cache_size
 
         if not self.registry_project:
             raise ValueError(
-                "registry_project must be provided or PSN_REGISTRY_PROJECT_ID/GCP_PROJECT_ID must be set"
+                "Registry project must be explicitly set via registry_project parameter "
+                "or PSN_REGISTRY_PROJECT_ID environment variable. "
+                "Do not reuse GCP_PROJECT_ID to avoid ambiguity."
             )
 
         # Initialize BigQuery client for registry access
@@ -83,8 +84,16 @@ class CustomerRegistry:
         else:
             self.client = bigquery.Client(project=self.registry_project)
 
-        # Cache for customer configs with TTL
-        self._cache: dict[str, CachedConfig] = {}
+        # Cache for customer configs with TTL - using OrderedDict for LRU eviction
+        self._cache: OrderedDict[str, CachedConfig] = OrderedDict()
+
+    def _evict_if_needed(self) -> None:
+        """Remove oldest entry if cache is at capacity."""
+        while len(self._cache) >= self.max_cache_size:
+            oldest_key, oldest_value = self._cache.popitem(last=False)
+            logger.debug(
+                f"Evicted customer {oldest_key} from cache (size limit: {self.max_cache_size})"
+            )
 
     def get_customer_config(self, customer_id: str) -> Optional[CustomerConfig]:
         """Get BigQuery configuration for a customer.
@@ -104,6 +113,7 @@ class CustomerRegistry:
         if customer_id in self._cache:
             cached = self._cache[customer_id]
             if datetime.now() < cached.expires_at:
+                self._cache.move_to_end(customer_id)  # Mark as recently used
                 logger.debug(
                     f"Returning cached config for customer {customer_id} "
                     f"(expires at {cached.expires_at})"
@@ -154,11 +164,15 @@ class CustomerRegistry:
                 status=row["status"],
             )
 
+            # Evict oldest entry if cache is at capacity before adding new entry
+            self._evict_if_needed()
+
             # Cache the result with expiration
             expires_at = datetime.now() + timedelta(seconds=self.cache_ttl_seconds)
             self._cache[customer_id] = CachedConfig(
                 config=config, expires_at=expires_at
             )
+            self._cache.move_to_end(customer_id)  # Mark as recently used
 
             logger.info(
                 f"Loaded config for customer {customer_id}: "

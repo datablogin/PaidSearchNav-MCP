@@ -244,14 +244,16 @@ class GoogleAdsInputValidator:
         return " OR ".join(type_filters)
 
     @classmethod
-    def build_safe_campaign_id_filter(cls, campaign_ids: list[str]) -> str:
+    def build_safe_campaign_id_filter(cls, campaign_ids: list[str]) -> tuple[str, bool]:
         """Build a safe campaign ID filter for GAQL queries.
 
         Args:
             campaign_ids: List of campaign IDs to filter by
 
         Returns:
-            Safe GAQL filter string
+            Tuple of (filter_clause, needs_parentheses) where:
+            - filter_clause: Safe GAQL filter string
+            - needs_parentheses: True if filter contains OR and needs parentheses
 
         Raises:
             ValueError: If any campaign ID is invalid
@@ -259,22 +261,26 @@ class GoogleAdsInputValidator:
         validated_ids = cls.validate_campaign_ids(campaign_ids)
 
         if not validated_ids:
-            return ""
+            return "", False
 
         # Build safe filter using validated numeric IDs
-        id_filters = [f"campaign.id = {cid}" for cid in validated_ids]
-
-        return " OR ".join(id_filters)
+        if len(validated_ids) == 1:
+            return f"campaign.id = {validated_ids[0]}", False
+        else:
+            id_filters = [f"campaign.id = {cid}" for cid in validated_ids]
+            return " OR ".join(id_filters), True
 
     @classmethod
-    def build_safe_ad_group_id_filter(cls, ad_group_ids: list[str]) -> str:
+    def build_safe_ad_group_id_filter(cls, ad_group_ids: list[str]) -> tuple[str, bool]:
         """Build a safe ad group ID filter for GAQL queries.
 
         Args:
             ad_group_ids: List of ad group IDs to filter by
 
         Returns:
-            Safe GAQL filter string
+            Tuple of (filter_clause, needs_parentheses) where:
+            - filter_clause: Safe GAQL filter string
+            - needs_parentheses: True if filter contains OR and needs parentheses
 
         Raises:
             ValueError: If any ad group ID is invalid
@@ -282,9 +288,11 @@ class GoogleAdsInputValidator:
         validated_ids = cls.validate_ad_group_ids(ad_group_ids)
 
         if not validated_ids:
-            return ""
+            return "", False
 
         # Build safe filter using validated numeric IDs
-        id_filters = [f"ad_group.id = {agid}" for agid in validated_ids]
-
-        return " OR ".join(id_filters)
+        if len(validated_ids) == 1:
+            return f"ad_group.id = {validated_ids[0]}", False
+        else:
+            id_filters = [f"ad_group.id = {agid}" for agid in validated_ids]
+            return " OR ".join(id_filters), True

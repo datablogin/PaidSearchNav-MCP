@@ -851,27 +851,27 @@ class GoogleAdsAPIClient:
 
         if campaigns:
             # Validate campaign IDs to prevent injection
-            campaign_filter = GoogleAdsInputValidator.build_safe_campaign_id_filter(
-                campaigns
+            campaign_filter, needs_parens = (
+                GoogleAdsInputValidator.build_safe_campaign_id_filter(campaigns)
             )
             if campaign_filter:
-                # Don't wrap in parentheses if it's a single condition
-                if " OR " in campaign_filter:
-                    query += f" AND ({campaign_filter})"
-                else:
-                    query += f" AND {campaign_filter}"
+                query += (
+                    f" AND ({campaign_filter})"
+                    if needs_parens
+                    else f" AND {campaign_filter}"
+                )
 
         if ad_groups:
             # Validate ad group IDs to prevent injection
-            ad_group_filter = GoogleAdsInputValidator.build_safe_ad_group_id_filter(
-                ad_groups
+            ad_group_filter, needs_parens = (
+                GoogleAdsInputValidator.build_safe_ad_group_id_filter(ad_groups)
             )
             if ad_group_filter:
-                # Don't wrap in parentheses if it's a single condition
-                if " OR " in ad_group_filter:
-                    query += f" AND ({ad_group_filter})"
-                else:
-                    query += f" AND {ad_group_filter}"
+                query += (
+                    f" AND ({ad_group_filter})"
+                    if needs_parens
+                    else f" AND {ad_group_filter}"
+                )
 
         query += " ORDER BY ad_group_criterion.keyword.text"
 
@@ -1025,27 +1025,27 @@ class GoogleAdsAPIClient:
 
         if campaigns:
             # Validate campaign IDs to prevent injection
-            campaign_filter = GoogleAdsInputValidator.build_safe_campaign_id_filter(
-                campaigns
+            campaign_filter, needs_parens = (
+                GoogleAdsInputValidator.build_safe_campaign_id_filter(campaigns)
             )
             if campaign_filter:
-                # Don't wrap in parentheses if it's a single condition
-                if " OR " in campaign_filter:
-                    query += f" AND ({campaign_filter})"
-                else:
-                    query += f" AND {campaign_filter}"
+                query += (
+                    f" AND ({campaign_filter})"
+                    if needs_parens
+                    else f" AND {campaign_filter}"
+                )
 
         if ad_groups:
             # Validate ad group IDs to prevent injection
-            ad_group_filter = GoogleAdsInputValidator.build_safe_ad_group_id_filter(
-                ad_groups
+            ad_group_filter, needs_parens = (
+                GoogleAdsInputValidator.build_safe_ad_group_id_filter(ad_groups)
             )
             if ad_group_filter:
-                # Don't wrap in parentheses if it's a single condition
-                if " OR " in ad_group_filter:
-                    query += f" AND ({ad_group_filter})"
-                else:
-                    query += f" AND {ad_group_filter}"
+                query += (
+                    f" AND ({ad_group_filter})"
+                    if needs_parens
+                    else f" AND {ad_group_filter}"
+                )
 
         query += " ORDER BY metrics.impressions DESC"
 
@@ -1509,11 +1509,15 @@ class GoogleAdsAPIClient:
         # Add campaign filter if specified
         if campaign_ids:
             # Use consistent safe campaign ID filter method
-            campaign_filter = GoogleAdsInputValidator.build_safe_campaign_id_filter(
-                campaign_ids
+            campaign_filter, needs_parens = (
+                GoogleAdsInputValidator.build_safe_campaign_id_filter(campaign_ids)
             )
             if campaign_filter:
-                query += f" AND ({campaign_filter})"
+                query += (
+                    f" AND ({campaign_filter})"
+                    if needs_parens
+                    else f" AND {campaign_filter}"
+                )
 
         # Add non-zero impressions filter
         query += " AND metrics.impressions > 0"
@@ -1693,11 +1697,15 @@ class GoogleAdsAPIClient:
         # Add campaign filter if specified
         if campaign_ids:
             # Use consistent safe campaign ID filter method
-            campaign_filter = GoogleAdsInputValidator.build_safe_campaign_id_filter(
-                campaign_ids
+            campaign_filter, needs_parens = (
+                GoogleAdsInputValidator.build_safe_campaign_id_filter(campaign_ids)
             )
             if campaign_filter:
-                query += f" AND ({campaign_filter})"
+                query += (
+                    f" AND ({campaign_filter})"
+                    if needs_parens
+                    else f" AND {campaign_filter}"
+                )
 
         # Add non-zero impressions filter
         query += " AND metrics.impressions > 0"
@@ -1838,11 +1846,15 @@ class GoogleAdsAPIClient:
 
         # Add campaign filter if specified
         if campaign_ids:
-            campaign_filter = GoogleAdsInputValidator.build_safe_campaign_id_filter(
-                campaign_ids
+            campaign_filter, needs_parens = (
+                GoogleAdsInputValidator.build_safe_campaign_id_filter(campaign_ids)
             )
             if campaign_filter:
-                query += f" AND ({campaign_filter})"
+                query += (
+                    f" AND ({campaign_filter})"
+                    if needs_parens
+                    else f" AND {campaign_filter}"
+                )
 
         # Add non-zero impressions filter
         query += " AND metrics.impressions > 0"
@@ -1950,11 +1962,15 @@ class GoogleAdsAPIClient:
 
         # Add campaign filter if specified
         if campaign_ids:
-            campaign_filter = GoogleAdsInputValidator.build_safe_campaign_id_filter(
-                campaign_ids
+            campaign_filter, needs_parens = (
+                GoogleAdsInputValidator.build_safe_campaign_id_filter(campaign_ids)
             )
             if campaign_filter:
-                query += f" AND ({campaign_filter})"
+                query += (
+                    f" AND ({campaign_filter})"
+                    if needs_parens
+                    else f" AND {campaign_filter}"
+                )
 
         logger.info(f"Fetching ad schedule bid modifiers for customer {customer_id}")
 
@@ -2470,11 +2486,15 @@ class GoogleAdsAPIClient:
 
         if campaign_ids:
             # Validate campaign IDs to prevent injection
-            campaign_filter = GoogleAdsInputValidator.build_safe_campaign_id_filter(
-                campaign_ids
+            campaign_filter, needs_parens = (
+                GoogleAdsInputValidator.build_safe_campaign_id_filter(campaign_ids)
             )
             if campaign_filter:
-                query += f" AND ({campaign_filter})"
+                query += (
+                    f" AND ({campaign_filter})"
+                    if needs_parens
+                    else f" AND {campaign_filter}"
+                )
 
         query += " ORDER BY metrics.impressions DESC"
 
