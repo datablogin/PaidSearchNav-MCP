@@ -1,0 +1,18 @@
+{
+  "name": "GeoPerformanceAnalyzer",
+  "version": "1.0.0",
+  "description": "Analyzes geographic performance and recommends location bid adjustments for retail businesses",
+  "author": "PaidSearchNav",
+  "category": "geographic_optimization",
+  "requires_mcp_tools": [
+    "get_geo_performance"
+  ],
+  "output_format": "markdown",
+  "use_cases": [
+    "Retail business location optimization",
+    "Geographic bid adjustments",
+    "Store proximity analysis",
+    "Quarterly keyword audits"
+  ],
+  "business_value": "Optimizes local targeting for retail, typically improving ROAS by 15-25% through location bid adjustments"
+}

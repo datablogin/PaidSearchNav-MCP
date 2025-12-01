@@ -1340,6 +1340,214 @@ async def get_bigquery_schema(request: BigQuerySchemaRequest) -> dict[str, Any]:
 
 
 # ============================================================================
+# Tools - Orchestration (Phase 2.5)
+# ============================================================================
+
+
+@mcp.tool()
+async def analyze_keyword_match_types(
+    customer_id: str,
+    start_date: str,
+    end_date: str,
+    campaign_id: str | None = None,
+    min_impressions: int = 50,
+) -> dict[str, Any]:
+    """Run complete keyword match type analysis and return actionable recommendations.
+
+    This orchestration tool handles large data volumes internally and returns only:
+    - Executive summary (5-10 lines)
+    - Top 10 recommendations with dollar impact
+    - Implementation steps
+
+    Perfect for Claude Desktop - no context window issues.
+
+    Args:
+        customer_id: Google Ads customer ID (10 digits, no dashes)
+        start_date: Analysis start date (YYYY-MM-DD)
+        end_date: Analysis end date (YYYY-MM-DD)
+        campaign_id: Optional campaign ID to limit scope
+        min_impressions: Minimum impressions threshold for keywords (default: 50, increase for large accounts or decrease for low-traffic accounts)
+
+    Returns:
+        Analysis summary with recommendations
+    """
+    from paidsearchnav_mcp.analyzers import KeywordMatchAnalyzer
+
+    try:
+        analyzer = KeywordMatchAnalyzer(min_impressions=min_impressions)
+        summary = await analyzer.analyze(customer_id, start_date, end_date, campaign_id)
+        return summary.model_dump()
+    except Exception as e:
+        logger.error(
+            f"Keyword match analysis failed: {sanitize_error_message(str(e))}",
+            exc_info=True,
+        )
+        return {
+            "status": "error",
+            "error_code": ErrorCode.INTERNAL_ERROR,
+            "message": f"Analysis failed: {str(e)}",
+            "data": {},
+        }
+
+
+@mcp.tool()
+async def analyze_search_term_waste(
+    customer_id: str,
+    start_date: str,
+    end_date: str,
+) -> dict[str, Any]:
+    """Identify search terms generating spend with no conversion value.
+
+    Returns top negative keyword recommendations to eliminate wasted budget.
+
+    This orchestration tool analyzes all search terms and identifies those that
+    are wasting budget with no conversions. Perfect for quarterly audits.
+
+    Args:
+        customer_id: Google Ads customer ID (10 digits, no dashes)
+        start_date: Analysis start date (YYYY-MM-DD)
+        end_date: Analysis end date (YYYY-MM-DD)
+
+    Returns:
+        Analysis summary with negative keyword recommendations
+    """
+    from paidsearchnav_mcp.analyzers import SearchTermWasteAnalyzer
+
+    try:
+        analyzer = SearchTermWasteAnalyzer()
+        summary = await analyzer.analyze(customer_id, start_date, end_date)
+        return summary.model_dump()
+    except Exception as e:
+        logger.error(
+            f"Search term waste analysis failed: {sanitize_error_message(str(e))}",
+            exc_info=True,
+        )
+        return {
+            "status": "error",
+            "error_code": ErrorCode.INTERNAL_ERROR,
+            "message": f"Analysis failed: {str(e)}",
+            "data": {},
+        }
+
+
+@mcp.tool()
+async def analyze_negative_conflicts(
+    customer_id: str,
+) -> dict[str, Any]:
+    """Identify negative keywords blocking positive keywords.
+
+    Returns conflicts causing lost impression share and revenue.
+
+    This orchestration tool identifies negative keywords that are blocking
+    positive keywords, leading to lost opportunities and revenue.
+
+    Args:
+        customer_id: Google Ads customer ID (10 digits, no dashes)
+
+    Returns:
+        Analysis summary with conflict resolutions
+    """
+    from paidsearchnav_mcp.analyzers import NegativeConflictAnalyzer
+
+    try:
+        analyzer = NegativeConflictAnalyzer()
+        # Use empty dates as negative conflicts are not time-bound
+        summary = await analyzer.analyze(customer_id, "", "")
+        return summary.model_dump()
+    except Exception as e:
+        logger.error(
+            f"Negative conflict analysis failed: {sanitize_error_message(str(e))}",
+            exc_info=True,
+        )
+        return {
+            "status": "error",
+            "error_code": ErrorCode.INTERNAL_ERROR,
+            "message": f"Analysis failed: {str(e)}",
+            "data": {},
+        }
+
+
+@mcp.tool()
+async def analyze_geo_performance(
+    customer_id: str,
+    start_date: str,
+    end_date: str,
+) -> dict[str, Any]:
+    """Analyze location performance and recommend bid adjustments.
+
+    Returns locations to bid up, bid down, or exclude.
+
+    This orchestration tool analyzes geographic performance across all
+    locations and provides specific bid adjustment recommendations.
+
+    Args:
+        customer_id: Google Ads customer ID (10 digits, no dashes)
+        start_date: Analysis start date (YYYY-MM-DD)
+        end_date: Analysis end date (YYYY-MM-DD)
+
+    Returns:
+        Analysis summary with geo performance recommendations
+    """
+    from paidsearchnav_mcp.analyzers import GeoPerformanceAnalyzer
+
+    try:
+        analyzer = GeoPerformanceAnalyzer()
+        summary = await analyzer.analyze(customer_id, start_date, end_date)
+        return summary.model_dump()
+    except Exception as e:
+        logger.error(
+            f"Geo performance analysis failed: {sanitize_error_message(str(e))}",
+            exc_info=True,
+        )
+        return {
+            "status": "error",
+            "error_code": ErrorCode.INTERNAL_ERROR,
+            "message": f"Analysis failed: {str(e)}",
+            "data": {},
+        }
+
+
+@mcp.tool()
+async def analyze_pmax_cannibalization(
+    customer_id: str,
+    start_date: str,
+    end_date: str,
+) -> dict[str, Any]:
+    """Detect Performance Max campaigns cannibalizing Search campaigns.
+
+    Returns PMax negative keywords to prevent traffic overlap.
+
+    This orchestration tool identifies search terms where Performance Max
+    campaigns are competing with Search campaigns, leading to inefficiencies.
+
+    Args:
+        customer_id: Google Ads customer ID (10 digits, no dashes)
+        start_date: Analysis start date (YYYY-MM-DD)
+        end_date: Analysis end date (YYYY-MM-DD)
+
+    Returns:
+        Analysis summary with PMax negative keyword recommendations
+    """
+    from paidsearchnav_mcp.analyzers import PMaxCannibalizationAnalyzer
+
+    try:
+        analyzer = PMaxCannibalizationAnalyzer()
+        summary = await analyzer.analyze(customer_id, start_date, end_date)
+        return summary.model_dump()
+    except Exception as e:
+        logger.error(
+            f"PMax cannibalization analysis failed: {sanitize_error_message(str(e))}",
+            exc_info=True,
+        )
+        return {
+            "status": "error",
+            "error_code": ErrorCode.INTERNAL_ERROR,
+            "message": f"Analysis failed: {str(e)}",
+            "data": {},
+        }
+
+
+# ============================================================================
 # Resources
 # ============================================================================
 
@@ -1366,6 +1574,11 @@ def health_check() -> dict[str, Any]:
             "get_geo_performance",
             "query_bigquery",
             "get_bigquery_schema",
+            "analyze_keyword_match_types",
+            "analyze_search_term_waste",
+            "analyze_negative_conflicts",
+            "analyze_geo_performance",
+            "analyze_pmax_cannibalization",
         ],
     }
 

@@ -1,0 +1,169 @@
+# Keyword Match Type Analysis
+
+Identify opportunities to reduce wasted spend through match type optimization for Google Ads keywords.
+
+## Data Retrieval
+
+**Pagination for Large Accounts**:
+
+- Use `limit=500` for all MCP calls
+- Check `pagination.has_more` in response
+- If true, fetch next batch with `offset=500`, `1000`, etc.
+- Combine all batches before analysis
+
+**Get Keywords**:
+
+```
+get_keywords(customer_id, start_date, end_date, limit=500)
+```
+
+- Returns: keywords with metrics (impressions, clicks, cost, conversions, conversion_value, quality_score)
+- Apply minimum threshold: ≥100 impressions
+- If using BigQuery fallback, call `resource://bigquery/config` first for project ID
+
+**Get Search Terms**:
+
+```
+get_search_terms(customer_id, start_date, end_date, limit=500)
+```
+
+- Returns: search terms linked to triggering keywords
+- Match to keywords for match type analysis
+
+## Analysis Steps
+
+### 1. Match Type Performance
+
+Calculate for each match type (BROAD, PHRASE, EXACT):
+
+- Count, impressions, clicks, cost, conversions, conversion_value
+- CTR, CPC, CPA, ROAS, conversion rate
+
+### 2. High-Cost Broad Match Keywords
+
+**Criteria** (ALL must be met):
+
+- Match type = BROAD
+- Cost ≥ $100
+- ROAS < 1.5 OR CPA > 2× account average
+
+Sort by cost descending.
+
+### 3. Low Quality Score Keywords
+
+**Criteria**:
+
+- Quality Score < 7
+- Cost > $0
+
+Sort by cost descending. Low QS can increase CPC by 50%+.
+
+### 4. Duplicate Keywords
+
+Find keywords with identical text but different match types:
+
+- Group by normalized text (lowercase, trimmed)
+- Identify best-performing match type (lowest CPA)
+- Calculate savings from consolidation
+
+### 5. Savings Calculation
+
+**Broad Match Optimization**:
+
+- If broad CPA > 2× account CPA, estimate 50% of excess cost recoverable
+
+**Top 10 High-Cost Keywords**:
+
+- No conversions: 80% of spend wasted
+- High CPA: savings from reaching average CPA
+
+Use 50-80% multipliers for conservative estimates.
+
+## Recommendations
+
+### HIGH Priority
+
+**Reduce Broad Match Usage** (if broad spend >50% AND ROAS <1.5):
+
+- Pause worst performers
+- Convert medium performers to phrase match
+- Add negative keywords
+
+**Optimize High-Cost Broad Keywords**:
+
+- List specific keywords with spend/conversion data
+- Provide conversion to exact/phrase recommendations
+
+### MEDIUM Priority
+
+**Improve Low Quality Keywords** (QS <7):
+
+- Improve ad relevance
+- Optimize landing pages
+- Increase expected CTR
+
+**Consolidate Duplicates**:
+
+- Keep best-performing match type, pause others
+
+### LOW Priority
+
+**Increase Exact Match Coverage** (if exact <30% of total):
+
+- Add exact match versions of top search terms
+
+## Output Format
+
+```markdown
+# Keyword Match Type Analysis Report
+
+**Date**: [Analysis Date]
+**Customer ID**: [Customer ID]
+**Analysis Period**: [Start] to [End]
+
+## Executive Summary
+- Total Keywords Analyzed: [N]
+- Keywords ≥100 Impressions: [N]
+- Estimated Monthly Savings: $[N]
+- Primary Issue: [Issue]
+
+## Match Type Performance
+
+| Match Type | Keywords | Cost | Conversions | CPA | ROAS |
+|------------|----------|------|-------------|-----|------|
+| BROAD      | [N]      | $[N] | [N]         | $[N]| [N]  |
+| PHRASE     | [N]      | $[N] | [N]         | $[N]| [N]  |
+| EXACT      | [N]      | $[N] | [N]         | $[N]| [N]  |
+
+## HIGH Priority Recommendations
+
+### [Recommendation Title]
+**Impact**: $[N] monthly savings
+
+**Top Keywords**:
+| Keyword | Match Type | Cost | CPA | Action |
+|---------|------------|------|-----|--------|
+| [keyword] | [type] | $[N] | $[N] | [action] |
+
+**Action Steps**:
+1. [Action]
+2. [Action]
+
+## Implementation Roadmap
+
+**Week 1**: Pause [N] non-converting broad keywords ($[N]/week savings)
+**Week 2-3**: Improve ad copy for low QS keywords, convert broad to phrase
+**Week 4**: Monitor CPA/ROAS improvements
+
+## Notes
+- Analysis based on [N] days
+- Savings estimates are conservative (50-80%)
+```
+
+## Guidelines
+
+- Be specific with numbers and keyword examples
+- Prioritize ruthlessly (users need clear first steps)
+- Conservative estimates (under-promise, over-deliver)
+- Flag risks (e.g., "May reduce impression share 5-10%")
+- Exclude keywords <100 impressions or <30 days old

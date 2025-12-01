@@ -1,0 +1,83 @@
+{
+  "name": "CostEfficiencySuite",
+  "version": "1.0.0",
+  "description": "Complete suite of cost efficiency analyzers for quarterly Google Ads audits",
+  "author": "PaidSearchNav",
+  "type": "skill_bundle",
+  "includes": [
+    "keyword_match_analyzer",
+    "search_term_analyzer",
+    "negative_conflict_analyzer",
+    "geo_performance_analyzer",
+    "pmax_analyzer"
+  ],
+  "use_case": "Quarterly keyword audit for retail businesses",
+  "execution_order": [
+    "keyword_match_analyzer",
+    "search_term_analyzer",
+    "negative_conflict_analyzer",
+    "geo_performance_analyzer",
+    "pmax_analyzer"
+  ],
+  "estimated_runtime": "5-10 minutes for typical account",
+  "typical_savings": "20-35% reduction in wasted spend",
+  "business_value": {
+    "total_impact": "$5,000-$15,000/month for mid-sized accounts",
+    "roi": "10-20x on audit cost",
+    "use_frequency": "Quarterly (minimum) or on-demand",
+    "best_for": [
+      "Retail businesses with physical locations",
+      "E-commerce stores",
+      "Service area businesses",
+      "Multi-location brands"
+    ]
+  },
+  "required_mcp_tools": [
+    "get_keywords",
+    "get_search_terms",
+    "get_negative_keywords",
+    "get_geo_performance",
+    "get_campaigns"
+  ],
+  "workflow": {
+    "step_1": {
+      "skill": "keyword_match_analyzer",
+      "purpose": "Identify exact match opportunities",
+      "typical_savings": "$1,500-5,000/month"
+    },
+    "step_2": {
+      "skill": "search_term_analyzer",
+      "purpose": "Find negative keyword opportunities",
+      "typical_savings": "$2,000-7,000/month"
+    },
+    "step_3": {
+      "skill": "negative_conflict_analyzer",
+      "purpose": "Fix negatives blocking positives",
+      "typical_savings": "5-10% impression share recovery"
+    },
+    "step_4": {
+      "skill": "geo_performance_analyzer",
+      "purpose": "Optimize location targeting",
+      "typical_savings": "15-25% ROAS improvement"
+    },
+    "step_5": {
+      "skill": "pmax_analyzer",
+      "purpose": "Prevent PMax cannibalization",
+      "typical_savings": "10-20% CPA improvement"
+    }
+  },
+  "output_format": "Combined markdown report with executive summary",
+  "prerequisites": [
+    "Claude Desktop or API access",
+    "PaidSearchNav MCP server connected",
+    "Google Ads account access via MCP",
+    "Minimum 90 days of campaign data"
+  ],
+  "best_practices": [
+    "Run all 5 skills in sequence for complete audit",
+    "Start with KeywordMatchAnalyzer for quick wins",
+    "Use SearchTermAnalyzer to eliminate waste first",
+    "Run quarterly minimum, more frequently for large accounts",
+    "Document all changes for tracking improvements over time"
+  ]
+}

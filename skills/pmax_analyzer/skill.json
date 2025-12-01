@@ -1,0 +1,19 @@
+{
+  "name": "PMaxAnalyzer",
+  "version": "1.0.0",
+  "description": "Analyzes Performance Max campaigns for search term conflicts and cannibalization with standard Search campaigns",
+  "author": "PaidSearchNav",
+  "category": "campaign_overlap",
+  "requires_mcp_tools": [
+    "get_search_terms",
+    "get_campaigns"
+  ],
+  "output_format": "markdown",
+  "use_cases": [
+    "Performance Max optimization",
+    "Campaign cannibalization analysis",
+    "Search vs PMax strategy",
+    "Quarterly keyword audits"
+  ],
+  "business_value": "Prevents PMax from cannibalizing high-performing Search campaigns, maintaining CPA efficiency"
+}
