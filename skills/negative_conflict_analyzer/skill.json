@@ -1,0 +1,19 @@
+{
+  "name": "NegativeConflictAnalyzer",
+  "version": "1.0.0",
+  "description": "Identifies negative keywords blocking positive keywords and causing impression share loss",
+  "author": "PaidSearchNav",
+  "category": "campaign_health",
+  "requires_mcp_tools": [
+    "get_keywords",
+    "get_negative_keywords"
+  ],
+  "output_format": "markdown",
+  "use_cases": [
+    "Campaign health audits",
+    "Negative keyword strategy review",
+    "Impression share recovery",
+    "Quarterly keyword audits"
+  ],
+  "business_value": "Prevents lost impressions from overly restrictive negative keywords, typically recovering 5-10% impression share"
+}

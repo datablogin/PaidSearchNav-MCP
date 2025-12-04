@@ -2224,9 +2224,19 @@ class GoogleAdsAPIClient:
 
         # Build query for geo_target_constant
         # Note: geo_target_constant uses resource names like "geoTargetConstants/1023191"
-        criterion_filter = " OR ".join(
-            [f"geo_target_constant.id = {cid}" for cid in criterion_ids]
-        )
+        # GAQL does not support OR in WHERE clauses - use IN operator instead
+        # Validate IDs are numeric to prevent injection
+        validated_ids = []
+        for cid in criterion_ids:
+            if not str(cid).isdigit():
+                logger.warning(f"Invalid criterion ID (not numeric): {cid}")
+                continue
+            validated_ids.append(str(cid))
+
+        if not validated_ids:
+            return {}
+
+        criterion_ids_str = ", ".join(validated_ids)
 
         query = f"""
             SELECT
@@ -2236,7 +2246,7 @@ class GoogleAdsAPIClient:
                 geo_target_constant.target_type,
                 geo_target_constant.canonical_name
             FROM geo_target_constant
-            WHERE {criterion_filter}
+            WHERE geo_target_constant.id IN ({criterion_ids_str})
         """.strip()
 
         try:
@@ -2251,12 +2261,19 @@ class GoogleAdsAPIClient:
             location_map = {}
             for row in response:
                 geo_target = row.geo_target_constant
+                # Handle target_type - it can be a string or an enum object
+                target_type = geo_target.target_type
+                if hasattr(target_type, "name"):
+                    target_type_str = target_type.name
+                elif isinstance(target_type, str):
+                    target_type_str = target_type
+                else:
+                    target_type_str = str(target_type) if target_type else ""
+
                 location_map[str(geo_target.id)] = {
                     "name": geo_target.name,
                     "country_code": geo_target.country_code,
-                    "target_type": geo_target.target_type.name
-                    if geo_target.target_type
-                    else "",
+                    "target_type": target_type_str,
                     "canonical_name": geo_target.canonical_name,
                 }
 

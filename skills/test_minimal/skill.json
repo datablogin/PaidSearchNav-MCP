@@ -1,0 +1,17 @@
+{
+  "name": "TestMinimal",
+  "version": "1.0.0",
+  "description": "Minimal test skill to validate MCP server integration and pagination",
+  "author": "PaidSearchNav",
+  "category": "testing",
+  "requires_mcp_tools": [
+    "get_keywords"
+  ],
+  "output_format": "markdown",
+  "use_cases": [
+    "MCP server validation",
+    "Context window testing",
+    "Pagination verification"
+  ],
+  "business_value": "Validates MCP integration without context overhead to diagnose skill hang issues"
+}

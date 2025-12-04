@@ -1,0 +1,19 @@
+{
+  "name": "SearchTermAnalyzer",
+  "version": "1.0.0",
+  "description": "Identifies search terms wasting budget with zero conversions or low relevance",
+  "author": "PaidSearchNav",
+  "category": "cost_efficiency",
+  "requires_mcp_tools": [
+    "get_search_terms",
+    "get_negative_keywords"
+  ],
+  "output_format": "markdown",
+  "use_cases": [
+    "Quarterly keyword audits",
+    "Negative keyword mining",
+    "Cost efficiency analysis",
+    "Search term waste identification"
+  ],
+  "business_value": "Eliminates 15-20% of wasted spend on irrelevant searches by identifying negative keyword opportunities"
+}
