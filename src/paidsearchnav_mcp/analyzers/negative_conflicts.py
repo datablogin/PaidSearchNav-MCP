@@ -94,8 +94,9 @@ class NegativeConflictAnalyzer(BaseAnalyzer):
 
                 if self._is_conflict(keyword_text, negative_text, negative_match_type):
                     # Estimate revenue loss from blocking
-                    metrics = keyword.get("metrics", {})
-                    revenue_loss = metrics.get("conversion_value", 0.0)
+                    # Note: get_keywords returns flat structure with metrics at top level
+                    revenue_loss = keyword.get("conversion_value", 0.0)
+                    impressions_lost = keyword.get("impressions", 0)
 
                     conflicts.append(
                         {
@@ -104,7 +105,7 @@ class NegativeConflictAnalyzer(BaseAnalyzer):
                             "negative_match_type": negative_match_type,
                             "negative_level": negative.get("level", "UNKNOWN"),
                             "estimated_savings": revenue_loss,  # Actually revenue LOSS
-                            "impressions_lost": metrics.get("impressions", 0),
+                            "impressions_lost": impressions_lost,
                             "campaign": keyword.get("campaign_name", ""),
                             "reasoning": f"Negative '{negative_text}' blocks '{keyword_text}' (${revenue_loss:.2f} revenue)",
                         }

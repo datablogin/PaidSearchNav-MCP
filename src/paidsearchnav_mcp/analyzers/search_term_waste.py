@@ -156,7 +156,10 @@ class SearchTermWasteAnalyzer(BaseAnalyzer):
             result = await get_search_terms_fn(request)
 
             if result["status"] != "success":
-                logger.warning(f"Failed to fetch search terms at offset {offset}")
+                error_msg = result.get("message", "Unknown error")
+                logger.warning(
+                    f"Failed to fetch search terms at offset {offset}: {error_msg}"
+                )
                 break
 
             all_search_terms.extend(result["data"])
