@@ -98,16 +98,16 @@ class GeoPerformanceAnalyzer(BaseAnalyzer):
 
         if locations_with_conversions:
             avg_cpa = statistics.mean(
-                loc["cost_micros"] / 1_000_000 / loc["conversions"]
+                loc.get("cost_micros", 0) / 1_000_000 / loc.get("conversions", 1)
                 for loc in locations_with_conversions
+                if loc.get("conversions", 0) > 0
             )
             avg_roas = statistics.mean(
                 loc.get("conversion_value_micros", 0)
                 / 1_000_000
-                / (loc["cost_micros"] / 1_000_000)
+                / max(loc.get("cost_micros", 0) / 1_000_000, 0.001)
                 for loc in locations_with_conversions
                 if loc.get("cost_micros", 0) > 0
-                and loc.get("conversion_value_micros", 0) > 0
             )
         else:
             avg_cpa = 0.0
@@ -136,8 +136,8 @@ class GeoPerformanceAnalyzer(BaseAnalyzer):
                     }
                 )
             else:
-                cpa = cost / conversions
-                roas = revenue / cost if cost > 0 else 0.0
+                cpa = cost / max(conversions, 0.001)  # Protect against division by zero
+                roas = revenue / max(cost, 0.001)  # Protect against division by zero
 
                 # High performers (low CPA or high ROAS)
                 if cpa < avg_cpa * (
